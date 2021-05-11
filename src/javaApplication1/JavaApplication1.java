@@ -14,6 +14,8 @@ public class JavaApplication1 {
     public static void main(String[] args) throws InfException {
         
         System.out.println("Hej Bashar!");
+        System.out.println("Hej Kristoffer!");
+
 
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
