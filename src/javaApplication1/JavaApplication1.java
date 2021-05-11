@@ -10,7 +10,7 @@ public class JavaApplication1 {
     private static InfDB idb;
 
     public static void main(String[] args) throws InfException {
-// kommentar här...!!!
+// kommentar här...!!!!!!!!!123123123123
         try {
             idb = new InfDB("mibdb", "3307", "mibdba", "mibkey");
 
