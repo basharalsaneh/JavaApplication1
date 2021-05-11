@@ -6,10 +6,14 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 public class JavaApplication1 {
+    
+    
 
     private static InfDB idb;
 
     public static void main(String[] args) throws InfException {
+        
+        System.out.println("Hej Bashar!");
 
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
