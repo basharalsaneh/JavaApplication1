@@ -15,6 +15,7 @@ public class JavaApplication1 {
         
         System.out.println("Hej Bashar!");
         System.out.println("Hej Kristoffer!");
+        System.out.println("Hej hej");
 
 
         try {
