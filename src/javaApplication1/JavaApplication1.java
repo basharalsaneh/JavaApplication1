@@ -34,7 +34,6 @@ public class JavaApplication1 {
     
     public JavaApplication1(){
          inlogg = new Inloggningssidan();
-         inlogg.setVisible(true);
     }
     
     
