@@ -5,7 +5,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.Random;
 
-public class Agent{
+public class Agent{ // Ska tas bort...!!!
 
 private static InfDB idb;
 private int agent_ID;

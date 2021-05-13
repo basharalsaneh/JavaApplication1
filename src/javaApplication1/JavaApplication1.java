@@ -20,7 +20,6 @@ public class JavaApplication1 {
         System.out.println("Hej hej");
         System.out.println("dqwdqw");
         
-        
        
       
         try {
