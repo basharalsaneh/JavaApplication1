@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
+import oru.inf.InfDB;
 /**
  *
  * @author Marcu
@@ -262,40 +263,7 @@ public class Registrering extends javax.swing.JFrame {
             }
              //
              
-<<<<<<< Updated upstream
-             Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hämtar mysql driver och gör det möjligt att koppla upp till databasen.
-             String url = "jdbc:mysql://localhost:3306/mibd";
-             String user = "mibdba";
-             String losenord = "mibkey";
-             connection1 = DriverManager.getConnection(url, user, losenord); 
-            // Denna ska också på något sätt koppla upp till databasen. Ingen kod är "röd" men osäker på om projektet 
-            // inte funkar pga att jag är "disconnected" från databasen eller inte.
-             insert = connection1.prepareStatement("insert into alien (Alien_ID, Namn, Telefon) values (?,?,?))"); 
-                // Preparestatment = en förberedd fråga att ställa till databasen.
-             insert.setString(1, id); // 1an riktas till values (1,x,x). Alltså vilken plats id:t kommer på i select-frågan ovanför.
-             insert.setString(2, name); // osv
-             insert.setString(3, Telefon);
-             insert.executeUpdate(); // exekuterar uppdateringen.
-             
-             JOptionPane.showMessageDialog(this, "Alien added, check database");
-             
-             txtAlienID.setText("");
-             txtAlienNamn.setText("");
-             txtAlienTelefon.setText("");
-        }
-             catch (InfException ex){ 
-            Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (SQLException | ClassNotFoundException ex){ 
-            Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
-        }   
-        
-=======
-             
-     
->>>>>>> Stashed changes
-        
-        
+
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
