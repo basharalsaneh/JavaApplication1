@@ -9,12 +9,13 @@ package javaApplication1;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import oru.inf.InfDB;
+
 import oru.inf.InfException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
+import java.sql.ResultSet;
 /**
  *
  * @author Marcu
@@ -29,10 +30,27 @@ public class Registrering extends javax.swing.JFrame {
     /**
      * Creates new form Registrering
      */
-    public Registrering() {
+    public Registrering() throws Exception {
         initComponents();
+        getConnection();
     }
 
+    void getConnection() throws Exception{
+        try{
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hämtar mysql driver och gör det möjligt att koppla upp till databasen.
+             connection1 = DriverManager.getConnection("jdbc:mysql://localhost/mibdb", "root", "password"); // Denna ska också på något sätt
+             // koppa upp till databasen. Ingen kod är "röd" men osäker på om projektet inte funkar pga att jag är "disconnected" från databasen eller inte.
+             System.out.println("lyckad");
+             
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+       
+           
+        
+       
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,6 +72,10 @@ public class Registrering extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        txtAlienPlats = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtAlienAnsvarig = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -98,6 +120,10 @@ public class Registrering extends javax.swing.JFrame {
 
         jButton3.setText("Delete");
 
+        jLabel5.setText("Plats");
+
+        jLabel6.setText("Ansvarig");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -113,14 +139,19 @@ public class Registrering extends javax.swing.JFrame {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel6)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtAlienNamn)
                             .addComponent(txtAlienTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                            .addComponent(txtAlienID))))
+                            .addComponent(txtAlienID)
+                            .addComponent(txtAlienPlats)
+                            .addComponent(txtAlienAnsvarig))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -131,14 +162,22 @@ public class Registrering extends javax.swing.JFrame {
                     .addComponent(txtAlienID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtAlienNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAlienNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtAlienTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAlienPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtAlienAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -170,7 +209,7 @@ public class Registrering extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(156, 156, 156)
                         .addComponent(jLabel1)))
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +224,7 @@ public class Registrering extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 77, Short.MAX_VALUE))
+                .addGap(0, 71, Short.MAX_VALUE))
         );
 
         pack();
@@ -193,17 +232,37 @@ public class Registrering extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        // Vid tryck på "Add"-knappen.
-        String id = txtAlienID.getText();
-        String name = txtAlienNamn.getText();
-        String Telefon = txtAlienTelefon.getText();
-       
-        // Ger id, namne och telefon utifrån det men fyllt i när inloggningen körs.
-        
+
         try {
+            String id = txtAlienID.getText();// Får ej vara null
+            //int hej = Integer.parseInt(id);
+            String telefon = txtAlienTelefon.getText();
+            String plats = txtAlienPlats.getText(); // Får ej vara null
+            String namn = txtAlienNamn.getText(); 
+            String ansvarig = txtAlienAnsvarig.getText(); // Får ej vara null
+            String fraga = "INSERT INTO alien (Alien_ID, Namn, Telefon, Plats, Ansvarig_Agent) VALUES (?,?,?,?,?)";
+            PreparedStatement insert = connection1.prepareStatement(fraga);
+            insert.setString(1, id);
+            insert.setString(2, namn);
+            insert.setString(3, telefon);
+            insert.setString(4, plats);
+            insert.setString(5, ansvarig);
+            insert.execute();
+            JOptionPane.showMessageDialog(this, "alien added");
+           
+          
+           // ignorera nedan.
+            // JOptionPane.showMessageDialog(this, "Alien added, check database");
+             //ResultSet rs = insert.executeQuery();
+             //while(rs.next()){
+               //  String namn = rs.getString("name");
+                 //System.out.println(namn);
+             } catch (SQLException ex) {
+                Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             //
              
+<<<<<<< Updated upstream
              Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hämtar mysql driver och gör det möjligt att koppla upp till databasen.
              String url = "jdbc:mysql://localhost:3306/mibd";
              String user = "mibdba";
@@ -231,6 +290,10 @@ public class Registrering extends javax.swing.JFrame {
             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
         }   
         
+=======
+             
+     
+>>>>>>> Stashed changes
         
         
        
@@ -270,7 +333,11 @@ public class Registrering extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Registrering().setVisible(true);
+                try {
+                    new Registrering().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -283,12 +350,16 @@ public class Registrering extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtAlienAnsvarig;
     private javax.swing.JTextField txtAlienID;
     private javax.swing.JTextField txtAlienNamn;
+    private javax.swing.JTextField txtAlienPlats;
     private javax.swing.JTextField txtAlienTelefon;
     // End of variables declaration//GEN-END:variables
 }
