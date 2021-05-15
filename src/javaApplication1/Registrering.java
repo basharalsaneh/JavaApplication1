@@ -5,7 +5,7 @@
  */
 package javaApplication1;
 
-
+import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +25,7 @@ public class Registrering extends javax.swing.JFrame {
    
      private static InfDB idb;
         Connection connection1;
-        PreparedStatement insert;
+        
  
 
     /**
@@ -70,15 +70,16 @@ public class Registrering extends javax.swing.JFrame {
         txtAlienID = new javax.swing.JTextField();
         txtAlienNamn = new javax.swing.JTextField();
         txtAlienTelefon = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        buttonAdd = new javax.swing.JButton();
+        buttonEdit = new javax.swing.JButton();
+        buttonDelete = new javax.swing.JButton();
         txtAlienPlats = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtAlienAnsvarig = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        buttonListaAll = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,16 +111,21 @@ public class Registrering extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonAdd.setText("Add");
+        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonAddActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Edit");
+        buttonEdit.setText("Edit");
 
-        jButton3.setText("Delete");
+        buttonDelete.setText("Delete");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Plats");
 
@@ -133,11 +139,11 @@ public class Registrering extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
@@ -180,9 +186,9 @@ public class Registrering extends javax.swing.JFrame {
                     .addComponent(txtAlienAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(buttonAdd)
+                    .addComponent(buttonEdit)
+                    .addComponent(buttonDelete))
                 .addContainerGap())
         );
 
@@ -191,10 +197,17 @@ public class Registrering extends javax.swing.JFrame {
 
             },
             new String [] {
-                "AlienID", "Namn", "Telefon", "Ansvarig_Agent"
+                "AlienID", "Namn", "Telefon", "Plats", "Ansvarig"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        buttonListaAll.setText("Lista alla aliens");
+        buttonListaAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonListaAllActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,12 +218,14 @@ public class Registrering extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(67, 67, 67)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonListaAll, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(156, 156, 156)
                         .addComponent(jLabel1)))
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +239,10 @@ public class Registrering extends javax.swing.JFrame {
                         .addGap(41, 41, 41)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(buttonListaAll, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 71, Short.MAX_VALUE))
         );
 
@@ -232,8 +250,8 @@ public class Registrering extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+PreparedStatement statement;
         try {
             String id = txtAlienID.getText();// Får ej vara null
             //int hej = Integer.parseInt(id);
@@ -242,22 +260,17 @@ public class Registrering extends javax.swing.JFrame {
             String namn = txtAlienNamn.getText(); 
             String ansvarig = txtAlienAnsvarig.getText(); // Får ej vara null
             String fraga = "INSERT INTO alien (Alien_ID, Namn, Telefon, Plats, Ansvarig_Agent) VALUES (?,?,?,?,?)";
-            PreparedStatement insert = connection1.prepareStatement(fraga);
-            insert.setString(1, id);
-            insert.setString(2, namn);
-            insert.setString(3, telefon);
-            insert.setString(4, plats);
-            insert.setString(5, ansvarig);
-            insert.execute();
-            JOptionPane.showMessageDialog(this, "alien added");
+            statement = connection1.prepareStatement(fraga);
+            statement.setString(1, id);
+            statement.setString(2, namn);
+            statement.setString(3, telefon);
+            statement.setString(4, plats);
+            statement.setString(5, ansvarig);
+            statement.execute();
+            JOptionPane.showMessageDialog(this, "Alien added");
            
           
-           // ignorera nedan.
-            // JOptionPane.showMessageDialog(this, "Alien added, check database");
-             //ResultSet rs = insert.executeQuery();
-             //while(rs.next()){
-               //  String namn = rs.getString("name");
-                 //System.out.println(namn);
+         
              } catch (SQLException ex) {
                 Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -265,15 +278,52 @@ public class Registrering extends javax.swing.JFrame {
              
 
        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonAddActionPerformed
 
     private void txtAlienIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlienIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAlienIDActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void buttonListaAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaAllActionPerformed
+        // LISTA ALLA ALIENS I LISTAN!!
+        
+        String listaAliens = "SELECT Alien_ID, Namn from alien";
+         try {
+             Statement statement = connection1.createStatement();
+             ResultSet rs = statement.executeQuery(listaAliens);
+             if(rs.next() == false){
+                 System.out.println("Inga Aliens i listan.");
+             }
+             while(rs.next()){
+                String alienNamn = rs.getString("Namn");
+                 System.out.println(alienNamn); 
+            }
+             }
+         
+         
+             catch (SQLException ex) {
+             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+          
+    }//GEN-LAST:event_buttonListaAllActionPerformed
+
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        // Delete en alien vars id = ..
+        String id = txtAlienID.getText();
+         String taBortAlien = "delete from alien where Alien_ID = " + id;
+         try {
+             Statement statement = connection1.createStatement();
+             ResultSet rs = statement.executeQuery(taBortAlien); // Ska ändras tror jag. Fortsätter nån annan dag.
+         } catch (SQLException ex) {
+             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
+         }
+            
+          
+         
+          
+         
+    }//GEN-LAST:event_buttonDeleteActionPerformed
+       
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -311,9 +361,10 @@ public class Registrering extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonDelete;
+    private javax.swing.JButton buttonEdit;
+    private javax.swing.JButton buttonListaAll;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
