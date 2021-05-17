@@ -39,7 +39,7 @@ public class Registrering extends javax.swing.JFrame {
     void getConnection() throws Exception{
         try{
         Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hämtar mysql driver och gör det möjligt att koppla upp till databasen.
-             connection1 = DriverManager.getConnection("jdbc:mysql://localhost/mibdb", "root", "password"); // Denna ska också på något sätt
+             connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibdb", "mibdba", "mibkey"); // Denna ska också på något sätt
              // koppa upp till databasen. Ingen kod är "röd" men osäker på om projektet inte funkar pga att jag är "disconnected" från databasen eller inte.
              System.out.println("lyckad");
              
