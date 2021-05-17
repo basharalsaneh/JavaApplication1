@@ -257,19 +257,19 @@ public class Registrering extends javax.swing.JFrame {
         kolumn = rss.getColumnCount();
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
         df.setRowCount(0);
-        while(rs.next())
+        while(rs.next()) // Listar alla aliens
         {
-        Vector v1 = new Vector();
+        Vector v1 = new Vector(); // Vektor med varje alien-individs värden.
         
-        for(int i=1 ; i<=kolumn ; i++){
-        v1.add(rs.getString("Alien_ID"));
+        for(int i=1 ; i<=kolumn ; i++){ 
+        v1.add(rs.getString("Alien_ID")); // Hämtar första aliensID och sen 2:a osv.
         v1.add(rs.getString("Namn"));
         v1.add(rs.getString("Telefon"));
         v1.add(rs.getString("Plats"));
         v1.add(rs.getString("Ansvarig_Agent"));
         }
         
-        df.addRow(v1);
+        df.addRow(v1); // Adderar/Listar varje alien-individs värde i tabellen
         
         }
         
@@ -343,15 +343,31 @@ public class Registrering extends javax.swing.JFrame {
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // Delete en alien vars id = ..
-        
+        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+        int selectedIndex = jTable1.getSelectedRow();
          try {
-             
-             createStatement = connection1.createStatement();
-             
-             String id = txtAlienID.getText();
+             int id = Integer.parseInt(df.getValueAt(selectedIndex, 0).toString());
+             int villDuDelete = JOptionPane.showConfirmDialog(null, "Vill du ta bort vald alien?", 
+                     "Warning", JOptionPane.YES_NO_OPTION);
+             if(villDuDelete == JOptionPane.YES_OPTION){
              String taBortAlien = "delete from alien where Alien_ID = ?";
-             ResultSet rs = statement.executeQuery(taBortAlien); 
-             
+             statement = connection1.prepareStatement(taBortAlien);
+             statement.setInt(1, id);
+             statement.executeUpdate();
+             JOptionPane.showMessageDialog(this, "Alien ändrad");
+             table_update(); // Uppdaterar flödet. Kolla vad metoden gör.
+             txtAlienID.setText("");
+             txtAlienNamn.setText("");
+             txtAlienTelefon.setText("");
+             txtAlienPlats.setText("");
+             txtAlienAnsvarig.setText("");
+             txtAlienID.requestFocus(); // Fokus på vald textruta.
+             } 
+             if(villDuDelete == JOptionPane.NO_OPTION){
+             JOptionPane.showMessageDialog(this, "Alien INTE ändrad");
+             }
+              
+           
          } catch (SQLException ex) {
              Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -362,7 +378,8 @@ public class Registrering extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
         int selectedIndex = jTable1.getSelectedRow();
-       
+        // Går för tillfället att ändra datan i Tabellen. Ska kolla upp
+        // så att det inte är möjligt.
         
         txtAlienID.setText(df.getValueAt(selectedIndex, 0).toString());
         txtAlienNamn.setText(df.getValueAt(selectedIndex, 1).toString());
