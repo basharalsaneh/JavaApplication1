@@ -25,6 +25,7 @@ public class Registrering extends javax.swing.JFrame {
     public Registrering() throws Exception { // Körs igång direkt.
         initComponents();
         getConnection();
+        table_update();
          
     }
 
@@ -65,6 +66,7 @@ public class Registrering extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtAlienAnsvarig = new javax.swing.JTextField();
+        buttonRensaData = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         buttonListaAll = new javax.swing.JButton();
@@ -124,6 +126,13 @@ public class Registrering extends javax.swing.JFrame {
 
         jLabel6.setText("Ansvarig");
 
+        buttonRensaData.setText("Rensa fälten");
+        buttonRensaData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRensaDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -133,9 +142,9 @@ public class Registrering extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -151,7 +160,8 @@ public class Registrering extends javax.swing.JFrame {
                             .addComponent(txtAlienTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                             .addComponent(txtAlienID)
                             .addComponent(txtAlienPlats)
-                            .addComponent(txtAlienAnsvarig))))
+                            .addComponent(txtAlienAnsvarig)))
+                    .addComponent(buttonRensaData))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -177,7 +187,9 @@ public class Registrering extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtAlienAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonRensaData)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd)
                     .addComponent(buttonEdit)
@@ -223,10 +235,13 @@ public class Registrering extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(buttonListaAll, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(84, 84, 84)
+                                .addComponent(buttonListaAll, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(156, 156, 156)
@@ -292,7 +307,7 @@ public class Registrering extends javax.swing.JFrame {
  
     
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-
+   
         try {
             String StringID = txtAlienID.getText();// Får ej vara null
             int id = Integer.parseInt(StringID);
@@ -301,6 +316,8 @@ public class Registrering extends javax.swing.JFrame {
             String namn = txtAlienNamn.getText(); 
             String ansvarig = txtAlienAnsvarig.getText(); // Får ej vara null
             String fraga = "INSERT INTO alien (Alien_ID, Namn, Telefon, Plats, Ansvarig_Agent) VALUES (?,?,?,?,?)";
+            
+            
             statement = connection1.prepareStatement(fraga);
             statement.setInt(1, id);
             statement.setString(2, namn);
@@ -341,19 +358,17 @@ public class Registrering extends javax.swing.JFrame {
              while(rs.next()){
                  
                 String alienNamn = rs.getString("Namn");
-                 System.out.println(alienNamn); 
-            }
+                System.out.println(alienNamn); 
+                }
              }
-         
-         
-             catch (SQLException ex) {
+                catch (SQLException ex) {
              Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
                  }
           
     }//GEN-LAST:event_buttonListaAllActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        // Delete en alien vars id = ..
+        // Delete en alien vars alien man trycker på i tabellen.
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
         int selectedIndex = jTable1.getSelectedRow();
          try {
@@ -389,8 +404,7 @@ public class Registrering extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
         int selectedIndex = jTable1.getSelectedRow();
-        // Går för tillfället att ändra datan i Tabellen. Ska kolla upp
-        // så att det inte är möjligt.
+        
         
         txtAlienID.setText(df.getValueAt(selectedIndex, 0).toString());
         txtAlienNamn.setText(df.getValueAt(selectedIndex, 1).toString());
@@ -431,12 +445,14 @@ public class Registrering extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Alien CHANGED");
             table_update();
            
+           
             txtAlienID.setText("");
             txtAlienNamn.setText("");
             txtAlienTelefon.setText("");
             txtAlienPlats.setText("");
             txtAlienAnsvarig.setText("");
             txtAlienID.requestFocus();
+            
          
              } catch (SQLException ex) {
                 Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
@@ -444,6 +460,17 @@ public class Registrering extends javax.swing.JFrame {
         
         }
     }//GEN-LAST:event_buttonEditActionPerformed
+
+    private void buttonRensaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRensaDataActionPerformed
+        // TODO add your handling code here:
+          txtAlienID.setText("");
+            txtAlienNamn.setText("");
+            txtAlienTelefon.setText("");
+            txtAlienPlats.setText("");
+            txtAlienAnsvarig.setText("");
+            txtAlienID.requestFocus();
+        
+    }//GEN-LAST:event_buttonRensaDataActionPerformed
        
     public static void main(String args[]) {
        
@@ -463,6 +490,7 @@ public class Registrering extends javax.swing.JFrame {
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonEdit;
     private javax.swing.JButton buttonListaAll;
+    private javax.swing.JButton buttonRensaData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
