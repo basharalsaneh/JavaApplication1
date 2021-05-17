@@ -25,7 +25,7 @@ public class Registrering extends javax.swing.JFrame {
     public Registrering() throws Exception { // Körs igång direkt.
         initComponents();
         getConnection();
-        table_update(); 
+         
     }
 
     void getConnection() throws Exception{
@@ -33,7 +33,7 @@ public class Registrering extends javax.swing.JFrame {
         Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hämtar mysql driver och gör det möjligt att koppla upp till databasen.
              connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibdb", "mibdba", "mibkey"); // Denna ska också på något sätt
              // koppa upp till databasen. Ingen kod är "röd" men osäker på om projektet inte funkar pga att jag är "disconnected" från databasen eller inte.
-             System.out.println("lyckad");
+             System.out.println("Databasen kopplad till projektet, lyckats!");
              
         }
         catch(ClassNotFoundException | SQLException e){
@@ -192,7 +192,15 @@ public class Registrering extends javax.swing.JFrame {
             new String [] {
                 "AlienID", "Namn", "Telefon", "Plats", "Ansvarig"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -319,9 +327,11 @@ public class Registrering extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAlienIDActionPerformed
 
     private void buttonListaAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaAllActionPerformed
-        // LISTA ALLA ALIENS I LISTAN!!
-        
-        String listaAliens = "SELECT Alien_ID, Namn from alien";
+        // LISTA ALLA ALIENS (Bara namn) I LISTAN!!
+        // Finns uppgifter om att lista aliens baserat på datum, plats mm.
+        // Kanske kan fixas in här. att det dyker upp en ny ruta och man får välja
+        // Hur man vill lista aliens.
+        String listaAliens = "SELECT Namn from alien";
          try {
              createStatement = connection1.createStatement();
              ResultSet rs = createStatement.executeQuery(listaAliens);
@@ -329,6 +339,7 @@ public class Registrering extends javax.swing.JFrame {
                  System.out.println("Inga Aliens i listan.");
              }
              while(rs.next()){
+                 
                 String alienNamn = rs.getString("Namn");
                  System.out.println(alienNamn); 
             }
