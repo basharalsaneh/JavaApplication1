@@ -10,7 +10,6 @@ public class JavaApplication1 {
     
 
     private static InfDB idb;
-    private static Inloggningssidan inlogg;
     
     
     public static void main(String[] args) throws InfException {
@@ -20,6 +19,7 @@ public class JavaApplication1 {
         System.out.println("Hej hej");
         System.out.println("dqwdqw");
         
+        new Inloggningssidan().setVisible(true);
        
       
         try {
@@ -31,9 +31,8 @@ public class JavaApplication1 {
         
     }
     
-    public JavaApplication1(){
-         inlogg = new Inloggningssidan();
-    }
+         
+    
     
     
     
