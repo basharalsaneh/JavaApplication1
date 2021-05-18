@@ -2,19 +2,22 @@
 package javaApplication1;
 
 
-import javax.swing.JOptionPane;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 
+
 public class Inloggningssidan extends javax.swing.JFrame {
 
     ResultSet resultat;
     Statement statement;
+    PreparedStatement prepStatement;
     Connection connection1;
     
     public Inloggningssidan() throws Exception {
@@ -35,6 +38,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
+        labelAndraLosen = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
 
@@ -64,12 +68,31 @@ public class Inloggningssidan extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         jLabel6.setText("MIB");
 
+        labelAndraLosen.setText("Ändra ditt lösenord");
+        labelAndraLosen.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                labelAndraLosenFocusGained(evt);
+            }
+        });
+        labelAndraLosen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelAndraLosenMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelAndraLosenMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addContainerGap(61, Short.MAX_VALUE)
+=======
+                .addContainerGap(23, Short.MAX_VALUE)
+>>>>>>> 6f1a5e12e4556a62de2279b8f40fc18a0fb7777c
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,9 +102,11 @@ public class Inloggningssidan extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPassword)
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(buttonLogin)))
+                        .addComponent(buttonLogin)
+                        .addGap(47, 47, 47)
+                        .addComponent(labelAndraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28))
@@ -109,7 +134,9 @@ public class Inloggningssidan extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(buttonLogin)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonLogin)
+                    .addComponent(labelAndraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
 
@@ -169,9 +196,30 @@ public class Inloggningssidan extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void labelAndraLosenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelAndraLosenMouseClicked
+        try {
+            // TODO add your handling code here:
+            
+            dispose();
+            BytaLosenord bytLosen = new BytaLosenord();
+            bytLosen.show();
+        } catch (Exception ex) {
+            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_labelAndraLosenMouseClicked
+
+    private void labelAndraLosenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_labelAndraLosenFocusGained
+        // TODO add your handling code here:
+        
+       
+    }//GEN-LAST:event_labelAndraLosenFocusGained
+
+    private void labelAndraLosenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelAndraLosenMouseExited
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_labelAndraLosenMouseExited
+
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -216,6 +264,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel labelAndraLosen;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
