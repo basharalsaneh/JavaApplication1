@@ -160,7 +160,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
      }
     
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        // TODO add your handling code here:
+      
         String ID = txtUser.getText();
         String password = txtPassword.getText(); 
         // boolean okejPassword = false;
