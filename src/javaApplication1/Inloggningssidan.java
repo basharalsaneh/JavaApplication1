@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
+import javax.swing.JOptionPane;
 
 
 public class Inloggningssidan extends javax.swing.JFrame {
@@ -173,9 +174,12 @@ public class Inloggningssidan extends javax.swing.JFrame {
                     Registrering registrering = new Registrering();
                     registrering.show();
             }
-                   else
+            else{
                 JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
-                                
+                txtUser.setText("");
+                txtPassword.setText("");
+                txtUser.requestFocus();
+            }                  
         } catch (SQLException ex) {
             Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
