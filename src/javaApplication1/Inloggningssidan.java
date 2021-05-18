@@ -199,7 +199,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
             
             dispose();
             BytaLosenord bytLosen = new BytaLosenord();
-            bytLosen.show();
+            bytLosen.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
         }
