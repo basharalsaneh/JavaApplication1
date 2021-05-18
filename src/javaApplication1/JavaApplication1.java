@@ -32,7 +32,7 @@ public class JavaApplication1 {
         
     }
     
-    public JavaApplication1(){
+    public JavaApplication1() throws Exception{
          inlogg = new Inloggningssidan();
     }
     

@@ -36,11 +36,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-<<<<<<< HEAD
               <EmptySpace pref="61" max="32767" attributes="0"/>
-=======
-              <EmptySpace pref="23" max="32767" attributes="0"/>
->>>>>>> 6f1a5e12e4556a62de2279b8f40fc18a0fb7777c
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -53,11 +49,9 @@
                           <Component id="txtUser" min="-2" pref="142" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Component id="buttonLogin" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="labelAndraLosen" min="-2" pref="102" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -95,10 +89,7 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="buttonLogin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="labelAndraLosen" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-              </Group>
+              <Component id="buttonLogin" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="82" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -122,7 +113,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Alien ID"/>
+        <Property name="text" type="java.lang.String" value="Agent ID"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -142,16 +133,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="MIB"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="labelAndraLosen">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc4;ndra ditt l&#xf6;senord"/>
-      </Properties>
-      <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="labelAndraLosenFocusGained"/>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelAndraLosenMouseClicked"/>
-        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelAndraLosenMouseExited"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

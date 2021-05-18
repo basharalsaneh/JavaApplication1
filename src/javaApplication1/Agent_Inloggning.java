@@ -2,26 +2,22 @@
 package javaApplication1;
 
 
-
+import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
-import javax.swing.JOptionPane;
 
-
-public class Inloggningssidan extends javax.swing.JFrame {
+public class Agent_Inloggning extends javax.swing.JFrame {
 
     ResultSet resultat;
     Statement statement;
-    PreparedStatement prepStatement;
     Connection connection1;
     
-    public Inloggningssidan() throws Exception {
+    public Agent_Inloggning() throws Exception {
         initComponents();
         getConnection();
     }
@@ -39,7 +35,6 @@ public class Inloggningssidan extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
-        labelAndraLosen = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
 
@@ -56,7 +51,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
 
         txtUser.setColumns(6);
 
-        jLabel2.setText("Användarnamn");
+        jLabel2.setText("Agent ID");
 
         jLabel3.setText("Lösenord");
 
@@ -69,27 +64,12 @@ public class Inloggningssidan extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         jLabel6.setText("MIB");
 
-        labelAndraLosen.setText("Ändra ditt lösenord");
-        labelAndraLosen.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                labelAndraLosenFocusGained(evt);
-            }
-        });
-        labelAndraLosen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labelAndraLosenMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                labelAndraLosenMouseExited(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,11 +79,9 @@ public class Inloggningssidan extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPassword)
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(buttonLogin)
-                        .addGap(47, 47, 47)
-                        .addComponent(labelAndraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(buttonLogin)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28))
@@ -131,9 +109,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonLogin)
-                    .addComponent(labelAndraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(buttonLogin)
                 .addContainerGap(82, Short.MAX_VALUE))
         );
 
@@ -159,64 +135,41 @@ public class Inloggningssidan extends javax.swing.JFrame {
         String password = txtPassword.getText(); 
         // boolean okejPassword = false;
         // boolean okejID = false;
-        ResultSet resultat1;
-        try{
+       ResultSet resultat2;
+        try {
            statement = connection1.createStatement();
-           String fraga = "SELECT Alien_ID, Losenord FROM alien where "
-                   + "Alien_ID = '"+ID+"' and Losenord = '"+password+"';";
+           
+           String fraga1 = "SELECT Agent_ID, Losenord FROM Agent where "
+                   + "Agent_ID = '"+ID+"' and Losenord = '"+password+"';";
            
          
-                resultat1 = statement.executeQuery(fraga);
+                resultat2 = statement.executeQuery(fraga1);
+
                 
                 
-            if(resultat1.next()){
+            if(resultat2.next()){
                     dispose();
-                    Registrering registrering = new Registrering();
-                    registrering.show();
+                    Admin admin = new Admin();
+                    admin.show();
             }
-            else{
+                   else
                 JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
-                txtUser.setText("");
-                txtPassword.setText("");
-                txtUser.requestFocus();
-            }                  
-        } catch (SQLException ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-     
+
+        
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
-    private void labelAndraLosenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelAndraLosenMouseClicked
-        try {
-            // TODO add your handling code here:
-            
-            dispose();
-            BytaLosenord bytLosen = new BytaLosenord();
-            bytLosen.show();
-        } catch (Exception ex) {
-            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_labelAndraLosenMouseClicked
-
-    private void labelAndraLosenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_labelAndraLosenFocusGained
-        // TODO add your handling code here:
-        
-       
-    }//GEN-LAST:event_labelAndraLosenFocusGained
-
-    private void labelAndraLosenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelAndraLosenMouseExited
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_labelAndraLosenMouseExited
-
-   
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -231,23 +184,24 @@ public class Inloggningssidan extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Agent_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Agent_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Agent_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Agent_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Inloggningssidan().setVisible(true);
+                    new Agent_Inloggning().setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Agent_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -261,7 +215,6 @@ public class Inloggningssidan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel labelAndraLosen;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables

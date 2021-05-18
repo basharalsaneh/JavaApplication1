@@ -29,7 +29,7 @@ public class Registrering extends javax.swing.JFrame {
          
     }
 
-    void getConnection() throws Exception{
+    final void getConnection() throws Exception{
         try{
         Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hämtar mysql driver och gör det möjligt att koppla upp till databasen.
              connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibdb", "mibdba", "mibkey"); // Denna ska också på något sätt
