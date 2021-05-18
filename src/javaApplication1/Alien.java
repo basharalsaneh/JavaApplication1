@@ -143,26 +143,12 @@ public class Alien extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String uid, nuvarandelosen, nyttlosen, upprepalosen;
-        uid = txtuid.getText();
-        nuvarandelosen = txtnuvarandelosen.getText();
-        nyttlosen = txtnyttlosen.getText();
-        upprepalosen = txtupprepalosen.getText();
+        try{
+            var query = "SELECT * FROM 'agent' WHERE Agent_ID = ? and Losenord = ?"
+            con = DriverManager.getConnection("jdbc:mysql://localhost/javaApplication1")
+        }
         
-         try
-        {
-        Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/niiitusers");
-        Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery("Select * from app.userlogin");
-        while(rs.next())
-            }
         
-        if(nyttlosen.equals(upprepalosen))
-                {
-                    Statement st1 = con.createStatement();
-                    ResultSet i = st1.executeQuery("UPDATE app.userlogin SET password='newpass' where username='usname'");//query i am using to update the password
-                    JOptionPane.showMessageDialog(null, "PASSWORD UPDATE SUCCESSFUL");
-                }
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
