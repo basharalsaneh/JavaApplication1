@@ -172,7 +172,10 @@ public class Inloggningssidan extends javax.swing.JFrame {
                     dispose();
                     Registrering registrering = new Registrering();
                     registrering.show();
-                }
+            }
+                   else
+                JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
+                                
         } catch (SQLException ex) {
             Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
