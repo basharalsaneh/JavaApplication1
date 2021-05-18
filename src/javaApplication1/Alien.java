@@ -6,11 +6,11 @@
 package javaApplication1;
 
 import com.mysql.cj.xdevapi.Statement;
-import com.sun.jdi.connect.spi.Connection;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
+import java.sql.Connection;
 
 /**
  *
@@ -144,9 +144,31 @@ public class Alien extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         try{
-            var query = "SELECT * FROM 'agent' WHERE Agent_ID = ? and Losenord = ?"
-            con = DriverManager.getConnection("jdbc:mysql://localhost/javaApplication1")
-        }
+            var query = "SELECT * FROM 'agent' WHERE User = ? and Losenord = ?";
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibdb","mibdba","mibkey");
+            pst = con.prepareStatement(query);
+            pst.setString(1, txtUser.getText());
+            pst.setString(2, txtPassword.getText());
+            pst.setString(3, string.valueOf(jComboBox1.getSelectedItem()));
+            rs = pst.executeQuery();
+            if(rs.next()){
+            JOptionPane.showMessageDialog(this, "Inloggning lyckad");
+            if(jComboBox1.getSelectedIndex()==0) {
+                admin a = new Admin();
+                a.setVisible(true)
+                this.setVisible(false);
+            }else{
+            user u = new Agent();
+            u.setVisible(true);
+            this.setVisible(false);
+            }
+            }
+            else{
+            JOptionPane.showMessageDialog(this, "Användarnamn och Lösenord matchar inte");}         
+            }
+        }catch(Exception ex) {
+        JOptionPane.showMessageDialog(this. ex.getMessage());}
+
         
         
         
