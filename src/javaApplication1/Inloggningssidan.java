@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
+import javax.swing.JOptionPane;
 
 
 public class Inloggningssidan extends javax.swing.JFrame {
