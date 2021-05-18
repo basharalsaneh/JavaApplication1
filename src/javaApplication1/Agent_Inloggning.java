@@ -11,13 +11,13 @@ import java.util.logging.Logger;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 
-public class Inloggningssidan extends javax.swing.JFrame {
+public class Agent_Inloggning extends javax.swing.JFrame {
 
     ResultSet resultat;
     Statement statement;
     Connection connection1;
     
-    public Inloggningssidan() throws Exception {
+    public Agent_Inloggning() throws Exception {
         initComponents();
         getConnection();
     }
@@ -51,7 +51,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
 
         txtUser.setColumns(6);
 
-        jLabel2.setText("Alien ID");
+        jLabel2.setText("Agent ID");
 
         jLabel3.setText("Lösenord");
 
@@ -135,33 +135,31 @@ public class Inloggningssidan extends javax.swing.JFrame {
         String password = txtPassword.getText(); 
         // boolean okejPassword = false;
         // boolean okejID = false;
-        ResultSet resultat1;
-        try{
+       ResultSet resultat2;
+        try {
            statement = connection1.createStatement();
-           String fraga = "SELECT Alien_ID, Losenord FROM alien where "
-                   + "Alien_ID = '"+ID+"' and Losenord = '"+password+"';";
-          
+           
+           String fraga1 = "SELECT Agent_ID, Losenord FROM Agent where "
+                   + "Agent_ID = '"+ID+"' and Losenord = '"+password+"';";
            
          
-                resultat1 = statement.executeQuery(fraga);
+                resultat2 = statement.executeQuery(fraga1);
 
                 
                 
-            if(resultat1.next()){
+            if(resultat2.next()){
                     dispose();
-                    Registrering registrering = new Registrering();
-                    registrering.show();
+                    Admin admin = new Admin();
+                    admin.show();
             }
                    else
                 JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
-                                
-        }
-        
-        catch (SQLException ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         
     }//GEN-LAST:event_buttonLoginActionPerformed
 
@@ -186,23 +184,24 @@ public class Inloggningssidan extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Agent_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Agent_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Agent_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Agent_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Inloggningssidan().setVisible(true);
+                    new Agent_Inloggning().setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Agent_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
