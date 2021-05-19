@@ -16,7 +16,7 @@ import java.sql.Connection;
  *
  * @author marcu
  */
-public class Alien extends javax.swing.JFrame {
+public class Inloggsvalidering extends javax.swing.JFrame {
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
@@ -25,7 +25,7 @@ public class Alien extends javax.swing.JFrame {
     /**
      * Creates new form Alien
      */
-    public Alien() {
+    public Inloggsvalidering() {
         initComponents();
     }
 
