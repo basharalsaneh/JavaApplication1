@@ -17,6 +17,8 @@ public class Start extends javax.swing.JFrame {
     
     
     private InfDB idb;
+  
+    
     
     /**
      * Creates new form Start
@@ -24,6 +26,11 @@ public class Start extends javax.swing.JFrame {
     public Start(InfDB idb) {
         initComponents();
         this.idb = idb;
+        boolean alien;
+        boolean agent;
+        boolean admin;
+        
+       
     }
 
     /**
@@ -36,33 +43,33 @@ public class Start extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        agentButton = new javax.swing.JButton();
+        alienButton = new javax.swing.JButton();
+        adminButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setText("Logga in som:");
 
-        jButton1.setText("Agent");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        agentButton.setText("Agent");
+        agentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                agentButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Alien");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        alienButton.setText("Alien");
+        alienButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                alienButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Administratör");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        adminButton.setText("Administratör");
+        adminButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                adminButtonActionPerformed(evt);
             }
         });
 
@@ -73,9 +80,9 @@ public class Start extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(146, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(adminButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(alienButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(agentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(125, 125, 125))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
@@ -88,45 +95,47 @@ public class Start extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
-                .addComponent(jButton1)
+                .addComponent(agentButton)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(alienButton)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(adminButton)
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+    private void alienButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alienButtonActionPerformed
+            
         // TODO add your handling code here:
+        
+        boolean alien = true;
+        
         this.dispose();
-        Inloggningssidan inlogg = null;
-        try {
-            inlogg = new Inloggningssidan();
-        } catch (Exception ex) {
-            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        inlogg.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        new Inloggningssidan(idb).setVisible(true);
+    }//GEN-LAST:event_alienButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
+       
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        
+        Boolean admin = true;
+        
         this.dispose();
-        Agent_Inloggning AgentID = null;
-        try {
-            AgentID = new Agent_Inloggning();
-        } catch (Exception ex) {
-            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        AgentID.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        new Inloggningssidan(idb).setVisible(true);
+        
+    }//GEN-LAST:event_adminButtonActionPerformed
+
+    private void agentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentButtonActionPerformed
+        // TODO add your handling code here:
+        
+        Boolean agent = true;
+        this.dispose();
+        new Inloggningssidan(idb).setVisible(true);
+        
+        
+    }//GEN-LAST:event_agentButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,9 +143,9 @@ public class Start extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton adminButton;
+    private javax.swing.JButton agentButton;
+    private javax.swing.JButton alienButton;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

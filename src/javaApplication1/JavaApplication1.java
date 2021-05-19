@@ -22,6 +22,7 @@ public class JavaApplication1 {
       
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
+            System.out.println("Koppling established");
 
         }   catch (InfException ex){
             Logger.getLogger(JavaApplication1.class.getName()).log(Level.SEVERE, null, ex);
