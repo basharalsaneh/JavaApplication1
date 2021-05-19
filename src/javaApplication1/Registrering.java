@@ -22,7 +22,7 @@ public class Registrering extends javax.swing.JFrame {
         PreparedStatement statement;
         Statement createStatement;
   
-    public Registrering() throws Exception { // Körs igång direkt.
+    public Registrering() throws Exception { // KÃ¶rs igÃ¥ng direkt.
         initComponents();
         getConnection();
         table_update();
@@ -31,9 +31,9 @@ public class Registrering extends javax.swing.JFrame {
 
     final void getConnection() throws Exception{
         try{
-        Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hämtar mysql driver och gör det möjligt att koppla upp till databasen.
-             connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibdb", "mibdba", "mibkey"); // Denna ska också på något sätt
-             // koppa upp till databasen. Ingen kod är "röd" men osäker på om projektet inte funkar pga att jag är "disconnected" från databasen eller inte.
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hÃ¤mtar mysql driver och gÃ¶r det mÃ¶jligt att koppla upp till databasen.
+             connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibdb", "mibdba", "mibkey"); // Denna ska ocksÃ¥ pÃ¥ nÃ¥got sÃ¤tt
+             // koppa upp till databasen. Ingen kod Ã¤r "rÃ¶d" men osÃ¤ker pÃ¥ om projektet inte funkar pga att jag Ã¤r "disconnected" frÃ¥n databasen eller inte.
              System.out.println("Databasen kopplad till projektet, lyckats!");
              
         }
@@ -70,6 +70,9 @@ public class Registrering extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         buttonListaAll = new javax.swing.JButton();
+        txtPlatsID = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        buttonListaAliens = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -227,6 +230,21 @@ public class Registrering extends javax.swing.JFrame {
             }
         });
 
+        txtPlatsID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPlatsIDActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Lista aliens på plats:");
+
+        buttonListaAliens.setText("Lista nu");
+        buttonListaAliens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonListaAliensActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -235,18 +253,22 @@ public class Registrering extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonListaAll, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPlatsID, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addComponent(buttonListaAll, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(buttonListaAliens, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(156, 156, 156)
                         .addComponent(jLabel1)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,7 +284,12 @@ public class Registrering extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPlatsID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(buttonListaAliens))
+                        .addGap(3, 3, 3)
                         .addComponent(buttonListaAll, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 71, Short.MAX_VALUE))
         );
@@ -282,17 +309,17 @@ public class Registrering extends javax.swing.JFrame {
         df.setRowCount(0);
         while(rs.next()) // Listar alla aliens
         {
-        Vector v1 = new Vector(); // Vektor med varje alien-individs värden.
+        Vector v1 = new Vector(); // Vektor med varje alien-individs vÃ¤rden.
         
         for(int i=1 ; i<=kolumn ; i++){ 
-        v1.add(rs.getString("Alien_ID")); // Hämtar första aliensID och sen 2:a osv.
+        v1.add(rs.getString("Alien_ID")); // HÃ¤mtar fÃ¶rsta aliensID och sen 2:a osv.
         v1.add(rs.getString("Namn"));
         v1.add(rs.getString("Telefon"));
         v1.add(rs.getString("Plats"));
         v1.add(rs.getString("Ansvarig_Agent"));
         }
         
-        df.addRow(v1); // Adderar/Listar varje alien-individs värde i tabellen
+        df.addRow(v1); // Adderar/Listar varje alien-individs vÃ¤rde i tabellen
         
         }
         
@@ -309,12 +336,12 @@ public class Registrering extends javax.swing.JFrame {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
    
         try {
-            String StringID = txtAlienID.getText();// Får ej vara null
+            String StringID = txtAlienID.getText();// FÃ¥r ej vara null
             int id = Integer.parseInt(StringID);
             String telefon = txtAlienTelefon.getText();
-            String plats = txtAlienPlats.getText(); // Får ej vara null
+            String plats = txtAlienPlats.getText(); // FÃ¥r ej vara null
             String namn = txtAlienNamn.getText(); 
-            String ansvarig = txtAlienAnsvarig.getText(); // Får ej vara null
+            String ansvarig = txtAlienAnsvarig.getText(); // FÃ¥r ej vara null
             String fraga = "INSERT INTO alien (Alien_ID, Namn, Telefon, Plats, Ansvarig_Agent) VALUES (?,?,?,?,?)";
             
             
@@ -345,8 +372,8 @@ public class Registrering extends javax.swing.JFrame {
 
     private void buttonListaAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaAllActionPerformed
         // LISTA ALLA ALIENS (Bara namn) I LISTAN!!
-        // Finns uppgifter om att lista aliens baserat på datum, plats mm.
-        // Kanske kan fixas in här. att det dyker upp en ny ruta och man får välja
+        // Finns uppgifter om att lista aliens baserat pÃ¥ datum, plats mm.
+        // Kanske kan fixas in hÃ¤r. att det dyker upp en ny ruta och man fÃ¥r vÃ¤lja
         // Hur man vill lista aliens.
         String listaAliens = "SELECT Namn from alien";
          try {
@@ -368,7 +395,7 @@ public class Registrering extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonListaAllActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        // Delete en alien vars alien man trycker på i tabellen.
+        // Delete en alien vars alien man trycker pÃ¥ i tabellen.
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
         int selectedIndex = jTable1.getSelectedRow();
          try {
@@ -380,17 +407,17 @@ public class Registrering extends javax.swing.JFrame {
              statement = connection1.prepareStatement(taBortAlien);
              statement.setInt(1, id);
              statement.executeUpdate();
-             JOptionPane.showMessageDialog(this, "Alien ändrad");
-             table_update(); // Uppdaterar flödet. Kolla vad metoden gör.
+             JOptionPane.showMessageDialog(this, "Alien Ã¤ndrad");
+             table_update(); // Uppdaterar flÃ¶det. Kolla vad metoden gÃ¶r.
              txtAlienID.setText("");
              txtAlienNamn.setText("");
              txtAlienTelefon.setText("");
              txtAlienPlats.setText("");
              txtAlienAnsvarig.setText("");
-             txtAlienID.requestFocus(); // Fokus på vald textruta.
+             txtAlienID.requestFocus(); // Fokus pÃ¥ vald textruta.
              } 
              if(villDuDelete == JOptionPane.NO_OPTION){
-             JOptionPane.showMessageDialog(this, "Alien INTE ändrad");
+             JOptionPane.showMessageDialog(this, "Alien INTE Ã¤ndrad");
              }
               
            
@@ -418,10 +445,10 @@ public class Registrering extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
         int selectedIndex = jTable1.getSelectedRow();
-         String alienID = df.getValueAt(selectedIndex, 0).toString();
-        if(!txtAlienID.getText().equals(alienID)){ //Om ID:t är annat än det angivna så körs detta:
-        JOptionPane.showMessageDialog(this, "Du får inte ändra på ID:t, ID:t byts nu tillbaks!");
-        txtAlienID.setText(alienID); // ID:t sätts tillbaka till det förvalda.
+        String alienID = df.getValueAt(selectedIndex, 0).toString();
+        if(!txtAlienID.getText().equals(alienID)){ //Om ID:t Ã¤r annat Ã¤n det angivna sÃ¥ kÃ¶rs detta:
+        JOptionPane.showMessageDialog(this, "Du fÃ¥r inte Ã¤ndra pÃ¥ ID:t, ID:t byts nu tillbaks!");
+        txtAlienID.setText(alienID); // ID:t sÃ¤tts tillbaka till det fÃ¶rvalda.
         }
         else
         {
@@ -430,8 +457,8 @@ public class Registrering extends javax.swing.JFrame {
             int id = Integer.parseInt(df.getValueAt(selectedIndex, 0).toString());
             String namn = txtAlienNamn.getText();
             String telefon = txtAlienTelefon.getText();
-            String plats = txtAlienPlats.getText(); // Får ej vara null
-            String ansvarig = txtAlienAnsvarig.getText(); // Får ej vara null
+            String plats = txtAlienPlats.getText(); // FÃ¥r ej vara null
+            String ansvarig = txtAlienAnsvarig.getText(); // FÃ¥r ej vara null
             String fraga = "UPDATE alien SET Namn = ?, Telefon = ?, "
                     + "Plats = ?, Ansvarig_Agent = ? where Alien_ID = ? ";
             statement = connection1.prepareStatement(fraga);
@@ -471,6 +498,43 @@ public class Registrering extends javax.swing.JFrame {
             txtAlienID.requestFocus();
         
     }//GEN-LAST:event_buttonRensaDataActionPerformed
+
+    private void buttonListaAliensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaAliensActionPerformed
+        // TODO add your handling code here:
+        
+        // Skippar en rad när koden körs. Måste komma förbi det på något sätt. Får fortsätta.. 
+        // Borde man göra en tillfällig arraylist för att kunna loopa igenom den?
+            try {
+             
+            String platsID = txtPlatsID.getText();
+            String listaAliens = ("select Namn, Plats, Benamning from alien join plats on Plats_ID where Plats = ? group by Namn");
+
+            statement = connection1.prepareStatement(listaAliens);
+            statement.setString(1, platsID);
+            statement.executeQuery();
+            ResultSet rs = statement.executeQuery();
+            JOptionPane.showMessageDialog(this, "listar nu:");
+   
+             if(rs.next() == false){
+                 System.out.println("Inga Aliens på vald plats");
+             }
+             while(rs.next()){
+                 
+                String alienNamn = rs.getString("Namn");
+                String alienPlats = rs.getString("Plats");
+                String alienPlatsNamn = rs.getString("Benamning");
+                JOptionPane.showMessageDialog(this, alienNamn + " " + alienPlats + " " + alienPlatsNamn);
+                }
+             }
+                catch (SQLException ex) {
+             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+          
+    }//GEN-LAST:event_buttonListaAliensActionPerformed
+
+    private void txtPlatsIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlatsIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPlatsIDActionPerformed
        
     public static void main(String args[]) {
        
@@ -489,6 +553,7 @@ public class Registrering extends javax.swing.JFrame {
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonEdit;
+    private javax.swing.JButton buttonListaAliens;
     private javax.swing.JButton buttonListaAll;
     private javax.swing.JButton buttonRensaData;
     private javax.swing.JLabel jLabel1;
@@ -497,6 +562,7 @@ public class Registrering extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -506,5 +572,6 @@ public class Registrering extends javax.swing.JFrame {
     private javax.swing.JTextField txtAlienNamn;
     private javax.swing.JTextField txtAlienPlats;
     private javax.swing.JTextField txtAlienTelefon;
+    private javax.swing.JTextField txtPlatsID;
     // End of variables declaration//GEN-END:variables
 }
