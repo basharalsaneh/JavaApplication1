@@ -29,7 +29,8 @@ public class JavaApplication1 {
         }
         
         
-        new Start(idb).setVisible(true);
+       
+        new Inloggningssidan(idb).setVisible(true);
         
     }
    

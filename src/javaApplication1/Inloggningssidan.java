@@ -37,7 +37,12 @@ public class Inloggningssidan extends javax.swing.JFrame {
         txtAnvandarnamn = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         loggaIn = new javax.swing.JToggleButton();
-        gaTillbaka = new javax.swing.JToggleButton();
+        txtAnvandarTyp = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        valjAnvandare = new javax.swing.JMenu();
+        alienAnvandare = new javax.swing.JMenuItem();
+        agentAnvandare = new javax.swing.JMenuItem();
+        adminAnvandare = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,12 +60,37 @@ public class Inloggningssidan extends javax.swing.JFrame {
 
         loggaIn.setText("Logga in");
 
-        gaTillbaka.setText("Gå tillbaka");
-        gaTillbaka.addActionListener(new java.awt.event.ActionListener() {
+        txtAnvandarTyp.setText("Välj användare");
+
+        valjAnvandare.setText("Välj användare");
+
+        alienAnvandare.setText("Alien");
+        alienAnvandare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gaTillbakaActionPerformed(evt);
+                alienAnvandareActionPerformed(evt);
             }
         });
+        valjAnvandare.add(alienAnvandare);
+
+        agentAnvandare.setText("Agent");
+        agentAnvandare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agentAnvandareActionPerformed(evt);
+            }
+        });
+        valjAnvandare.add(agentAnvandare);
+
+        adminAnvandare.setText("Admin");
+        adminAnvandare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminAnvandareActionPerformed(evt);
+            }
+        });
+        valjAnvandare.add(adminAnvandare);
+
+        jMenuBar1.add(valjAnvandare);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,8 +99,10 @@ public class Inloggningssidan extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gaTillbaka)
-                    .addComponent(loggaIn)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(loggaIn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtAnvandarTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(anvandarnamn)
@@ -93,10 +125,10 @@ public class Inloggningssidan extends javax.swing.JFrame {
                     .addComponent(password)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(loggaIn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gaTillbaka)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loggaIn)
+                    .addComponent(txtAnvandarTyp))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
@@ -106,13 +138,22 @@ public class Inloggningssidan extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAnvandarnamnActionPerformed
 
-    private void gaTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gaTillbakaActionPerformed
+    private void agentAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentAnvandareActionPerformed
         // TODO add your handling code here:
+        txtAnvandarTyp.setText("Som Agent");
         
-        this.dispose();
-        new Start(idb).setVisible(true);
-       
-    }//GEN-LAST:event_gaTillbakaActionPerformed
+        
+    }//GEN-LAST:event_agentAnvandareActionPerformed
+
+    private void alienAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alienAnvandareActionPerformed
+        // TODO add your handling code here:
+        txtAnvandarTyp.setText("Som Alien");
+    }//GEN-LAST:event_alienAnvandareActionPerformed
+
+    private void adminAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminAnvandareActionPerformed
+        // TODO add your handling code here:
+        txtAnvandarTyp.setText("Som Admin");
+    }//GEN-LAST:event_adminAnvandareActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,11 +161,16 @@ public class Inloggningssidan extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem adminAnvandare;
+    private javax.swing.JMenuItem agentAnvandare;
+    private javax.swing.JMenuItem alienAnvandare;
     private javax.swing.JLabel anvandarnamn;
-    private javax.swing.JToggleButton gaTillbaka;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JToggleButton loggaIn;
     private javax.swing.JLabel password;
+    private javax.swing.JLabel txtAnvandarTyp;
     private javax.swing.JTextField txtAnvandarnamn;
     private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JMenu valjAnvandare;
     // End of variables declaration//GEN-END:variables
 }
