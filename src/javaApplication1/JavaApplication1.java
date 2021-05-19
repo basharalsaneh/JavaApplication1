@@ -10,15 +10,12 @@ public class JavaApplication1 {
     
 
     private static InfDB idb;
-    private static Inloggningssidan inlogg;
+
     
     
     public static void main(String[] args) throws InfException {
         
-        System.out.println("Hej Bashar!");
-        System.out.println("Hej Kristoffer!");
-        System.out.println("Hej hej");
-        System.out.println("dqwdqw");
+        
         
         
        
@@ -30,12 +27,11 @@ public class JavaApplication1 {
             Logger.getLogger(JavaApplication1.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
+        new Start(idb).setVisible(true);
+        
     }
-    
-    public JavaApplication1() throws Exception{
-         inlogg = new Inloggningssidan();
-    }
-    
+   
     
     
 }
