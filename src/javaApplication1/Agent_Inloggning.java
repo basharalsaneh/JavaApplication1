@@ -2,6 +2,7 @@
 package javaApplication1;
 
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -58,6 +59,11 @@ public class Agent_Inloggning extends javax.swing.JFrame {
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
+            }
+        });
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
             }
         });
 
@@ -166,6 +172,41 @@ public class Agent_Inloggning extends javax.swing.JFrame {
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            
+        String ID = txtUser.getText();
+        String password = txtPassword.getText(); 
+        // boolean okejPassword = false;
+        // boolean okejID = false;
+       ResultSet resultat2;
+        try {
+           statement = connection1.createStatement();
+           
+           String fraga1 = "SELECT Agent_ID, Losenord FROM Agent where "
+                   + "Agent_ID = '"+ID+"' and Losenord = '"+password+"';";
+           
+         
+                resultat2 = statement.executeQuery(fraga1);
+
+                
+                
+            if(resultat2.next()){
+                    dispose();
+                    Admin admin = new Admin();
+                    admin.show();
+            }
+                   else
+                JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
+        }catch (SQLException ex) {
+            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     /**
      * @param args the command line arguments
