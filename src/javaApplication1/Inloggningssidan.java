@@ -11,14 +11,18 @@ import oru.inf.InfDB;
 
 
 public class Inloggningssidan extends javax.swing.JFrame {
+    
+    
+    private InfDB idb;
+    
 
-    private static InfDB idb;
+  
     
     public Inloggningssidan(InfDB idb){
-        initComponents();
         
+
         this.idb = idb;
-    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -125,16 +129,13 @@ public class Inloggningssidan extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     public final void getConnection(){
-         
-     }
-        
+ 
     
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
       
-        
+       
     
-     
+   
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
