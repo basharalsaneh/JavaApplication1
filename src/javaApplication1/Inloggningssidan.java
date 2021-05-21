@@ -283,21 +283,11 @@ public class Inloggningssidan extends javax.swing.JFrame {
             prepStatement.setString(2, txtPassword.getText());
             resultat = prepStatement.executeQuery();
             if(resultat.next()){
-            JOptionPane.showMessageDialog(this, "Inloggning lyckad");
-            if(jComboBox1.getSelectedIndex()==0) {
-                admin a = new Admin();
-                a.setVisible(true)
-                this.setVisible(false);
-            }else{
-            user u = new Agent();
-            u.setVisible(true);
-            this.setVisible(false);
-            }
-            }
+            JOptionPane.showMessageDialog(this, "Inloggning lyckad");}
             else{
             JOptionPane.showMessageDialog(this, "Användarnamn och Lösenord matchar inte");}         
             }
-        }catch(Exception ex) {
+        catch(Exception ex) {
         JOptionPane.showMessageDialog(this. ex.getMessage());}
     }//GEN-LAST:event_jButton1ActionPerformed
 
