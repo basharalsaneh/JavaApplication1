@@ -15,6 +15,7 @@ import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 
 
+
 public class Inloggningssidan extends javax.swing.JFrame {
 
     ResultSet resultat = null;
@@ -288,7 +289,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Användarnamn och Lösenord matchar inte");}         
             }
         catch(Exception ex) {
-        JOptionPane.showMessageDialog(this. ex.getMessage());}
+        Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);}
     }//GEN-LAST:event_jButton1ActionPerformed
 
    
