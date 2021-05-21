@@ -15,10 +15,21 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
+<<<<<<< Updated upstream
 /**
  *
  * @author Marcu
  */
+=======
+import java.sql.ResultSet;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+import oru.inf.InfDB;
+
+>>>>>>> Stashed changes
 public class Registrering extends javax.swing.JFrame {
    
      private static InfDB idb;
@@ -51,11 +62,35 @@ public class Registrering extends javax.swing.JFrame {
         txtAlienID = new javax.swing.JTextField();
         txtAlienNamn = new javax.swing.JTextField();
         txtAlienTelefon = new javax.swing.JTextField();
+<<<<<<< Updated upstream
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+=======
+        buttonAdd = new javax.swing.JButton();
+        buttonEdit = new javax.swing.JButton();
+        buttonDelete = new javax.swing.JButton();
+        txtAlienPlats = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtAlienAnsvarig = new javax.swing.JTextField();
+        buttonRensaData = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        txtAlienRegDate = new javax.swing.JTextField();
+        txtAlienLosenord = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        buttonListaAll = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        txtListaAliens = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        buttonListaAliens = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtUtrustningsID = new javax.swing.JTextField();
+        jToggleButton1 = new javax.swing.JToggleButton();
+>>>>>>> Stashed changes
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +133,17 @@ public class Registrering extends javax.swing.JFrame {
 
         jButton3.setText("Delete");
 
+        jLabel8.setText("Reg datum");
+
+        jLabel9.setText("Lösenord");
+
+        buttonListaAll.setText("Lista alien med vald ID");
+        buttonListaAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonListaAllActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -106,6 +152,7 @@ public class Registrering extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+<<<<<<< Updated upstream
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,6 +169,47 @@ public class Registrering extends javax.swing.JFrame {
                             .addComponent(txtAlienTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                             .addComponent(txtAlienID))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAlienRegDate)
+                            .addComponent(txtAlienLosenord)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(buttonRensaData)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonListaAll))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(29, 29, 29)
+                                        .addComponent(txtAlienID, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtAlienNamn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtAlienTelefon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtAlienPlats, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtAlienAnsvarig, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+>>>>>>> Stashed changes
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,6 +218,7 @@ public class Registrering extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAlienID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
+<<<<<<< Updated upstream
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -139,6 +228,37 @@ public class Registrering extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtAlienTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+=======
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtAlienNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtAlienTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAlienPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtAlienAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(txtAlienRegDate, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAlienLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonRensaData)
+                    .addComponent(buttonListaAll, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+>>>>>>> Stashed changes
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -151,11 +271,50 @@ public class Registrering extends javax.swing.JFrame {
 
             },
             new String [] {
+<<<<<<< Updated upstream
                 "AlienID", "Namn", "Telefon", "Ansvarig_Agent"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
+=======
+                "AlienID", "Namn", "Telefon", "Plats", "Ansvarig", "Registreringsdatum", "Lösenord"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel7.setText("Lista aliens på plats:");
+
+        buttonListaAliens.setText("Lista nu");
+        buttonListaAliens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonListaAliensActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Ta bort utrustning med id:");
+
+        jToggleButton1.setText("Ta bort");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
+>>>>>>> Stashed changes
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,8 +323,26 @@ public class Registrering extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< Updated upstream
                         .addGap(67, 67, 67)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtListaAliens, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buttonListaAliens, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtUtrustningsID, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+>>>>>>> Stashed changes
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(156, 156, 156)
@@ -183,17 +360,63 @@ public class Registrering extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(41, 41, 41)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 77, Short.MAX_VALUE))
+=======
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtListaAliens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(buttonListaAliens))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUtrustningsID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton1)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 27, Short.MAX_VALUE))
+>>>>>>> Stashed changes
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< Updated upstream
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+=======
+    private void table_update(){
+        int kolumn;
+        try{
+        statement = connection1.prepareStatement("SELECT * FROM alien");
+        ResultSet rs = statement.executeQuery();
+        ResultSetMetaData rss = (ResultSetMetaData) rs.getMetaData();
+        kolumn = rss.getColumnCount();
+        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+        df.setRowCount(0);
+        while(rs.next()) // Listar alla aliens
+        {
+        Vector v1 = new Vector(); // Vektor med varje alien-individs vÃ¤rden.
+        
+        for(int i=1 ; i<=kolumn ; i++){ 
+        v1.add(rs.getString("Alien_ID")); // HÃ¤mtar fÃ¶rsta aliensID och sen 2:a osv.
+        v1.add(rs.getString("Namn"));
+        v1.add(rs.getString("Telefon"));
+        v1.add(rs.getString("Plats"));
+        v1.add(rs.getString("Ansvarig_Agent"));
+        v1.add(rs.getString("Registreringsdatum"));
+        v1.add(rs.getString("Losenord"));
+        }
+        
+        df.addRow(v1); // Adderar/Listar varje alien-individs vÃ¤rde i tabellen
+        
+        }
+>>>>>>> Stashed changes
         
         // Vid tryck på "Add"-knappen.
         String id = txtAlienID.getText();
@@ -203,6 +426,7 @@ public class Registrering extends javax.swing.JFrame {
         // Ger id, namne och telefon utifrån det men fyllt i när inloggningen körs.
         
         try {
+<<<<<<< Updated upstream
              
              Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hämtar mysql driver och gör det möjligt att koppla upp till databasen.
              String url = "jdbc:mysql://localhost:3306/mibd";
@@ -220,6 +444,137 @@ public class Registrering extends javax.swing.JFrame {
              
              JOptionPane.showMessageDialog(this, "Alien added, check database");
              
+=======
+            String StringID = txtAlienID.getText();// FÃ¥r ej vara null
+            int id = Integer.parseInt(StringID);
+            String telefon = txtAlienTelefon.getText();
+            String plats = txtAlienPlats.getText(); // FÃ¥r ej vara null
+            String namn = txtAlienNamn.getText(); 
+            String ansvarig = txtAlienAnsvarig.getText(); // FÃ¥r ej vara null
+            String losenord = txtAlienLosenord.getText();
+            String regdate = txtAlienRegDate.getText(); // Ska ändras till date men fick det inte o funka.
+            String fraga = "INSERT INTO alien (Alien_ID, Namn, Telefon, Plats, Ansvarig_Agent, Registreringsdatum, Losenord) VALUES (?,?,?,?,?,?,?)";
+            
+            
+            statement = connection1.prepareStatement(fraga);
+            statement.setInt(1, id);
+            statement.setString(2, namn);
+            statement.setString(3, telefon);
+            statement.setString(4, plats);
+            statement.setString(5, ansvarig);
+            statement.setString(6, regdate); // Också ändras till setDate här..
+            statement.setString(7, losenord);
+            statement.execute();
+            JOptionPane.showMessageDialog(this, "Alien added");
+            table_update();
+           
+          
+         
+             } catch (SQLException ex) {
+                Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             //
+             
+
+       
+    }//GEN-LAST:event_buttonAddActionPerformed
+
+    private void txtAlienIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlienIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAlienIDActionPerformed
+    public void listaAliensBaseratPaNamn(String alienNamn){
+     try {
+              
+           String Namn = txtAlienNamn.getText();
+           
+            String fraga1 = "SELECT * from alien where Namn like '%%?'"; 
+           statement = connection1.prepareStatement(fraga1);
+            statement.setString(1, Namn);
+            ResultSet rs = statement.executeQuery();
+            
+            JOptionPane.showMessageDialog(this, "listar nu:");
+             if(rs.next() == false){
+                 System.out.println("Inga Aliens på vald plats");
+             }
+             do{
+               int ID = rs.getInt("Alien_ID");
+                String Namn1 = rs.getString("Namn");
+                JOptionPane.showMessageDialog(this, ID + " " + Namn1 );
+                }
+             while(rs.next());
+             }
+                catch (SQLException ex) {
+             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
+             System.out.println("något har blivit fel");
+                 }
+          
+    }
+    
+    public void listaAliensBaseratPaID(int alienID){
+             try {
+               String id = txtAlienID.getText();
+            int intID = Integer.parseInt(id);
+           
+            String fraga1 = "SELECT * from alien where Alien_ID = ?"; 
+            
+            statement = connection1.prepareStatement(fraga1);
+            statement.setInt(1, intID);
+            ResultSet rs = statement.executeQuery();
+            
+            JOptionPane.showMessageDialog(this, "listar nu:");
+             if(rs.next() == false){
+                 System.out.println("Inga Aliens på vald plats");
+             }
+             do{
+                 
+                int ID = rs.getInt("Alien_ID");
+                String alienNamn = rs.getString("Namn");
+                JOptionPane.showMessageDialog(this, ID + " " + alienNamn );
+                }
+             while(rs.next());
+             }
+                catch (SQLException ex) {
+             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
+             System.out.println("något har blivit fel");
+                 }
+          
+    }
+
+    
+    private void buttonListaAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaAllActionPerformed
+       
+        String alienID = txtAlienID.getText();
+       int intID = Integer.parseInt(alienID);
+       String alienNamn = txtAlienNamn.getText();
+       
+        if(!alienID.equals("")){
+      listaAliensBaseratPaID(intID);
+       }
+       
+
+//          Om alienIDtextFältet är tomt ska ett felmeddelande komma upp.
+//        if(alienID.equals("")){
+//        JOptionPane.showMessageDialog(this, "Var god välj ett ID/Namn att lista");
+//        }
+        
+    }//GEN-LAST:event_buttonListaAllActionPerformed
+
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        // Delete en alien vars alien man trycker pÃ¥ i tabellen.
+        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+        int selectedIndex = jTable1.getSelectedRow();
+         try {
+             int id = Integer.parseInt(df.getValueAt(selectedIndex, 0).toString());
+             int villDuDelete = JOptionPane.showConfirmDialog(null, "Vill du ta bort vald alien?", 
+                     "Warning", JOptionPane.YES_NO_OPTION);
+             if(villDuDelete == JOptionPane.YES_OPTION){
+             String taBortAlien = "delete from alien where Alien_ID = ?";
+             statement = connection1.prepareStatement(taBortAlien);
+             statement.setInt(1, id);
+             statement.executeUpdate();
+             JOptionPane.showMessageDialog(this, "Alien Ã¤ndrad");
+             table_update(); // Uppdaterar flÃ¶det. Kolla vad metoden gÃ¶r.
+>>>>>>> Stashed changes
              txtAlienID.setText("");
              txtAlienNamn.setText("");
              txtAlienTelefon.setText("");
@@ -236,6 +591,7 @@ public class Registrering extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
+<<<<<<< Updated upstream
     private void txtAlienIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlienIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAlienIDActionPerformed
@@ -268,6 +624,87 @@ public class Registrering extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+=======
+    public ArrayList <String> getArrayList() throws Exception{
+    try{
+         String listaAliens = ("select Namn from alien");
+        getConnection();
+        statement = connection1.prepareStatement(listaAliens);
+        ResultSet rs = statement.executeQuery();
+        
+        ArrayList<String> arrayList = new ArrayList<>();
+        while(rs.next())
+        {
+            String alienNamn = rs.getString("Namn");
+        arrayList.add(alienNamn);
+        }
+    
+         return arrayList;
+    }
+        catch(Exception e){
+            System.out.println(e);
+            
+        }
+    return null;
+    }
+    
+    private void buttonListaAliensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaAliensActionPerformed
+        // TODO add your handling code here:
+         try {
+             
+            String platsID = txtListaAliens.getText();
+            String listaAliens = ("select Namn, Plats, Benamning from alien join plats on Plats_ID where Plats = ? group by Namn");
+
+            statement = connection1.prepareStatement(listaAliens);
+            statement.setString(1, platsID);
+            statement.executeQuery();
+            ResultSet rs = statement.executeQuery();
+            JOptionPane.showMessageDialog(this, "listar nu:");
+   
+             if(rs.next() == false){
+                 System.out.println("Inga Aliens på vald plats");
+             }
+             do{
+                 
+                String alienNamn = rs.getString("Namn");
+                String alienPlats = rs.getString("Plats");
+                String alienPlatsNamn = rs.getString("Benamning");
+                System.out.println(alienNamn + " " + alienPlats + " " + alienPlatsNamn);
+                }
+             while(rs.next());
+             }
+                catch (SQLException ex) {
+             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+    }//GEN-LAST:event_buttonListaAliensActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        try {
+             
+            String utrustningsID = txtUtrustningsID.getText();
+            String taBortUtrustning = ("delete from utrustning where Utrustnings_ID = ?");
+
+      
+            statement = connection1.prepareStatement(taBortUtrustning);
+            statement.setString(1, utrustningsID);
+            statement.executeUpdate();
+            
+            JOptionPane.showMessageDialog(this, "Du har nu tagit bort:");
+   
+//             if(rs.next() == false){
+//                 System.out.println("Inga Aliens på vald plats");
+//             }
+        } 
+               catch (SQLException ex) {
+             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+        
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+       
+    public static void main(String args[]) {
+       
+>>>>>>> Stashed changes
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Registrering().setVisible(true);
@@ -280,15 +717,38 @@ public class Registrering extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+<<<<<<< Updated upstream
+=======
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+>>>>>>> Stashed changes
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+<<<<<<< Updated upstream
+=======
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTextField txtAlienAnsvarig;
+>>>>>>> Stashed changes
     private javax.swing.JTextField txtAlienID;
+    private javax.swing.JTextField txtAlienLosenord;
     private javax.swing.JTextField txtAlienNamn;
+<<<<<<< Updated upstream
     private javax.swing.JTextField txtAlienTelefon;
+=======
+    private javax.swing.JTextField txtAlienPlats;
+    private javax.swing.JTextField txtAlienRegDate;
+    private javax.swing.JTextField txtAlienTelefon;
+    private javax.swing.JTextField txtListaAliens;
+    private javax.swing.JTextField txtUtrustningsID;
+>>>>>>> Stashed changes
     // End of variables declaration//GEN-END:variables
 }
