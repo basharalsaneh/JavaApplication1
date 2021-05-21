@@ -15,12 +15,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
-<<<<<<< Updated upstream
+
 /**
  *
  * @author Marcu
  */
-=======
+
 import java.sql.ResultSet;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import oru.inf.InfDB;
 
->>>>>>> Stashed changes
+
 public class Registrering extends javax.swing.JFrame {
    
      private static InfDB idb;
@@ -386,10 +386,10 @@ public class Registrering extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< Updated upstream
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-=======
+
     private void table_update(){
         int kolumn;
         try{
@@ -416,7 +416,7 @@ public class Registrering extends javax.swing.JFrame {
         df.addRow(v1); // Adderar/Listar varje alien-individs vÃ¤rde i tabellen
         
         }
->>>>>>> Stashed changes
+
         
         // Vid tryck på "Add"-knappen.
         String id = txtAlienID.getText();
@@ -426,7 +426,7 @@ public class Registrering extends javax.swing.JFrame {
         // Ger id, namne och telefon utifrån det men fyllt i när inloggningen körs.
         
         try {
-<<<<<<< Updated upstream
+
              
              Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hämtar mysql driver och gör det möjligt att koppla upp till databasen.
              String url = "jdbc:mysql://localhost:3306/mibd";
@@ -444,7 +444,7 @@ public class Registrering extends javax.swing.JFrame {
              
              JOptionPane.showMessageDialog(this, "Alien added, check database");
              
-=======
+
             String StringID = txtAlienID.getText();// FÃ¥r ej vara null
             int id = Integer.parseInt(StringID);
             String telefon = txtAlienTelefon.getText();
@@ -477,11 +477,11 @@ public class Registrering extends javax.swing.JFrame {
              
 
        
-    }//GEN-LAST:event_buttonAddActionPerformed
+    }                                         
 
-    private void txtAlienIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlienIDActionPerformed
+    private void txtAlienIDActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAlienIDActionPerformed
+    }                                          
     public void listaAliensBaseratPaNamn(String alienNamn){
      try {
               
@@ -559,7 +559,7 @@ public class Registrering extends javax.swing.JFrame {
         
     }//GEN-LAST:event_buttonListaAllActionPerformed
 
-    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // Delete en alien vars alien man trycker pÃ¥ i tabellen.
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
         int selectedIndex = jTable1.getSelectedRow();
@@ -574,7 +574,7 @@ public class Registrering extends javax.swing.JFrame {
              statement.executeUpdate();
              JOptionPane.showMessageDialog(this, "Alien Ã¤ndrad");
              table_update(); // Uppdaterar flÃ¶det. Kolla vad metoden gÃ¶r.
->>>>>>> Stashed changes
+
              txtAlienID.setText("");
              txtAlienNamn.setText("");
              txtAlienTelefon.setText("");
@@ -589,9 +589,9 @@ public class Registrering extends javax.swing.JFrame {
         
         
        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }                                        
 
-<<<<<<< Updated upstream
+
     private void txtAlienIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlienIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAlienIDActionPerformed
@@ -624,7 +624,7 @@ public class Registrering extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-=======
+
     public ArrayList <String> getArrayList() throws Exception{
     try{
          String listaAliens = ("select Namn from alien");
@@ -704,7 +704,7 @@ public class Registrering extends javax.swing.JFrame {
        
     public static void main(String args[]) {
        
->>>>>>> Stashed changes
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Registrering().setVisible(true);
