@@ -26,9 +26,9 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="146" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="adminButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="alienButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="agentButton" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="buttonAdministrator" alignment="0" max="32767" attributes="0"/>
+                  <Component id="buttonAlien" alignment="0" max="32767" attributes="0"/>
+                  <Component id="buttonAgent" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
           </Group>
@@ -45,11 +45,11 @@
               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="agentButton" min="-2" max="-2" attributes="0"/>
+              <Component id="buttonAgent" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="alienButton" min="-2" max="-2" attributes="0"/>
+              <Component id="buttonAlien" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="adminButton" min="-2" max="-2" attributes="0"/>
+              <Component id="buttonAdministrator" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="66" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -64,28 +64,28 @@
         <Property name="text" type="java.lang.String" value="Logga in som:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="agentButton">
+    <Component class="javax.swing.JButton" name="buttonAgent">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agent"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="agentButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAgentActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="alienButton">
+    <Component class="javax.swing.JButton" name="buttonAlien">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alien"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="alienButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAlienActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="adminButton">
+    <Component class="javax.swing.JButton" name="buttonAdministrator">
       <Properties>
         <Property name="text" type="java.lang.String" value="Administrat&#xf6;r"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAdministratorActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

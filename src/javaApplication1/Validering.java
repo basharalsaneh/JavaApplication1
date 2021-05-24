@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package javaApplication1;
 
 import javax.swing.JOptionPane;
@@ -15,7 +11,8 @@ import oru.inf.InfDB;
  * @author Marcu
  */
 public class Validering {
-        static boolean resultat = false;
+    
+    static boolean resultat = false;
     private static InfDB idb;
     
      public static boolean textFaltHarVarde(JTextField rutaAttKolla) {
@@ -40,7 +37,10 @@ public class Validering {
         System.out.println(resultat);
         return resultat;
     }
-
+          
+    
+     
+     
      public static boolean arAgent(){
      resultat = true;
      return resultat;

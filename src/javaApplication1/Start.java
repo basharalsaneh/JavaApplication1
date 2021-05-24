@@ -17,8 +17,6 @@ public class Start extends javax.swing.JFrame {
     
     
     private InfDB idb;
-  
-    
     
     /**
      * Creates new form Start
@@ -26,11 +24,6 @@ public class Start extends javax.swing.JFrame {
     public Start(InfDB idb) {
         initComponents();
         this.idb = idb;
-        boolean alien;
-        boolean agent;
-        boolean admin;
-        
-       
     }
 
     /**
@@ -43,33 +36,33 @@ public class Start extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        agentButton = new javax.swing.JButton();
-        alienButton = new javax.swing.JButton();
-        adminButton = new javax.swing.JButton();
+        buttonAgent = new javax.swing.JButton();
+        buttonAlien = new javax.swing.JButton();
+        buttonAdministrator = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setText("Logga in som:");
 
-        agentButton.setText("Agent");
-        agentButton.addActionListener(new java.awt.event.ActionListener() {
+        buttonAgent.setText("Agent");
+        buttonAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agentButtonActionPerformed(evt);
+                buttonAgentActionPerformed(evt);
             }
         });
 
-        alienButton.setText("Alien");
-        alienButton.addActionListener(new java.awt.event.ActionListener() {
+        buttonAlien.setText("Alien");
+        buttonAlien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alienButtonActionPerformed(evt);
+                buttonAlienActionPerformed(evt);
             }
         });
 
-        adminButton.setText("Administratör");
-        adminButton.addActionListener(new java.awt.event.ActionListener() {
+        buttonAdministrator.setText("Administratör");
+        buttonAdministrator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminButtonActionPerformed(evt);
+                buttonAdministratorActionPerformed(evt);
             }
         });
 
@@ -80,9 +73,9 @@ public class Start extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(146, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(adminButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(alienButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(agentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonAdministrator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(125, 125, 125))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
@@ -95,47 +88,57 @@ public class Start extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
-                .addComponent(agentButton)
+                .addComponent(buttonAgent)
                 .addGap(18, 18, 18)
-                .addComponent(alienButton)
+                .addComponent(buttonAlien)
                 .addGap(18, 18, 18)
-                .addComponent(adminButton)
+                .addComponent(buttonAdministrator)
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void alienButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alienButtonActionPerformed
-            
+    private void buttonAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlienActionPerformed
+
         // TODO add your handling code here:
-        
-        
         Validering.arAlien();
         this.dispose();
-        new Inloggningssidan(idb).setVisible(true);
-    }//GEN-LAST:event_alienButtonActionPerformed
+        Inloggningssidan inlogg = null;
+        try {
+            inlogg = new Inloggningssidan();
+        } catch (Exception ex) {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        inlogg.setVisible(true);
+    }//GEN-LAST:event_buttonAlienActionPerformed
 
-    private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
-       
+    private void buttonAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdministratorActionPerformed
         // TODO add your handling code here:
-        
-       Validering.arAdmin();
-        
+        Validering.arAdmin();
         this.dispose();
-        new Inloggningssidan(idb).setVisible(true);
         
-    }//GEN-LAST:event_adminButtonActionPerformed
+        Admin_Inloggning AgentID = null;
+        try {
+            AgentID = new Admin_Inloggning();
+        } catch (Exception ex) {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        AgentID.setVisible(true);
+    }//GEN-LAST:event_buttonAdministratorActionPerformed
 
-    private void agentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentButtonActionPerformed
+    private void buttonAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgentActionPerformed
         // TODO add your handling code here:
-        
         Validering.arAgent();
         this.dispose();
-        new Inloggningssidan(idb).setVisible(true);
-        
-        
-    }//GEN-LAST:event_agentButtonActionPerformed
+        Inloggningssidan inlogg = null;
+        try {
+            inlogg = new Inloggningssidan();
+        } catch (Exception ex) {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        inlogg.setVisible(true);
+    }//GEN-LAST:event_buttonAgentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,9 +146,9 @@ public class Start extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton adminButton;
-    private javax.swing.JButton agentButton;
-    private javax.swing.JButton alienButton;
+    private javax.swing.JButton buttonAdministrator;
+    private javax.swing.JButton buttonAgent;
+    private javax.swing.JButton buttonAlien;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
