@@ -15,7 +15,8 @@ import oru.inf.InfDB;
  *
  * @author marcu
  */
-public class Agent2{
+public class Agent2 extends javax.swing.JFrame {
+    
 
 private static InfDB idb;
 private int agent_ID;
@@ -27,12 +28,14 @@ private Date anstallningsdatum;
 
     
 public Agent2(String namn, String Telefon, String losenord)throws Exception {
-agent_ID = new Random().nextInt(10);
-this.namn = namn;
-this.Telefon = Telefon;
-this.losenord = losenord;
-administrator = false;
-anstallningsdatum = new Date();
+    initComponents();
+    
+    agent_ID = new Random().nextInt(10);
+    this.namn = namn;
+    this.Telefon = Telefon;
+    this.losenord = losenord;
+    administrator = false;
+    anstallningsdatum = new Date();
 }
  
 
@@ -176,7 +179,7 @@ return losenord;
             @Override
             public void run() {
                 try {
-                    new Agent2(String namn, String Telefon, String losenord);
+                    new Agent2();
                 } catch (Exception ex) {
                     Logger.getLogger(Agent2.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -195,8 +198,4 @@ return losenord;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
-
-    private void dispose() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-}
+ }
