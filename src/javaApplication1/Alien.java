@@ -161,7 +161,7 @@ public Alien() {
             // TODO add your handling code here:
             
             dispose();
-            BytaLosenord bytLosen = new BytaLosenord();
+            BytaLosenord bytLosen = new BytaLosenord(idb);
             bytLosen.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);

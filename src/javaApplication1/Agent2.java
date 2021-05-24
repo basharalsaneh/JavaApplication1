@@ -27,8 +27,9 @@ private boolean administrator;
 private Date anstallningsdatum;
 
     
-public Agent2() {
+public Agent2(InfDB idb) {
     initComponents();
+    this.idb = idb;
 }
 
 
@@ -122,7 +123,7 @@ public Agent2() {
         // TODO add your handling code here:
         dispose();
         try {
-            BytaLosenord bytLosen = new BytaLosenord();
+            BytaLosenord bytLosen = new BytaLosenord(idb);
             bytLosen.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
@@ -158,7 +159,7 @@ public Agent2() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                    new Agent2().setVisible(true);
+                    new Agent2(idb).setVisible(true);
                 }
         });
        }

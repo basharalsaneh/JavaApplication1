@@ -13,15 +13,17 @@ public class inloggningValidering {
 
     private String namn;
     private int id;
+    private String losenord;
 
-    public void inloggadAnvandare(String nyttNamn, int nyttId) {
+    public void inloggadAnvandare(String namnInloggad, int idInloggad) {
 
-        namn = nyttNamn;
-        id = nyttId;
+        namn = namnInloggad;
+        id = idInloggad;
+        this.losenord ="";
     }
 
-    public void setNamn(String nn) {
-        this.namn = nn;
+    public void setNamn(String nyttNamn) {
+        this.namn = nyttNamn;
     }
 
     public String getNamn() {
@@ -30,11 +32,17 @@ public class inloggningValidering {
 
     public int getId() {
         return id;
-
     }
-
+    
     public void setId(int nyttId) {
         id = nyttId;
+    }
+    
+    public String getLosenord(){
+    return losenord;
+    }
+    public void setNyttLosenord(String nyttLosenord){
+    losenord = nyttLosenord;
     }
 
 }

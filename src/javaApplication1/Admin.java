@@ -5,17 +5,21 @@
  */
 package javaApplication1;
 
+import oru.inf.InfDB;
+import oru.inf.InfException;
+
 /**
  *
  * @author kristofffer
  */
 public class Admin extends javax.swing.JFrame {
-
+    private static InfDB idb;
     /**
      * Creates new form Admin
      */
-    public Admin() {
+    public Admin(InfDB idb) {
         initComponents();
+        this.idb = idb;
     }
 
     /**
@@ -127,7 +131,7 @@ public class Admin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Admin().setVisible(true);
+                new Admin(idb).setVisible(true);
             }
         });
     }

@@ -5,17 +5,19 @@
  */
 package javaApplication1;
 
+import oru.inf.InfDB;
 /**
  *
  * @author Marcu
  */
 public class BytaLosenord extends javax.swing.JFrame {
-
+    private static InfDB idb;
     /**
      * Creates new form BytaLosenord
      */
-    public BytaLosenord() {
+    public BytaLosenord(InfDB idb) {
         initComponents();
+        this.idb = idb;
     }
 
     /**
@@ -45,6 +47,11 @@ public class BytaLosenord extends javax.swing.JFrame {
         jLabel3.setText("Password");
 
         buttonAndraLosenord.setText("OK");
+        buttonAndraLosenord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAndraLosenordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,6 +93,12 @@ public class BytaLosenord extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonAndraLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAndraLosenordActionPerformed
+        // TODO add your handling code here:
+       String nyttLosenord = inloggningValidering
+        
+    }//GEN-LAST:event_buttonAndraLosenordActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -116,7 +129,7 @@ public class BytaLosenord extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BytaLosenord().setVisible(true);
+                new BytaLosenord(idb).setVisible(true);
             }
         });
     }

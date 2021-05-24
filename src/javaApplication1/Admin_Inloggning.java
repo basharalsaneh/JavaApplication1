@@ -158,7 +158,7 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                 
             if(resultat2.next()){
                     dispose();
-                    Admin inloggadSomAdmin = new Admin();
+                    Admin inloggadSomAdmin = new Admin(idb);
                     inloggadSomAdmin.show();
             }
                    else
@@ -198,7 +198,7 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                 
             if(resultat2.next()){
                     dispose();
-                    Admin admin = new Admin();
+                    Admin admin = new Admin(idb);
                     admin.show();
             }
                    else

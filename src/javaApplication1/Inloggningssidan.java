@@ -182,7 +182,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
                 
             if(resultat1.next()){
                     dispose();
-                    Registrering registrering = new Registrering();
+                    Registrering registrering = new Registrering(idb);
                     registrering.show();
             }
             else{
@@ -209,7 +209,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
             // TODO add your handling code here:
             
             dispose();
-            BytaLosenord bytLosen = new BytaLosenord();
+            BytaLosenord bytLosen = new BytaLosenord(idb);
             bytLosen.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
@@ -229,42 +229,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        
-        String ID = txtUser.getText();
-        String password = txtPassword.getText(); 
-        // boolean okejPassword = false;
-        // boolean okejID = false;
-        ResultSet resultat1;
-        try{
-           statement = connection1.createStatement();
-           String fraga = "SELECT Alien_ID, Losenord FROM alien where "
-                   + "Alien_ID = '"+ID+"' and Losenord = '"+password+"';";
-           
-         
-                resultat1 = statement.executeQuery(fraga);
-                
-                
-            if(resultat1.next()){
-                    dispose();
-                    Registrering registrering = new Registrering();
-                    registrering.show();
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
-                txtUser.setText("");
-                txtPassword.setText("");
-                txtUser.requestFocus();
-            }                  
-        } catch (SQLException ex) {
-            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-        }
+       // Ingen kod här än. Lägg till metoden som loggar in vald person.
     }//GEN-LAST:event_txtPasswordKeyPressed
 
    

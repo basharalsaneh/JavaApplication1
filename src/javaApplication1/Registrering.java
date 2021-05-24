@@ -23,10 +23,11 @@ public class Registrering extends javax.swing.JFrame {
         PreparedStatement statement;
         Statement createStatement;
   
-    public Registrering() throws Exception { // KÃ¶rs igÃ¥ng direkt.
+    public Registrering(InfDB idb) throws Exception {
         initComponents();
         getConnection();
         table_update();
+        this.idb = idb;
          
     }
     
@@ -35,7 +36,7 @@ public class Registrering extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                 try {
-                    new Registrering().setVisible(true);
+                    new Registrering(idb).setVisible(true);
                 } catch (Exception ex) {
                     Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
                 }
