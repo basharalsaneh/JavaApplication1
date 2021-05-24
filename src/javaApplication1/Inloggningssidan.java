@@ -54,8 +54,6 @@ public class Inloggningssidan extends javax.swing.JFrame {
             }
         });
 
-        txtPassword.setText("jPasswordField1");
-
         loggaIn.setText("Logga in");
         loggaIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,23 +117,24 @@ public class Inloggningssidan extends javax.swing.JFrame {
         
         this.dispose();
         new Start(idb).setVisible(true);
+        Validering.resultat = false;
        
     }//GEN-LAST:event_gaTillbakaActionPerformed
 
-    public void vemArInloggad(){
+    public void vemArInloggad() throws Exception{
     if(JavaApplication1.textFaltHarVarde(txtAnvandarnamn) && (JavaApplication1.losenordHarVarde(txtPassword))){
          
         if(JavaApplication1.arAgent()){
             this.dispose();
-            new agentInlogg(idb).setVisible(true);
+            new Registrering().setVisible(true);
     }
          if(JavaApplication1.arAlien()){
             this.dispose();
-            new alienInlogg(idb).setVisible(true);
+            new Registrering().setVisible(true);
     }
           if(JavaApplication1.arAdmin()){
             this.dispose();
-            new adminInlogg(idb).setVisible(true);
+            new Registrering().setVisible(true);
     }
         
     }

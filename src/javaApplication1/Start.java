@@ -110,8 +110,8 @@ public class Start extends javax.swing.JFrame {
             
         // TODO add your handling code here:
         
-        boolean alien = true;
         
+        Validering.arAlien();
         this.dispose();
         new Inloggningssidan(idb).setVisible(true);
     }//GEN-LAST:event_alienButtonActionPerformed
@@ -120,7 +120,7 @@ public class Start extends javax.swing.JFrame {
        
         // TODO add your handling code here:
         
-        Boolean admin = true;
+       Validering.arAdmin();
         
         this.dispose();
         new Inloggningssidan(idb).setVisible(true);
@@ -130,7 +130,7 @@ public class Start extends javax.swing.JFrame {
     private void agentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentButtonActionPerformed
         // TODO add your handling code here:
         
-        Boolean agent = true;
+        Validering.arAgent();
         this.dispose();
         new Inloggningssidan(idb).setVisible(true);
         
