@@ -13,34 +13,29 @@ import oru.inf.InfDB;
 public class Validering {
     
     static boolean resultat = false;
-    private static InfDB idb;
+    private InfDB idb;
     
-     public static boolean textFaltHarVarde(JTextField rutaAttKolla) {
+     public static boolean personFinns(JTextField enPerson) {
         resultat = true;
 
-        if (rutaAttKolla.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Inmatningsrutan är tom!");
-
-            resultat = false;
-            rutaAttKolla.requestFocus();
+        if (enPerson.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "person fel");
+            resultat = false;    
         }
         return resultat;
      }
      
-     public static boolean losenordHarVarde(JPasswordField rutaAttKolla) {
+     public static boolean finnsLosenord(JPasswordField ettLosenord) {
         resultat = true;
 
-        if (rutaAttKolla.getPassword().length == 0) {
+        if (ettLosenord.getPassword().length == 0) {
             JOptionPane.showMessageDialog(null, "Rutan är tom!");
             resultat = false;
         }
         System.out.println(resultat);
         return resultat;
     }
-          
     
-     
-     
      public static boolean arAgent(){
      resultat = true;
      return resultat;

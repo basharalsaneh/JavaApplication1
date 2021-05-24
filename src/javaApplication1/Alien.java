@@ -20,14 +20,16 @@ import oru.inf.InfException;
 
 public class Alien extends javax.swing.JFrame {
     
-inloggningValidering vemArInloggad;
+
 private InfDB idb;
 
-public Alien() {
+public Alien(InfDB idb) {
         initComponents();
-        
+        this.idb = idb;
+       
+    
     }
-      public static void main(String args[]) {
+      public void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -54,7 +56,7 @@ public Alien() {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Alien().setVisible(true);
+                new Alien(idb).setVisible(true);
             }
         });
     }
@@ -75,6 +77,7 @@ public Alien() {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +101,13 @@ public Alien() {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel4.setText("Inloggad som Alien ");
 
+        jButton1.setText("Ändra lösenord");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,7 +117,10 @@ public Alien() {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
@@ -130,29 +143,31 @@ public Alien() {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtOmradeChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(58, 58, 58))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton1))
+                .addGap(53, 53, 53))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtOmradeChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOmradeChefActionPerformed
-    try {
-        // TODO add your handling code here:
-        
-        int ID = vemArInloggad.getId();
-        String fraga = "select a.Namn, p.Benamning, Alien_ID from alien\n" +
-                "    join Plats p on p.Plats_ID=Alien_ID\n" +
-                "join omrade om on om.Omrades_ID=p.Plats_ID\n" +
-                "join omradeschef omc on omc.Omrade = om.Omrades_ID\n" +
-                "join agent a on a.Agent_ID=omc.Agent_ID where alien_ID =" + ID + ";";
-        ArrayList<String> minOmradeschef = idb.fetchColumn(fraga);
-        JOptionPane.showMessageDialog(this, minOmradeschef);
-    } catch (InfException ex) {
-        Logger.getLogger(Alien.class.getName()).log(Level.SEVERE, null, ex);
-    }
+//    try {
+//        // TODO add your handling code here:
+//        
+//        int ID = vemArInloggad.getId();
+//        String fraga = "select a.Namn, p.Benamning, Alien_ID from alien\n" +
+//                "    join Plats p on p.Plats_ID=Alien_ID\n" +
+//                "join omrade om on om.Omrades_ID=p.Plats_ID\n" +
+//                "join omradeschef omc on omc.Omrade = om.Omrades_ID\n" +
+//                "join agent a on a.Agent_ID=omc.Agent_ID where alien_ID =" + ID + ";";
+//        ArrayList<String> minOmradeschef = idb.fetchColumn(fraga);
+//        JOptionPane.showMessageDialog(this, minOmradeschef);
+//    } catch (InfException ex) {
+//        Logger.getLogger(Alien.class.getName()).log(Level.SEVERE, null, ex);
+//    }
         
     }//GEN-LAST:event_txtOmradeChefActionPerformed
 
@@ -168,7 +183,20 @@ public Alien() {
         }
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+  
+         try {
+   
+            dispose();
+            BytaLosenord bytLosen = new BytaLosenord(idb);
+            bytLosen.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -182,8 +182,8 @@ public class Inloggningssidan extends javax.swing.JFrame {
                 
             if(resultat1.next()){
                     dispose();
-                    Registrering registrering = new Registrering(idb);
-                    registrering.show();
+                    Alien inloggAlien = new Alien(idb);
+                    inloggAlien.show();
             }
             else{
                 JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
