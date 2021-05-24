@@ -5,20 +5,29 @@
  */
 package javaApplication1;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+import oru.inf.InfException;
+
 
 /**
  *
  * @author marcu
  */
-public class Alien extends javax.swing.JFrame {
 
+public class Alien extends javax.swing.JFrame {
+inloggningValidering vemArInloggad;
     /**
      * Creates new form Alien
      */
-    public Alien() {
+private InfDB idb;
+
+    public Alien(InfDB idb) {
         initComponents();
+        this.idb = idb;
     }
 
     /**
@@ -31,7 +40,7 @@ public class Alien extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtOmradeChef = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -40,10 +49,9 @@ public class Alien extends javax.swing.JFrame {
 
         jLabel1.setText("Din områdeschef:");
 
-        jTextField2.setText("Din områdeschef");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtOmradeChef.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtOmradeChefActionPerformed(evt);
             }
         });
 
@@ -72,7 +80,7 @@ public class Alien extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtOmradeChef, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +98,7 @@ public class Alien extends javax.swing.JFrame {
                 .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtOmradeChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(58, 58, 58))
@@ -99,9 +107,23 @@ public class Alien extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtOmradeChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOmradeChefActionPerformed
+    try {
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+        
+        int ID = vemArInloggad.getId();
+        String fraga = "select a.Namn, p.Benamning, Alien_ID from alien\n" +
+                "    join Plats p on p.Plats_ID=Alien_ID\n" +
+                "join omrade om on om.Omrades_ID=p.Plats_ID\n" +
+                "join omradeschef omc on omc.Omrade = om.Omrades_ID\n" +
+                "join agent a on a.Agent_ID=omc.Agent_ID where alien_ID =" + ID + ";";
+        ArrayList<String> minOmradeschef = idb.fetchColumn(fraga);
+        JOptionPane.showMessageDialog(this, minOmradeschef);
+    } catch (InfException ex) {
+        Logger.getLogger(Alien.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+    }//GEN-LAST:event_txtOmradeChefActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         try {
@@ -155,6 +177,6 @@ public class Alien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtOmradeChef;
     // End of variables declaration//GEN-END:variables
 }
