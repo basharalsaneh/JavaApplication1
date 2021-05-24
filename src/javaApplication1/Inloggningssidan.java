@@ -5,6 +5,7 @@
  */
 package javaApplication1;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 
 /**
@@ -12,8 +13,9 @@ import oru.inf.InfDB;
  * @author kristofffer
  */
 public class Inloggningssidan extends javax.swing.JFrame {
-    
+    public JavaApplication1 inloggadSom;
     InfDB idb;
+   
 
     /**
      * Creates new form Inloggningssidan
@@ -23,6 +25,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
         this.idb = idb;
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,6 +57,11 @@ public class Inloggningssidan extends javax.swing.JFrame {
         txtPassword.setText("jPasswordField1");
 
         loggaIn.setText("Logga in");
+        loggaIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loggaInActionPerformed(evt);
+            }
+        });
 
         gaTillbaka.setText("Gå tillbaka");
         gaTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +121,36 @@ public class Inloggningssidan extends javax.swing.JFrame {
         new Start(idb).setVisible(true);
        
     }//GEN-LAST:event_gaTillbakaActionPerformed
+
+    public void vemArInloggad(){
+    if(JavaApplication1.textFaltHarVarde(txtAnvandarnamn) && (JavaApplication1.losenordHarVarde(txtPassword))){
+         
+        if(JavaApplication1.arAgent()){
+            this.dispose();
+            new agentInlogg(idb).setVisible(true);
+    }
+         if(JavaApplication1.arAlien()){
+            this.dispose();
+            new alienInlogg(idb).setVisible(true);
+    }
+          if(JavaApplication1.arAdmin()){
+            this.dispose();
+            new adminInlogg(idb).setVisible(true);
+    }
+        
+    }
+    else{
+    JOptionPane.showMessageDialog(this, "FEL vid inloggning.");
+    }
+    
+    }
+    
+    
+    private void loggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loggaInActionPerformed
+        // TODO add your handling code here:
+        
+       
+    }//GEN-LAST:event_loggaInActionPerformed
 
     /**
      * @param args the command line arguments
