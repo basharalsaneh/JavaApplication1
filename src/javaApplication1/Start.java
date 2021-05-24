@@ -116,20 +116,28 @@ public class Start extends javax.swing.JFrame {
     private void buttonAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdministratorActionPerformed
         // TODO add your handling code here:
         Validering.arAdmin();
+        this.dispose();
+        
+        Admin_Inloggning AgentID = null;
+        try {
+            AgentID = new Admin_Inloggning();
+        } catch (Exception ex) {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        AgentID.setVisible(true);
     }//GEN-LAST:event_buttonAdministratorActionPerformed
 
     private void buttonAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgentActionPerformed
         // TODO add your handling code here:
         Validering.arAgent();
         this.dispose();
-        
-        Agent_Inloggning AgentID = null;
+        Inloggningssidan inlogg = null;
         try {
-            AgentID = new Agent_Inloggning();
+            inlogg = new Inloggningssidan();
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
-        AgentID.setVisible(true);
+        inlogg.setVisible(true);
     }//GEN-LAST:event_buttonAgentActionPerformed
 
     /**

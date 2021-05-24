@@ -12,13 +12,13 @@ import java.util.logging.Logger;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 
-public class Agent_Inloggning extends javax.swing.JFrame {
+public class Admin_Inloggning extends javax.swing.JFrame {
 
     ResultSet resultat;
     Statement statement;
     Connection connection1;
     
-    public Agent_Inloggning() throws Exception {
+    public Admin_Inloggning() throws Exception {
         initComponents();
         getConnection();
     }
@@ -225,13 +225,13 @@ public class Agent_Inloggning extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Agent_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Admin_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Agent_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Admin_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Agent_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Admin_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Agent_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Admin_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -240,9 +240,9 @@ public class Agent_Inloggning extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Agent_Inloggning().setVisible(true);
+                    new Admin_Inloggning().setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(Agent_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Admin_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

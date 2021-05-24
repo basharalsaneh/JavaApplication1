@@ -27,50 +27,10 @@ private boolean administrator;
 private Date anstallningsdatum;
 
     
-public Agent2(String namn, String Telefon, String losenord)throws Exception {
+public Agent2() {
     initComponents();
-    
-    agent_ID = new Random().nextInt(10);
-    this.namn = namn;
-    this.Telefon = Telefon;
-    this.losenord = losenord;
-    administrator = false;
-    anstallningsdatum = new Date();
-}
- 
-
-public int getAgentID(){
-return agent_ID;
 }
 
-public String getNamn(){
-return namn;
-}
-
-public String getTelefon(){
-return Telefon;
-}
-
-public Date getAnstallningsdatum(){
-return anstallningsdatum;
-}
-
-public void bytLosenord(String nyttLosenord){
-nyttLosenord = losenord;
-}
-
-public boolean getAdministrator(){
-return administrator;
-}
-
-public boolean becomeAdministrator(){
-administrator = true;
-return administrator;
-}
-
-public String getLosenord(){
-return losenord;
-}
 
 
     /**
@@ -160,32 +120,49 @@ return losenord;
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-        BytaLosenord BytaLosen = null;
+        dispose();
         try {
-            BytaLosen = new BytaLosenord();
+            BytaLosenord bytLosen = new BytaLosenord();
+            bytLosen.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
-        BytaLosen.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
-     */
+     *//* Set the Nimbus look and feel */
+        ////<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        /*try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Alien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Alien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Alien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Alien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>*/
        public static void main(String args[]) {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try {
-                    new Agent2();
-                } catch (Exception ex) {
-                    Logger.getLogger(Agent2.class.getName()).log(Level.SEVERE, null, ex);
+                    new Agent2().setVisible(true);
                 }
-            }
         });
-    }
+       }
+
 
        
     // Variables declaration - do not modify//GEN-BEGIN:variables
