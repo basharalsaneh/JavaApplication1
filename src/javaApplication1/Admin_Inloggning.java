@@ -11,16 +11,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
+import oru.inf.InfDB;
 
 public class Admin_Inloggning extends javax.swing.JFrame {
 
     ResultSet resultat;
     Statement statement;
     Connection connection1;
+    private static InfDB idb;
     
-    public Admin_Inloggning() throws Exception {
+    public Admin_Inloggning(InfDB idb) throws Exception {
         initComponents();
         getConnection();
+        this.idb = idb;
     }
 
     @SuppressWarnings("unchecked")
@@ -155,8 +158,8 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                 
             if(resultat2.next()){
                     dispose();
-                    Admin admin = new Admin();
-                    admin.show();
+                    Admin inloggadSomAdmin = new Admin();
+                    inloggadSomAdmin.show();
             }
                    else
                 JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
@@ -240,7 +243,7 @@ public class Admin_Inloggning extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Admin_Inloggning().setVisible(true);
+                    new Admin_Inloggning(idb).setVisible(true);
                 } catch (Exception ex) {
                     Logger.getLogger(Admin_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
                 }

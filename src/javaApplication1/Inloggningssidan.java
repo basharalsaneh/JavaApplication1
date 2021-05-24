@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
+import oru.inf.InfDB;
 
 
 
@@ -22,10 +23,12 @@ public class Inloggningssidan extends javax.swing.JFrame {
     Statement statement = null;
     PreparedStatement prepStatement = null;
     Connection connection1 = null;
+    private static InfDB idb;
    
-    public Inloggningssidan() throws Exception {
+    public Inloggningssidan(InfDB idb) throws Exception {
         initComponents();
         getConnection();
+        this.idb = idb;
     }
 
     @SuppressWarnings("unchecked")
@@ -293,7 +296,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Inloggningssidan().setVisible(true);
+                    new Inloggningssidan(idb).setVisible(true);
                 } catch (Exception ex) {
                     Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
                 }

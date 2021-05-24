@@ -8,7 +8,7 @@ package javaApplication1;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import oru.inf.InfDB;
-
+import oru.inf.InfException;
 /**
  *
  * @author macbook
@@ -101,43 +101,37 @@ public class Start extends javax.swing.JFrame {
 
     private void buttonAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlienActionPerformed
 
-        // TODO add your handling code here:
-        Validering.arAlien();
-        this.dispose();
-        Inloggningssidan inlogg = null;
         try {
-            inlogg = new Inloggningssidan();
+            // TODO add your handling code here:
+            Validering.arAlien();
+            this.dispose();
+            new Inloggningssidan(idb).setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
-        inlogg.setVisible(true);
     }//GEN-LAST:event_buttonAlienActionPerformed
 
     private void buttonAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdministratorActionPerformed
-        // TODO add your handling code here:
-        Validering.arAdmin();
-        this.dispose();
-        
-        Admin_Inloggning AgentID = null;
         try {
-            AgentID = new Admin_Inloggning();
+            // TODO add your handling code here:
+            Validering.arAdmin();
+            this.dispose();
+            new Admin_Inloggning(idb).setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
-        AgentID.setVisible(true);
     }//GEN-LAST:event_buttonAdministratorActionPerformed
 
     private void buttonAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgentActionPerformed
-        // TODO add your handling code here:
-        Validering.arAgent();
-        this.dispose();
-        Inloggningssidan inlogg = null;
         try {
-            inlogg = new Inloggningssidan();
+            // TODO add your handling code here:
+            Validering.arAgent();
+            this.dispose();
+            new Inloggningssidan(idb).setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
-        inlogg.setVisible(true);
+       
     }//GEN-LAST:event_buttonAgentActionPerformed
 
     /**
