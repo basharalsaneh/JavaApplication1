@@ -102,6 +102,7 @@ public class Start extends javax.swing.JFrame {
     private void buttonAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlienActionPerformed
 
         // TODO add your handling code here:
+        Validering.arAlien();
         this.dispose();
         Inloggningssidan inlogg = null;
         try {
@@ -114,11 +115,14 @@ public class Start extends javax.swing.JFrame {
 
     private void buttonAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdministratorActionPerformed
         // TODO add your handling code here:
+        Validering.arAdmin();
     }//GEN-LAST:event_buttonAdministratorActionPerformed
 
     private void buttonAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgentActionPerformed
         // TODO add your handling code here:
+        Validering.arAgent();
         this.dispose();
+        
         Agent_Inloggning AgentID = null;
         try {
             AgentID = new Agent_Inloggning();
