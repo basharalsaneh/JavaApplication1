@@ -5,17 +5,45 @@
  */
 package javaApplication1;
 
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oru.inf.InfException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+import java.sql.ResultSet;
+import java.util.Date;
+import java.util.Vector;
+import static javaApplication1.Hantera_Aliens.vemArInloggad;
+import javax.swing.table.DefaultTableModel;
+import oru.inf.InfDB;
 /**
  *
  * @author marcu
  */
 public class Hantera_Agenter extends javax.swing.JFrame {
-
+        
+        private static InfDB idb;
+        Connection connection1;
+        PreparedStatement statement;
+        Statement createStatement;
+        static inloggningValidering vemArInloggad;
+        
+       
+        
     /**
      * Creates new form Hantera_Agenter
      */
-    public Hantera_Agenter() {
+    public Hantera_Agenter(InfDB idb, inloggningValidering vemArInloggad)throws Exception {
         initComponents();
+        getConnection();
+        table_update();
+        this.idb = idb;
+        this.vemArInloggad = vemArInloggad;
     }
 
     /**
@@ -29,7 +57,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtAgentID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -37,16 +65,16 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        txtAgentNamn = new javax.swing.JTextField();
+        txtAgentTelefon = new javax.swing.JTextField();
+        txtAgentDatum = new javax.swing.JTextField();
+        txtAgentAdmin = new javax.swing.JTextField();
+        txtAgentLosenord = new javax.swing.JTextField();
+        txtAgentOmrade = new javax.swing.JTextField();
+        buttonRensaData = new javax.swing.JButton();
+        buttonAdd = new javax.swing.JButton();
+        buttonEdit = new javax.swing.JButton();
+        buttonDelete = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -73,13 +101,33 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
         jLabel8.setText("Omrade");
 
-        jButton1.setText("Rensa fälten");
+        buttonRensaData.setText("Rensa fälten");
+        buttonRensaData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRensaDataActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Lägg till");
+        buttonAdd.setText("Lägg till");
+        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Ändra");
+        buttonEdit.setText("Ändra");
+        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Ta bort");
+        buttonDelete.setText("Ta bort");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Lista an agent");
 
@@ -92,16 +140,12 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
                         .addGap(86, 86, 86)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
+                            .addComponent(txtAgentNamn, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                            .addComponent(txtAgentID))
                         .addGap(23, 23, 23))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,27 +156,27 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                             .addComponent(jLabel8))
                         .addGap(67, 67, 67)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField6)
-                            .addComponent(jTextField7)
-                            .addComponent(jTextField4))
+                            .addComponent(txtAgentTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                            .addComponent(txtAgentAdmin)
+                            .addComponent(txtAgentLosenord)
+                            .addComponent(txtAgentOmrade)
+                            .addComponent(txtAgentDatum))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(buttonRensaData)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton5)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -141,43 +185,43 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAgentID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAgentNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAgentTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtAgentDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAgentAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAgentLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAgentOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(buttonRensaData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(buttonAdd)
+                    .addComponent(buttonEdit)
+                    .addComponent(buttonDelete))
                 .addContainerGap())
         );
 
@@ -195,6 +239,11 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -231,6 +280,188 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     private void table_update(){
+        int kolumn;
+        try{
+        statement = connection1.prepareStatement("SELECT * FROM agent");
+        ResultSet rs = statement.executeQuery();
+        ResultSetMetaData rss = (ResultSetMetaData) rs.getMetaData();
+        kolumn = rss.getColumnCount();
+        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+        df.setRowCount(0);
+        while(rs.next()) // Listar alla aliens
+        {
+        Vector v1 = new Vector(); // Vektor med varje alien-individs vÃ¤rden.
+        
+        for(int i=1 ; i<=kolumn ; i++){ 
+        v1.add(rs.getString("Agent_ID")); 
+        v1.add(rs.getString("Namn"));
+        v1.add(rs.getString("Telefon"));
+        v1.add(rs.getString("Anst.datum"));
+        v1.add(rs.getString("Administratör"));
+        v1.add(rs.getString("Losenord"));
+        v1.add(rs.getString("Område"));
+        }
+        
+        df.addRow(v1); // Adderar/Listar varje agent-individs vÃ¤rde i tabellen
+        
+        }
+        
+        }
+       
+             catch (SQLException ex) {
+                Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
+     
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+        // TODO add your handling code here:
+        try {
+            String StringID = txtAgentID.getText();// FÃ¥r ej vara null
+            int id = Integer.parseInt(StringID);
+            String namn = txtAgentNamn.getText(); // FÃ¥r ej vara null
+            String telefon = txtAgentTelefon.getText(); 
+            String datum = txtAgentDatum.getText();    // FÃ¥r ej vara null
+            String admin = txtAgentAdmin.getText();
+            String losenord = txtAgentLosenord.getText();
+            String plats = txtAgentOmrade.getText();
+            String fraga = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES (?,?,?,?,?,?,?,)";
+            
+            
+            statement = connection1.prepareStatement(fraga);
+            statement.setInt(1, id);
+            statement.setString(2, namn);
+            statement.setString(3, telefon);
+            statement.setString(4, datum);
+            statement.setString(5, admin);
+            statement.setString(6, losenord);
+            statement.setString(7, plats);
+            statement.execute();
+            JOptionPane.showMessageDialog(this, "Agent registrerad");
+            table_update();
+           
+          
+         
+             } catch (SQLException ex) {
+                Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_buttonAddActionPerformed
+
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+        int selectedIndex = jTable1.getSelectedRow();
+         try {
+             int id = Integer.parseInt(df.getValueAt(selectedIndex, 0).toString());
+             int villDuDelete = JOptionPane.showConfirmDialog(null, "Vill du ta bort vald agent?", 
+                     "Warning", JOptionPane.YES_NO_OPTION);
+             if(villDuDelete == JOptionPane.YES_OPTION){
+             String taBortAlien = "delete from agent where Agent_ID = ?";
+             statement = connection1.prepareStatement(taBortAlien);
+             statement.setInt(1, id);
+             statement.executeUpdate();
+             JOptionPane.showMessageDialog(this, "Agent ändrad");
+             table_update(); // Uppdaterar flÃ¶det. Kolla vad metoden gÃ¶r.
+             txtAgentID.setText("");
+             txtAgentNamn.setText("");
+             txtAgentTelefon.setText("");
+             txtAgentDatum.setText("");
+             txtAgentAdmin.setText("");
+             txtAgentLosenord.setText("");
+             txtAgentOmrade.setText("");
+             txtAgentID.requestFocus(); // Fokus pÃ¥ vald textruta.
+             } 
+             if(villDuDelete == JOptionPane.NO_OPTION){
+             JOptionPane.showMessageDialog(this, "Alien INTE ändrad");
+             }
+              
+           
+         } catch (SQLException ex) {
+             Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }//GEN-LAST:event_buttonDeleteActionPerformed
+
+    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+        int selectedIndex = jTable1.getSelectedRow();
+        String agentID = df.getValueAt(selectedIndex, 0).toString();
+        if(txtAgentID.getText().equals(agentID)){ 
+        JOptionPane.showMessageDialog(this, "Du får ej ändra på ID:t, det ändras nu tillbaka.");
+        txtAgentID.setText(agentID); // 
+        }
+        else
+        {
+         try {
+             
+            int id = Integer.parseInt(df.getValueAt(selectedIndex, 0).toString());
+            String namn = txtAgentNamn.getText(); 
+            String telefon = txtAgentTelefon.getText(); 
+            String datum = txtAgentDatum.getText();   
+            String admin = txtAgentAdmin.getText();
+            String losenord = txtAgentLosenord.getText();
+            String plats = txtAgentOmrade.getText();
+            String fraga = "UPDATE alien SET Namn = ?, Telefon = ?, "
+                    + "Datum = ?, Administrator = ?, Losenord = ?, Plats = ? WHERE Alien_ID = ? ";
+            statement = connection1.prepareStatement(fraga);
+           //  
+            statement.setString(1, namn);
+            statement.setString(2, telefon);
+            statement.setString(3, datum);
+            statement.setString(4, admin);
+            statement.setString(5, losenord);
+            statement.setString(6, plats);
+            statement.setInt(7, id);
+            statement.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Agent ändrad");
+            table_update();
+           
+            txtAgentID.setText("");
+            txtAgentNamn.setText("");
+            txtAgentTelefon.setText("");
+            txtAgentDatum.setText("");
+            txtAgentAdmin.setText("");
+            txtAgentLosenord.setText("");
+            txtAgentOmrade.setText("");
+            txtAgentID.requestFocus();
+            
+         
+             } catch (SQLException ex) {
+                Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_buttonEditActionPerformed
+
+    private void buttonRensaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRensaDataActionPerformed
+        // TODO add your handling code here:
+             txtAgentID.setText("");
+             txtAgentNamn.setText("");
+             txtAgentTelefon.setText("");
+             txtAgentDatum.setText("");
+             txtAgentAdmin.setText("");
+             txtAgentLosenord.setText("");
+             txtAgentOmrade.setText("");
+             txtAgentID.requestFocus();
+             
+    }//GEN-LAST:event_buttonRensaDataActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+        int selectedIndex = jTable1.getSelectedRow();
+        
+        
+        txtAgentID.setText(df.getValueAt(selectedIndex, 0).toString());
+        txtAgentNamn.setText(df.getValueAt(selectedIndex, 1).toString());
+        txtAgentTelefon.setText(df.getValueAt(selectedIndex, 2).toString());
+        txtAgentDatum.setText(df.getValueAt(selectedIndex, 3).toString());
+        txtAgentAdmin.setText(df.getValueAt(selectedIndex, 4).toString());
+        txtAgentLosenord.setText(df.getValueAt(selectedIndex, 5).toString());
+        txtAgentOmrade.setText(df.getValueAt(selectedIndex, 6).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -261,16 +492,39 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Hantera_Agenter().setVisible(true);
+                try {
+                    new Hantera_Agenter(idb, vemArInloggad).setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
+    
+    final void getConnection() throws Exception{
+        try{
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hÃ¤mtar mysql driver och gÃ¶r det mÃ¶jligt att koppla upp till databasen.
+             connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibdb", "mibdba", "mibkey"); // Denna ska ocksÃ¥ pÃ¥ nÃ¥got sÃ¤tt
+             // koppa upp till databasen. Ingen kod Ã¤r "rÃ¶d" men osÃ¤ker pÃ¥ om projektet inte funkar pga att jag Ã¤r "disconnected" frÃ¥n databasen eller inte.
+             System.out.println("Databasen kopplad till projektet, lyckats!");
+             
+        }
+        catch(ClassNotFoundException | SQLException e){
+            System.out.println(e);
+        }
+       
+           
+        
+       
+    }
+    
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonDelete;
+    private javax.swing.JButton buttonEdit;
+    private javax.swing.JButton buttonRensaData;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -283,12 +537,12 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField txtAgentAdmin;
+    private javax.swing.JTextField txtAgentDatum;
+    private javax.swing.JTextField txtAgentID;
+    private javax.swing.JTextField txtAgentLosenord;
+    private javax.swing.JTextField txtAgentNamn;
+    private javax.swing.JTextField txtAgentOmrade;
+    private javax.swing.JTextField txtAgentTelefon;
     // End of variables declaration//GEN-END:variables
 }

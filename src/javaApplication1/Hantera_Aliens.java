@@ -603,7 +603,7 @@ public class Hantera_Aliens extends javax.swing.JFrame {
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
         int selectedIndex = jTable1.getSelectedRow();
         String alienID = df.getValueAt(selectedIndex, 0).toString();
-        if(!txtAlienID.getText().equals(alienID)){ 
+        if(txtAlienID.getText().equals(alienID)){ 
         JOptionPane.showMessageDialog(this, "Du får ej ändra på ID:t, det ändras nu tillbaka.");
         txtAlienID.setText(alienID); // 
         }

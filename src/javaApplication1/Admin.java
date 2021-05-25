@@ -66,6 +66,11 @@ public class Admin extends javax.swing.JFrame {
         });
 
         btnAgent.setText("Agenter");
+        btnAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgentActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Ändra lösenord");
 
@@ -132,6 +137,17 @@ public class Admin extends javax.swing.JFrame {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAliensActionPerformed
+
+    private void btnAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgentActionPerformed
+        // TODO add your handling code here:
+        
+        this.dispose();
+        try {
+            new Hantera_Agenter(idb, vemArInloggad).setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAgentActionPerformed
 
     /**
      * @param args the command line arguments
