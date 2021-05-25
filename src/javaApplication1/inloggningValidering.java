@@ -28,6 +28,10 @@ public class inloggningValidering {
     public String getNamn() {
         return namn;
     }
+    
+    public String getNamn2(){
+    return this.namn;
+    }
 
     public int getId() {
         return id;
