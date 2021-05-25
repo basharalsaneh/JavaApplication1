@@ -20,9 +20,8 @@ public class Admin_Inloggning extends javax.swing.JFrame {
     Connection connection1;
     private InfDB idb;
     
-    public Admin_Inloggning(InfDB idb) throws Exception {
+    public Admin_Inloggning(InfDB idb){
         initComponents();
-        getConnection();
         this.idb = idb;
     }
 

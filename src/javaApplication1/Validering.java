@@ -40,10 +40,19 @@ public class Validering {
      resultat = true;
      return resultat;
      }
+     
+     
       public static boolean arAdmin(){
      resultat = true;
+     if (resultat = true){
+            JOptionPane.showMessageDialog(null, "Admin inloggning");
+        }
+     
      return resultat;
+     
      }
+      
+      
        public static boolean arAlien(){
      resultat = true;
      return resultat;
