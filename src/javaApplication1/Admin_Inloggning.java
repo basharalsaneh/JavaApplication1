@@ -19,11 +19,9 @@ public class Admin_Inloggning extends javax.swing.JFrame {
     Statement statement;
     Connection connection1;
     private InfDB idb;
-    inloggningValidering vemArInloggad;
     
-    public Admin_Inloggning(InfDB idb) throws Exception {
+    public Admin_Inloggning(InfDB idb){
         initComponents();
-        getConnection();
         this.idb = idb;
     }
 
@@ -72,17 +70,16 @@ public class Admin_Inloggning extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
-        jLabel6.setText("MIB Admin");
+        jLabel6.setText("MIB");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonLogin, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
@@ -90,10 +87,16 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPassword)
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(buttonLogin)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,9 +106,9 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                         .addGap(132, 132, 132)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addGap(39, 39, 39)
                         .addComponent(jLabel6)
-                        .addGap(32, 32, 32)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -115,7 +118,7 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(buttonLogin)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pack();
@@ -154,15 +157,15 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                 
             if(resultat2.next()){
                     dispose();
-                    Admin inloggadSomAdmin = new Admin(idb, vemArInloggad);
+                    Admin inloggadSomAdmin = new Admin(idb);
                     inloggadSomAdmin.show();
             }
                    else
                 JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
         }catch (SQLException ex) {
-            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
@@ -194,15 +197,15 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                 
             if(resultat2.next()){
                     dispose();
-                    Admin admin = new Admin(idb, vemArInloggad);
+                    Admin admin = new Admin(idb);
                     admin.show();
             }
                    else
                 JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
         }catch (SQLException ex) {
-            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
     }//GEN-LAST:event_txtPasswordKeyPressed

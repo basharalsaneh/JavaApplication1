@@ -16,7 +16,7 @@ import oru.inf.InfException;
 public class Start extends javax.swing.JFrame {
     
     
-    private final InfDB idb;
+    private InfDB idb;
     
     
     /**
@@ -107,21 +107,18 @@ public class Start extends javax.swing.JFrame {
             // TODO add your handling code here:
             Validering.arAlien();
             this.dispose();
-            new Alien_Inloggning(idb).setVisible(true);
+            new Alien_Inloggningssida(idb).setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonAlienActionPerformed
 
     private void buttonAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdministratorActionPerformed
-        try {
+        
             // TODO add your handling code here:
             Validering.arAdmin();
             this.dispose();
             new Admin_Inloggning(idb).setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_buttonAdministratorActionPerformed
 
     private void buttonAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgentActionPerformed
@@ -129,7 +126,7 @@ public class Start extends javax.swing.JFrame {
             // TODO add your handling code here:
             Validering.arAgent();
             this.dispose();
-            new Agent_Inloggning(idb).setVisible(true);
+            new Alien_Inloggningssida(idb).setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
