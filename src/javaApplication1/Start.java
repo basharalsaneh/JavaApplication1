@@ -16,7 +16,7 @@ import oru.inf.InfException;
 public class Start extends javax.swing.JFrame {
     
     
-    private InfDB idb;
+    private final InfDB idb;
     
     
     /**
@@ -107,7 +107,7 @@ public class Start extends javax.swing.JFrame {
             // TODO add your handling code here:
             Validering.arAlien();
             this.dispose();
-            new Inloggningssidan(idb).setVisible(true);
+            new Alien_Inloggning(idb).setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -129,7 +129,7 @@ public class Start extends javax.swing.JFrame {
             // TODO add your handling code here:
             Validering.arAgent();
             this.dispose();
-            new Inloggningssidan(idb).setVisible(true);
+            new Agent_Inloggning(idb).setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }

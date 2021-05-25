@@ -5,6 +5,8 @@
  */
 package javaApplication1;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -14,12 +16,14 @@ import oru.inf.InfException;
  */
 public class Admin extends javax.swing.JFrame {
     private static InfDB idb;
+    static inloggningValidering vemArInloggad;
     /**
      * Creates new form Admin
      */
-    public Admin(InfDB idb) {
+    public Admin(InfDB idb, inloggningValidering vemArInloggad) {
         initComponents();
         this.idb = idb;
+        this.vemArInloggad = vemArInloggad;
     }
 
     /**
@@ -33,9 +37,9 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAliens = new javax.swing.JButton();
+        btnUtrustning = new javax.swing.JButton();
+        btnAgent = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,11 +51,21 @@ public class Admin extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Hantera:");
 
-        jButton1.setText("Aliens");
+        btnAliens.setText("Aliens");
+        btnAliens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAliensActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Utrustning");
+        btnUtrustning.setText("Utrustning");
+        btnUtrustning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUtrustningActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Agenter");
+        btnAgent.setText("Agenter");
 
         jLabel2.setText("Ändra lösenord");
 
@@ -71,9 +85,9 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
+                    .addComponent(btnAgent)
+                    .addComponent(btnUtrustning)
+                    .addComponent(btnAliens)
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -85,11 +99,11 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27)
-                .addComponent(jButton1)
+                .addComponent(btnAliens)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnUtrustning)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnAgent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(80, 80, 80))
@@ -100,6 +114,24 @@ public class Admin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtrustningActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Hantera_Utrustning(idb, vemArInloggad).setVisible(true);
+        
+    }//GEN-LAST:event_btnUtrustningActionPerformed
+
+    private void btnAliensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAliensActionPerformed
+        // TODO add your handling code here:
+        
+        this.dispose();
+        try {
+            new Hantera_Aliens(idb, vemArInloggad).setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAliensActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,15 +163,15 @@ public class Admin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Admin(idb).setVisible(true);
+                new Admin(idb, vemArInloggad).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAgent;
+    private javax.swing.JButton btnAliens;
+    private javax.swing.JButton btnUtrustning;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
