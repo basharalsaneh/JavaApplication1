@@ -1,7 +1,4 @@
-
 package javaApplication1;
-
-
 
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -24,11 +21,14 @@ public class Inloggningssidan extends javax.swing.JFrame {
     PreparedStatement prepStatement = null;
     Connection connection1 = null;
     private static InfDB idb;
+    inloggningValidering vemArInloggad;
    
     public Inloggningssidan(InfDB idb) throws Exception {
         initComponents();
         getConnection();
         this.idb = idb;
+        vemArInloggad = new inloggningValidering();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -166,27 +166,32 @@ public class Inloggningssidan extends javax.swing.JFrame {
      
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
       
-        String ID = txtUser.getText();
-        String password = txtPassword.getText(); 
+        
         // boolean okejPassword = false;
         // boolean okejID = false;
-        ResultSet resultat1;
+        
         try{
-           statement = connection1.createStatement();
-           String fraga = "SELECT Alien_ID, Losenord FROM alien where "
-                   + "Alien_ID = '"+ID+"' and Losenord = '"+password+"';";
+            String anv_namn = txtUser.getText();
+            String password = txtPassword.getText(); 
            
-         
-                resultat1 = statement.executeQuery(fraga);
-                
-                
-            if(resultat1.next()){
+           String fraga1 = ("SELECT Namn FROM alien where Namn like '"+anv_namn+"';");
+           String kollaUppAnvandare = idb.fetchSingle(fraga1);
+           String fraga2 = ("SELECT Losenord FROM alien where Namn like '" + kollaUppAnvandare + "';");
+           String kollaUppLosenord = idb.fetchSingle(fraga2);
+    
+             if(anv_namn.equals(kollaUppAnvandare) && password.equals(kollaUppLosenord)){
+                String fraga3 = ("SELECT Alien_ID from alien where Namn like '" + kollaUppAnvandare+ "';");
+                 String anvandareIDString = idb.fetchSingle(fraga3);
+                 int anvandareID = Integer.parseInt(anvandareIDString);
+                vemArInloggad.inloggadSom(kollaUppAnvandare, anvandareID, kollaUppLosenord);
+                JOptionPane.showMessageDialog(this, kollaUppAnvandare + " " + kollaUppLosenord + " " + anvandareID);
+                    new Alien(idb, vemArInloggad).setVisible(true);
                     dispose();
-                    Alien inloggAlien = new Alien(idb);
-                    inloggAlien.show();
+                    
+                    
             }
             else{
-                JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
+                JOptionPane.showMessageDialog(null, "Namn / lösenord är felaktigt");
                 txtUser.setText("");
                 txtPassword.setText("");
                 txtUser.requestFocus();

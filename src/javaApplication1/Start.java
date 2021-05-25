@@ -18,12 +18,14 @@ public class Start extends javax.swing.JFrame {
     
     private InfDB idb;
     
+    
     /**
      * Creates new form Start
      */
     public Start(InfDB idb) {
         initComponents();
         this.idb = idb;
+        
     }
 
     /**

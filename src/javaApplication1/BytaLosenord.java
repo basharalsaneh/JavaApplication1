@@ -147,7 +147,12 @@ public class BytaLosenord extends javax.swing.JFrame {
 //           statement = connection1.prepareStatement(fraga);
 //           statement.setString(1, nyttLosenord);
 //           statement.executeUpdate();
-           JOptionPane.showMessageDialog(this, "nuvarande lösenord:" + "giltigtLosenord, bytt till:" + nyttLosenord);
+            idb.update(fraga);
+           JOptionPane.showMessageDialog(this, "nuvarande lösenord:" + giltigtLosenord + ", bytt till:" + nyttLosenord);
+           txtUser.setText("");
+           txtUser.requestFocus();
+           passNuvarande.setText("");
+           passNytt.setText("");
             }}
          else
             {

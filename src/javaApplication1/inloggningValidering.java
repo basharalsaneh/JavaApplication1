@@ -15,11 +15,12 @@ public class inloggningValidering {
     private int id;
     private String losenord;
 
-    public void inloggadAnvandare(String namnInloggad, int idInloggad) {
+    public void inloggadSom(String namnInloggad, int idInloggad, String angettLosenord) {
 
         namn = namnInloggad;
         id = idInloggad;
-        this.losenord ="";
+        losenord = angettLosenord;
+        
     }
 
     public void setNamn(String nyttNamn) {
