@@ -164,9 +164,9 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                    else
                 JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
         }catch (SQLException ex) {
-            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
@@ -204,9 +204,9 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                    else
                 JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
         }catch (SQLException ex) {
-            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
     }//GEN-LAST:event_txtPasswordKeyPressed

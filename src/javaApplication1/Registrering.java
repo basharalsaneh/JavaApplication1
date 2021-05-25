@@ -414,7 +414,7 @@ public class Registrering extends javax.swing.JFrame {
         v1.add(rs.getString("Plats"));
         v1.add(rs.getString("Ansvarig_Agent"));
         v1.add(rs.getString("Losenord"));
-        v1.add(rs.getString("Registreringsdatum"));
+        v1.add(rs.getDate("Registreringsdatum"));
         }
         
         df.addRow(v1); // Adderar/Listar varje alien-individs vÃ¤rde i tabellen
@@ -497,7 +497,8 @@ public class Registrering extends javax.swing.JFrame {
             String plats = txtAlienPlats.getText(); // FÃ¥r ej vara null
             String namn = txtAlienNamn.getText(); 
             String ansvarig = txtAlienAnsvarig.getText(); // FÃ¥r ej vara null
-            String fraga = "INSERT INTO alien (Alien_ID, Namn, Telefon, Plats, Ansvarig_Agent) VALUES (?,?,?,?,?)";
+            String losenord = txtAlienLosenord.getText();
+            String fraga = "INSERT INTO alien (Alien_ID, Namn, Telefon, Plats, Ansvarig_Agent, Losenord) VALUES (?,?,?,?,?,?)";
             
             
             statement = connection1.prepareStatement(fraga);
@@ -506,6 +507,7 @@ public class Registrering extends javax.swing.JFrame {
             statement.setString(3, telefon);
             statement.setString(4, plats);
             statement.setString(5, ansvarig);
+            statement.setString(6, losenord);
             statement.execute();
             JOptionPane.showMessageDialog(this, "Alien added");
             table_update();

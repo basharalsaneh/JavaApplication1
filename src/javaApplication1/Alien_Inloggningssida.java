@@ -14,7 +14,7 @@ import oru.inf.InfDB;
 
 
 
-public class Inloggningssidan extends javax.swing.JFrame {
+public class Alien_Inloggningssida extends javax.swing.JFrame {
 
     ResultSet resultat = null;
     Statement statement = null;
@@ -23,7 +23,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
     private static InfDB idb;
     inloggningValidering vemArInloggad;
    
-    public Inloggningssidan(InfDB idb) throws Exception {
+    public Alien_Inloggningssida(InfDB idb) throws Exception {
         initComponents();
         getConnection();
         this.idb = idb;
@@ -197,9 +197,9 @@ public class Inloggningssidan extends javax.swing.JFrame {
                 txtUser.requestFocus();
             }                  
         } catch (SQLException ex) {
-            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
         }
     
      
@@ -217,7 +217,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
             BytaLosenord bytLosen = new BytaLosenord(idb);
             bytLosen.setVisible(true);
         } catch (Exception ex) {
-            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_labelAndraLosenMouseClicked
 
@@ -252,13 +252,13 @@ public class Inloggningssidan extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Alien_Inloggningssida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Alien_Inloggningssida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Alien_Inloggningssida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Alien_Inloggningssida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -266,9 +266,9 @@ public class Inloggningssidan extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Inloggningssidan(idb).setVisible(true);
+                    new Alien_Inloggningssida(idb).setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
