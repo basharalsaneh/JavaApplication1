@@ -193,7 +193,11 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
             BytaLosenord bytLosen = new BytaLosenord(idb);
             bytLosen.setVisible(true);
         } catch (Exception ex) {
+<<<<<<< HEAD
             Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
+=======
+            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+>>>>>>> parent of a26e50f (Mer uppdateringar.)
         }
     }//GEN-LAST:event_jLabel2MouseClicked
 
@@ -205,7 +209,11 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
             BytaLosenord bytLosen = new BytaLosenord(idb);
             bytLosen.setVisible(true);
         } catch (Exception ex) {
+<<<<<<< HEAD
             Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
+=======
+            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+>>>>>>> parent of a26e50f (Mer uppdateringar.)
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -16,9 +16,11 @@ public class inloggningValidering {
     private String losenord;
 
     public void inloggadSom(String namnInloggad, int idInloggad, String angettLosenord) {
+
         namn = namnInloggad;
         id = idInloggad;
-        losenord = angettLosenord;   
+        losenord = angettLosenord;
+        
     }
 
     public void setNamn(String nyttNamn) {

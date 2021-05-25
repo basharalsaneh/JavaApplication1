@@ -18,16 +18,16 @@ public class BytaLosenord extends javax.swing.JFrame {
     private static InfDB idb;
     String hamtatIDString;
     int hamtatID;
-    static inloggningValidering vemArInloggad;
+    inloggningValidering vemArInloggad;
     /**
      * Creates new form BytaLosenord
      */
-    public BytaLosenord(InfDB idb, inloggningValidering vemArInloggad) {
+    public BytaLosenord(InfDB idb) {
+        this.hamtatIDString = txtUser.getText();
         initComponents();
         this.idb = idb;
         this.hamtatID = Integer.parseInt(hamtatIDString);
-        JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " +vemArInloggad.getNamn());
-        this.vemArInloggad = vemArInloggad;
+        JOptionPane.showMessageDialog(this, vemArInloggad.getNamn());
     }
 
     /**
@@ -209,7 +209,7 @@ public class BytaLosenord extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BytaLosenord(idb, vemArInloggad).setVisible(true);
+                new BytaLosenord(idb).setVisible(true);
             }
         });
     }

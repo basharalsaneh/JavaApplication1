@@ -107,7 +107,11 @@ public class Start extends javax.swing.JFrame {
             // TODO add your handling code here:
             Validering.arAlien();
             this.dispose();
+<<<<<<< HEAD
             new Alien_Inloggningssida(idb).setVisible(true);
+=======
+            new Inloggningssidan(idb).setVisible(true);
+>>>>>>> parent of a26e50f (Mer uppdateringar.)
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -126,7 +130,11 @@ public class Start extends javax.swing.JFrame {
             // TODO add your handling code here:
             Validering.arAgent();
             this.dispose();
+<<<<<<< HEAD
             new Alien_Inloggningssida(idb).setVisible(true);
+=======
+            new Inloggningssidan(idb).setVisible(true);
+>>>>>>> parent of a26e50f (Mer uppdateringar.)
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }

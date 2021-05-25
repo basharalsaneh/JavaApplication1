@@ -15,10 +15,14 @@ import oru.inf.InfDB;
 
 
 <<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
+<<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
 public class Alien_Inloggning extends javax.swing.JFrame {
 =======
 public class Alien_Inloggningssida extends javax.swing.JFrame {
 >>>>>>> 79625bc68736428fd7f2b023d4f126dc0807b183:src/javaApplication1/Alien_Inloggningssida.java
+=======
+public class Inloggningssidan extends javax.swing.JFrame {
+>>>>>>> parent of a26e50f (Mer uppdateringar.):src/javaApplication1/Inloggningssidan.java
 
     ResultSet resultat = null;
     Statement statement = null;
@@ -28,10 +32,14 @@ public class Alien_Inloggningssida extends javax.swing.JFrame {
     inloggningValidering vemArInloggad;
    
 <<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
+<<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
     public Alien_Inloggning(InfDB idb) throws Exception {
 =======
     public Alien_Inloggningssida(InfDB idb) throws Exception {
 >>>>>>> 79625bc68736428fd7f2b023d4f126dc0807b183:src/javaApplication1/Alien_Inloggningssida.java
+=======
+    public Inloggningssidan(InfDB idb) throws Exception {
+>>>>>>> parent of a26e50f (Mer uppdateringar.):src/javaApplication1/Inloggningssidan.java
         initComponents();
         getConnection();
         this.idb = idb;
@@ -85,10 +93,9 @@ public class Alien_Inloggningssida extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Alien inloggning");
+        jLabel6.setText("MIB");
 
-        labelAndraLosen.setText("Ska tas bort (ändra lösenord)");
+        labelAndraLosen.setText("Ändra ditt lösenord");
         labelAndraLosen.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 labelAndraLosenFocusGained(evt);
@@ -107,29 +114,28 @@ public class Alien_Inloggningssida extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(buttonLogin)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labelAndraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(80, 80, 80))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(109, 109, 109)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(14, 14, 14)))
-                .addGap(82, 82, 82))
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonLogin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelAndraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPassword)
+                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,21 +145,21 @@ public class Alien_Inloggningssida extends javax.swing.JFrame {
                         .addGap(132, 132, 132)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addGap(39, 39, 39)
                         .addComponent(jLabel6)
-                        .addGap(55, 55, 55)
+                        .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(buttonLogin)
-                .addGap(18, 18, 18)
-                .addComponent(labelAndraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonLogin)
+                    .addComponent(labelAndraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         pack();
@@ -208,6 +214,7 @@ public class Alien_Inloggningssida extends javax.swing.JFrame {
             }                  
         } catch (SQLException ex) {
 <<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
+<<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
             Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
@@ -216,6 +223,11 @@ public class Alien_Inloggningssida extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
 >>>>>>> 79625bc68736428fd7f2b023d4f126dc0807b183:src/javaApplication1/Alien_Inloggningssida.java
+=======
+            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+>>>>>>> parent of a26e50f (Mer uppdateringar.):src/javaApplication1/Inloggningssidan.java
         }
     
      
@@ -226,6 +238,7 @@ public class Alien_Inloggningssida extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void labelAndraLosenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelAndraLosenMouseClicked
+<<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
 <<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
 //        SKA TAS BORT? OCH ÄNDRA LÖSENORD SKA VARA MÖJLIGT FRÅN RESPEKTIVE INLOGGNINGSSIDA ???
 //          try {
@@ -238,6 +251,8 @@ public class Alien_Inloggningssida extends javax.swing.JFrame {
 //            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 =======
+=======
+>>>>>>> parent of a26e50f (Mer uppdateringar.):src/javaApplication1/Inloggningssidan.java
         try {
             // TODO add your handling code here:
             
@@ -245,9 +260,14 @@ public class Alien_Inloggningssida extends javax.swing.JFrame {
             BytaLosenord bytLosen = new BytaLosenord(idb);
             bytLosen.setVisible(true);
         } catch (Exception ex) {
+<<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
             Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
         }
 >>>>>>> 79625bc68736428fd7f2b023d4f126dc0807b183:src/javaApplication1/Alien_Inloggningssida.java
+=======
+            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+>>>>>>> parent of a26e50f (Mer uppdateringar.):src/javaApplication1/Inloggningssidan.java
     }//GEN-LAST:event_labelAndraLosenMouseClicked
 
     private void labelAndraLosenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_labelAndraLosenFocusGained
@@ -282,12 +302,17 @@ public class Alien_Inloggningssida extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException ex) {
 <<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
+<<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
             java.util.logging.Logger.getLogger(Alien_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+=======
+            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+>>>>>>> parent of a26e50f (Mer uppdateringar.):src/javaApplication1/Inloggningssidan.java
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Alien_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Alien_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+<<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
             java.util.logging.Logger.getLogger(Alien_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 =======
             java.util.logging.Logger.getLogger(Alien_Inloggningssida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -298,14 +323,17 @@ public class Alien_Inloggningssida extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Alien_Inloggningssida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 >>>>>>> 79625bc68736428fd7f2b023d4f126dc0807b183:src/javaApplication1/Alien_Inloggningssida.java
+=======
+            java.util.logging.Logger.getLogger(Inloggningssidan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+>>>>>>> parent of a26e50f (Mer uppdateringar.):src/javaApplication1/Inloggningssidan.java
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+<<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
 <<<<<<< HEAD:src/javaApplication1/Alien_Inloggning.java
                     new Alien_Inloggning(idb).setVisible(true);
                 } catch (Exception ex) {
@@ -315,6 +343,11 @@ public class Alien_Inloggningssida extends javax.swing.JFrame {
                 } catch (Exception ex) {
                     Logger.getLogger(Alien_Inloggningssida.class.getName()).log(Level.SEVERE, null, ex);
 >>>>>>> 79625bc68736428fd7f2b023d4f126dc0807b183:src/javaApplication1/Alien_Inloggningssida.java
+=======
+                    new Inloggningssidan(idb).setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+>>>>>>> parent of a26e50f (Mer uppdateringar.):src/javaApplication1/Inloggningssidan.java
                 }
             }
         });

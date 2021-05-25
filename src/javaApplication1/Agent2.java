@@ -8,13 +8,14 @@ package javaApplication1;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
+import java.util.Random;
 import oru.inf.InfDB;
 
 /**
  *
  * @author marcu
  */
-public class Agent extends javax.swing.JFrame {
+public class Agent2 extends javax.swing.JFrame {
     
 
 private static InfDB idb;
@@ -24,13 +25,11 @@ private String Telefon;
 private String losenord;
 private boolean administrator;
 private Date anstallningsdatum;
-static inloggningValidering vemArInloggad;
 
     
-public Agent(InfDB idb, inloggningValidering vemArInloggad) {
+public Agent2(InfDB idb) {
     initComponents();
     this.idb = idb;
-    this.vemArInloggad = vemArInloggad;
 }
 
 
@@ -45,45 +44,37 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnAliens = new javax.swing.JButton();
-        btnUtrustning = new javax.swing.JButton();
-        btnOmrade = new javax.swing.JButton();
-        btnBytLosenord = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Inloggad som Agent");
 
-        btnAliens.setText("Kolla upp aliens");
+        jButton1.setText("Kolla upp aliens");
 
-        btnUtrustning.setText("Registrera utrustning");
-        btnUtrustning.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Registrera utrustning");
+
+        jButton3.setText("Undersök område");
+
+        jButton4.setText("Ändra lösenord");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUtrustningActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
 
-        btnOmrade.setText("Undersök område");
-
-        btnBytLosenord.setText("Ändra lösenord");
-        btnBytLosenord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBytLosenordActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Visa");
+        jButton5.setText("Din utrustning");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
-
-        jLabel2.setText("Din utrustning:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,71 +82,53 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(114, 114, 114)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(114, 114, 114))
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnUtrustning)
-                            .addComponent(btnAliens, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnOmrade, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBytLosenord, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(46, 46, 46))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton2)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(btnAliens)
+                .addComponent(jButton1)
                 .addGap(18, 18, 18)
-                .addComponent(btnUtrustning)
+                .addComponent(jButton2)
                 .addGap(18, 18, 18)
-                .addComponent(btnOmrade)
+                .addComponent(jButton3)
                 .addGap(18, 18, 18)
-                .addComponent(btnBytLosenord)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jButton4)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLosenordActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         dispose();
         try {
-            BytaLosenord bytLosen = new BytaLosenord(idb, vemArInloggad);
+            BytaLosenord bytLosen = new BytaLosenord(idb);
             bytLosen.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnBytLosenordActionPerformed
-
-    private void btnUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtrustningActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        new Registrera_Utrustning(idb, vemArInloggad).setVisible(true);
-    }//GEN-LAST:event_btnUtrustningActionPerformed
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,7 +159,7 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                    new Agent(idb, vemArInloggad).setVisible(true);
+                    new Agent2(idb).setVisible(true);
                 }
         });
        }
@@ -194,13 +167,12 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
 
        
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAliens;
-    private javax.swing.JButton btnBytLosenord;
-    private javax.swing.JButton btnOmrade;
-    private javax.swing.JButton btnUtrustning;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables

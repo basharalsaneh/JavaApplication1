@@ -16,20 +16,18 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import oru.inf.InfDB;
 
-public class Hantera_Aliens extends javax.swing.JFrame {
+public class Registrering extends javax.swing.JFrame {
    
      private static InfDB idb;
         Connection connection1;
         PreparedStatement statement;
         Statement createStatement;
-        static inloggningValidering vemArInloggad;
   
-    public Hantera_Aliens(InfDB idb, inloggningValidering vemArInloggad) throws Exception {
+    public Registrering(InfDB idb) throws Exception {
         initComponents();
         getConnection();
         table_update();
         this.idb = idb;
-        this.vemArInloggad = vemArInloggad;
          
     }
     
@@ -38,9 +36,9 @@ public class Hantera_Aliens extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                 try {
-                    new Hantera_Aliens(idb, vemArInloggad).setVisible(true);
+                    new Registrering(idb).setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -426,7 +424,7 @@ public class Hantera_Aliens extends javax.swing.JFrame {
         }
        
              catch (SQLException ex) {
-                Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             
@@ -454,7 +452,7 @@ public class Hantera_Aliens extends javax.swing.JFrame {
              while(rs.next());
              }
                 catch (SQLException ex) {
-             Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
              System.out.println("något har blivit fel");
                  }
           
@@ -484,7 +482,7 @@ public class Hantera_Aliens extends javax.swing.JFrame {
              while(rs.next());
              }
                 catch (SQLException ex) {
-             Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
              System.out.println("något har blivit fel");
                  }
           
@@ -517,11 +515,8 @@ public class Hantera_Aliens extends javax.swing.JFrame {
           
          
              } catch (SQLException ex) {
-                Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
             }
-             //
-             //
-             //
              //
              
 
@@ -579,7 +574,7 @@ public class Hantera_Aliens extends javax.swing.JFrame {
               
            
          } catch (SQLException ex) {
-             Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
          }
          
     }//GEN-LAST:event_buttonDeleteActionPerformed
@@ -646,7 +641,7 @@ public class Hantera_Aliens extends javax.swing.JFrame {
             
          
              } catch (SQLException ex) {
-                Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
             }
         
         }
@@ -692,7 +687,7 @@ public class Hantera_Aliens extends javax.swing.JFrame {
              
              }
                 catch (SQLException ex) {
-             Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
                  }
           
     }//GEN-LAST:event_buttonListaAliensActionPerformed
@@ -719,7 +714,7 @@ public class Hantera_Aliens extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(this, "Utrustning INTE borttagen.");
              }}}
              catch (SQLException ex) {
-                Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
             }
         
     }//GEN-LAST:event_buttonTaBortUtrustningActionPerformed
@@ -750,7 +745,7 @@ public class Hantera_Aliens extends javax.swing.JFrame {
              while(rs.next());
              
              } catch (SQLException ex) {
-             Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(Registrering.class.getName()).log(Level.SEVERE, null, ex);
          }
         
     }//GEN-LAST:event_jButton2ActionPerformed

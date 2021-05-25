@@ -5,22 +5,17 @@
  */
 package javaApplication1;
 
-import oru.inf.InfDB;
-
 /**
  *
  * @author marcu
  */
 public class Hantera_Utrustning extends javax.swing.JFrame {
-    static inloggningValidering vemArInloggad;
-    static InfDB idb;
+
     /**
      * Creates new form Hantera_Utrustning
      */
-    public Hantera_Utrustning(InfDB idb, inloggningValidering vemArInloggad) {
+    public Hantera_Utrustning() {
         initComponents();
-        this.idb = idb;
-        this.vemArInloggad = vemArInloggad;
     }
 
     /**
@@ -78,7 +73,7 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Hantera_Utrustning(idb, vemArInloggad).setVisible(true);
+                new Hantera_Utrustning().setVisible(true);
             }
         });
     }
