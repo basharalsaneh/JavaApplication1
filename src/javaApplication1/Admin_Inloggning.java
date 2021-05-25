@@ -2,29 +2,22 @@
 package javaApplication1;
 
 
-import java.awt.event.KeyEvent;
+
 import javax.swing.JOptionPane;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.sql.ResultSet;
-import java.sql.DriverManager;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 public class Admin_Inloggning extends javax.swing.JFrame {
 
-    ResultSet resultat;
-    Statement statement;
-    Connection connection1;
     private InfDB idb;
     inloggningValidering vemArInloggad;
     
-    public Admin_Inloggning(InfDB idb) throws Exception {
+    public Admin_Inloggning(InfDB idb, inloggningValidering vemArInloggad){
         initComponents();
-        getConnection();
         this.idb = idb;
+        this.vemArInloggad = vemArInloggad;
     }
 
     @SuppressWarnings("unchecked")
@@ -59,17 +52,6 @@ public class Admin_Inloggning extends javax.swing.JFrame {
         jLabel2.setText("Agent ID");
 
         jLabel3.setText("Lösenord");
-
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
-            }
-        });
-        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPasswordKeyPressed(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         jLabel6.setText("MIB Admin");
@@ -121,131 +103,52 @@ public class Admin_Inloggning extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     public final void getConnection() throws Exception{
-        try{
-        Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hämtar mysql driver och gör det möjligt att koppla upp till databasen.
-             connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibdb", "mibdba", "mibkey"); // Denna ska också på något sätt
-             // koppa upp till databasen. Ingen kod är "röd" men osäker på om projektet inte funkar pga att jag är "disconnected" från databasen eller inte.
-             System.out.println("Databasen kopplad till projektet, lyckats!");
-            
-        }
-        catch(ClassNotFoundException e){
-            System.out.println(e);
-        }
-     }
-    
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         // TODO add your handling code here:
-        String ID = txtUser.getText();
-        String password = txtPassword.getText(); 
-        // boolean okejPassword = false;
-        // boolean okejID = false;
-       ResultSet resultat2;
+        
+        
+        boolean godkandLosen = false;
+        String admin = "J";
+        
+        // 1. Läsa av text i ID
+        
+        String user = txtUser.getText();
+        
+        // 2. Läsa av text i Lösenord
+        
+        String password = txtPassword.getText();
+        System.out.println("Lösenordet inskrivet i rutan: " + password);
+        
+        String fraga = "SELECT losenord FROM Agent where Agent_id =" + user;
+        String kollaAdmin = "SELECT administrator FROM Agent where Agent_id =" + user;
+        
+        
         try {
-           statement = connection1.createStatement();
-           
-           String fraga1 = "SELECT Agent_ID, Losenord FROM Agent where "
-                   + "Agent_ID = '"+ID+"' and Losenord = '"+password+"';";
-           
-         
-                resultat2 = statement.executeQuery(fraga1);
-
+            String svar = idb.fetchSingle(fraga);
+            String adminBehorighet = idb.fetchSingle(kollaAdmin);
+            System.out.println("svaret på SQL-frågan: " + svar);
+            
+            
+            if ( (password.equals(svar)) && (adminBehorighet.equals(admin)) ){
                 
-                
-            if(resultat2.next()){
-                    dispose();
-                    Admin inloggadSomAdmin = new Admin(idb, vemArInloggad);
-                    inloggadSomAdmin.show();
+                godkandLosen = true;
+                System.out.println(godkandLosen);
+                this.dispose();
+                new Admin(idb,vemArInloggad).setVisible(true);
             }
-                   else
+        else {
                 JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
-        }catch (SQLException ex) {
-            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+            
+        } catch (InfException ex) {
+            Logger.getLogger(Admin_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         
     }//GEN-LAST:event_buttonLoginActionPerformed
 
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
-
-    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            
-        String ID = txtUser.getText();
-        String password = txtPassword.getText(); 
-        // boolean okejPassword = false;
-        // boolean okejID = false;
-       ResultSet resultat2;
-        try {
-           statement = connection1.createStatement();
-           
-           String fraga1 = "SELECT Agent_ID, Losenord FROM Agent where "
-                   + "Agent_ID = '"+ID+"' and Losenord = '"+password+"';";
-           
-         
-                resultat2 = statement.executeQuery(fraga1);
-
-                
-                
-            if(resultat2.next()){
-                    dispose();
-                    Admin admin = new Admin(idb, vemArInloggad);
-                    admin.show();
-            }
-                   else
-                JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
-        }catch (SQLException ex) {
-            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
-    }//GEN-LAST:event_txtPasswordKeyPressed
-
-    /**
-     * @param args the command line arguments
-     */
-    public void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Admin_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Admin_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Admin_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Admin_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Admin_Inloggning(idb).setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(Admin_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonLogin;

@@ -1,31 +1,21 @@
 package javaApplication1;
 
-import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.sql.ResultSet;
-import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 
 
 public class Alien_Inloggning extends javax.swing.JFrame {
-
-    ResultSet resultat = null;
-    Statement statement = null;
-    PreparedStatement prepStatement = null;
-    Connection connection1 = null;
-    private static InfDB idb;
+    
+    private InfDB idb;
     inloggningValidering vemArInloggad;
    
-    public Alien_Inloggning(InfDB idb) throws Exception {
+    public Alien_Inloggning(InfDB idb, inloggningValidering vemArInloggad){
         initComponents();
-        getConnection();
         this.idb = idb;
         vemArInloggad = new inloggningValidering();
         
@@ -151,58 +141,48 @@ public class Alien_Inloggning extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     public final void getConnection() throws Exception{
-        try{
-        Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hämtar mysql driver och gör det möjligt att koppla upp till databasen.
-             connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibdb", "mibdba", "mibkey"); // Denna ska också på något sätt
-             // koppa upp till databasen. Ingen kod är "röd" men osäker på om projektet inte funkar pga att jag är "disconnected" från databasen eller inte.
-             System.out.println("Databasen kopplad till projektet, lyckats!");
-            
-        }
-        catch(ClassNotFoundException e){
-            System.out.println(e);
-        }
-     }
+     
     
   
      
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
       
         
-        // boolean okejPassword = false;
-        // boolean okejID = false;
+        boolean godkandLosen = false;
         
-        try{
-            String anv_namn = txtUser.getText();
-            String password = txtPassword.getText(); 
-           
-           String fraga1 = ("SELECT Namn FROM alien where Namn like '"+anv_namn+"';");
-           String kollaUppAnvandare = idb.fetchSingle(fraga1);
-           String fraga2 = ("SELECT Losenord FROM alien where Namn like '" + kollaUppAnvandare + "';");
-           String kollaUppLosenord = idb.fetchSingle(fraga2);
-    
-             if(anv_namn.equals(kollaUppAnvandare) && password.equals(kollaUppLosenord)){
-                String fraga3 = ("SELECT Alien_ID from alien where Namn like '" + kollaUppAnvandare+ "';");
-                 String anvandareIDString = idb.fetchSingle(fraga3);
-                 int anvandareID = Integer.parseInt(anvandareIDString);
-                vemArInloggad.inloggadSom(kollaUppAnvandare, anvandareID, kollaUppLosenord);
-                JOptionPane.showMessageDialog(this, kollaUppAnvandare + " " + kollaUppLosenord + " " + anvandareID);
-                    new Alien(idb, vemArInloggad).setVisible(true);
-                    dispose();
-                    
-                    
+        // 1. Läsa av text i ID
+        
+        String user = txtUser.getText();
+        
+        // 2. Läsa av text i Lösenord
+        
+        String password = txtPassword.getText();
+        System.out.println("Lösenordet inskrivet i rutan: " + password);
+        
+        String fraga = "SELECT losenord FROM Alien where Alien_id =" + user;
+        
+        
+        try {
+            String svar = idb.fetchSingle(fraga);
+            System.out.println("svaret på SQL-frågan: " + svar);
+            
+            
+            if(password.equals(svar)){
+                
+                godkandLosen = true;
+                System.out.println(godkandLosen);
+                this.dispose();
+                new Alien(idb, vemArInloggad).setVisible(true);
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Namn / lösenord är felaktigt");
-                txtUser.setText("");
-                txtPassword.setText("");
-                txtUser.requestFocus();
-            }                  
-        } catch (SQLException ex) {
-            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
+        else {
+                JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
+            }
+        
+            
+        } catch (InfException ex) {
             Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     
      
     }//GEN-LAST:event_buttonLoginActionPerformed
@@ -240,43 +220,7 @@ public class Alien_Inloggning extends javax.swing.JFrame {
        // Ingen kod här än. Lägg till metoden som loggar in vald person.
     }//GEN-LAST:event_txtPasswordKeyPressed
 
-   
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Alien_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Alien_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Alien_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Alien_Inloggning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Alien_Inloggning(idb).setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonLogin;

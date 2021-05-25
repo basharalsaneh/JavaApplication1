@@ -10,10 +10,10 @@ import oru.inf.InfDB;
  *
  * @author Marcu
  */
+
 public class Validering {
     
     static boolean resultat = false;
-    private InfDB idb;
     
      public static boolean personFinns(JTextField enPerson) {
         resultat = true;

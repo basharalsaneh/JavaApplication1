@@ -24,44 +24,17 @@ public class Hantera_Aliens extends javax.swing.JFrame {
         Statement createStatement;
         static inloggningValidering vemArInloggad;
   
-    public Hantera_Aliens(InfDB idb, inloggningValidering vemArInloggad) throws Exception {
+    public Hantera_Aliens(InfDB idb, inloggningValidering vemArInloggad){
         initComponents();
-        getConnection();
         table_update();
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
          
     }
     
-     public static void main(String args[]) {
-       
-        java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                try {
-                    new Hantera_Aliens(idb, vemArInloggad).setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
+    
 
-    final void getConnection() throws Exception{
-        try{
-        Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hÃ¤mtar mysql driver och gÃ¶r det mÃ¶jligt att koppla upp till databasen.
-             connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibdb", "mibdba", "mibkey"); // Denna ska ocksÃ¥ pÃ¥ nÃ¥got sÃ¤tt
-             // koppa upp till databasen. Ingen kod Ã¤r "rÃ¶d" men osÃ¤ker pÃ¥ om projektet inte funkar pga att jag Ã¤r "disconnected" frÃ¥n databasen eller inte.
-             System.out.println("Databasen kopplad till projektet, lyckats!");
-             
-        }
-        catch(ClassNotFoundException | SQLException e){
-            System.out.println(e);
-        }
-       
-           
-        
-       
-    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

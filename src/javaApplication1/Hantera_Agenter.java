@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 import oru.inf.InfException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.util.Date;
@@ -27,7 +26,7 @@ import oru.inf.InfDB;
  */
 public class Hantera_Agenter extends javax.swing.JFrame {
         
-        private static InfDB idb;
+        private InfDB idb;
         Connection connection1;
         PreparedStatement statement;
         Statement createStatement;
@@ -38,9 +37,8 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     /**
      * Creates new form Hantera_Agenter
      */
-    public Hantera_Agenter(InfDB idb, inloggningValidering vemArInloggad)throws Exception {
+    public Hantera_Agenter(InfDB idb, inloggningValidering vemArInloggad){
         initComponents();
-        getConnection();
         table_update();
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
@@ -462,62 +460,8 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         txtAgentOmrade.setText(df.getValueAt(selectedIndex, 6).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Hantera_Agenter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Hantera_Agenter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Hantera_Agenter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Hantera_Agenter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Hantera_Agenter(idb, vemArInloggad).setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
-
     
-    final void getConnection() throws Exception{
-        try{
-        Class.forName("com.mysql.cj.jdbc.Driver"); // Tror den hÃ¤mtar mysql driver och gÃ¶r det mÃ¶jligt att koppla upp till databasen.
-             connection1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibdb", "mibdba", "mibkey"); // Denna ska ocksÃ¥ pÃ¥ nÃ¥got sÃ¤tt
-             // koppa upp till databasen. Ingen kod Ã¤r "rÃ¶d" men osÃ¤ker pÃ¥ om projektet inte funkar pga att jag Ã¤r "disconnected" frÃ¥n databasen eller inte.
-             System.out.println("Databasen kopplad till projektet, lyckats!");
-             
-        }
-        catch(ClassNotFoundException | SQLException e){
-            System.out.println(e);
-        }
-       
-           
-        
-       
-    }
+    
     
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

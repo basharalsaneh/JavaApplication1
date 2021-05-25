@@ -181,15 +181,7 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
             java.util.logging.Logger.getLogger(Alien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>*/
-       public static void main(String args[]) {
        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                    new Agent(idb, vemArInloggad).setVisible(true);
-                }
-        });
-       }
 
 
        

@@ -17,14 +17,16 @@ public class Start extends javax.swing.JFrame {
     
     
     private final InfDB idb;
+    static inloggningValidering vemArInloggad;
     
     
     /**
      * Creates new form Start
      */
-    public Start(InfDB idb) {
+    public Start(InfDB idb, inloggningValidering vemArInloggad) {
         initComponents();
         this.idb = idb;
+        this.vemArInloggad = vemArInloggad;
         
     }
 
@@ -103,36 +105,29 @@ public class Start extends javax.swing.JFrame {
 
     private void buttonAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlienActionPerformed
 
-        try {
+        
             // TODO add your handling code here:
             Validering.arAlien();
             this.dispose();
-            new Alien_Inloggning(idb).setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            new Alien_Inloggning(idb, vemArInloggad).setVisible(true);
+        
     }//GEN-LAST:event_buttonAlienActionPerformed
 
     private void buttonAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdministratorActionPerformed
-        try {
+       
             // TODO add your handling code here:
             Validering.arAdmin();
             this.dispose();
-            new Admin_Inloggning(idb).setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            new Admin_Inloggning(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_buttonAdministratorActionPerformed
 
     private void buttonAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgentActionPerformed
-        try {
+      
             // TODO add your handling code here:
             Validering.arAgent();
             this.dispose();
-            new Agent_Inloggning(idb).setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            new Agent_Inloggning(idb, vemArInloggad).setVisible(true);
+       
        
     }//GEN-LAST:event_buttonAgentActionPerformed
 
