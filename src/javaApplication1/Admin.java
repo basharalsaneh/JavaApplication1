@@ -21,18 +21,10 @@ public class Admin extends javax.swing.JFrame {
     private InfDB idb;
     
     
-    public Admin(){
+    public Admin(InfDB idb){
         initComponents();
+        this.idb = idb;
         
-        
-        try{
-            idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
-        }
-        
-        catch(InfException ettUndantag){
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande!" + ettUndantag.getMessage());
-        }
     }
 
     /**

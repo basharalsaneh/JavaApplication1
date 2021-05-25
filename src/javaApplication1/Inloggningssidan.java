@@ -5,8 +5,11 @@
  */
 package javaApplication1;
 
-import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import oru.inf.InfException;
 
 /**
  *
@@ -37,7 +40,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
 
         anvandarnamn = new javax.swing.JLabel();
         password = new javax.swing.JLabel();
-        txtAnvandarnamn = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         loggaIn = new javax.swing.JToggleButton();
         gaTillbaka = new javax.swing.JToggleButton();
@@ -48,9 +51,9 @@ public class Inloggningssidan extends javax.swing.JFrame {
 
         password.setText("Lösenord");
 
-        txtAnvandarnamn.addActionListener(new java.awt.event.ActionListener() {
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAnvandarnamnActionPerformed(evt);
+                txtUserActionPerformed(evt);
             }
         });
 
@@ -84,7 +87,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -93,7 +96,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
                 .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(anvandarnamn)
-                    .addComponent(txtAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(password)
@@ -108,9 +111,9 @@ public class Inloggningssidan extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtAnvandarnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnvandarnamnActionPerformed
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAnvandarnamnActionPerformed
+    }//GEN-LAST:event_txtUserActionPerformed
 
     private void gaTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gaTillbakaActionPerformed
         // TODO add your handling code here:
@@ -122,7 +125,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
     }//GEN-LAST:event_gaTillbakaActionPerformed
 
     public void vemArInloggad() throws Exception{
-    if(JavaApplication1.textFaltHarVarde(txtAnvandarnamn) && (JavaApplication1.losenordHarVarde(txtPassword))){
+    if(JavaApplication1.textFaltHarVarde(txtUser) && (JavaApplication1.losenordHarVarde(txtPassword))){
          
         if(JavaApplication1.arAgent()){
             this.dispose();
@@ -148,6 +151,42 @@ public class Inloggningssidan extends javax.swing.JFrame {
     private void loggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loggaInActionPerformed
         // TODO add your handling code here:
         
+        boolean godkandLosen = false;
+        
+        // 1. Läsa av text i ID
+        
+        String user = txtUser.getText();
+        
+        // 2. Läsa av text i Lösenord
+        
+        String password = txtPassword.getText();
+        System.out.println("Lösenordet inskrivet i rutan: " + password);
+        
+        String fraga = "SELECT losenord FROM Agent where Agent_id =" + user;
+        
+        
+        try {
+            String svar = idb.fetchSingle(fraga);
+            System.out.println("svaret på SQL-frågan: " + svar);
+            
+            
+            if(password.equals(svar)){
+                
+                godkandLosen = true;
+                System.out.println(godkandLosen);
+                this.dispose();
+                new Admin(idb).setVisible(true);
+            }
+        else {
+                JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
+            }
+        
+            
+        } catch (InfException ex) {
+            Logger.getLogger(Inloggningssidan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
        
     }//GEN-LAST:event_loggaInActionPerformed
 
@@ -161,7 +200,7 @@ public class Inloggningssidan extends javax.swing.JFrame {
     private javax.swing.JToggleButton gaTillbaka;
     private javax.swing.JToggleButton loggaIn;
     private javax.swing.JLabel password;
-    private javax.swing.JTextField txtAnvandarnamn;
     private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

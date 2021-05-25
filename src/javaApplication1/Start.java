@@ -26,9 +26,6 @@ public class Start extends javax.swing.JFrame {
     public Start(InfDB idb) {
         initComponents();
         this.idb = idb;
-        boolean alien;
-        boolean agent;
-        boolean admin;
         
        
     }
