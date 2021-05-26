@@ -130,7 +130,7 @@ public class BytaLosenord extends javax.swing.JFrame {
                 }
                 else{
                     passNuvarande.requestFocus();
-                    JOptionPane.showMessageDialog(this, "Ditt lösenord är felaktigt!");
+                    JOptionPane.showMessageDialog(this, "Ditt nuvarande lösenord är felaktigt!");
                 }
     
             }
