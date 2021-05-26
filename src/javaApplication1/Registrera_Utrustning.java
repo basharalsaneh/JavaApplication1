@@ -252,24 +252,18 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
                 
                 if (UtrustningFinns) {
                     JOptionPane.showMessageDialog(null,"Utrustningen finns redan i listan!");
-                } 
-                
-                else {
+                } else {
                     if (jTyp.getSelectedItem().equals("Vapen")) {
                         LaTillVapen();
                         LadeUtrustning = true;
-                    } 
-                    
-                    else if (jTyp.getSelectedItem().equals("Teknik")) {
+                    } else if (jTyp.getSelectedItem().equals("Kommunikation")) {
+                        laTillKommunikation();
+                        LadeUtrustning = true;
+                    }else if (jTyp.getSelectedItem().equals("Teknik")) {
                         laTillTeknik();
                         LadeUtrustning = true;
                     } 
-                    
-                    else if (jTyp.getSelectedItem().equals("Kommunikation")) {
-                        laTillKommunikation();
-                        LadeUtrustning = true;
-                    }
-                    
+                       
                 }
                 if (LadeUtrustning) {
                     JOptionPane.showMessageDialog(null,"Utrustningen har lagts till!");
