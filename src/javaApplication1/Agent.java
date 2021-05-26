@@ -17,14 +17,14 @@ import oru.inf.InfDB;
 public class Agent extends javax.swing.JFrame {
     
 
-private static InfDB idb;
+InfDB idb;
 private int agent_ID;
 private String namn;
 private String Telefon;
 private String losenord;
 private boolean administrator;
 private Date anstallningsdatum;
-static inloggningValidering vemArInloggad;
+inloggningValidering vemArInloggad;
 
     
 public Agent(InfDB idb, inloggningValidering vemArInloggad) {

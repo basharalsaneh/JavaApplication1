@@ -11,9 +11,9 @@ package javaApplication1;
  */
 public class inloggningValidering {
 
-    private String namn;
-    private int id;
-    private String losenord;
+    private String namn = "";
+    private int id = 0;
+    private String losenord = "";
 
     public void inloggadSom(String namnInloggad, int idInloggad, String angettLosenord) {
         namn = namnInloggad;

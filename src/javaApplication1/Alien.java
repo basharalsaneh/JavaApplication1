@@ -21,14 +21,14 @@ import oru.inf.InfException;
 public class Alien extends javax.swing.JFrame {
     
 
-private InfDB idb;
-inloggningValidering vemArInloggad;
+InfDB idb;
+inloggningValidering vemArInloggad = null;
 
 public Alien(InfDB idb, inloggningValidering vemArInloggad) {
         initComponents();
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
-        JOptionPane.showMessageDialog(this, "Du är nu inloggad som: " + vemArInloggad.getNamn());
+        
     
     }
       public void main(String args[]) {

@@ -16,8 +16,8 @@ import oru.inf.InfException;
 public class Start extends javax.swing.JFrame {
     
     
-    private final InfDB idb;
-    static inloggningValidering vemArInloggad;
+    InfDB idb;
+
     
     
     /**
@@ -107,8 +107,9 @@ public class Start extends javax.swing.JFrame {
         
             // TODO add your handling code here:
             Validering.arAlien();
+            
+            new Alien_Inloggning(idb).setVisible(true);
             this.dispose();
-            new Alien_Inloggning(idb, vemArInloggad).setVisible(true);
         
     }//GEN-LAST:event_buttonAlienActionPerformed
 
@@ -116,16 +117,18 @@ public class Start extends javax.swing.JFrame {
        
             // TODO add your handling code here:
             Validering.arAdmin();
+            
+            new Admin_Inloggning(idb).setVisible(true);
             this.dispose();
-            new Admin_Inloggning(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_buttonAdministratorActionPerformed
 
     private void buttonAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgentActionPerformed
       
             // TODO add your handling code here:
             Validering.arAgent();
+            
+            new Agent_Inloggning(idb).setVisible(true);
             this.dispose();
-            new Agent_Inloggning(idb, vemArInloggad).setVisible(true);
        
        
     }//GEN-LAST:event_buttonAgentActionPerformed

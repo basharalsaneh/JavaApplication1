@@ -17,17 +17,16 @@ import oru.inf.InfException;
 public class Agent_Inloggning extends javax.swing.JFrame {
 
     
-    private static InfDB idb;
-    static inloggningValidering vemArInloggad;
+    InfDB idb;
+    inloggningValidering vemArInloggad;
     /**
      * Creates new form Agent_Inloggning
      */
-    public Agent_Inloggning(InfDB idb, inloggningValidering vemArInloggad){
+    public Agent_Inloggning(InfDB idb){
         initComponents();
         this.idb = idb;
         vemArInloggad = new inloggningValidering();
- 
-    }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,7 +37,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
         txtUser = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -47,10 +46,10 @@ public class Agent_Inloggning extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Logga in");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setText("Logga in");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
 
@@ -70,7 +69,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(btnLogin))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,54 +98,61 @@ public class Agent_Inloggning extends javax.swing.JFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnLogin)
                 .addGap(102, 102, 102))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        
-        
-        boolean godkandLosen = false;
-        
-        // 1. Läsa av text i ID
-        
+    public void loggaInSomAgent(){
+             if(Validering.personFinns(txtUser) && Validering.finnsLosenord(txtPassword)){
+        boolean godkandUser = false;
+        boolean godkandLosenord = false;
+          
         String user = txtUser.getText();
-        
-        // 2. Läsa av text i Lösenord
-        
         String password = txtPassword.getText();
         System.out.println("Lösenordet inskrivet i rutan: " + password);
-        
-        String fraga = "SELECT losenord FROM Agent where Agent_id =" + user;
-        
-        
-        try {
-            String svar = idb.fetchSingle(fraga);
-            System.out.println("svaret på SQL-frågan: " + svar);
-            
-            
-            if(password.equals(svar)){
-                
-                godkandLosen = true;
-                System.out.println(godkandLosen);
-                this.dispose();
+        try{
+        String fraga1 = "SELECT Namn FROM agent where Namn like '"+user+"';";
+           String giltigUser = idb.fetchSingle(fraga1);
+           String fraga2 = "SELECT Losenord FROM agent where Namn like '" + giltigUser + "';";
+           String giltigLosenord = idb.fetchSingle(fraga2);
+    
+             if(user.equals(giltigUser)){
+                 godkandUser = true;
+                 if(password.equals(giltigLosenord)){
+                  godkandLosenord = true;
+                }
+                else {
+                JOptionPane.showMessageDialog(null, "Lösenord är felaktigt för valt id");
+                }
+            }
+            else{
+                 JOptionPane.showMessageDialog(null, "Agent ej hittat.");
+             }
+             if(godkandUser && godkandLosenord){
+                 JOptionPane.showMessageDialog(this, "Du kommer nu loggas in som" + giltigUser);
+             String fraga3 = "SELECT Agent_ID from agent where Namn like '" + giltigUser+ "';";
+                 String userID = idb.fetchSingle(fraga3);
+                 int giltigtID = Integer.parseInt(userID);
+                 JOptionPane.showMessageDialog(this, "User: " + giltigUser + ", lösenord: " + giltigLosenord + ", med id: " + giltigtID);
+                vemArInloggad.inloggadSom(giltigUser, giltigtID, giltigLosenord);
                 new Agent(idb, vemArInloggad).setVisible(true);
-            }
-        else {
-                JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
-            }
+             }
         
             
         } catch (InfException ex) {
-            Logger.getLogger(Admin_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Agent_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex);
         }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        }
+    }
+    
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        loggaInSomAgent();
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,7 +160,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

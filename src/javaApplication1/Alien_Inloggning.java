@@ -11,10 +11,10 @@ import oru.inf.InfException;
 
 public class Alien_Inloggning extends javax.swing.JFrame {
     
-    private InfDB idb;
+    InfDB idb;
     inloggningValidering vemArInloggad;
    
-    public Alien_Inloggning(InfDB idb, inloggningValidering vemArInloggad){
+    public Alien_Inloggning(InfDB idb){
         initComponents();
         this.idb = idb;
         this.vemArInloggad = new inloggningValidering();
@@ -162,8 +162,10 @@ public class Alien_Inloggning extends javax.swing.JFrame {
     
              if(user.equals(giltigUser)){
                  godkandUser = true;
+                 JOptionPane.showMessageDialog(this, giltigUser);
                  if(password.equals(giltigLosenord)){
                   godkandLosenord = true;
+                  JOptionPane.showMessageDialog(this, giltigLosenord);
                 }
                 else {
                 JOptionPane.showMessageDialog(null, "Lösenord är felaktigt för valt id");
@@ -178,7 +180,8 @@ public class Alien_Inloggning extends javax.swing.JFrame {
                  int giltigtID = Integer.parseInt(userID);
                 vemArInloggad.inloggadSom(giltigUser, giltigtID, giltigLosenord);
                 JOptionPane.showMessageDialog(this, "User: " + giltigUser + ", lösenord: " + giltigLosenord + ", med id: " + giltigtID);
-                    new Alien(idb, vemArInloggad).setVisible(true);
+                   this.dispose();
+                new Alien(idb, vemArInloggad).setVisible(true);
              }
         
             

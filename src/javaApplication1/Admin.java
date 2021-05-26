@@ -15,8 +15,8 @@ import oru.inf.InfException;
  * @author kristofffer
  */
 public class Admin extends javax.swing.JFrame {
-    private static InfDB idb;
-    static inloggningValidering vemArInloggad;
+    InfDB idb;
+    inloggningValidering vemArInloggad;
     /**
      * Creates new form Admin
      */
