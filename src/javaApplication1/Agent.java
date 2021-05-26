@@ -86,6 +86,11 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
         jLabel1.setText("Inloggad som Agent");
 
         btnAliens.setText("Kolla upp aliens");
+        btnAliens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAliensActionPerformed(evt);
+            }
+        });
 
         btnUtrustning.setText("Registrera utrustning");
         btnUtrustning.addActionListener(new java.awt.event.ActionListener() {
@@ -195,6 +200,10 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
         this.dispose();
         new Start(idb).setVisible(true);
     }//GEN-LAST:event_brnLoggaUtActionPerformed
+
+    private void btnAliensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAliensActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAliensActionPerformed
 
     /**
      * @param args the command line arguments
