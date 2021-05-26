@@ -18,7 +18,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
 
     
     private static InfDB idb;
-    static inloggningValidering vemArInloggad;
+    static inloggningValidering inloggadSom;
     /**
      * Creates new form Agent_Inloggning
      */
@@ -135,7 +135,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
                 godkandLosen = true;
                 System.out.println(godkandLosen);
                 this.dispose();
-                new Agent(idb, vemArInloggad).setVisible(true);
+                new Agent(idb, inloggadSom).setVisible(true);
             }
         else {
                 JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");

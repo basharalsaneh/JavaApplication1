@@ -24,11 +24,11 @@ public class Hantera_Aliens extends javax.swing.JFrame {
         Statement createStatement;
         static inloggningValidering vemArInloggad;
   
-    public Hantera_Aliens(InfDB idb, inloggningValidering vemArInloggad){
+    public Hantera_Aliens(InfDB idb){
         initComponents();
         table_update();
         this.idb = idb;
-        this.vemArInloggad = vemArInloggad;
+        //this.vemArInloggad = vemArInloggad;
          
     }
     

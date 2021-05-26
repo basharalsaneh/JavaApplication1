@@ -12,12 +12,12 @@ import oru.inf.InfException;
 public class Admin_Inloggning extends javax.swing.JFrame {
 
     private InfDB idb;
-    inloggningValidering vemArInloggad;
+    inloggningValidering inloggadSom;
     
     public Admin_Inloggning(InfDB idb, inloggningValidering vemArInloggad){
         initComponents();
         this.idb = idb;
-        this.vemArInloggad = new inloggningValidering();
+        this.inloggadSom = new inloggningValidering();
     }
 
     @SuppressWarnings("unchecked")
@@ -134,7 +134,7 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                 godkandLosen = true;
                 System.out.println(godkandLosen);
                 this.dispose();
-                new Admin(idb,vemArInloggad).setVisible(true);
+                new Admin(idb,inloggadSom).setVisible(true);
             }
         else {
                 JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");

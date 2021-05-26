@@ -16,14 +16,14 @@ import oru.inf.InfException;
  */
 public class Admin extends javax.swing.JFrame {
     private static InfDB idb;
-    static inloggningValidering vemArInloggad;
+    static inloggningValidering inloggadSom;
     /**
      * Creates new form Admin
      */
-    public Admin(InfDB idb, inloggningValidering vemArInloggad) {
+    public Admin(InfDB idb, inloggningValidering inloggadSom) {
         initComponents();
         this.idb = idb;
-        this.vemArInloggad = vemArInloggad;
+        this.inloggadSom = inloggadSom;
     }
 
     /**
@@ -125,7 +125,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.dispose();
-        new Hantera_Utrustning(idb, vemArInloggad).setVisible(true);
+        new Hantera_Utrustning(idb, inloggadSom).setVisible(true);
         
     }//GEN-LAST:event_btnUtrustningActionPerformed
 
@@ -133,7 +133,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.dispose();
-        new Hantera_Aliens(idb, vemArInloggad).setVisible(true);
+        new Hantera_Aliens(idb).setVisible(true);
         
     }//GEN-LAST:event_btnAliensActionPerformed
 
@@ -141,7 +141,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.dispose();
-        new Hantera_Agenter(idb, vemArInloggad).setVisible(true);
+        new Hantera_Agenter(idb, inloggadSom).setVisible(true);
         
     }//GEN-LAST:event_btnAgentActionPerformed
 

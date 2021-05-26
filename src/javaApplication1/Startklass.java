@@ -10,7 +10,7 @@ public class Startklass {
     
 
     private static InfDB idb;
-    static inloggningValidering vemArInloggad;
+    static inloggningValidering inloggadSom;
     
     
     public static void main(String[] args){

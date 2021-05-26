@@ -17,7 +17,7 @@ public class Start extends javax.swing.JFrame {
     
     
     private final InfDB idb;
-    static inloggningValidering vemArInloggad;
+    static inloggningValidering inloggadSom;
     
     
     /**
@@ -108,7 +108,7 @@ public class Start extends javax.swing.JFrame {
             // TODO add your handling code here:
             Validering.arAlien();
             this.dispose();
-            new Alien_Inloggning(idb, vemArInloggad).setVisible(true);
+            new Alien_Inloggning(idb, inloggadSom).setVisible(true);
         
     }//GEN-LAST:event_buttonAlienActionPerformed
 
@@ -117,7 +117,7 @@ public class Start extends javax.swing.JFrame {
             // TODO add your handling code here:
             Validering.arAdmin();
             this.dispose();
-            new Admin_Inloggning(idb, vemArInloggad).setVisible(true);
+            new Admin_Inloggning(idb, inloggadSom).setVisible(true);
     }//GEN-LAST:event_buttonAdministratorActionPerformed
 
     private void buttonAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgentActionPerformed
@@ -125,7 +125,7 @@ public class Start extends javax.swing.JFrame {
             // TODO add your handling code here:
             Validering.arAgent();
             this.dispose();
-            new Agent_Inloggning(idb, vemArInloggad).setVisible(true);
+            new Agent_Inloggning(idb, inloggadSom).setVisible(true);
        
        
     }//GEN-LAST:event_buttonAgentActionPerformed
