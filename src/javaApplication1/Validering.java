@@ -1,6 +1,8 @@
 
 package javaApplication1;
 
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -36,6 +38,29 @@ public class Validering {
         return resultat;
     }
     
+    public static boolean txtKontroll(JTextField text) {
+        boolean result = true;
+        if (text.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "utrustningsnamn är tomt");
+            result = false;
+            text.requestFocus();
+        }
+        return result;
+    }
+    
+    
+        public static boolean kontrollForComboBox(JComboBox text) {
+        boolean result = true;
+        if (text.getSelectedItem().equals("Välja")) {
+            JOptionPane.showMessageDialog(null, "Välja en typ av utrustning!");
+            result = false;
+            text.requestFocus();
+        }
+        return result;
+    }
+        
+            
+            
      public static boolean arAgent(){
      resultat = true;
      return resultat;
