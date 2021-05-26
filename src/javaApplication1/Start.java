@@ -5,10 +5,7 @@
  */
 package javaApplication1;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import oru.inf.InfDB;
-import oru.inf.InfException;
 /**
  *
  * @author macbook
@@ -16,8 +13,13 @@ import oru.inf.InfException;
 public class Start extends javax.swing.JFrame {
     
     
+<<<<<<< Updated upstream
     InfDB idb;
 
+=======
+    private InfDB idb;
+    inloggningValidering inloggadSom;
+>>>>>>> Stashed changes
     
     
     /**

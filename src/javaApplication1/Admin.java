@@ -5,19 +5,26 @@
  */
 package javaApplication1;
 
+<<<<<<< Updated upstream
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+=======
+>>>>>>> Stashed changes
 import oru.inf.InfDB;
-import oru.inf.InfException;
 
 /**
  *
  * @author kristofffer
  */
 public class Admin extends javax.swing.JFrame {
+<<<<<<< Updated upstream
     InfDB idb;
     inloggningValidering vemArInloggad;
+=======
+    private InfDB idb;
+    inloggningValidering inloggadSom;
+>>>>>>> Stashed changes
     /**
      * Creates new form Admin
      * @param idb
@@ -43,9 +50,14 @@ public class Admin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnAliens = new javax.swing.JButton();
         btnUtrustning = new javax.swing.JButton();
+<<<<<<< Updated upstream
         btnAgent = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnBytLosenord = new javax.swing.JButton();
+=======
+        btnRegistreraAgenter = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+>>>>>>> Stashed changes
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,10 +82,10 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        btnAgent.setText("Agenter");
-        btnAgent.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistreraAgenter.setText("Registrera Agenter");
+        btnRegistreraAgenter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgentActionPerformed(evt);
+                btnRegistreraAgenterActionPerformed(evt);
             }
         });
 
@@ -102,6 +114,7 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAgent)
@@ -114,6 +127,13 @@ public class Admin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnBytLosenord)
                         .addGap(39, 39, 39))))
+=======
+                    .addComponent(btnRegistreraAgenter)
+                    .addComponent(btnUtrustning)
+                    .addComponent(btnAliens)
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> Stashed changes
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,12 +147,19 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnUtrustning)
                 .addGap(18, 18, 18)
+<<<<<<< Updated upstream
                 .addComponent(btnAgent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(btnBytLosenord))
                 .addGap(75, 75, 75))
+=======
+                .addComponent(btnRegistreraAgenter)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(80, 80, 80))
+>>>>>>> Stashed changes
         );
 
         jLabel3.getAccessibleContext().setAccessibleName("Inloggad som Administratör");
@@ -157,13 +184,17 @@ public class Admin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAliensActionPerformed
 
-    private void btnAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgentActionPerformed
+    private void btnRegistreraAgenterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAgenterActionPerformed
         // TODO add your handling code here:
         
         this.dispose();
+<<<<<<< Updated upstream
         new Hantera_Agenter(idb, vemArInloggad).setVisible(true);
+=======
+        new Registrera_Agenter(idb, inloggadSom).setVisible(true);
+>>>>>>> Stashed changes
         
-    }//GEN-LAST:event_btnAgentActionPerformed
+    }//GEN-LAST:event_btnRegistreraAgenterActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -185,9 +216,12 @@ public class Admin extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgent;
     private javax.swing.JButton btnAliens;
+<<<<<<< Updated upstream
     private javax.swing.JButton btnBytLosenord;
+=======
+    private javax.swing.JButton btnRegistreraAgenter;
+>>>>>>> Stashed changes
     private javax.swing.JButton btnUtrustning;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
