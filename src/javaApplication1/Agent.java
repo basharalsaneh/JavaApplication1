@@ -45,9 +45,9 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
                     + "JOIN agent USING (agent_id)\n"
                     + "WHERE agent_id = " + "'" + vemArInloggad.getId() + "'";
 
-            ArrayList<String> result = idb.fetchColumn(fraga);
+            ArrayList<String> svar = idb.fetchColumn(fraga);
             
-            for (String objekt : result) {
+            for (String objekt : svar) {
                 UtrustningRS.append(" - " + objekt + "\n");
             }
         } 
