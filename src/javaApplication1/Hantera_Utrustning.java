@@ -12,7 +12,7 @@ import oru.inf.InfDB;
  * @author marcu
  */
 public class Hantera_Utrustning extends javax.swing.JFrame {
-    static inloggningValidering vemArInloggad;
+    static inloggningValidering inloggadSom;
     static InfDB idb;
     /**
      * Creates new form Hantera_Utrustning
@@ -20,7 +20,7 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
     public Hantera_Utrustning(InfDB idb, inloggningValidering vemArInloggad) {
         initComponents();
         this.idb = idb;
-        this.vemArInloggad = vemArInloggad;
+        this.inloggadSom = vemArInloggad;
     }
 
     /**
@@ -149,7 +149,7 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Hantera_Utrustning(idb, vemArInloggad).setVisible(true);
+                new Hantera_Utrustning(idb, inloggadSom).setVisible(true);
             }
         });
     }

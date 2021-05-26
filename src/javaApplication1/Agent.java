@@ -24,13 +24,13 @@ private String Telefon;
 private String losenord;
 private boolean administrator;
 private Date anstallningsdatum;
-static inloggningValidering vemArInloggad;
+static inloggningValidering inloggadSom;
 
     
 public Agent(InfDB idb, inloggningValidering vemArInloggad) {
     initComponents();
     this.idb = idb;
-    this.vemArInloggad = vemArInloggad;
+    this.inloggadSom = vemArInloggad;
 }
 
 
@@ -144,7 +144,7 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
         // TODO add your handling code here:
         dispose();
         try {
-            BytaLosenord bytLosen = new BytaLosenord(idb, vemArInloggad);
+            BytaLosenord bytLosen = new BytaLosenord(idb, inloggadSom);
             bytLosen.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,7 +154,7 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
     private void btnUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtrustningActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new Registrera_Utrustning(idb, vemArInloggad).setVisible(true);
+        new Registrera_Utrustning(idb, inloggadSom).setVisible(true);
     }//GEN-LAST:event_btnUtrustningActionPerformed
 
     /**
