@@ -175,8 +175,13 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
 
     private void btnBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLosenordActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-        new BytaLosenord(idb).setVisible(true);
+        dispose();
+        try {
+            BytaLosenord bytLosen = new BytaLosenord(idb, vemArInloggad);
+            bytLosen.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBytLosenordActionPerformed
 
     private void btnUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtrustningActionPerformed

@@ -44,10 +44,13 @@ public class Agent_Inloggning extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 <<<<<<< HEAD
+<<<<<<< HEAD
         btnTillbaka = new javax.swing.JButton();
 =======
         jButton1 = new javax.swing.JButton();
 >>>>>>> 13d2afa8022ea3ae9288fd303aac38babbc42a0e
+=======
+>>>>>>> parent of 489f4ad (Login - med logga ut-knapp samt Gå tillbaka-knapp)
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +70,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
         jLabel3.setText("Agent inloggning");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         btnTillbaka.setText("Gå tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,22 +84,26 @@ public class Agent_Inloggning extends javax.swing.JFrame {
             }
         });
 
+=======
+>>>>>>> parent of 489f4ad (Login - med logga ut-knapp samt Gå tillbaka-knapp)
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .addGap(60, 60, 60)
+=======
+>>>>>>> parent of 489f4ad (Login - med logga ut-knapp samt Gå tillbaka-knapp)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnTillbaka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLogin))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -105,6 +113,8 @@ public class Agent_Inloggning extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+=======
+>>>>>>> parent of 489f4ad (Login - med logga ut-knapp samt Gå tillbaka-knapp)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,6 +123,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
@@ -120,6 +131,9 @@ public class Agent_Inloggning extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLogin)))
 >>>>>>> 13d2afa8022ea3ae9288fd303aac38babbc42a0e
+=======
+                                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+>>>>>>> parent of 489f4ad (Login - med logga ut-knapp samt Gå tillbaka-knapp)
                 .addGap(94, 94, 94))
         );
         layout.setVerticalGroup(
@@ -136,6 +150,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
+<<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
 <<<<<<< HEAD
@@ -143,6 +158,9 @@ public class Agent_Inloggning extends javax.swing.JFrame {
 =======
                     .addComponent(jButton1))
 >>>>>>> 13d2afa8022ea3ae9288fd303aac38babbc42a0e
+=======
+                .addComponent(btnLogin)
+>>>>>>> parent of 489f4ad (Login - med logga ut-knapp samt Gå tillbaka-knapp)
                 .addGap(102, 102, 102))
         );
 
@@ -199,6 +217,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -212,6 +231,8 @@ public class Agent_Inloggning extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 >>>>>>> 13d2afa8022ea3ae9288fd303aac38babbc42a0e
 
+=======
+>>>>>>> parent of 489f4ad (Login - med logga ut-knapp samt Gå tillbaka-knapp)
     /**
      * @param args the command line arguments
      */
@@ -220,10 +241,13 @@ public class Agent_Inloggning extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
 <<<<<<< HEAD
+<<<<<<< HEAD
     private javax.swing.JButton btnTillbaka;
 =======
     private javax.swing.JButton jButton1;
 >>>>>>> 13d2afa8022ea3ae9288fd303aac38babbc42a0e
+=======
+>>>>>>> parent of 489f4ad (Login - med logga ut-knapp samt Gå tillbaka-knapp)
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

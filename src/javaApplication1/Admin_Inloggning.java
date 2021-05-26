@@ -34,10 +34,13 @@ public class Admin_Inloggning extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
 <<<<<<< HEAD
+<<<<<<< HEAD
         btnTillbaka = new javax.swing.JButton();
 =======
         jButton1 = new javax.swing.JButton();
 >>>>>>> 13d2afa8022ea3ae9288fd303aac38babbc42a0e
+=======
+>>>>>>> parent of 489f4ad (Login - med logga ut-knapp samt Gå tillbaka-knapp)
 
         jLabel4.setText("jLabel4");
 
@@ -62,6 +65,7 @@ public class Admin_Inloggning extends javax.swing.JFrame {
         jLabel6.setText("MIB Admin");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         btnTillbaka.setText("Gå tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +79,8 @@ public class Admin_Inloggning extends javax.swing.JFrame {
             }
         });
 
+=======
+>>>>>>> parent of 489f4ad (Login - med logga ut-knapp samt Gå tillbaka-knapp)
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,11 +88,8 @@ public class Admin_Inloggning extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
 <<<<<<< HEAD
                 .addContainerGap(38, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnTillbaka)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonLogin))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonLogin, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -141,9 +144,7 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
 <<<<<<< HEAD
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buttonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTillbaka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(buttonLogin)
                 .addContainerGap(83, Short.MAX_VALUE))
 =======
                 .addGap(55, 55, 55)
@@ -249,6 +250,7 @@ public class Admin_Inloggning extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonLoginActionPerformed
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         // TODO add your handling code here:
         
@@ -264,10 +266,11 @@ public class Admin_Inloggning extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 >>>>>>> 13d2afa8022ea3ae9288fd303aac38babbc42a0e
 
+=======
+>>>>>>> parent of 489f4ad (Login - med logga ut-knapp samt Gå tillbaka-knapp)
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton buttonLogin;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

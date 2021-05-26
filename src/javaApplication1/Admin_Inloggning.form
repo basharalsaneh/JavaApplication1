@@ -38,12 +38,8 @@
           <Group type="102" alignment="1" attributes="0">
 <<<<<<< HEAD
               <EmptySpace pref="38" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="buttonLogin" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="buttonLogin" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -110,10 +106,7 @@
               </Group>
 <<<<<<< HEAD
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="buttonLogin" max="32767" attributes="0"/>
-                  <Component id="btnTillbaka" max="32767" attributes="0"/>
-              </Group>
+              <Component id="buttonLogin" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="83" max="32767" attributes="0"/>
 =======
               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
@@ -164,6 +157,7 @@
       </Properties>
     </Component>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Component class="javax.swing.JButton" name="btnTillbaka">
       <Properties>
         <Property name="text" type="java.lang.String" value="G&#xe5; tillbaka"/>
@@ -180,5 +174,7 @@
 >>>>>>> 13d2afa8022ea3ae9288fd303aac38babbc42a0e
       </Events>
     </Component>
+=======
+>>>>>>> parent of 489f4ad (Login - med logga ut-knapp samt Gå tillbaka-knapp)
   </SubComponents>
 </Form>
