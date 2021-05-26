@@ -120,10 +120,10 @@ public class BytaLosenord extends javax.swing.JFrame {
                 char[] nyttLosenordArray = passNytt.getPassword();
                 String nyttLosenord = new String(nyttLosenordArray);
 
-                String query = "SELECT losenord FROM agent WHERE agent_id =" + "'" + vemArInloggad.getId() + "'";
-                String result = idb.fetchSingle(query);
+                String fraga = "SELECT losenord FROM agent WHERE agent_id =" + "'" + vemArInloggad.getId() + "'";
+                String resultat = idb.fetchSingle(fraga);
 
-                if(gammalLosenord.equals(result)){
+                if(gammalLosenord.equals(resultat)){
                     String qSetPassword = "UPDATE agent SET losenord =" + "'" + nyttLosenord + "'" + "WHERE agent_id = " + "'" + vemArInloggad.getId() + "'";
                     idb.update(qSetPassword);
                      JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
