@@ -3,6 +3,7 @@ package javaApplication1;
 
 
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,6 +54,12 @@ public class Admin_Inloggning extends javax.swing.JFrame {
         jLabel2.setText("Agent ID");
 
         jLabel3.setText("Lösenord");
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         jLabel6.setText("MIB Admin");
@@ -213,6 +220,66 @@ public class Admin_Inloggning extends javax.swing.JFrame {
         this.dispose();
         new Start(idb).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            
+             if(Validering.personFinns(txtUser) && Validering.finnsLosenord(txtPassword)){
+        boolean godkandUser = false;
+        boolean godkandLosenord = false;
+        boolean godkandAdmin = false;
+       
+          
+        String user = txtUser.getText();
+        String password = txtPassword.getText();
+        System.out.println("Lösenordet inskrivet i rutan: " + password);
+        try{
+        String fraga1 = "SELECT Namn FROM agent where Namn like '"+user+"';";
+           String giltigUser = idb.fetchSingle(fraga1);
+           String fraga2 = "SELECT Losenord FROM agent where Namn like '" + giltigUser + "';";
+           String giltigLosenord = idb.fetchSingle(fraga2);
+           String fraga3 = "SELECT Administrator FROM agent where Namn like '" + giltigUser + "';";
+           String befogenhet = idb.fetchSingle(fraga3);
+           String admin = "J";
+             if(user.equals(giltigUser)){
+                 godkandUser = true;
+                 if(password.equals(giltigLosenord)){
+                  godkandLosenord = true;
+                  if(befogenhet.equals(admin)){
+                  godkandAdmin = true;
+                  }
+                  else{
+                  JOptionPane.showMessageDialog(null, "Du har ej befogenhet till denna att logga in.");
+                  }
+                }
+                else {
+                JOptionPane.showMessageDialog(null, "Lösenord är felaktigt för valt id");
+                }
+            }
+            else{
+                 JOptionPane.showMessageDialog(null, "Agent ej hittat.");
+             }
+             if(godkandUser && godkandLosenord && godkandAdmin){
+                 JOptionPane.showMessageDialog(this, "Du kommer nu loggas in som" + giltigUser);
+             String fraga4 = "SELECT Agent_ID from agent where Namn like '" + giltigUser+ "';";
+                 String userID = idb.fetchSingle(fraga4);
+                 int giltigtID = Integer.parseInt(userID);
+                 JOptionPane.showMessageDialog(this, "User: " + giltigUser + ", lösenord: " + giltigLosenord + ", med id: " + giltigtID);
+                vemArInloggad.inloggadSom(giltigUser, giltigtID, giltigLosenord);
+                this.dispose();
+                new Admin(idb, vemArInloggad).setVisible(true);
+             }
+        
+            
+        } catch (InfException ex) {
+            Logger.getLogger(Admin_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex);
+        }
+        }
+            
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     
 
