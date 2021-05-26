@@ -237,23 +237,13 @@ public class Alien_Inloggning extends javax.swing.JFrame {
        // Ingen kod här än. Lägg till metoden som loggar in vald person.
     }//GEN-LAST:event_txtPasswordKeyPressed
 
-
-
-
-    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        // TODO add your handling code here:
-        
-        this.dispose();
-        new Start(idb).setVisible(true);
-    }//GEN-LAST:event_btnTillbakaActionPerformed
-
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
         new Start(idb).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonLogin;
