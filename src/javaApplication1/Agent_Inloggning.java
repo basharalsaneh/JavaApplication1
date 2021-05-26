@@ -25,7 +25,8 @@ public class Agent_Inloggning extends javax.swing.JFrame {
     public Agent_Inloggning(InfDB idb, inloggningValidering vemArInloggad){
         initComponents();
         this.idb = idb;
-        this.vemArInloggad = vemArInloggad;
+        vemArInloggad = new inloggningValidering();
+ 
     }
 
     /**

@@ -18,7 +18,7 @@ public class Startklass {
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
             System.out.println("Koppling established");
-            new Start(idb, vemArInloggad).setVisible(true);
+            new Start(idb).setVisible(true);
 
         }   catch (InfException ex){
             Logger.getLogger(Startklass.class.getName()).log(Level.SEVERE, null, ex);

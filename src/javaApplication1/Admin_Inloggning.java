@@ -17,7 +17,7 @@ public class Admin_Inloggning extends javax.swing.JFrame {
     public Admin_Inloggning(InfDB idb, inloggningValidering vemArInloggad){
         initComponents();
         this.idb = idb;
-        this.vemArInloggad = vemArInloggad;
+        this.vemArInloggad = new inloggningValidering();
     }
 
     @SuppressWarnings("unchecked")

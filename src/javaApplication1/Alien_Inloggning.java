@@ -17,7 +17,7 @@ public class Alien_Inloggning extends javax.swing.JFrame {
     public Alien_Inloggning(InfDB idb, inloggningValidering vemArInloggad){
         initComponents();
         this.idb = idb;
-        vemArInloggad = new inloggningValidering();
+        this.vemArInloggad = new inloggningValidering();
         
     }
 
@@ -147,44 +147,45 @@ public class Alien_Inloggning extends javax.swing.JFrame {
      
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
       
-        
-        boolean godkandLosen = false;
-        
-        // 1. Läsa av text i ID
-        
+        if(Validering.personFinns(txtUser) && Validering.finnsLosenord(txtPassword)){
+        boolean godkandUser = false;
+        boolean godkandLosenord = false;
+          
         String user = txtUser.getText();
-        
-        // 2. Läsa av text i Lösenord
-        
         String password = txtPassword.getText();
         System.out.println("Lösenordet inskrivet i rutan: " + password);
-        
-        String fraga = "SELECT losenord FROM Alien where Alien_id =" + user;
-        
-        
-        try {
-            String svar = idb.fetchSingle(fraga);
-            System.out.println("svaret på SQL-frågan: " + svar);
-            
-            
-            if(password.equals(svar)){
-                
-                godkandLosen = true;
-                System.out.println(godkandLosen);
-                this.dispose();
-                new Alien(idb, vemArInloggad).setVisible(true);
+        try{
+        String fraga1 = "SELECT Namn FROM alien where Namn like '"+user+"';";
+           String giltigUser = idb.fetchSingle(fraga1);
+           String fraga2 = "SELECT Losenord FROM alien where Namn like '" + giltigUser + "';";
+           String giltigLosenord = idb.fetchSingle(fraga2);
+    
+             if(user.equals(giltigUser)){
+                 godkandUser = true;
+                 if(password.equals(giltigLosenord)){
+                  godkandLosenord = true;
+                }
+                else {
+                JOptionPane.showMessageDialog(null, "Lösenord är felaktigt för valt id");
+                }
             }
-        else {
-                JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
-            }
+            else{
+                 JOptionPane.showMessageDialog(null, "Användare ej hittat.");
+             }
+             if(godkandUser && godkandLosenord){
+             String fraga3 = "SELECT Alien_ID from alien where Namn like '" + giltigUser+ "';";
+                 String userID = idb.fetchSingle(fraga3);
+                 int giltigtID = Integer.parseInt(userID);
+                vemArInloggad.inloggadSom(giltigUser, giltigtID, giltigLosenord);
+                JOptionPane.showMessageDialog(this, "User: " + giltigUser + ", lösenord: " + giltigLosenord + ", med id: " + giltigtID);
+                    new Alien(idb, vemArInloggad).setVisible(true);
+             }
         
             
         } catch (InfException ex) {
             Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    
-     
+        }
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed

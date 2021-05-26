@@ -19,7 +19,7 @@ public class Validering {
         resultat = true;
 
         if (enPerson.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "person fel");
+            JOptionPane.showMessageDialog(null, "Ingen användare inskrivet");
             resultat = false;    
         }
         return resultat;
@@ -29,7 +29,7 @@ public class Validering {
         resultat = true;
 
         if (ettLosenord.getPassword().length == 0) {
-            JOptionPane.showMessageDialog(null, "Rutan är tom!");
+            JOptionPane.showMessageDialog(null, "Inget lösenord inskrivet");
             resultat = false;
         }
         System.out.println(resultat);

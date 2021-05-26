@@ -23,10 +23,9 @@ public class Start extends javax.swing.JFrame {
     /**
      * Creates new form Start
      */
-    public Start(InfDB idb, inloggningValidering vemArInloggad) {
+    public Start(InfDB idb) {
         initComponents();
         this.idb = idb;
-        this.vemArInloggad = vemArInloggad;
         
     }
 
