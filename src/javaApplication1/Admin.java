@@ -42,7 +42,6 @@ public class Admin extends javax.swing.JFrame {
         btnUtrustning = new javax.swing.JButton();
         btnAgent = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,13 +75,6 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel2.setText("Ändra lösenord");
 
-        jButton1.setText("Logga ut");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,16 +89,12 @@ public class Admin extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(54, 54, 54))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnAgent)
-                        .addComponent(btnUtrustning)
-                        .addComponent(btnAliens)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgent)
+                    .addComponent(btnUtrustning)
+                    .addComponent(btnAliens)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -124,9 +112,7 @@ public class Admin extends javax.swing.JFrame {
                 .addComponent(btnAgent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(20, 20, 20)
-                .addComponent(jButton1)
-                .addGap(31, 31, 31))
+                .addGap(80, 80, 80))
         );
 
         jLabel3.getAccessibleContext().setAccessibleName("Inloggad som Administratör");
@@ -159,12 +145,6 @@ public class Admin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAgentActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        new Start(idb).setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -174,7 +154,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JButton btnAgent;
     private javax.swing.JButton btnAliens;
     private javax.swing.JButton btnUtrustning;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
