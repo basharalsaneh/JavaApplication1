@@ -34,8 +34,12 @@ public class Alien_Inloggning extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
+<<<<<<< HEAD
         labelAndraLosen = new javax.swing.JLabel();
         btnTillbaka = new javax.swing.JButton();
+=======
+        jButton1 = new javax.swing.JButton();
+>>>>>>> 13d2afa8022ea3ae9288fd303aac38babbc42a0e
 
         jLabel4.setText("jLabel4");
 
@@ -71,18 +75,10 @@ public class Alien_Inloggning extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Alien inloggning");
 
-        labelAndraLosen.setText("Ska tas bort (ändra lösenord)");
-        labelAndraLosen.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                labelAndraLosenFocusGained(evt);
-            }
-        });
-        labelAndraLosen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labelAndraLosenMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                labelAndraLosenMouseExited(evt);
+        jButton1.setText("Tillbaka");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -98,11 +94,12 @@ public class Alien_Inloggning extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+<<<<<<< HEAD
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnTillbaka)
@@ -122,6 +119,24 @@ public class Alien_Inloggning extends javax.swing.JFrame {
                                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(14, 14, 14)))
+=======
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(buttonLogin)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(31, 31, 31))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton1)
+                                            .addComponent(jLabel3))
+                                        .addGap(21, 21, 21)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(63, 63, 63)))
+>>>>>>> 13d2afa8022ea3ae9288fd303aac38babbc42a0e
                 .addGap(82, 82, 82))
         );
         layout.setVerticalGroup(
@@ -142,6 +157,7 @@ public class Alien_Inloggning extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+<<<<<<< HEAD
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonLogin)
@@ -149,6 +165,13 @@ public class Alien_Inloggning extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(labelAndraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(141, Short.MAX_VALUE))
+=======
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonLogin)
+                    .addComponent(jButton1))
+                .addContainerGap(34, Short.MAX_VALUE))
+>>>>>>> 13d2afa8022ea3ae9288fd303aac38babbc42a0e
         );
 
         pack();
@@ -208,54 +231,38 @@ public class Alien_Inloggning extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
-    private void labelAndraLosenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelAndraLosenMouseClicked
-//        SKA TAS BORT? OCH ÄNDRA LÖSENORD SKA VARA MÖJLIGT FRÅN RESPEKTIVE INLOGGNINGSSIDA ???
-//          try {
-//            // TODO add your handling code here:
-//            
-//            dispose();
-//            BytaLosenord bytLosen = new BytaLosenord(idb, vemArInloggad);
-//            bytLosen.setVisible(true);
-//        } catch (Exception ex) {
-//            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_labelAndraLosenMouseClicked
-
-    private void labelAndraLosenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_labelAndraLosenFocusGained
-        // TODO add your handling code here:
-        
-       
-    }//GEN-LAST:event_labelAndraLosenFocusGained
-
-    private void labelAndraLosenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelAndraLosenMouseExited
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_labelAndraLosenMouseExited
-
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
        // Ingen kod här än. Lägg till metoden som loggar in vald person.
     }//GEN-LAST:event_txtPasswordKeyPressed
 
+<<<<<<< HEAD
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         // TODO add your handling code here:
         
         this.dispose();
         new Start(idb).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
+=======
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Start(idb).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+>>>>>>> 13d2afa8022ea3ae9288fd303aac38babbc42a0e
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton buttonLogin;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel labelAndraLosen;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
