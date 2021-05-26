@@ -187,7 +187,7 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-              new BytaLosenord(idb, vemArInloggad).setVisible(true);
+              new BytaLosenordAlien(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonVisaOmradeChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVisaOmradeChefActionPerformed
