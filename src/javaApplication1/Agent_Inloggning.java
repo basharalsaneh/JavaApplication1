@@ -5,6 +5,7 @@
  */
 package javaApplication1;
 
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -52,6 +53,12 @@ public class Agent_Inloggning extends javax.swing.JFrame {
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
+            }
+        });
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
             }
         });
 
@@ -171,6 +178,15 @@ public class Agent_Inloggning extends javax.swing.JFrame {
         this.dispose();
         new Start(idb).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            
+            loggaInSomAgent();
+            
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     /**
      * @param args the command line arguments
