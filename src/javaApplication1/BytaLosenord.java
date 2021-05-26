@@ -5,6 +5,7 @@
  */
 package javaApplication1;
 
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -42,14 +43,11 @@ public class BytaLosenord extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtUser = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        buttonAndraLosenord = new javax.swing.JButton();
         passNytt = new javax.swing.JPasswordField();
         passNuvarande = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
-        buttonhej = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,23 +55,14 @@ public class BytaLosenord extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Byta lösenord");
 
-        jLabel2.setText("Användarnamn");
-
         jLabel3.setText("Nuvarande lösenord");
-
-        buttonAndraLosenord.setText("OK");
-        buttonAndraLosenord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAndraLosenordActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Nytt lösenord");
 
-        buttonhej.setText("Visa namnet på valt ID");
-        buttonhej.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Spara");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonhejActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -83,103 +72,76 @@ public class BytaLosenord extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(buttonAndraLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(passNytt, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                            .addComponent(passNuvarande)))
+                    .addComponent(jButton1)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4))
-                            .addGap(39, 39, 39)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtUser)
-                                .addComponent(passNytt, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                                .addComponent(passNuvarande))))
-                    .addComponent(buttonhej, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(62, 62, 62)))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(passNuvarande, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passNytt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addComponent(buttonAndraLosenord)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonhej)
-                .addGap(33, 33, 33))
+                .addGap(30, 30, 30)
+                .addComponent(jButton1)
+                .addGap(82, 82, 82))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonAndraLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAndraLosenordActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String ID = txtUser.getText();
-        String nuvarandeLosenord = passNuvarande.getText();
-        String nyttLosenord = passNytt.getText();
-        int hamtatID = vemArInloggad.getId();
-        
-        if (Validering.personFinns(txtUser)) {
-            if (Validering.finnsLosenord(passNuvarande)) {
-                if (Validering.finnsLosenord(passNytt))
-         try{
-            String namnFraga = "Select Namn from agent where Agent_ID =" + hamtatID + ";";
-            String losenordFraga = "Select Losenord from agent where Agent_ID =" + hamtatID + ";";
-            String giltigtNamn = idb.fetchSingle(namnFraga);
-            String giltigtLosenord = idb.fetchSingle(losenordFraga);
-            String fraga = "UPDATE agent SET Losenord =" +nyttLosenord+ "where "
-                   + "Agent_ID = "+hamtatID+" and Losenord = "+nuvarandeLosenord+";";
-            if(giltigtNamn.equals(vemArInloggad.getNamn())){
-            if(giltigtLosenord.equals(nuvarandeLosenord)){
-//           statement = connection1.prepareStatement(fraga);
-//           statement.setString(1, nyttLosenord);
-//           statement.executeUpdate();
-            idb.update(fraga);
-           JOptionPane.showMessageDialog(this, "nuvarande lösenord:" + giltigtLosenord + ", bytt till:" + nyttLosenord);
-           txtUser.setText("");
-           txtUser.requestFocus();
-           passNuvarande.setText("");
-           passNytt.setText("");
-            }}
-         else
-            {
-            JOptionPane.showMessageDialog(this, "Skriv in rätt id först.");
-            }} catch (InfException ex) {
-                    Logger.getLogger(BytaLosenord.class.getName()).log(Level.SEVERE, null, ex);
-                }}}
+            if(Validering.personFinns(passNuvarande) 
+                && Validering.personFinns(passNytt)
+                ){
+            try{
+                char[] losenordArray = passNuvarande.getPassword();
+                String gammalLosenord = new String(losenordArray);
 
-        
-     
-        
-    }//GEN-LAST:event_buttonAndraLosenordActionPerformed
+                char[] nyttLosenordArray = passNytt.getPassword();
+                String nyttLosenord = new String(nyttLosenordArray);
 
-    private void buttonhejActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonhejActionPerformed
-        try {
-            // TODO add your handling code here:
-            String namnFraga = "Select Namn from alien where Alien_ID =" + hamtatID + ";";
-            String namnet = idb.fetchSingle(namnFraga);
-            JOptionPane.showMessageDialog(this, namnet);
-        } catch (InfException ex) {
-            Logger.getLogger(BytaLosenord.class.getName()).log(Level.SEVERE, null, ex);
+                String query = "SELECT losenord FROM agent WHERE agent_id =" + "'" + vemArInloggad.getId() + "'";
+                String result = idb.fetchSingle(query);
+
+                if(gammalLosenord.equals(result)){
+                    String qSetPassword = "UPDATE agent SET losenord =" + "'" + nyttLosenord + "'" + "WHERE agent_id = " + "'" + vemArInloggad.getId() + "'";
+                    idb.update(qSetPassword);
+                     JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
+                }
+                else{
+                    passNuvarande.requestFocus();
+                    JOptionPane.showMessageDialog(this, "Ditt lösenord är felaktigt!");
+                }
+    
+            }
+            catch (InfException ex){
+                System.out.println("Databasfel" + ex.getMessage());
+            }
+            catch (Exception ex){
+                System.out.println("Random fel" + ex.getMessage());
+            }
         }
-        
-
-    }//GEN-LAST:event_buttonhejActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,14 +179,11 @@ public class BytaLosenord extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAndraLosenord;
-    private javax.swing.JButton buttonhej;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField passNuvarande;
     private javax.swing.JPasswordField passNytt;
-    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }
