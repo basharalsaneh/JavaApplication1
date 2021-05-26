@@ -5,12 +5,8 @@
  */
 package javaApplication1;
 
-<<<<<<< Updated upstream
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
-=======
->>>>>>> Stashed changes
 import oru.inf.InfDB;
 
 /**
@@ -18,22 +14,19 @@ import oru.inf.InfDB;
  * @author kristofffer
  */
 public class Admin extends javax.swing.JFrame {
-<<<<<<< Updated upstream
-    InfDB idb;
-    inloggningValidering vemArInloggad;
-=======
+
     private InfDB idb;
     inloggningValidering inloggadSom;
->>>>>>> Stashed changes
+
     /**
      * Creates new form Admin
      * @param idb
      * @param vemArInloggad
      */
-    public Admin(InfDB idb, inloggningValidering vemArInloggad) {
+    public Admin(InfDB idb, inloggningValidering inloggadSom) {
         initComponents();
         this.idb = idb;
-        this.vemArInloggad = vemArInloggad;
+        this.inloggadSom = inloggadSom;
     }
 
     /**
@@ -172,7 +165,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.dispose();
-        new Hantera_Utrustning(idb, vemArInloggad).setVisible(true);
+        new Hantera_Utrustning(idb, inloggadSom).setVisible(true);
         
     }//GEN-LAST:event_btnUtrustningActionPerformed
 
@@ -180,7 +173,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.dispose();
-        new Hantera_Aliens(idb, vemArInloggad).setVisible(true);
+        new Hantera_Aliens(idb, inloggadSom).setVisible(true);
         
     }//GEN-LAST:event_btnAliensActionPerformed
 
@@ -188,26 +181,22 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.dispose();
-<<<<<<< Updated upstream
-        new Hantera_Agenter(idb, vemArInloggad).setVisible(true);
-=======
         new Registrera_Agenter(idb, inloggadSom).setVisible(true);
->>>>>>> Stashed changes
         
     }//GEN-LAST:event_btnRegistreraAgenterActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Du loggas nu ut som: " + vemArInloggad.getNamn());
+        JOptionPane.showMessageDialog(this, "Du loggas nu ut som: " + inloggadSom.getNamn());
         this.dispose();
         new Start(idb).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLosenordActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " + vemArInloggad.getNamn());
+        JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " + inloggadSom.getNamn());
         this.dispose();
-        new BytaLosenord(idb, vemArInloggad).setVisible(true);
+        new BytaLosenord(idb, inloggadSom).setVisible(true);
     }//GEN-LAST:event_btnBytLosenordActionPerformed
 
     /**
