@@ -31,7 +31,7 @@ public class Validering {
         resultat = true;
 
         if (ettLosenord.getPassword().length == 0) {
-            JOptionPane.showMessageDialog(null, "Inget lösenord inskrivet   ");
+            JOptionPane.showMessageDialog(null, "Inget lösenord inskrivet");
             resultat = false;
         }
         System.out.println(resultat);

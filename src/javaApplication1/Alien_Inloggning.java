@@ -35,7 +35,6 @@ public class Alien_Inloggning extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
-        labelAndraLosen = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         jLabel4.setText("jLabel4");
@@ -72,21 +71,6 @@ public class Alien_Inloggning extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Alien inloggning");
 
-        labelAndraLosen.setText("Ska tas bort (ändra lösenord)");
-        labelAndraLosen.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                labelAndraLosenFocusGained(evt);
-            }
-        });
-        labelAndraLosen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labelAndraLosenMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                labelAndraLosenMouseExited(evt);
-            }
-        });
-
         jButton1.setText("Gå tillbaka");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,19 +93,17 @@ public class Alien_Inloggning extends javax.swing.JFrame {
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(buttonLogin))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labelAndraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(80, 80, 80))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(109, 109, 109)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(80, 80, 80))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(109, 109, 109)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(14, 14, 14)))
                 .addGap(82, 82, 82))
         );
@@ -147,9 +129,7 @@ public class Alien_Inloggning extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(labelAndraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         pack();
@@ -180,10 +160,10 @@ public class Alien_Inloggning extends javax.swing.JFrame {
     
              if(user.equals(giltigUser)){
                  godkandUser = true;
-                 JOptionPane.showMessageDialog(this, giltigUser);
+                 JOptionPane.showMessageDialog(this, giltigUser);   // Bara för att förtydliga att det funkar
                  if(password.equals(giltigLosenord)){
                   godkandLosenord = true;
-                  JOptionPane.showMessageDialog(this, giltigLosenord);
+                  JOptionPane.showMessageDialog(this, giltigLosenord); // Bara för att förtydliga att det funkar
                 }
                 else {
                 JOptionPane.showMessageDialog(null, "Lösenord är felaktigt för valt id");
@@ -212,30 +192,6 @@ public class Alien_Inloggning extends javax.swing.JFrame {
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
-
-    private void labelAndraLosenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelAndraLosenMouseClicked
-//        SKA TAS BORT? OCH ÄNDRA LÖSENORD SKA VARA MÖJLIGT FRÅN RESPEKTIVE INLOGGNINGSSIDA ???
-//          try {
-//            // TODO add your handling code here:
-//            
-//            dispose();
-//            BytaLosenord bytLosen = new BytaLosenord(idb, vemArInloggad);
-//            bytLosen.setVisible(true);
-//        } catch (Exception ex) {
-//            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_labelAndraLosenMouseClicked
-
-    private void labelAndraLosenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_labelAndraLosenFocusGained
-        // TODO add your handling code here:
-        
-       
-    }//GEN-LAST:event_labelAndraLosenFocusGained
-
-    private void labelAndraLosenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelAndraLosenMouseExited
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_labelAndraLosenMouseExited
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
@@ -305,7 +261,6 @@ public class Alien_Inloggning extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel labelAndraLosen;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables

@@ -124,8 +124,8 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-            if(Validering.personFinns(passNuvarande) 
-                && Validering.personFinns(passNytt)
+            if(Validering.finnsLosenord(passNuvarande) 
+                && Validering.finnsLosenord(passNytt)
                 ){
             try{
                 char[] losenordArray = passNuvarande.getPassword();
@@ -138,9 +138,15 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
                 String resultat = idb.fetchSingle(fraga);
 
                 if(gammalLosenord.equals(resultat)){
+//                    if(nyttLosenord.length() < 9){ // La till detta pga att lösenordet får ej vara för långt.
                     String qSetPassword = "UPDATE alien SET losenord =" + "'" + nyttLosenord + "'" + "WHERE alien_id = " + "'" + vemArInloggad.getId() + "'";
                     idb.update(qSetPassword);
                      JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
+//                }
+//                    else{ // AVMARKERA DE TOTALT 6 RADER KOMMENTERARIFALL NI  FÅR FELMEDDELANDE OM "DATA TOO LONG"
+//                        passNytt.requestFocus();  // VET INTE VART GRÄNSEN GÅR VID nyttLosenord.length()....
+//                        JOptionPane.showMessageDialog(this, "Tyvärr för långt lösenord, prova med ett kortare");
+//                    }
                 }
                 else{
                     passNuvarande.requestFocus();
