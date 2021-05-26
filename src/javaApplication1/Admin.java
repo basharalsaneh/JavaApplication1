@@ -42,8 +42,8 @@ public class Admin extends javax.swing.JFrame {
         btnAliens = new javax.swing.JButton();
         btnUtrustning = new javax.swing.JButton();
         btnAgent = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        btnBytLosenord = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,12 +75,17 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Ändra lösenord");
-
         jButton1.setText("Logga ut");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnBytLosenord.setText("Ändra lösenord");
+        btnBytLosenord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBytLosenordActionPerformed(evt);
             }
         });
 
@@ -96,17 +101,17 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(54, 54, 54))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAgent)
                             .addComponent(btnUtrustning)
                             .addComponent(btnAliens)
                             .addComponent(jLabel1))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBytLosenord)
+                        .addGap(39, 39, 39))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,8 +128,8 @@ public class Admin extends javax.swing.JFrame {
                 .addComponent(btnAgent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(btnBytLosenord))
                 .addGap(75, 75, 75))
         );
 
@@ -165,6 +170,13 @@ public class Admin extends javax.swing.JFrame {
         new Start(idb).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLosenordActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " + vemArInloggad.getNamn());
+        this.dispose();
+        new BytaLosenord(idb, vemArInloggad).setVisible(true);
+    }//GEN-LAST:event_btnBytLosenordActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -173,10 +185,10 @@ public class Admin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgent;
     private javax.swing.JButton btnAliens;
+    private javax.swing.JButton btnBytLosenord;
     private javax.swing.JButton btnUtrustning;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

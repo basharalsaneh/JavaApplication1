@@ -78,7 +78,7 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
         jScrollPane1 = new javax.swing.JScrollPane();
         UtrustningRS = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        brnLoggaUt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,10 +109,10 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
 
         jLabel2.setText("Din utrustning:");
 
-        jButton1.setText("Logga ut");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        brnLoggaUt.setText("Logga ut");
+        brnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                brnLoggaUtActionPerformed(evt);
             }
         });
 
@@ -133,7 +133,7 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
                                 .addGap(45, 45, 45)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(brnLoggaUt)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,7 +166,7 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
                         .addGap(33, 33, 33))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(brnLoggaUt, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -179,7 +179,7 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "Du transporteras nu till att byta lösenord.");
         this.dispose();
-        new BytaLosenord(idb).setVisible(true);
+        new BytaLosenord(idb, vemArInloggad).setVisible(true);
         
     }//GEN-LAST:event_btnBytLosenordActionPerformed
 
@@ -189,12 +189,12 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
         new Registrera_Utrustning(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_btnUtrustningActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void brnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnLoggaUtActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "Du loggas nu ut som: " + vemArInloggad.getNamn());
         this.dispose();
         new Start(idb).setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_brnLoggaUtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,11 +226,11 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea UtrustningRS;
+    private javax.swing.JButton brnLoggaUt;
     private javax.swing.JButton btnAliens;
     private javax.swing.JButton btnBytLosenord;
     private javax.swing.JButton btnOmrade;
     private javax.swing.JButton btnUtrustning;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

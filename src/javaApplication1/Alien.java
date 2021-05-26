@@ -80,7 +80,7 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         buttonVisaOmradeChef = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnLoggaUt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,10 +111,10 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
             }
         });
 
-        jButton2.setText("Logga ut");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnLoggaUt.setText("Logga ut");
+        btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnLoggaUtActionPerformed(evt);
             }
         });
 
@@ -135,7 +135,7 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
                             .addGap(60, 60, 60)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton2)
+                                    .addComponent(btnLoggaUt)
                                     .addGap(59, 59, 59)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
@@ -160,7 +160,7 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnLoggaUt))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
@@ -186,15 +186,8 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
     }//GEN-LAST:event_txtOmradeChefActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  
-         try {
-   
-            dispose();
-            BytaLosenord bytLosen = new BytaLosenord(idb);
-            bytLosen.setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.dispose();
+              new BytaLosenord(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonVisaOmradeChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVisaOmradeChefActionPerformed
@@ -203,17 +196,17 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
         // Här vill vi visa områdeschef i txt: txtOmradeChef.setText();
     }//GEN-LAST:event_buttonVisaOmradeChefActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "Du loggas nu ut som: " + vemArInloggad.getNamn());
         this.dispose();
         new Start(idb).setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton buttonVisaOmradeChef;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
