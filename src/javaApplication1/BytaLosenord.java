@@ -21,13 +21,15 @@ public class BytaLosenord extends javax.swing.JFrame {
     static inloggningValidering vemArInloggad;
     /**
      * Creates new form BytaLosenord
+     * @param idb
+     * @param vemArInloggad
      */
     public BytaLosenord(InfDB idb, inloggningValidering vemArInloggad) {
         initComponents();
-        this.idb = idb;
-        this.hamtatID = Integer.parseInt(hamtatIDString);
+        BytaLosenord.idb = idb;
+        //this.hamtatID = Integer.parseInt(hamtatIDString);
         JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " +vemArInloggad.getNamn());
-        this.vemArInloggad = vemArInloggad;
+        BytaLosenord.vemArInloggad = vemArInloggad;
     }
 
     /**
@@ -136,12 +138,12 @@ public class BytaLosenord extends javax.swing.JFrame {
             if (Validering.finnsLosenord(passNuvarande)) {
                 if (Validering.finnsLosenord(passNytt))
          try{
-            String namnFraga = "Select Namn from alien where Alien_ID =" + hamtatID + ";";
-            String losenordFraga = "Select Losenord from alien where Alien_ID =" + hamtatID + ";";
+            String namnFraga = "Select Namn from agent where Agent_ID =" + hamtatID + ";";
+            String losenordFraga = "Select Losenord from agent where Agent_ID =" + hamtatID + ";";
             String giltigtNamn = idb.fetchSingle(namnFraga);
             String giltigtLosenord = idb.fetchSingle(losenordFraga);
-            String fraga = "UPDATE alien SET Losenord =" +nyttLosenord+ "where "
-                   + "Alien_ID = "+hamtatID+" and Losenord = "+nuvarandeLosenord+";";
+            String fraga = "UPDATE agent SET Losenord =" +nyttLosenord+ "where "
+                   + "Agent_ID = "+hamtatID+" and Losenord = "+nuvarandeLosenord+";";
             if(giltigtNamn.equals(vemArInloggad.getNamn())){
             if(giltigtLosenord.equals(nuvarandeLosenord)){
 //           statement = connection1.prepareStatement(fraga);

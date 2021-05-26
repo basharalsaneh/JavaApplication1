@@ -129,6 +129,7 @@ public class Start extends javax.swing.JFrame {
             
             new Agent_Inloggning(idb).setVisible(true);
             this.dispose();
+            
        
        
     }//GEN-LAST:event_buttonAgentActionPerformed

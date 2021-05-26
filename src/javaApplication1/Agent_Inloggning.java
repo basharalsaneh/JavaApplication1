@@ -21,6 +21,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
     inloggningValidering vemArInloggad;
     /**
      * Creates new form Agent_Inloggning
+     * @param idb
      */
     public Agent_Inloggning(InfDB idb){
         initComponents();
@@ -161,6 +162,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        this.dispose();
         loggaInSomAgent();
     }//GEN-LAST:event_btnLoginActionPerformed
 

@@ -20,6 +20,8 @@ public class Admin extends javax.swing.JFrame {
     inloggningValidering vemArInloggad;
     /**
      * Creates new form Admin
+     * @param idb
+     * @param vemArInloggad
      */
     public Admin(InfDB idb, inloggningValidering vemArInloggad) {
         initComponents();
