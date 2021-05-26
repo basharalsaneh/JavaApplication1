@@ -37,7 +37,7 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
     minaUtrustning();
 }
 
-    public void minaUtrustning() {
+    private void minaUtrustning() {
         try {
             String fraga
                     = "SELECT benamning\n"
