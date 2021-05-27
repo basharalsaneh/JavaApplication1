@@ -63,6 +63,12 @@ inloggningValidering vemArInloggad = null;
 
         jLabel3.setText("Vilka agenter ansvarar för flest aliens inom område:");
 
+        txtOmradesChef1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOmradesChef1ActionPerformed(evt);
+            }
+        });
+
         txtAreaVisaInfo.setColumns(20);
         txtAreaVisaInfo.setRows(5);
         jScrollPane1.setViewportView(txtAreaVisaInfo);
@@ -92,8 +98,8 @@ inloggningValidering vemArInloggad = null;
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtOmradesChef1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(161, 161, 161)
+                            .addComponent(txtOmradesChef1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(78, 78, 78)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -109,15 +115,13 @@ inloggningValidering vemArInloggad = null;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(29, 29, 29))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtOmradesChef1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21))))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9))
+                    .addComponent(txtOmradesChef1))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,9 +187,34 @@ inloggningValidering vemArInloggad = null;
         catch (Exception ettUndantag) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
-        }      
+        }   
+    
+        txtOmradesChef1.setText("");
+
+            try {
+                String valdSektion = cbValjaOmradesNamn.getSelectedItem().toString();
+                String fraga2 = "SELECT namn, telefon FROM Agent \n"
+                        + "JOIN omradeschef oc USING (Agent_ID) \n"
+                        + "JOIN Omrade o ON oc.Omrade = o.Omrades_ID \n"
+                        + "WHERE o.Benamning = " + "'" + valdSektion + "'";
+
+                HashMap<String, String> OmradesChef = idb.fetchRow(fraga2);
+                String namn = OmradesChef.get("namn");
+
+                txtOmradesChef1.setText(namn);
+
+            } catch (InfException ex) {
+                System.out.println("Databasfel" + ex.getMessage());
+            } catch (Exception ex) {
+                System.out.println("Random fel" + ex.getMessage());
+            }
         
     }//GEN-LAST:event_cbValjaOmradesNamnActionPerformed
+
+    private void txtOmradesChef1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOmradesChef1ActionPerformed
+        // TODO add your handling code here:
+    
+    }//GEN-LAST:event_txtOmradesChef1ActionPerformed
 
     /**
      * @param args the command line arguments
