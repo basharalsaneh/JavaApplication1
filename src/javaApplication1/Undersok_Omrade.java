@@ -16,8 +16,10 @@ import oru.inf.InfException;
  * @author Marcu
  */
 public class Undersok_Omrade extends javax.swing.JFrame {
-InfDB idb;
-inloggningValidering vemArInloggad = null;
+
+    InfDB idb;
+    inloggningValidering vemArInloggad = null;
+
     /**
      * Creates new form Undersok_Omrade
      */
@@ -131,31 +133,29 @@ inloggningValidering vemArInloggad = null;
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-        private void fyllcbValjaOmradesNamn() {
+    private void fyllcbValjaOmradesNamn() {
         String fraga = "SELECT Benamning from omrade";
 
         ArrayList<String> allaOmradesNamn;
-        
+
         try {
-            
+
             allaOmradesNamn = idb.fetchColumn(fraga);
 
             for (String namn : allaOmradesNamn) {
                 cbValjaOmradesNamn.addItem(namn);
-            }            
-            
+            }
+
         } catch (InfException ettUndantag) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
-        }
-        
-        catch (Exception ettUndantag) {
+        } catch (Exception ettUndantag) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
         }
 
     }
-        
+
     private void cbValjaOmradesNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbValjaOmradesNamnActionPerformed
         // TODO add your handling code here:
 
@@ -165,12 +165,12 @@ inloggningValidering vemArInloggad = null;
 
         try {
             String valdSektion = cbValjaOmradesNamn.getSelectedItem().toString();
-            String fraga = "SELECT Agent_ID, Agent.Namn, count(Agent_ID) FROM Agent\n" +
-                           "join Alien on Agent.Agent_ID= Alien.Ansvarig_Agent\n"+
-                           "join omrade on Alien.plats = Omrade.Omrades_ID\n" +
-                           "where Omrade =(SELECT Omrades_ID FROM Omrade WHERE Benamning = '" + valdSektion + "')\n" +
-                           "group by Agent_ID\n" +
-                           "order by count(Ansvarig_Agent) DESC limit 3";
+            String fraga = "SELECT Agent_ID, Agent.Namn, count(Agent_ID) FROM Agent\n"
+                    + "join Alien on Agent.Agent_ID= Alien.Ansvarig_Agent\n"
+                    + "join omrade on Alien.plats = Omrade.Omrades_ID\n"
+                    + "where Omrade =(SELECT Omrades_ID FROM Omrade WHERE Benamning = '" + valdSektion + "')\n"
+                    + "group by Agent_ID\n"
+                    + "order by count(Ansvarig_Agent) DESC limit 3";
             soktaAgenter = idb.fetchRows(fraga);
 
             soktaAgenter.stream().map(Agent -> {
@@ -183,43 +183,41 @@ inloggningValidering vemArInloggad = null;
         } catch (InfException ettUndantag) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
-        } 
-        catch (Exception ettUndantag) {
+        } catch (Exception ettUndantag) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
-        }   
-    
+        }
+
         txtOmradesChef1.setText("");
 
-            try {
-                String valdSektion = cbValjaOmradesNamn.getSelectedItem().toString();
-                String fraga2 = "SELECT namn, telefon FROM Agent \n"
-                        + "JOIN omradeschef oc USING (Agent_ID) \n"
-                        + "JOIN Omrade o ON oc.Omrade = o.Omrades_ID \n"
-                        + "WHERE o.Benamning = " + "'" + valdSektion + "'";
+        try {
+            String valdSektion = cbValjaOmradesNamn.getSelectedItem().toString();
+            String fraga2 = "SELECT namn, telefon FROM Agent \n"
+                    + "JOIN omradeschef USING (Agent_ID) \n"
+                    + "JOIN Omrade ON omradeschef.Omrade = Omrade.Omrades_ID \n"
+                    + "WHERE Omrade.Benamning = " + "'" + valdSektion + "'";
 
-                HashMap<String, String> OmradesChef = idb.fetchRow(fraga2);
-                String namn = OmradesChef.get("namn");
+            HashMap<String, String> OmradesChef = idb.fetchRow(fraga2);
+            String namn = OmradesChef.get("namn");
 
-                txtOmradesChef1.setText(namn);
+            txtOmradesChef1.setText(namn);
 
-            } catch (InfException ex) {
-                System.out.println("Databasfel" + ex.getMessage());
-            } catch (Exception ex) {
-                System.out.println("Random fel" + ex.getMessage());
-            }
-        
+        } catch (InfException ex) {
+            System.out.println("Databasfel" + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Random fel" + ex.getMessage());
+        }
+
     }//GEN-LAST:event_cbValjaOmradesNamnActionPerformed
 
     private void txtOmradesChef1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOmradesChef1ActionPerformed
         // TODO add your handling code here:
-    
+
     }//GEN-LAST:event_txtOmradesChef1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbValjaOmradesNamn;
