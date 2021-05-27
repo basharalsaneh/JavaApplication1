@@ -67,6 +67,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         txtHämtaAgent = new javax.swing.JTextField();
         agentCombo = new javax.swing.JComboBox<>();
         visaAllaAgenter = new javax.swing.JToggleButton();
+        goBackButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -248,26 +249,33 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             }
         });
 
+        goBackButton.setText("Gå tillbaka");
+        goBackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goBackButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(txtHämtaAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(hämtaAgentInfoButton)
-                        .addGap(56, 56, 56)
-                        .addComponent(visaAllaAgenter)
-                        .addGap(33, 33, 33)
-                        .addComponent(agentCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(24, 24, 24)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(txtHämtaAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(hämtaAgentInfoButton)
+                .addGap(56, 56, 56)
+                .addComponent(visaAllaAgenter)
+                .addGap(33, 33, 33)
+                .addComponent(agentCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(goBackButton)
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +285,8 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                     .addComponent(txtHämtaAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hämtaAgentInfoButton)
                     .addComponent(agentCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(visaAllaAgenter))
+                    .addComponent(visaAllaAgenter)
+                    .addComponent(goBackButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78))
@@ -486,6 +495,12 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         
     }//GEN-LAST:event_visaAllaAgenterActionPerformed
 
+    private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Admin(idb, InloggadSom).setVisible(true);
+    }//GEN-LAST:event_goBackButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -496,6 +511,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> agentCombo;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonRensaData;
+    private javax.swing.JToggleButton goBackButton;
     private javax.swing.JButton hämtaAgentInfoButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

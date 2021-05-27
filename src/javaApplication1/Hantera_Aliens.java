@@ -1,30 +1,16 @@
 package javaApplication1;
 
-//import com.mysql.cj.jdbc.result.ResultSetMetaData;
-//import java.sql.Statement;
-//import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import oru.inf.InfException;
-//import java.sql.Connection;
-//import java.sql.SQLException;
-//import java.sql.DriverManager;
-//import javax.swing.JOptionPane;
-//import java.sql.ResultSet;
 import java.util.ArrayList;
-//import java.util.Date;
 import java.util.HashMap;
-//import java.util.Vector;
-//import javax.swing.table.DefaultTableModel;
 import oru.inf.InfDB;
 
 public class Hantera_Aliens extends javax.swing.JFrame {
    
-     private static InfDB idb;
-//        Connection connection1;
-//        PreparedStatement statement;
-//        Statement createStatement;
-        static inloggningValidering vemArInloggad;
+    InfDB idb;
+    inloggningValidering vemArInloggad;
   
     public Hantera_Aliens(InfDB idb, inloggningValidering vemArInloggad){
         initComponents();
@@ -80,6 +66,7 @@ public class Hantera_Aliens extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtListaAliens = new javax.swing.JTextArea();
         btnListaAliens = new javax.swing.JButton();
+        goBackButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -311,6 +298,13 @@ public class Hantera_Aliens extends javax.swing.JFrame {
             }
         });
 
+        goBackButton.setText("Gå Tillbaka");
+        goBackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goBackButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -320,9 +314,6 @@ public class Hantera_Aliens extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,7 +333,12 @@ public class Hantera_Aliens extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtDatum2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2))))))
+                                        .addComponent(jButton2))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(goBackButton))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -356,12 +352,14 @@ public class Hantera_Aliens extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(buttonListaAliens, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(92, 92, 92)))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(goBackButton))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -778,6 +776,13 @@ public class Hantera_Aliens extends javax.swing.JFrame {
              Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
          }
     }//GEN-LAST:event_btnListaAliensActionPerformed
+
+    private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Admin(idb, vemArInloggad).setVisible(true);
+        
+    }//GEN-LAST:event_goBackButtonActionPerformed
        
    
 
@@ -790,6 +795,7 @@ public class Hantera_Aliens extends javax.swing.JFrame {
     private javax.swing.JButton buttonListaAll;
     private javax.swing.JButton buttonRensaData;
     private javax.swing.JButton buttonTaBortUtrustning;
+    private javax.swing.JToggleButton goBackButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
