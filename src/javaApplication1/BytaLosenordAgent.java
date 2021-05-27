@@ -8,6 +8,7 @@ package javaApplication1;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javaApplication1.BytaLosenordAlien.vemArInloggad;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -140,6 +141,7 @@ public class BytaLosenordAgent extends javax.swing.JFrame {
                 if(gammalLosenord.equals(resultat)){
                     String qSetPassword = "UPDATE agent SET losenord =" + "'" + nyttLosenord + "'" + "WHERE agent_id = " + "'" + vemArInloggad.getId() + "'";
                     idb.update(qSetPassword);
+                    vemArInloggad.setNyttLosenord(nyttLosenord);
                      JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
                 }
                 else{

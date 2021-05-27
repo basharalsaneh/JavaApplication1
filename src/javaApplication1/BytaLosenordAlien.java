@@ -138,9 +138,10 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
                 String resultat = idb.fetchSingle(fraga);
 
                 if(gammalLosenord.equals(resultat)){
-//                    if(nyttLosenord.length() < 9){ // La till detta pga att lösenordet får ej vara för långt.
+//                    if(nyttLosenord.length() < 9){ // La till detta pga att lösenordet får ej vara för långt, tydligen.
                     String qSetPassword = "UPDATE alien SET losenord =" + "'" + nyttLosenord + "'" + "WHERE alien_id = " + "'" + vemArInloggad.getId() + "'";
                     idb.update(qSetPassword);
+                    vemArInloggad.setNyttLosenord(nyttLosenord);
                      JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
 //                }
 //                    else{ // AVMARKERA DE TOTALT 6 RADER KOMMENTERARIFALL NI  FÅR FELMEDDELANDE OM "DATA TOO LONG"
