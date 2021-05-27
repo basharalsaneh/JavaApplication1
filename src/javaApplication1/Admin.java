@@ -188,7 +188,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " + vemArInloggad.getNamn());
         this.dispose();
-        new BytaLosenord(idb, vemArInloggad).setVisible(true);
+        new BytaLosenordAgent(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_btnBytLosenordActionPerformed
 
     private void registreraAgenterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registreraAgenterButtonActionPerformed

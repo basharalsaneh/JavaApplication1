@@ -15,7 +15,7 @@ import oru.inf.InfException;
  *
  * @author Marcu
  */
-public class BytaLosenord extends javax.swing.JFrame {
+public class BytaLosenordAgent extends javax.swing.JFrame {
     private static InfDB idb;
     String hamtatIDString;
     int hamtatID;
@@ -25,12 +25,12 @@ public class BytaLosenord extends javax.swing.JFrame {
      * @param idb
      * @param vemArInloggad
      */
-    public BytaLosenord(InfDB idb, inloggningValidering vemArInloggad) {
+    public BytaLosenordAgent(InfDB idb, inloggningValidering vemArInloggad) {
         initComponents();
-        BytaLosenord.idb = idb;
+        BytaLosenordAgent.idb = idb;
         //this.hamtatID = Integer.parseInt(hamtatIDString);
         JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " +vemArInloggad.getNamn());
-        BytaLosenord.vemArInloggad = vemArInloggad;
+        BytaLosenordAgent.vemArInloggad = vemArInloggad;
     }
 
     /**
@@ -180,20 +180,21 @@ public class BytaLosenord extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BytaLosenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BytaLosenordAgent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BytaLosenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BytaLosenordAgent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BytaLosenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BytaLosenordAgent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BytaLosenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BytaLosenordAgent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BytaLosenord(idb, vemArInloggad).setVisible(true);
+                new BytaLosenordAgent(idb, vemArInloggad).setVisible(true);
             }
         });
     }

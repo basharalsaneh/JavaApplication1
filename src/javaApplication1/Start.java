@@ -5,8 +5,7 @@
  */
 package javaApplication1;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import oru.inf.InfDB;
 import oru.inf.InfException;
 /**
@@ -109,7 +108,7 @@ public class Start extends javax.swing.JFrame {
 
         
             // TODO add your handling code here:
-            Validering.arAlien();
+//            Validering.arAlien();
             
             new Alien_Inloggning(idb).setVisible(true);
             this.dispose();
@@ -119,7 +118,7 @@ public class Start extends javax.swing.JFrame {
     private void buttonAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdministratorActionPerformed
        
             // TODO add your handling code here:
-            Validering.arAdmin();
+//            Validering.arAdmin();
             
             new Admin_Inloggning(idb).setVisible(true);
             this.dispose();
@@ -128,7 +127,7 @@ public class Start extends javax.swing.JFrame {
     private void buttonAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgentActionPerformed
       
             // TODO add your handling code here:
-            Validering.arAgent();
+//            Validering.arAgent();
             
             new Agent_Inloggning(idb).setVisible(true);
             this.dispose();

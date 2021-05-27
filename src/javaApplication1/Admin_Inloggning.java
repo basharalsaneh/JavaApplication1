@@ -124,44 +124,12 @@ public class Admin_Inloggning extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        // TODO add your handling code here:
-        // SKA TAS BORT ANTAR JAG ?!?!?!??!!??!??!?!???!?!!??!?!!?!!?!??!??!!? :) :) :)
-        
-//        boolean godkandLosen = false;
-//        String admin = "J";
-//        
-//        // 1. Läsa av text i ID
-//        
-//        String user = txtUser.getText();
-//        
-//        // 2. Läsa av text i Lösenord
-//        
-//        String password = txtPassword.getText();
-//        System.out.println("Lösenordet inskrivet i rutan: " + password);
-//        
-//        String fraga = "SELECT losenord FROM Agent where Agent_id =" + user;
-//        String kollaAdmin = "SELECT administrator FROM Agent where Agent_id =" + user;
-//        
-//        
-//        try {
-//            String svar = idb.fetchSingle(fraga);
-//            String adminBehorighet = idb.fetchSingle(kollaAdmin);
-//            System.out.println("svaret på SQL-frågan: " + svar);
-//            
-//            
-//            if ( (password.equals(svar)) && (adminBehorighet.equals(admin)) ){
-//                
-//                godkandLosen = true;
-//                System.out.println(godkandLosen);
-//                this.dispose();
-//                new Admin(idb,vemArInloggad).setVisible(true);
-//            }
-//        else {
-//                JOptionPane.showMessageDialog(null, "ID / lösenord är felaktigt");
-//            }
+
                 loggaInSomAdmin();
     }
-            private void loggaInSomAdmin(){
+        
+    
+    private void loggaInSomAdmin(){
             if(Validering.personFinns(txtUser) && Validering.finnsLosenord(txtPassword)){
         boolean godkandUser = false;
         boolean godkandLosenord = false;
@@ -226,61 +194,7 @@ public class Admin_Inloggning extends javax.swing.JFrame {
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-//            
-//             if(Validering.personFinns(txtUser) && Validering.finnsLosenord(txtPassword)){
-//        boolean godkandUser = false;
-//        boolean godkandLosenord = false;
-//        boolean godkandAdmin = false;
-//       
-//          
-//        String user = txtUser.getText();
-//        String password = txtPassword.getText();
-//        System.out.println("Lösenordet inskrivet i rutan: " + password);
-//        try{
-//        String fraga1 = "SELECT Namn FROM agent where Namn like '"+user+"';";
-//           String giltigUser = idb.fetchSingle(fraga1);
-//           String fraga2 = "SELECT Losenord FROM agent where Namn like '" + giltigUser + "';";
-//           String giltigLosenord = idb.fetchSingle(fraga2);
-//           String fraga3 = "SELECT Administrator FROM agent where Namn like '" + giltigUser + "';";
-//           String befogenhet = idb.fetchSingle(fraga3);
-//           String admin = "J";
-//             if(user.equals(giltigUser)){
-//                 godkandUser = true;
-//                 if(password.equals(giltigLosenord)){
-//                  godkandLosenord = true;
-//                  if(befogenhet.equals(admin)){
-//                  godkandAdmin = true;
-//                  }
-//                  else{
-//                  JOptionPane.showMessageDialog(null, "Du har ej befogenhet till denna att logga in.");
-//                  }
-//                }
-//                else {
-//                JOptionPane.showMessageDialog(null, "Lösenord är felaktigt för valt id");
-//                }
-//            }
-//            else{
-//                 JOptionPane.showMessageDialog(null, "Agent ej hittat.");
-//             }
-//             if(godkandUser && godkandLosenord && godkandAdmin){
-//                 JOptionPane.showMessageDialog(this, "Du kommer nu loggas in som" + giltigUser);
-//             String fraga4 = "SELECT Agent_ID from agent where Namn like '" + giltigUser+ "';";
-//                 String userID = idb.fetchSingle(fraga4);
-//                 int giltigtID = Integer.parseInt(userID);
-//                 JOptionPane.showMessageDialog(this, "User: " + giltigUser + ", lösenord: " + giltigLosenord + ", med id: " + giltigtID);
-//                vemArInloggad.inloggadSom(giltigUser, giltigtID, giltigLosenord);
-//                this.dispose();
-//                new Admin(idb, vemArInloggad).setVisible(true);
-//             }
-//        
-//            
-//        } catch (InfException ex) {
-//            Logger.getLogger(Admin_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
-//            JOptionPane.showMessageDialog(this, ex);
-//        }
-//        }
-//            
-//        } EJ DUBBEL KOD SÅ KÖR KODEN NEDAN ISTÄLLET:
+
             loggaInSomAdmin();}
     }//GEN-LAST:event_txtPasswordKeyPressed
 

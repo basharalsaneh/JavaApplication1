@@ -135,10 +135,6 @@ public class Alien_Inloggning extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     
-    
-  
-     
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
             loggaInSomAlien();
     }
@@ -160,10 +156,8 @@ public class Alien_Inloggning extends javax.swing.JFrame {
     
              if(user.equals(giltigUser)){
                  godkandUser = true;
-                 JOptionPane.showMessageDialog(this, giltigUser);   // Bara för att förtydliga att det funkar
                  if(password.equals(giltigLosenord)){
                   godkandLosenord = true;
-                  JOptionPane.showMessageDialog(this, giltigLosenord); // Bara för att förtydliga att det funkar
                 }
                 else {
                 JOptionPane.showMessageDialog(null, "Lösenord är felaktigt för valt id");
@@ -196,50 +190,7 @@ public class Alien_Inloggning extends javax.swing.JFrame {
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-//           
-//           if(Validering.personFinns(txtUser) && Validering.finnsLosenord(txtPassword)){
-//        boolean godkandUser = false;
-//        boolean godkandLosenord = false;
-//          
-//        String user = txtUser.getText();
-//        String password = txtPassword.getText();
-//        System.out.println("Lösenordet inskrivet i rutan: " + password);
-//        try{
-//        String fraga1 = "SELECT Namn FROM alien where Namn like '"+user+"';";
-//           String giltigUser = idb.fetchSingle(fraga1);
-//           String fraga2 = "SELECT Losenord FROM alien where Namn like '" + giltigUser + "';";
-//           String giltigLosenord = idb.fetchSingle(fraga2);
-//    
-//             if(user.equals(giltigUser)){
-//                 godkandUser = true;
-//                 JOptionPane.showMessageDialog(this, giltigUser);
-//                 if(password.equals(giltigLosenord)){
-//                  godkandLosenord = true;
-//                  JOptionPane.showMessageDialog(this, giltigLosenord);
-//                }
-//                else {
-//                JOptionPane.showMessageDialog(null, "Lösenord är felaktigt för valt id");
-//                }
-//            }
-//            else{
-//                 JOptionPane.showMessageDialog(null, "Användare ej hittat.");
-//             }
-//             if(godkandUser && godkandLosenord){
-//             String fraga3 = "SELECT Alien_ID from alien where Namn like '" + giltigUser+ "';";
-//                 String userID = idb.fetchSingle(fraga3);
-//                 int giltigtID = Integer.parseInt(userID);
-//                vemArInloggad.inloggadSom(giltigUser, giltigtID, giltigLosenord);
-//                JOptionPane.showMessageDialog(this, "User: " + giltigUser + ", lösenord: " + giltigLosenord + ", med id: " + giltigtID);
-//                   this.dispose();
-//                new Alien(idb, vemArInloggad).setVisible(true);
-//             }
-//        
-//            
-//        } catch (InfException ex) {
-//            Logger.getLogger(Alien_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        }
-//       } EJ DUBBEL KOD SÅ KÖR METODEN NEDAN ISTÄLLET:
+
             loggaInSomAlien();
        }
     }//GEN-LAST:event_txtPasswordKeyPressed

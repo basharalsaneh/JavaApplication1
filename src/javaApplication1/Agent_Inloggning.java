@@ -122,7 +122,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void loggaInSomAgent(){
+    private void loggaInSomAgent(){
              if(Validering.personFinns(txtUser) && Validering.finnsLosenord(txtPassword)){
         boolean godkandUser = false;
         boolean godkandLosenord = false;

@@ -61,17 +61,17 @@ public class Validering {
         
             
             
-     public static boolean arAgent(){
-     resultat = true;
-     return resultat;
-     }
-      public static boolean arAdmin(){
-     resultat = true;
-     return resultat;
-     }
-       public static boolean arAlien(){
-     resultat = true;
-     return resultat;
-     }
+//     public static boolean arAgent(){
+//     resultat = true;
+//     return resultat;
+//     }
+//      public static boolean arAdmin(){
+//     resultat = true;
+//     return resultat;
+//     }
+//       public static boolean arAlien(){
+//     resultat = true;
+//     return resultat;
+//     }
      }
         
