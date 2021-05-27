@@ -43,10 +43,10 @@ public class Admin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnAliens = new javax.swing.JButton();
         btnUtrustning = new javax.swing.JButton();
-        btnAgent = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnBytLosenord = new javax.swing.JButton();
         registreraAgenterButton = new javax.swing.JButton();
+        hanteraAgenterButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +57,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Hantera:");
 
+        btnAliens.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         btnAliens.setText("Aliens");
         btnAliens.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,17 +65,11 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
+        btnUtrustning.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         btnUtrustning.setText("Utrustning");
         btnUtrustning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUtrustningActionPerformed(evt);
-            }
-        });
-
-        btnAgent.setText("Agenter");
-        btnAgent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgentActionPerformed(evt);
             }
         });
 
@@ -99,6 +94,14 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
+        hanteraAgenterButton.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        hanteraAgenterButton.setText("Agenter");
+        hanteraAgenterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hanteraAgenterButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,22 +114,24 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUtrustning)
-                            .addComponent(btnAliens)
-                            .addComponent(jLabel1))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(381, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAgent)
+                                .addComponent(hanteraAgenterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(registreraAgenterButton))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnBytLosenord)))
-                        .addGap(39, 39, 39))))
+                        .addGap(39, 39, 39))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAliens, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,14 +140,14 @@ public class Admin extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(50, 50, 50)
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
-                .addComponent(btnAliens)
                 .addGap(18, 18, 18)
-                .addComponent(btnUtrustning)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgent)
-                    .addComponent(registreraAgenterButton))
+                .addComponent(btnAliens, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(registreraAgenterButton)
+                    .addComponent(hanteraAgenterButton, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -172,14 +177,6 @@ public class Admin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAliensActionPerformed
 
-    private void btnAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgentActionPerformed
-        // TODO add your handling code here:
-        
-        this.dispose();
-        new Hantera_Agenter(idb, vemArInloggad).setVisible(true);
-        
-    }//GEN-LAST:event_btnAgentActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "Du loggas nu ut som: " + vemArInloggad.getNamn());
@@ -201,16 +198,22 @@ public class Admin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_registreraAgenterButtonActionPerformed
 
+    private void hanteraAgenterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hanteraAgenterButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Hantera_Agenter(idb, vemArInloggad).setVisible(true);
+    }//GEN-LAST:event_hanteraAgenterButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgent;
     private javax.swing.JButton btnAliens;
     private javax.swing.JButton btnBytLosenord;
     private javax.swing.JButton btnUtrustning;
+    private javax.swing.JToggleButton hanteraAgenterButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
