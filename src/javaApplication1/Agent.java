@@ -100,6 +100,11 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
         });
 
         btnOmrade.setText("Undersök område");
+        btnOmrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOmradeActionPerformed(evt);
+            }
+        });
 
         btnBytLosenord.setText("Ändra lösenord");
         btnBytLosenord.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +132,7 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(114, 114, 114)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(114, 114, 114))
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
@@ -204,6 +209,12 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
     private void btnAliensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAliensActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAliensActionPerformed
+
+    private void btnOmradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOmradeActionPerformed
+        // TODO add your handling code here:
+               this.dispose();
+        new Undersok_Omrade(idb, vemArInloggad).setVisible(true);
+    }//GEN-LAST:event_btnOmradeActionPerformed
 
     /**
      * @param args the command line arguments
