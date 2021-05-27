@@ -322,7 +322,7 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.dispose();
-        new Admin(idb, vemArInloggad).setVisible(true);
+        new Agent(idb, vemArInloggad).setVisible(true);
         
     }//GEN-LAST:event_goBackButtonActionPerformed
 
