@@ -46,6 +46,7 @@ public class Admin extends javax.swing.JFrame {
         btnAgent = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnBytLosenord = new javax.swing.JButton();
+        registreraAgenterButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,6 +92,13 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
+        registreraAgenterButton.setText("Registrera Agenter");
+        registreraAgenterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registreraAgenterButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,7 +112,6 @@ public class Admin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAgent)
                             .addComponent(btnUtrustning)
                             .addComponent(btnAliens)
                             .addComponent(jLabel1))
@@ -113,7 +120,12 @@ public class Admin extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnBytLosenord)
-                        .addGap(39, 39, 39))))
+                        .addGap(39, 39, 39))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAgent)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(registreraAgenterButton)
+                        .addGap(65, 65, 65))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +139,9 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnUtrustning)
                 .addGap(18, 18, 18)
-                .addComponent(btnAgent)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgent)
+                    .addComponent(registreraAgenterButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -179,6 +193,13 @@ public class Admin extends javax.swing.JFrame {
         new BytaLosenord(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_btnBytLosenordActionPerformed
 
+    private void registreraAgenterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registreraAgenterButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Registrering_Agenter(idb, vemArInloggad).setVisible(true);
+        
+    }//GEN-LAST:event_registreraAgenterButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -192,5 +213,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton registreraAgenterButton;
     // End of variables declaration//GEN-END:variables
 }
