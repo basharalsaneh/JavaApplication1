@@ -169,13 +169,13 @@ inloggningValidering vemArInloggad = null;
                            "order by count(Ansvarig_Agent) DESC limit 3";
             soktaAgenter = idb.fetchRows(fraga);
 
-            for (HashMap<String, String> Agent : soktaAgenter) {
+            soktaAgenter.stream().map(Agent -> {
                 txtAreaVisaInfo.append(Agent.get("Agent_ID") + "\t");
-                txtAreaVisaInfo.append(" " + Agent.get("Namn") + "\n"); 
-               // txtAreaVisaInfo.append(" " + Agent.get("Alien_ID") + "\n");                
-
-
-            }
+                return Agent;
+            }).forEachOrdered(Agent -> {
+                txtAreaVisaInfo.append(" " + Agent.get("Namn") + "\n");
+                // txtAreaVisaInfo.append(" " + Agent.get("Alien_ID") + "\n");                
+            });
         } catch (InfException ettUndantag) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());

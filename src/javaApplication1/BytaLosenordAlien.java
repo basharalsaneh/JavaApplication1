@@ -165,7 +165,7 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
 
     private void btnGaTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGaTillbakaActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Ditt lösenord är nu:" + ""); // Bara för att förtydliga att det nya lösenordet följer med. Kan ju tas bort.
+        JOptionPane.showMessageDialog(this, "Ditt lösenord är nu: " + vemArInloggad.getLosenord()); // Bara för att förtydliga att det nya lösenordet följer med. Kan ju tas bort.
         this.dispose();
         new Alien(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_btnGaTillbakaActionPerformed
