@@ -27,6 +27,7 @@ public class BytaLosenordAgent extends javax.swing.JFrame {
      * @param vemArInloggad
      */
     public BytaLosenordAgent(InfDB idb, inloggningValidering vemArInloggad) {
+        // Vid byte av lösenord för admins så har konstruktorn med sig databasuppkopplingen samt information om den som är inloggad.
         initComponents();
         BytaLosenordAgent.idb = idb;
         //this.hamtatID = Integer.parseInt(hamtatIDString);
@@ -128,6 +129,7 @@ public class BytaLosenordAgent extends javax.swing.JFrame {
             if(Validering.personFinns(passNuvarande) 
                 && Validering.personFinns(passNytt)
                 ){
+// Dubbelkollar så textfälten ej är tomma med koden ovanför som hänvisar till Valideringsklassen.
             try{
                 char[] losenordArray = passNuvarande.getPassword();
                 String gammalLosenord = new String(losenordArray);
@@ -143,6 +145,7 @@ public class BytaLosenordAgent extends javax.swing.JFrame {
                     String qSetPassword = "UPDATE agent SET losenord =" + "'" + nyttLosenord + "'" + "WHERE agent_id = " + "'" + vemArInloggad.getId() + "'";
                     idb.update(qSetPassword);
                     vemArInloggad.setNyttLosenord(nyttLosenord);
+// Anropar metoden setNyttLosenord() från inloggningValideringsklassen och ändrar personens lösenord via den klassen.
                      JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
                     }else{ 
                         passNytt.requestFocus(); 

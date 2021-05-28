@@ -14,6 +14,7 @@ import oru.inf.InfDB;
  */
 
 public class Validering {
+    // Valideringsklass där vi kollar om eventuella textboxar, comboboxar, password-fält är tomma eller inte.
     
     static boolean resultat = false;
     

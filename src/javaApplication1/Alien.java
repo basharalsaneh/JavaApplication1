@@ -80,7 +80,7 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
 
         jLabel1.setText("Ditt område:");
 
-        jLabel2.setText("Din telefon:");
+        jLabel2.setText("Chefens telefon:");
 
         jLabel5.setText("Din chef:");
 
@@ -122,7 +122,7 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
                                     .addComponent(jTel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jChef, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnVisa)
@@ -184,12 +184,14 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
                     + "JOIN omradeschef oc ON o.Omrades_ID = oc.Omrade\n"
                     + "JOIN agent ag ON oc.Agent_ID = ag.Agent_ID\n"
                     + "WHERE Alien_ID = " + "'" + vemArInloggad.getId() + "'";
-            
+ // Frågan handlar om Aliens eventuella kontaktbehov och vilken agent + telefonnummer de kan använda.
             HashMap<String, String> result = idb.fetchRow(fraga);
+  // Hämtar hela raden av valda attribut i form av en Hashmap.
             String agentNamn = result.get("Namn");
             String agentTel = result.get("Telefon");
             String Omrade = result.get("Benamning");
 
+  // Textboxarna fylls då med svaren av de valda attribut.
             jChef.setText(agentNamn);
             jTel.setText(agentTel);
             jOmrade.setText(Omrade);

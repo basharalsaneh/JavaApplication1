@@ -41,7 +41,6 @@ public class Undersok_Omrade extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtOmradesChef1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -56,13 +55,6 @@ public class Undersok_Omrade extends javax.swing.JFrame {
         jLabel1.setText("Undersök ett område");
 
         jLabel2.setText("Områdeschefen är:");
-
-        jButton1.setText("Ta bort?");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Vilka agenter ansvarar för flest aliens inom område:");
 
@@ -109,13 +101,11 @@ public class Undersok_Omrade extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtOmradesChef1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(78, 78, 78)
-                                .addComponent(jButton1))
+                                .addComponent(txtOmradesChef1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(84, 84, 84)
                                 .addComponent(jLabel1)))
-                        .addContainerGap(48, Short.MAX_VALUE))))
+                        .addContainerGap(96, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +120,6 @@ public class Undersok_Omrade extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9))
@@ -142,11 +131,6 @@ public class Undersok_Omrade extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void fyllcbValjaOmradesNamn() {
         String fraga = "SELECT Benamning from omrade";
@@ -170,11 +154,9 @@ public class Undersok_Omrade extends javax.swing.JFrame {
         }
 
     }
-
-    private void cbValjaOmradesNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbValjaOmradesNamnActionPerformed
-        // TODO add your handling code here:
-
-        txtAreaVisaInfo.setText("");
+    
+    private void visaInfo(){
+    txtAreaVisaInfo.setText("");
 
         ArrayList<HashMap<String, String>> soktaAgenter;
 
@@ -189,10 +171,10 @@ public class Undersok_Omrade extends javax.swing.JFrame {
             soktaAgenter = idb.fetchRows(fraga);
 
             soktaAgenter.stream().map(Agent -> {
-                txtAreaVisaInfo.append(Agent.get("Agent_ID") + "\t");
+                txtAreaVisaInfo.append("Agent ID: " + Agent.get("Agent_ID") + "\t");
                 return Agent;
             }).forEachOrdered(Agent -> {
-                txtAreaVisaInfo.append(" " + Agent.get("Namn") + "\n");
+                txtAreaVisaInfo.append(" Namn: " + Agent.get("Namn") + "\n");
                 // txtAreaVisaInfo.append(" " + Agent.get("Alien_ID") + "\n");                
             });
         } catch (InfException ettUndantag) {
@@ -202,8 +184,17 @@ public class Undersok_Omrade extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
         }
+    }
 
-        txtOmradesChef1.setText("");
+    private void cbValjaOmradesNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbValjaOmradesNamnActionPerformed
+        // TODO add your handling code here:
+        visaOmradesChef();
+        visaInfo();
+     
+    }//GEN-LAST:event_cbValjaOmradesNamnActionPerformed
+
+    private void visaOmradesChef(){
+    txtOmradesChef1.setText("");
 
         try {
             String valdSektion = cbValjaOmradesNamn.getSelectedItem().toString();
@@ -223,8 +214,8 @@ public class Undersok_Omrade extends javax.swing.JFrame {
             System.out.println("Random fel" + ex.getMessage());
         }
 
-    }//GEN-LAST:event_cbValjaOmradesNamnActionPerformed
-
+    }
+    
     private void txtOmradesChef1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOmradesChef1ActionPerformed
         // TODO add your handling code here:
 
@@ -242,7 +233,6 @@ public class Undersok_Omrade extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbValjaOmradesNamn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
