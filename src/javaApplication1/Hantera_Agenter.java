@@ -402,14 +402,12 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             admin = "J";
             } 
             
-            
+            // SQL frågan är utformad så att den uppdaterar alla fälten hos Agenten. Om ett fält har samma värde som innan, så blir det ingen skillnad.
+            // Och alla värden som är annorlunda kommer att bli uppdaterade.
             String uppdateraAgent = "UPDATE agent SET Agent_ID = "+id+", Namn = \""+namn+"\", Telefon = \""+telefon+"\", Anstallningsdatum = \""+datum+"\", Administrator = \""+admin+"\", Losenord = \""+losenord+"\", Omrade = "+omrade+" WHERE Agent_ID = "+agentID+";";
 
-//String hämtaNyAgent = "SELECT * from Agent where Agent_ID ="+ StringID;
-            
             idb.update(uppdateraAgent);
             
-            //txtAreaAgent.setText(nyregistreradAgent);
             
             
             JOptionPane.showMessageDialog(this, "Agent ändrad");
@@ -437,13 +435,33 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         String agent = txtHämtaAgent.getText();
         int id = Integer.parseInt(agent); // Omvandlar String till INT. För Agent_ID är av typen INT.
         
+        // SQL fråga som tar bort en Agent från Databasen där Agent_ID = det som man skrev in i txtHämtaAgent.
         String fraga = "DELETE FROM agent WHERE Agent_ID ="+id;
         
+        
+        // En dialogruta ska poppa ut så att man inte tar bort en agent av misstag. Den här dialogrutan ska uppdateras och förbättras. T.ex Ta med mer information om vilken agent som håller på att tas bort.
+        int svar = JOptionPane.showConfirmDialog(this, "Vill du verkligen ta bort den här Agenten: Agent_ID "+ id, "Fortsätta?", JOptionPane.YES_NO_OPTION);
+        
+        // Om man trycker på "Yes" så ska agenten tas bort från systemet.
+        if(svar==JOptionPane.YES_OPTION){
         try{
             
             idb.delete(fraga);
+            JOptionPane.showMessageDialog(this, "Agent borttagen");
+            
+            VisaAllaAgenter();
+            // Uppdaterar listan med alla Agenter
+            
+            
+            
         } catch (InfException ex) {
             Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        }
+        else {
+            // Visar för användaren att agenten inte blev borttagen
+            JOptionPane.showMessageDialog(this, "Agent ej borttagen");
         }
         
         
@@ -456,13 +474,19 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
     private void hämtaAgentInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hämtaAgentInfoButtonActionPerformed
         // TODO add your handling code here:
+        
+        // För enkelhetens skull så kopierades en del kod från en annan metod. 
+        
+        // Ska kolla upp en Agent.
         ArrayList<HashMap<String, String>> kollaAgent;
         
+        // Agenten som ska kollas upp skriver man in i txtHämtaAgent.
         String agent = txtHämtaAgent.getText();
-        int id = Integer.parseInt(agent);
+        int id = Integer.parseInt(agent); // Omvandlar String till INT.
+        String admin = "J";
         
         try {
-            String fraga = "SELECT * FROM agent where Agent_ID =" + id;
+            String fraga = "SELECT * FROM agent where Agent_ID =" + id; // SQL fråga som ska hämta all information om Agenten.
             kollaAgent = idb.fetchRows(fraga);
             
             // Sätter ut "Titlarna" på respektive kolumn.
@@ -494,15 +518,25 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 txtAreaAgent.append(" " + Agent.get("Omrade") + "\n");
                 
                 
-                // Vill att all info som hämtas om agenten ska också komma in på respektive textruta.
+                // Vill att all info som hämtas om agenten ska också komma in på respektive täxtfält bredvid txtArean.
                 txtAgentID.setText(Agent.get("Agent_ID"));
                 txtAgentNamn.setText(Agent.get("Namn"));
                 txtAgentTelefon.setText(Agent.get("Telefon"));
                 txtAgentDatum.setText(Agent.get("Anstallningsdatum"));
-                adminBox.isEnabled();
+                
+                // Den här koden ska kolla om Admin är ett "J" hos agenten. Isåfall ska adminBox vara(true), och selected. 
+                // Om agenten inte är Admin, alltså att Agent.get("Administrator") = "N", då ska Admin.box returnera false och inte vara selected.
+                if (Agent.get("Administrator").equals(admin)){
+                    adminBox.setSelected(true);
+                }
+                else {
+                    adminBox.setSelected(false);
+                }
+                
+                
                 txtAgentLosenord.setText(Agent.get("Losenord"));
                 txtAgentOmrade.setText(Agent.get("Omrade"));
-                txtAgentID.requestFocus();
+                txtAgentID.requestFocus(); // Ger fokus på txtAgentID så att man inte behöver trycka på det fältet för att börja skriv igen.
                 
                 
             }
@@ -530,20 +564,21 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         
         VisaAllaAgenter();
         
+        // Anropar metoden VisaAllaAgenter som ja.. Visar alla agenter i txtArean! :D
+        
     }//GEN-LAST:event_visaAllaAgenterActionPerformed
 
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
         new Admin(idb, InloggadSom).setVisible(true);
+        
+        // Så att man kan gå tillbaka till föregående ruta som Admin. 
+        
     }//GEN-LAST:event_goBackButtonActionPerformed
 
     private void laggTillAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laggTillAgentActionPerformed
         // TODO add your handling code here:
-        
-        
-        HashMap<String, String> nyregistreradAgent;
-        
         
         
         try {
@@ -555,16 +590,17 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             String losenord = txtAgentLosenord.getText();
             String plats = txtAgentOmrade.getText();
             int omrade = Integer.parseInt(plats);
+            
             String admin = "N";
+            
                 if (adminBox.isEnabled()){
             admin = "J";
-            } else admin = "N";
-            
+                }
+                // Om Adminboxen är intryckt så kommer String admin att bli ett "J". Detta för att det ska bara finnas två olika värden i kolumnen "Administrator". Antingen "J" eller "N".
             
             String nyAgent = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES ("+id+", \""+namn+"\", \""+telefon+"\", \""+datum+"\", \""+admin+"\", \""+losenord+"\","+omrade+");";
             
 
-//String hämtaNyAgent = "SELECT * from Agent where Agent_ID ="+ StringID;
             
 
             idb.insert(nyAgent);
@@ -573,8 +609,11 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             
             
             JOptionPane.showMessageDialog(this, "Agent registrerad");
+            
             txtAreaAgent.setText("");
             VisaAllaAgenter();
+            // Den nyregistrerade Agenten kommer att dyka upp på listan av Alla agenter.
+            
             txtAgentID.setText("");
             txtAgentNamn.setText("");
             txtAgentTelefon.setText("");
