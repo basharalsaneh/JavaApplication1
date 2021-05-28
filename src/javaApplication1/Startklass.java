@@ -21,6 +21,7 @@ public class Startklass {
 
         }   catch (InfException ex){
             Logger.getLogger(Startklass.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
         
         

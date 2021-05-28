@@ -8,6 +8,7 @@ package javaApplication1;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javaApplication1.BytaLosenordAlien.vemArInloggad;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -26,6 +27,7 @@ public class BytaLosenordAdmin extends javax.swing.JFrame {
      * @param vemArInloggad
      */
     public BytaLosenordAdmin(InfDB idb, inloggningValidering vemArInloggad) {
+        // Vid byte av lösenord för admins så har konstruktorn med sig databasuppkopplingen samt information om den som är inloggad.
         initComponents();
         BytaLosenordAdmin.idb = idb;
         //this.hamtatID = Integer.parseInt(hamtatIDString);
@@ -127,6 +129,7 @@ public class BytaLosenordAdmin extends javax.swing.JFrame {
             if(Validering.personFinns(passNuvarande) 
                 && Validering.personFinns(passNytt)
                 ){
+  // Dubbelkollar så textfälten ej är tomma med koden ovanför som hänvisar till Valideringsklassen.
             try{
                 char[] losenordArray = passNuvarande.getPassword();
                 String gammalLosenord = new String(losenordArray);
@@ -137,10 +140,19 @@ public class BytaLosenordAdmin extends javax.swing.JFrame {
                 String fraga = "SELECT losenord FROM agent WHERE agent_id =" + "'" + vemArInloggad.getId() + "'";
                 String resultat = idb.fetchSingle(fraga);
 
-                if(gammalLosenord.equals(resultat)){
+                if(gammalLosenord.equals(resultat)){ 
+ // Om det gamla ifyllda lösenordet är lika med lösenordet som existerar i databasen så körs koden nedan.
+                    if(nyttLosenord.length() <=6){
                     String qSetPassword = "UPDATE agent SET losenord =" + "'" + nyttLosenord + "'" + "WHERE agent_id = " + "'" + vemArInloggad.getId() + "'";
-                    idb.update(qSetPassword);
+                    idb.update(qSetPassword); // idb.update, uppdaterar gentemot databasen.
+                    vemArInloggad.setNyttLosenord(nyttLosenord);
+ // Anropar metoden setNyttLosenord() från inloggningValideringsklassen och ändrar personens lösenord via den klassen.
                      JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
+                     }
+                    else{ 
+                        passNytt.requestFocus(); 
+                        JOptionPane.showMessageDialog(this, "Tyvärr för långt lösenord, max 6 tecken");
+                    }
                 }
                 else{
                     passNuvarande.requestFocus();

@@ -47,8 +47,9 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
                     + "WHERE agent_id = " + "'" + vemArInloggad.getId() + "'";
 
             ArrayList<String> result = idb.fetchColumn(fraga);
-            
+ // ArrayListen visar dessa valda benämningar som existerar för vald agent.          
             for (String objekt : result) {
+                // Varje objekt skrivs ut i textrutan.
                 UtrustningRS.append(" - " + objekt + "\n");
             }
         } 
@@ -189,7 +190,7 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "Du transporteras nu till att byta lösenord.");
         this.dispose();
-        new BytaLosenord(idb, vemArInloggad).setVisible(true);
+        new BytaLosenordAgent(idb, vemArInloggad).setVisible(true);
         
     }//GEN-LAST:event_btnBytLosenordActionPerformed
 

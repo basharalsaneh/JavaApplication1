@@ -53,7 +53,7 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnVisa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,14 +80,14 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
 
         jLabel1.setText("Ditt område:");
 
-        jLabel2.setText("Din telefon:");
+        jLabel2.setText("Chefens telefon:");
 
         jLabel5.setText("Din chef:");
 
-        jButton2.setText("Visa");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnVisa.setText("Visa");
+        btnVisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnVisaActionPerformed(evt);
             }
         });
 
@@ -122,10 +122,10 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
                                     .addComponent(jTel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jChef, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btnVisa)
                 .addGap(84, 84, 84))
         );
         layout.setVerticalGroup(
@@ -150,7 +150,7 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
                     .addComponent(jLabel1)
                     .addComponent(jOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(btnVisa)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -173,7 +173,7 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
         new Start(idb).setVisible(true);
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnVisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaActionPerformed
         // TODO add your handling code here:
            try {
             String fraga
@@ -184,12 +184,14 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
                     + "JOIN omradeschef oc ON o.Omrades_ID = oc.Omrade\n"
                     + "JOIN agent ag ON oc.Agent_ID = ag.Agent_ID\n"
                     + "WHERE Alien_ID = " + "'" + vemArInloggad.getId() + "'";
-            
+ // Frågan handlar om Aliens eventuella kontaktbehov och vilken agent + telefonnummer de kan använda.
             HashMap<String, String> result = idb.fetchRow(fraga);
+  // Hämtar hela raden av valda attribut i form av en Hashmap.
             String agentNamn = result.get("Namn");
             String agentTel = result.get("Telefon");
             String Omrade = result.get("Benamning");
 
+  // Textboxarna fylls då med svaren av de valda attribut.
             jChef.setText(agentNamn);
             jTel.setText(agentTel);
             jOmrade.setText(Omrade);
@@ -199,12 +201,12 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
         } catch (Exception ex) {
             System.out.println("Random fel" + ex.getMessage());
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnVisaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoggaUt;
+    private javax.swing.JButton btnVisa;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jChef;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

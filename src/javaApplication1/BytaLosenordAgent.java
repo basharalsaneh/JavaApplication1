@@ -8,6 +8,7 @@ package javaApplication1;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javaApplication1.BytaLosenordAlien.vemArInloggad;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -15,7 +16,7 @@ import oru.inf.InfException;
  *
  * @author Marcu
  */
-public class BytaLosenord extends javax.swing.JFrame {
+public class BytaLosenordAgent extends javax.swing.JFrame {
     private static InfDB idb;
     String hamtatIDString;
     int hamtatID;
@@ -25,12 +26,13 @@ public class BytaLosenord extends javax.swing.JFrame {
      * @param idb
      * @param vemArInloggad
      */
-    public BytaLosenord(InfDB idb, inloggningValidering vemArInloggad) {
+    public BytaLosenordAgent(InfDB idb, inloggningValidering vemArInloggad) {
+        // Vid byte av lösenord för admins så har konstruktorn med sig databasuppkopplingen samt information om den som är inloggad.
         initComponents();
-        BytaLosenord.idb = idb;
+        BytaLosenordAgent.idb = idb;
         //this.hamtatID = Integer.parseInt(hamtatIDString);
         JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " +vemArInloggad.getNamn());
-        BytaLosenord.vemArInloggad = vemArInloggad;
+        BytaLosenordAgent.vemArInloggad = vemArInloggad;
     }
 
     /**
@@ -127,6 +129,7 @@ public class BytaLosenord extends javax.swing.JFrame {
             if(Validering.personFinns(passNuvarande) 
                 && Validering.personFinns(passNytt)
                 ){
+// Dubbelkollar så textfälten ej är tomma med koden ovanför som hänvisar till Valideringsklassen.
             try{
                 char[] losenordArray = passNuvarande.getPassword();
                 String gammalLosenord = new String(losenordArray);
@@ -138,9 +141,16 @@ public class BytaLosenord extends javax.swing.JFrame {
                 String resultat = idb.fetchSingle(fraga);
 
                 if(gammalLosenord.equals(resultat)){
+                    if(nyttLosenord.length() <=6){
                     String qSetPassword = "UPDATE agent SET losenord =" + "'" + nyttLosenord + "'" + "WHERE agent_id = " + "'" + vemArInloggad.getId() + "'";
                     idb.update(qSetPassword);
+                    vemArInloggad.setNyttLosenord(nyttLosenord);
+// Anropar metoden setNyttLosenord() från inloggningValideringsklassen och ändrar personens lösenord via den klassen.
                      JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
+                    }else{ 
+                        passNytt.requestFocus(); 
+                        JOptionPane.showMessageDialog(this, "Tyvärr för långt lösenord, max 6 tecken");
+                    }
                 }
                 else{
                     passNuvarande.requestFocus();
@@ -180,20 +190,21 @@ public class BytaLosenord extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BytaLosenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BytaLosenordAgent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BytaLosenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BytaLosenordAgent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BytaLosenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BytaLosenordAgent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BytaLosenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BytaLosenordAgent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BytaLosenord(idb, vemArInloggad).setVisible(true);
+                new BytaLosenordAgent(idb, vemArInloggad).setVisible(true);
             }
         });
     }

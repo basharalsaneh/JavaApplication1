@@ -14,6 +14,7 @@ import oru.inf.InfDB;
  */
 
 public class Validering {
+    // Valideringsklass där vi kollar om eventuella textboxar, comboboxar, password-fält är tomma eller inte.
     
     static boolean resultat = false;
     
@@ -79,17 +80,17 @@ public class Validering {
           
             
             
-     public static boolean arAgent(){
-     resultat = true;
-     return resultat;
-     }
-      public static boolean arAdmin(){
-     resultat = true;
-     return resultat;
-     }
-       public static boolean arAlien(){
-     resultat = true;
-     return resultat;
-     }
+//     public static boolean arAgent(){
+//     resultat = true;
+//     return resultat;
+//     }
+//      public static boolean arAdmin(){
+//     resultat = true;
+//     return resultat;
+//     }
+//       public static boolean arAlien(){
+//     resultat = true;
+//     return resultat;
+//     }
      }
         

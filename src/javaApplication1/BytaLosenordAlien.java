@@ -127,6 +127,7 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
             if(Validering.finnsLosenord(passNuvarande) 
                 && Validering.finnsLosenord(passNytt)
                 ){
+// Dubbelkollar så textfälten ej är tomma med koden ovanför som hänvisar till Valideringsklassen.
             try{
                 char[] losenordArray = passNuvarande.getPassword();
                 String gammalLosenord = new String(losenordArray);
@@ -138,15 +139,17 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
                 String resultat = idb.fetchSingle(fraga);
 
                 if(gammalLosenord.equals(resultat)){
-//                    if(nyttLosenord.length() < 9){ // La till detta pga att lösenordet får ej vara för långt.
+                    if(nyttLosenord.length() <=6){ 
                     String qSetPassword = "UPDATE alien SET losenord =" + "'" + nyttLosenord + "'" + "WHERE alien_id = " + "'" + vemArInloggad.getId() + "'";
                     idb.update(qSetPassword);
+                    vemArInloggad.setNyttLosenord(nyttLosenord);
+ // Anropar metoden setNyttLosenord() från inloggningValideringsklassen och ändrar personens lösenord via den klassen.
                      JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
-//                }
-//                    else{ // AVMARKERA DE TOTALT 6 RADER KOMMENTERARIFALL NI  FÅR FELMEDDELANDE OM "DATA TOO LONG"
-//                        passNytt.requestFocus();  // VET INTE VART GRÄNSEN GÅR VID nyttLosenord.length()....
-//                        JOptionPane.showMessageDialog(this, "Tyvärr för långt lösenord, prova med ett kortare");
-//                    }
+                }
+                    else{ 
+                        passNytt.requestFocus(); 
+                        JOptionPane.showMessageDialog(this, "Tyvärr för långt lösenord, max 6 tecken");
+                    }
                 }
                 else{
                     passNuvarande.requestFocus();

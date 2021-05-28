@@ -23,34 +23,34 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="146" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="buttonAdministrator" alignment="0" max="32767" attributes="0"/>
-                  <Component id="buttonAlien" alignment="0" max="32767" attributes="0"/>
-                  <Component id="buttonAgent" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="buttonAgent" max="32767" attributes="0"/>
+                  <Component id="buttonAlien" max="32767" attributes="0"/>
+                  <Component id="buttonAdministrator" pref="292" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="88" max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="buttonAgent" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="buttonAlien" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="buttonAdministrator" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="66" max="32767" attributes="0"/>
+              <Component id="buttonAgent" min="-2" pref="51" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="buttonAlien" min="-2" pref="53" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="buttonAdministrator" min="-2" pref="58" max="-2" attributes="0"/>
+              <EmptySpace pref="25" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,13 +59,16 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Lucida Grande" size="24" style="1"/>
+          <Font name="Arial" size="36" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Logga in som:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="buttonAgent">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Avenir" size="18" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Agent"/>
       </Properties>
       <Events>
@@ -74,6 +77,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonAlien">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Avenir" size="18" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Alien"/>
       </Properties>
       <Events>
@@ -82,6 +88,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonAdministrator">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Avenir" size="18" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Administrat&#xf6;r"/>
       </Properties>
       <Events>

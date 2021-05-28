@@ -122,8 +122,9 @@ public class Agent_Inloggning extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void loggaInSomAgent(){
+    private void loggaInSomAgent(){
              if(Validering.personFinns(txtUser) && Validering.finnsLosenord(txtPassword)){
+ // Kollar upp om textBoxarna är tomma eller inte med hjälp av valideringsklassen.
         boolean godkandUser = false;
         boolean godkandLosenord = false;
           
@@ -135,7 +136,9 @@ public class Agent_Inloggning extends javax.swing.JFrame {
            String giltigUser = idb.fetchSingle(fraga1);
            String fraga2 = "SELECT Losenord FROM agent where Namn like '" + giltigUser + "';";
            String giltigLosenord = idb.fetchSingle(fraga2);
-    
+// Vi kör sql-frågor mot databasen och hämtar ett värde med hjälp av fetchSingle()-metoden.
+// Med koden nedan dubbelkollar vi så att rätt namn är inskrivet mot databasen, samt även det rätta lösenordet för det valda namnet.
+// Om så är fallet så ges de lokala booleanska variablerna godkandUser och godkandLosenord värdet true.
              if(user.equals(giltigUser)){
                  godkandUser = true;
                  if(password.equals(giltigLosenord)){
@@ -148,15 +151,20 @@ public class Agent_Inloggning extends javax.swing.JFrame {
             else{
                  JOptionPane.showMessageDialog(null, "Agent ej hittat.");
              }
+
              if(godkandUser && godkandLosenord){
-                 JOptionPane.showMessageDialog(this, "Du kommer nu loggas in som" + giltigUser);
+                  // Om true så körs följande nedan.
+                 JOptionPane.showMessageDialog(this, "Du kommer nu loggas in som " + giltigUser);
              String fraga3 = "SELECT Agent_ID from agent where Namn like '" + giltigUser+ "';";
                  String userID = idb.fetchSingle(fraga3);
                  int giltigtID = Integer.parseInt(userID);
-                 JOptionPane.showMessageDialog(this, "User: " + giltigUser + ", lösenord: " + giltigLosenord + ", med id: " + giltigtID);
+       // Med koden nedanför hänvisar vi till vår inloggningValiderings-klassen och fyller i vem som är inloggad med 
+ // hjälp av metoden inloggadSom(). Där fylls relevant information (namn, id, lösenord) för möjlighet att se 
+ // den inloggades uppgifter i inloggningValideringsklassen. 
                 vemArInloggad.inloggadSom(giltigUser, giltigtID, giltigLosenord);
                 this.dispose();
                 new Agent(idb, vemArInloggad).setVisible(true);
+ // Här följer databasens uppkoppling samt de inlagda uppgifter angående personens inloggning från metoden ovanför (inloggadSom()). 
              }
         
             
@@ -182,6 +190,8 @@ public class Agent_Inloggning extends javax.swing.JFrame {
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            
+         // Vid tryck på enter så körs metoden, loggaInSomAgen().
             
             loggaInSomAgent();
             

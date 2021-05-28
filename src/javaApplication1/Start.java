@@ -5,8 +5,7 @@
  */
 package javaApplication1;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import oru.inf.InfDB;
 import oru.inf.InfException;
 /**
@@ -45,9 +44,10 @@ public class Start extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel1.setText("Logga in som:");
 
+        buttonAgent.setFont(new java.awt.Font("Avenir", 1, 18)); // NOI18N
         buttonAgent.setText("Agent");
         buttonAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,6 +55,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
+        buttonAlien.setFont(new java.awt.Font("Avenir", 1, 18)); // NOI18N
         buttonAlien.setText("Alien");
         buttonAlien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,6 +63,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
+        buttonAdministrator.setFont(new java.awt.Font("Avenir", 1, 18)); // NOI18N
         buttonAdministrator.setText("Administratör");
         buttonAdministrator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,30 +75,30 @@ public class Start extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(146, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buttonAdministrator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(125, 125, 125))
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonAdministrator, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(88, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(68, 68, 68))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addGap(34, 34, 34)
-                .addComponent(buttonAgent)
                 .addGap(18, 18, 18)
-                .addComponent(buttonAlien)
-                .addGap(18, 18, 18)
-                .addComponent(buttonAdministrator)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(buttonAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonAlien, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonAdministrator, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -106,7 +108,7 @@ public class Start extends javax.swing.JFrame {
 
         
             // TODO add your handling code here:
-            Validering.arAlien();
+//            Validering.arAlien();
             
             new Alien_Inloggning(idb).setVisible(true);
             this.dispose();
@@ -116,7 +118,7 @@ public class Start extends javax.swing.JFrame {
     private void buttonAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdministratorActionPerformed
        
             // TODO add your handling code here:
-            Validering.arAdmin();
+//            Validering.arAdmin();
             
             new Admin_Inloggning(idb).setVisible(true);
             this.dispose();
@@ -125,7 +127,7 @@ public class Start extends javax.swing.JFrame {
     private void buttonAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgentActionPerformed
       
             // TODO add your handling code here:
-            Validering.arAgent();
+//            Validering.arAgent();
             
             new Agent_Inloggning(idb).setVisible(true);
             this.dispose();

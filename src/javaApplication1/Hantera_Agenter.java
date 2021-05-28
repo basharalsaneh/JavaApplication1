@@ -4,44 +4,32 @@
  * and open the template in the editor.
  */
 package javaApplication1;
-
-import com.mysql.cj.jdbc.result.ResultSetMetaData;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import oru.inf.InfException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import java.sql.ResultSet;
-import java.util.Date;
-import java.util.Vector;
-import static javaApplication1.Hantera_Aliens.vemArInloggad;
-import javax.swing.table.DefaultTableModel;
 import oru.inf.InfDB;
+import oru.inf.InfException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  *
- * @author marcu
+ * @author mac
  */
 public class Hantera_Agenter extends javax.swing.JFrame {
-        
-        private InfDB idb;
-        Connection connection1;
-        PreparedStatement statement;
-        Statement createStatement;
-        static inloggningValidering vemArInloggad;
-        
-       
-        
+    
+    inloggningValidering InloggadSom;
+    InfDB idb;
+    
+
     /**
-     * Creates new form Hantera_Agenter
+     * Creates new form Registrering_Agenter
      */
-    public Hantera_Agenter(InfDB idb, inloggningValidering vemArInloggad){
+    public Hantera_Agenter(InfDB idb, inloggningValidering InloggadSom) {
         initComponents();
-        table_update();
-        this.idb = idb;
-        this.vemArInloggad = vemArInloggad;
+        this.InloggadSom = InloggadSom;
+        this.idb = idb; 
+        VisaAllaAgenter(); // anropar en metod som ska visa alla Agenter
     }
 
     /**
@@ -53,7 +41,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtAgentID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -66,22 +53,24 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         txtAgentNamn = new javax.swing.JTextField();
         txtAgentTelefon = new javax.swing.JTextField();
         txtAgentDatum = new javax.swing.JTextField();
-        txtAgentAdmin = new javax.swing.JTextField();
         txtAgentLosenord = new javax.swing.JTextField();
         txtAgentOmrade = new javax.swing.JTextField();
         buttonRensaData = new javax.swing.JButton();
-        buttonAdd = new javax.swing.JButton();
-        buttonEdit = new javax.swing.JButton();
-        buttonDelete = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        ändraAgentButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        txtAreaAgent = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        adminBox = new javax.swing.JCheckBox();
+        jLabel9 = new javax.swing.JLabel();
+        buttonDelete = new javax.swing.JButton();
+        laggTillAgent = new javax.swing.JToggleButton();
+        hämtaAgentInfoButton = new javax.swing.JButton();
+        txtHämtaAgent = new javax.swing.JTextField();
+        agentCombo = new javax.swing.JComboBox<>();
+        visaAllaAgenter = new javax.swing.JToggleButton();
+        goBackButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Hantera agenter som administratör");
 
         jPanel1.setName(""); // NOI18N
 
@@ -99,6 +88,13 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
         jLabel8.setText("Omrade");
 
+        txtAgentDatum.setText("YYYY-MM-DD");
+        txtAgentDatum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAgentDatumActionPerformed(evt);
+            }
+        });
+
         buttonRensaData.setText("Rensa fälten");
         buttonRensaData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,370 +102,547 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             }
         });
 
-        buttonAdd.setText("Lägg till");
-        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+        ändraAgentButton.setText("Ändra");
+        ändraAgentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddActionPerformed(evt);
+                ändraAgentButtonActionPerformed(evt);
             }
         });
 
-        buttonEdit.setText("Ändra");
-        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEditActionPerformed(evt);
-            }
-        });
+        txtAreaAgent.setColumns(20);
+        txtAreaAgent.setRows(5);
+        jScrollPane1.setViewportView(txtAreaAgent);
 
-        buttonDelete.setText("Ta bort");
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        jLabel1.setText("(max 6 tecken)");
+
+        adminBox.setText("Ja");
+
+        jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        jLabel9.setText("(YYYY-MM-DD)");
+
+        buttonDelete.setText("Ta bort Agent");
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDeleteActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Lista an agent");
+        laggTillAgent.setText("Lägg till");
+        laggTillAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laggTillAgentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(86, 86, 86)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtAgentNamn, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                            .addComponent(txtAgentID))
-                        .addGap(23, 23, 23))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addGap(67, 67, 67)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtAgentTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                            .addComponent(txtAgentAdmin)
-                            .addComponent(txtAgentLosenord)
-                            .addComponent(txtAgentOmrade)
-                            .addComponent(txtAgentDatum))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(buttonRensaData)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))))
+                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(38, 38, 38))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(29, 29, 29))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(14, 14, 14))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3))
+                                        .addGap(29, 29, 29))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(buttonRensaData, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(74, 74, 74)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtAgentID)
+                                    .addComponent(txtAgentNamn)
+                                    .addComponent(txtAgentOmrade)
+                                    .addComponent(txtAgentLosenord, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtAgentDatum)
+                                    .addComponent(txtAgentTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(adminBox)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ändraAgentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(laggTillAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(txtAgentID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtAgentNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(txtAgentTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtAgentDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(txtAgentAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(txtAgentLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(txtAgentOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(buttonRensaData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(txtAgentID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAdd)
-                    .addComponent(buttonEdit)
-                    .addComponent(buttonDelete))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(txtAgentNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAgentTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAgentDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(adminBox))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAgentLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAgentOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonRensaData, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                            .addComponent(ändraAgentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(laggTillAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(44, 44, 44)
+                        .addComponent(buttonDelete))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Agent_ID", "Namn", "Telefon", "Anst.datum", "Administrator", "Losenord", "Omrade"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        hämtaAgentInfoButton.setText("Hämta Agent Info");
+        hämtaAgentInfoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hämtaAgentInfoButtonActionPerformed(evt);
             }
         });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+
+        txtHämtaAgent.setText("Skriv in Agent_ID");
+
+        agentCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        agentCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agentComboActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+
+        visaAllaAgenter.setText("Visa Alla Agenter");
+        visaAllaAgenter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visaAllaAgenterActionPerformed(evt);
+            }
+        });
+
+        goBackButton.setText("Gå tillbaka");
+        goBackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goBackButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(24, 24, 24)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(203, 203, 203))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(txtHämtaAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(hämtaAgentInfoButton)
+                .addGap(56, 56, 56)
+                .addComponent(visaAllaAgenter)
+                .addGap(33, 33, 33)
+                .addComponent(agentCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(goBackButton)
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtHämtaAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hämtaAgentInfoButton)
+                    .addComponent(agentCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(visaAllaAgenter)
+                    .addComponent(goBackButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78))
         );
-
-        jPanel1.getAccessibleContext().setAccessibleName("Hantering");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     private void table_update(){
-        int kolumn;
-        try{
-        statement = connection1.prepareStatement("SELECT * FROM agent");
-        ResultSet rs = statement.executeQuery();
-        ResultSetMetaData rss = (ResultSetMetaData) rs.getMetaData();
-        kolumn = rss.getColumnCount();
-        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
-        df.setRowCount(0);
-        while(rs.next()) // Listar alla aliens
-        {
-        Vector v1 = new Vector(); // Vektor med varje alien-individs vÃ¤rden.
+    
+    private void VisaAllaAgenter(){
         
-        for(int i=1 ; i<=kolumn ; i++){ 
-        v1.add(rs.getString("Agent_ID")); 
-        v1.add(rs.getString("Namn"));
-        v1.add(rs.getString("Telefon"));
-        v1.add(rs.getString("Anst.datum"));
-        v1.add(rs.getString("Administratör"));
-        v1.add(rs.getString("Losenord"));
-        v1.add(rs.getString("Område"));
-        }
+        txtAreaAgent.setText(""); // Nollställer txtArean.
         
-        df.addRow(v1); // Adderar/Listar varje agent-individs vÃ¤rde i tabellen
+        ArrayList<HashMap<String, String>> allaAgenter;
+        // Det är en ArrayList av Hashmaps som kommer att hämtas från Databasen.
         
-        }
-        
-        }
-       
-             catch (SQLException ex) {
-                Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            String fraga = "SELECT * FROM agent"; // Vill ha med all info från alla agenter.
+            allaAgenter = idb.fetchRows(fraga); // idb.fetchrows - en redan befintlig metod i InfDBklassen, som returnerar ett värden med ArrayList av hashmaps.
+                
+            
+            
+            // Första raden i rutan txtAreaAgent ska visa fältnamnen.
+            txtAreaAgent.append("Agent ID"+"\t");
+            txtAreaAgent.append("Namn"+"\t");
+            txtAreaAgent.append("Telefon"+"\t");
+            txtAreaAgent.append("Anställningsdatum"+ "\t");
+            txtAreaAgent.append("Admin" + "\t");
+            txtAreaAgent.append("Lösenord" + "\t");
+            txtAreaAgent.append("Område" + "\n");
+            
+            
+            
+            // en For loop som strukturerar varje hasmap för sig, under respektive fält.
+            for (HashMap<String, String> Agent : allaAgenter) {
+                txtAreaAgent.append(Agent.get("Agent_ID") + "\t");
+                txtAreaAgent.append(" " + Agent.get("Namn") + "\t");
+                txtAreaAgent.append(" " + Agent.get("Telefon") + "\t");
+                txtAreaAgent.append(" " + Agent.get("Anstallningsdatum") + "              "+ "\t"); // Behövde skapa ett extra stort mellanrum här för att få värdena att komma under rätt fältnamn.
+                txtAreaAgent.append(" " + Agent.get("Administrator") + "\t");
+                txtAreaAgent.append(" " + Agent.get("Losenord") + "\t");
+                txtAreaAgent.append(" " + Agent.get("Omrade") + "\n");
+                
             }
-            
+        }
+        catch (InfException ettUndantag) { 
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+            // Vi får ett felmeddelande som ska visa vart felet uppstod någonstans. Den hjälpte mig hitta när det var t.ex fel i SQL frågan.
             
         }
-     
-    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+        catch (Exception ettUndantag) { //lägger även till nullpointer exception
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        }  
+        
+    }
+    
+    
+    
+    private void buttonRensaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRensaDataActionPerformed
         // TODO add your handling code here:
+        
+        // Denna kod tar bort all data som i textfältena. T.ex om man råkade skriva fel.
+        txtAgentID.setText("");
+        txtAgentNamn.setText("");
+        txtAgentTelefon.setText("");
+        txtAgentDatum.setText("YYYY-MM-DD");
+        adminBox.setSelected(false);
+        txtAgentLosenord.setText("");
+        txtAgentOmrade.setText("");
+        txtAgentID.requestFocus();
+
+    }//GEN-LAST:event_buttonRensaDataActionPerformed
+
+    private void ändraAgentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ändraAgentButtonActionPerformed
+        // TODO add your handling code here:
+        
+        // En metod som ska uppdatera datan hos en agent med all data som finns skriven i textfälten. Agenten som ska uppdateras skrivs 
+        
+        String agent = txtHämtaAgent.getText();
+        int agentID = Integer.parseInt(agent);
+        
+        
         try {
             String StringID = txtAgentID.getText();// FÃ¥r ej vara null
             int id = Integer.parseInt(StringID);
             String namn = txtAgentNamn.getText(); // FÃ¥r ej vara null
-            String telefon = txtAgentTelefon.getText(); 
+            String telefon = txtAgentTelefon.getText();
             String datum = txtAgentDatum.getText();    // FÃ¥r ej vara null
-            String admin = txtAgentAdmin.getText();
             String losenord = txtAgentLosenord.getText();
             String plats = txtAgentOmrade.getText();
-            String fraga = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES (?,?,?,?,?,?,?,)";
+            int omrade = Integer.parseInt(plats);
+            String admin = "N";
+                if (adminBox.isEnabled()){
+            admin = "J";
+            } 
+            
+            // SQL frågan är utformad så att den uppdaterar alla fälten hos Agenten. Om ett fält har samma värde som innan, så blir det ingen skillnad.
+            // Och alla värden som är annorlunda kommer att bli uppdaterade.
+            String uppdateraAgent = "UPDATE agent SET Agent_ID = "+id+", Namn = \""+namn+"\", Telefon = \""+telefon+"\", Anstallningsdatum = \""+datum+"\", Administrator = \""+admin+"\", Losenord = \""+losenord+"\", Omrade = "+omrade+" WHERE Agent_ID = "+agentID+";";
+
+            idb.update(uppdateraAgent);
             
             
-            statement = connection1.prepareStatement(fraga);
-            statement.setInt(1, id);
-            statement.setString(2, namn);
-            statement.setString(3, telefon);
-            statement.setString(4, datum);
-            statement.setString(5, admin);
-            statement.setString(6, losenord);
-            statement.setString(7, plats);
-            statement.execute();
-            JOptionPane.showMessageDialog(this, "Agent registrerad");
-            table_update();
-           
-          
-         
-             } catch (SQLException ex) {
-                Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    }//GEN-LAST:event_buttonAddActionPerformed
-
-    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
-        int selectedIndex = jTable1.getSelectedRow();
-         try {
-             int id = Integer.parseInt(df.getValueAt(selectedIndex, 0).toString());
-             int villDuDelete = JOptionPane.showConfirmDialog(null, "Vill du ta bort vald agent?", 
-                     "Warning", JOptionPane.YES_NO_OPTION);
-             if(villDuDelete == JOptionPane.YES_OPTION){
-             String taBortAlien = "delete from agent where Agent_ID = ?";
-             statement = connection1.prepareStatement(taBortAlien);
-             statement.setInt(1, id);
-             statement.executeUpdate();
-             JOptionPane.showMessageDialog(this, "Agent ändrad");
-             table_update(); // Uppdaterar flÃ¶det. Kolla vad metoden gÃ¶r.
-             txtAgentID.setText("");
-             txtAgentNamn.setText("");
-             txtAgentTelefon.setText("");
-             txtAgentDatum.setText("");
-             txtAgentAdmin.setText("");
-             txtAgentLosenord.setText("");
-             txtAgentOmrade.setText("");
-             txtAgentID.requestFocus(); // Fokus pÃ¥ vald textruta.
-             } 
-             if(villDuDelete == JOptionPane.NO_OPTION){
-             JOptionPane.showMessageDialog(this, "Alien INTE ändrad");
-             }
-              
-           
-         } catch (SQLException ex) {
-             Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
-         }
-    }//GEN-LAST:event_buttonDeleteActionPerformed
-
-    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
-        int selectedIndex = jTable1.getSelectedRow();
-        String agentID = df.getValueAt(selectedIndex, 0).toString();
-        if(txtAgentID.getText().equals(agentID)){ 
-        JOptionPane.showMessageDialog(this, "Du får ej ändra på ID:t, det ändras nu tillbaka.");
-        txtAgentID.setText(agentID); // 
-        }
-        else
-        {
-         try {
-             
-            int id = Integer.parseInt(df.getValueAt(selectedIndex, 0).toString());
-            String namn = txtAgentNamn.getText(); 
-            String telefon = txtAgentTelefon.getText(); 
-            String datum = txtAgentDatum.getText();   
-            String admin = txtAgentAdmin.getText();
-            String losenord = txtAgentLosenord.getText();
-            String plats = txtAgentOmrade.getText();
-            String fraga = "UPDATE alien SET Namn = ?, Telefon = ?, "
-                    + "Datum = ?, Administrator = ?, Losenord = ?, Plats = ? WHERE Alien_ID = ? ";
-            statement = connection1.prepareStatement(fraga);
-           //  
-            statement.setString(1, namn);
-            statement.setString(2, telefon);
-            statement.setString(3, datum);
-            statement.setString(4, admin);
-            statement.setString(5, losenord);
-            statement.setString(6, plats);
-            statement.setInt(7, id);
-            statement.executeUpdate();
+            
             JOptionPane.showMessageDialog(this, "Agent ändrad");
-            table_update();
-           
+            txtAreaAgent.setText("");
+            VisaAllaAgenter();
             txtAgentID.setText("");
             txtAgentNamn.setText("");
             txtAgentTelefon.setText("");
-            txtAgentDatum.setText("");
-            txtAgentAdmin.setText("");
+            txtAgentDatum.setText("YYYY-MM-DD");
+            adminBox.isEnabled();
             txtAgentLosenord.setText("");
             txtAgentOmrade.setText("");
             txtAgentID.requestFocus();
             
-         
-             } catch (SQLException ex) {
-                Logger.getLogger(Hantera_Aliens.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+        } catch (InfException ex) {
+            Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_buttonEditActionPerformed
+    }//GEN-LAST:event_ändraAgentButtonActionPerformed
 
-    private void buttonRensaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRensaDataActionPerformed
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // TODO add your handling code here:
-             txtAgentID.setText("");
-             txtAgentNamn.setText("");
-             txtAgentTelefon.setText("");
-             txtAgentDatum.setText("");
-             txtAgentAdmin.setText("");
-             txtAgentLosenord.setText("");
-             txtAgentOmrade.setText("");
-             txtAgentID.requestFocus();
-             
-    }//GEN-LAST:event_buttonRensaDataActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
-        int selectedIndex = jTable1.getSelectedRow();
+        
+        // hämtar Agent_ID som man skrev in i fältet txtHämtaAgent.
+        String agent = txtHämtaAgent.getText();
+        int id = Integer.parseInt(agent); // Omvandlar String till INT. För Agent_ID är av typen INT.
+        
+        // SQL fråga som tar bort en Agent från Databasen där Agent_ID = det som man skrev in i txtHämtaAgent.
+        String fraga = "DELETE FROM agent WHERE Agent_ID ="+id;
         
         
-        txtAgentID.setText(df.getValueAt(selectedIndex, 0).toString());
-        txtAgentNamn.setText(df.getValueAt(selectedIndex, 1).toString());
-        txtAgentTelefon.setText(df.getValueAt(selectedIndex, 2).toString());
-        txtAgentDatum.setText(df.getValueAt(selectedIndex, 3).toString());
-        txtAgentAdmin.setText(df.getValueAt(selectedIndex, 4).toString());
-        txtAgentLosenord.setText(df.getValueAt(selectedIndex, 5).toString());
-        txtAgentOmrade.setText(df.getValueAt(selectedIndex, 6).toString());
-    }//GEN-LAST:event_jTable1MouseClicked
+        // En dialogruta ska poppa ut så att man inte tar bort en agent av misstag. Den här dialogrutan ska uppdateras och förbättras. T.ex Ta med mer information om vilken agent som håller på att tas bort.
+        int svar = JOptionPane.showConfirmDialog(this, "Vill du verkligen ta bort den här Agenten: Agent_ID "+ id, "Fortsätta?", JOptionPane.YES_NO_OPTION);
+        
+        // Om man trycker på "Yes" så ska agenten tas bort från systemet.
+        if(svar==JOptionPane.YES_OPTION){
+        try{
+            
+            idb.delete(fraga);
+            JOptionPane.showMessageDialog(this, "Agent borttagen");
+            
+            VisaAllaAgenter();
+            // Uppdaterar listan med alla Agenter
+            
+            
+            
+        } catch (InfException ex) {
+            Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        }
+        else {
+            // Visar för användaren att agenten inte blev borttagen
+            JOptionPane.showMessageDialog(this, "Agent ej borttagen");
+        }
+        
+        
+        
+    }//GEN-LAST:event_buttonDeleteActionPerformed
 
+    private void txtAgentDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgentDatumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAgentDatumActionPerformed
+
+    private void hämtaAgentInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hämtaAgentInfoButtonActionPerformed
+        // TODO add your handling code here:
+        
+        // För enkelhetens skull så kopierades en del kod från en annan metod. 
+        
+        // Ska kolla upp en Agent.
+        ArrayList<HashMap<String, String>> kollaAgent;
+        
+        // Agenten som ska kollas upp skriver man in i txtHämtaAgent.
+        String agent = txtHämtaAgent.getText();
+        int id = Integer.parseInt(agent); // Omvandlar String till INT.
+        String admin = "J";
+        
+        try {
+            String fraga = "SELECT * FROM agent where Agent_ID =" + id; // SQL fråga som ska hämta all information om Agenten.
+            kollaAgent = idb.fetchRows(fraga);
+            
+            // Sätter ut "Titlarna" på respektive kolumn.
+            txtAreaAgent.setText("");
+            txtAreaAgent.append("Agent ID"+"\t");
+            txtAreaAgent.append("Namn"+"\t");
+            txtAreaAgent.append("Telefon"+"\t");
+            txtAreaAgent.append("Anställningsdatum"+ "\t");
+            txtAreaAgent.append("Admin" + "\t");
+            txtAreaAgent.append("Lösenord" + "\t");
+            txtAreaAgent.append("Område" + "\n");
+            
+            
+            
+            
+            
+            
+            
+            
+                
+                // Sätter ut all info på txtArean om agenten. 
+                for (HashMap<String, String> Agent : kollaAgent) {
+                txtAreaAgent.append(Agent.get("Agent_ID") + "\t");
+                txtAreaAgent.append(" " + Agent.get("Namn") + "\t");
+                txtAreaAgent.append(" " + Agent.get("Telefon") + "\t");
+                txtAreaAgent.append(" " + Agent.get("Anstallningsdatum") + "              "+ "\t");
+                txtAreaAgent.append(" " + Agent.get("Administrator") + "\t");
+                txtAreaAgent.append(" " + Agent.get("Losenord") + "\t");
+                txtAreaAgent.append(" " + Agent.get("Omrade") + "\n");
+                
+                
+                // Vill att all info som hämtas om agenten ska också komma in på respektive täxtfält bredvid txtArean.
+                txtAgentID.setText(Agent.get("Agent_ID"));
+                txtAgentNamn.setText(Agent.get("Namn"));
+                txtAgentTelefon.setText(Agent.get("Telefon"));
+                txtAgentDatum.setText(Agent.get("Anstallningsdatum"));
+                
+                // Den här koden ska kolla om Admin är ett "J" hos agenten. Isåfall ska adminBox vara(true), och selected. 
+                // Om agenten inte är Admin, alltså att Agent.get("Administrator") = "N", då ska Admin.box returnera false och inte vara selected.
+                if (Agent.get("Administrator").equals(admin)){
+                    adminBox.setSelected(true);
+                }
+                else {
+                    adminBox.setSelected(false);
+                }
+                
+                
+                txtAgentLosenord.setText(Agent.get("Losenord"));
+                txtAgentOmrade.setText(Agent.get("Omrade"));
+                txtAgentID.requestFocus(); // Ger fokus på txtAgentID så att man inte behöver trycka på det fältet för att börja skriv igen.
+                
+                
+            }
+            
+            
+            
+            
+            
+        }catch (InfException ex) {
+            Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_hämtaAgentInfoButtonActionPerformed
+
+    private void agentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentComboActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_agentComboActionPerformed
+
+    private void visaAllaAgenterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visaAllaAgenterActionPerformed
+        // TODO add your handling code here:
+        
+        VisaAllaAgenter();
+        
+        // Anropar metoden VisaAllaAgenter som ja.. Visar alla agenter i txtArean! :D
+        
+    }//GEN-LAST:event_visaAllaAgenterActionPerformed
+
+    private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Admin(idb, InloggadSom).setVisible(true);
+        
+        // Så att man kan gå tillbaka till föregående ruta som Admin. 
+        
+    }//GEN-LAST:event_goBackButtonActionPerformed
+
+    private void laggTillAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laggTillAgentActionPerformed
+        // TODO add your handling code here:
+        
+        
+        try {
+            String StringID = txtAgentID.getText();// FÃ¥r ej vara null
+            int id = Integer.parseInt(StringID);
+            String namn = txtAgentNamn.getText(); // FÃ¥r ej vara null
+            String telefon = txtAgentTelefon.getText();
+            String datum = txtAgentDatum.getText();    // FÃ¥r ej vara null
+            String losenord = txtAgentLosenord.getText();
+            String plats = txtAgentOmrade.getText();
+            int omrade = Integer.parseInt(plats);
+            
+            String admin = "N";
+            
+                if (adminBox.isEnabled()){
+            admin = "J";
+                }
+                // Om Adminboxen är intryckt så kommer String admin att bli ett "J". Detta för att det ska bara finnas två olika värden i kolumnen "Administrator". Antingen "J" eller "N".
+            
+            String nyAgent = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES ("+id+", \""+namn+"\", \""+telefon+"\", \""+datum+"\", \""+admin+"\", \""+losenord+"\","+omrade+");";
+            
+
+            
+
+            idb.insert(nyAgent);
+            
+            //txtAreaAgent.setText(nyregistreradAgent);
+            
+            
+            JOptionPane.showMessageDialog(this, "Agent registrerad");
+            
+            txtAreaAgent.setText("");
+            VisaAllaAgenter();
+            // Den nyregistrerade Agenten kommer att dyka upp på listan av Alla agenter.
+            
+            txtAgentID.setText("");
+            txtAgentNamn.setText("");
+            txtAgentTelefon.setText("");
+            txtAgentDatum.setText("YYYY-MM-DD");
+            adminBox.setSelected(false);
+            txtAgentLosenord.setText("");
+            txtAgentOmrade.setText("");
+            txtAgentID.requestFocus();
+            
+
+        } catch (InfException ex) {
+            Logger.getLogger(Registrering_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_laggTillAgentActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
     
-    
-    
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAdd;
+    private javax.swing.JCheckBox adminBox;
+    private javax.swing.JComboBox<String> agentCombo;
     private javax.swing.JButton buttonDelete;
-    private javax.swing.JButton buttonEdit;
     private javax.swing.JButton buttonRensaData;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JToggleButton goBackButton;
+    private javax.swing.JButton hämtaAgentInfoButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -478,15 +651,19 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtAgentAdmin;
+    private javax.swing.JToggleButton laggTillAgent;
     private javax.swing.JTextField txtAgentDatum;
     private javax.swing.JTextField txtAgentID;
     private javax.swing.JTextField txtAgentLosenord;
     private javax.swing.JTextField txtAgentNamn;
     private javax.swing.JTextField txtAgentOmrade;
     private javax.swing.JTextField txtAgentTelefon;
+    private javax.swing.JTextArea txtAreaAgent;
+    private javax.swing.JTextField txtHämtaAgent;
+    private javax.swing.JToggleButton visaAllaAgenter;
+    private javax.swing.JButton ändraAgentButton;
     // End of variables declaration//GEN-END:variables
 }
