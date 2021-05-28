@@ -63,6 +63,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         adminBox = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         buttonDelete = new javax.swing.JButton();
+        laggTillAgent = new javax.swing.JToggleButton();
         hämtaAgentInfoButton = new javax.swing.JButton();
         txtHämtaAgent = new javax.swing.JTextField();
         agentCombo = new javax.swing.JComboBox<>();
@@ -127,14 +128,24 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             }
         });
 
+        laggTillAgent.setText("Lägg till");
+        laggTillAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laggTillAgentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -156,23 +167,26 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                                         .addGap(29, 29, 29))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(buttonRensaData)))
-                        .addGap(51, 51, 51)
+                                .addComponent(buttonRensaData, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAgentID)
-                            .addComponent(txtAgentNamn)
-                            .addComponent(txtAgentOmrade)
-                            .addComponent(txtAgentLosenord, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtAgentDatum, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                            .addComponent(txtAgentTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(74, 74, 74)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ändraAgentButton)
-                                    .addComponent(adminBox))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)))
+                                    .addComponent(txtAgentID)
+                                    .addComponent(txtAgentNamn)
+                                    .addComponent(txtAgentOmrade)
+                                    .addComponent(txtAgentLosenord, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtAgentDatum)
+                                    .addComponent(txtAgentTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(adminBox)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ändraAgentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(laggTillAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
@@ -183,46 +197,49 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(txtAgentID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtAgentNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAgentTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAgentDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(adminBox))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAgentLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAgentOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonRensaData, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(ändraAgentButton))
-                .addGap(50, 50, 50)
-                .addComponent(buttonDelete))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(txtAgentID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(txtAgentNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAgentTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAgentDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(adminBox))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAgentLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAgentOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonRensaData, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                            .addComponent(ändraAgentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(laggTillAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(44, 44, 44)
+                        .addComponent(buttonDelete))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
 
@@ -350,7 +367,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     private void buttonRensaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRensaDataActionPerformed
         // TODO add your handling code here:
         
-        // Denna 
+        // Denna kod tar bort all data som i textfältena. T.ex om man råkade skriva fel.
         txtAgentID.setText("");
         txtAgentNamn.setText("");
         txtAgentTelefon.setText("");
@@ -365,7 +382,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     private void ändraAgentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ändraAgentButtonActionPerformed
         // TODO add your handling code here:
         
-        HashMap<String, String> nyregistreradAgent;
+        // En metod som ska uppdatera datan hos en agent med all data som finns skriven i textfälten. Agenten som ska uppdateras skrivs 
         
         String agent = txtHämtaAgent.getText();
         int agentID = Integer.parseInt(agent);
@@ -383,7 +400,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             String admin = "N";
                 if (adminBox.isEnabled()){
             admin = "J";
-            } else admin = "N";
+            } 
             
             
             String uppdateraAgent = "UPDATE agent SET Agent_ID = "+id+", Namn = \""+namn+"\", Telefon = \""+telefon+"\", Anstallningsdatum = \""+datum+"\", Administrator = \""+admin+"\", Losenord = \""+losenord+"\", Omrade = "+omrade+" WHERE Agent_ID = "+agentID+";";
@@ -415,6 +432,20 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // TODO add your handling code here:
+        
+        // hämtar Agent_ID som man skrev in i fältet txtHämtaAgent.
+        String agent = txtHämtaAgent.getText();
+        int id = Integer.parseInt(agent); // Omvandlar String till INT. För Agent_ID är av typen INT.
+        
+        String fraga = "DELETE FROM agent WHERE Agent_ID ="+id;
+        
+        try{
+            
+            idb.delete(fraga);
+        } catch (InfException ex) {
+            Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         
     }//GEN-LAST:event_buttonDeleteActionPerformed
@@ -507,6 +538,60 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         new Admin(idb, InloggadSom).setVisible(true);
     }//GEN-LAST:event_goBackButtonActionPerformed
 
+    private void laggTillAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laggTillAgentActionPerformed
+        // TODO add your handling code here:
+        
+        
+        HashMap<String, String> nyregistreradAgent;
+        
+        
+        
+        try {
+            String StringID = txtAgentID.getText();// FÃ¥r ej vara null
+            int id = Integer.parseInt(StringID);
+            String namn = txtAgentNamn.getText(); // FÃ¥r ej vara null
+            String telefon = txtAgentTelefon.getText();
+            String datum = txtAgentDatum.getText();    // FÃ¥r ej vara null
+            String losenord = txtAgentLosenord.getText();
+            String plats = txtAgentOmrade.getText();
+            int omrade = Integer.parseInt(plats);
+            String admin = "N";
+                if (adminBox.isEnabled()){
+            admin = "J";
+            } else admin = "N";
+            
+            
+            String nyAgent = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES ("+id+", \""+namn+"\", \""+telefon+"\", \""+datum+"\", \""+admin+"\", \""+losenord+"\","+omrade+");";
+            
+
+//String hämtaNyAgent = "SELECT * from Agent where Agent_ID ="+ StringID;
+            
+
+            idb.insert(nyAgent);
+            
+            //txtAreaAgent.setText(nyregistreradAgent);
+            
+            
+            JOptionPane.showMessageDialog(this, "Agent registrerad");
+            txtAreaAgent.setText("");
+            VisaAllaAgenter();
+            txtAgentID.setText("");
+            txtAgentNamn.setText("");
+            txtAgentTelefon.setText("");
+            txtAgentDatum.setText("YYYY-MM-DD");
+            adminBox.setSelected(false);
+            txtAgentLosenord.setText("");
+            txtAgentOmrade.setText("");
+            txtAgentID.requestFocus();
+            
+
+        } catch (InfException ex) {
+            Logger.getLogger(Registrering_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_laggTillAgentActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -530,6 +615,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton laggTillAgent;
     private javax.swing.JTextField txtAgentDatum;
     private javax.swing.JTextField txtAgentID;
     private javax.swing.JTextField txtAgentLosenord;
