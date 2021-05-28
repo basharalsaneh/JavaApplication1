@@ -339,7 +339,7 @@ public class Registrering_Agenter extends javax.swing.JFrame {
         txtAgentNamn.setText("");
         txtAgentTelefon.setText("");
         txtAgentDatum.setText("YYYY-MM-DD");
-        adminBox.isEnabled();
+        adminBox.setSelected(false);
         txtAgentLosenord.setText("");
         txtAgentOmrade.setText("");
         txtAgentID.requestFocus();
@@ -386,7 +386,7 @@ public class Registrering_Agenter extends javax.swing.JFrame {
             txtAgentNamn.setText("");
             txtAgentTelefon.setText("");
             txtAgentDatum.setText("YYYY-MM-DD");
-            adminBox.isEnabled();
+            adminBox.setSelected(false);
             txtAgentLosenord.setText("");
             txtAgentOmrade.setText("");
             txtAgentID.requestFocus();

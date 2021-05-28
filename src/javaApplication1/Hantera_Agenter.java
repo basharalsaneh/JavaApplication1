@@ -28,8 +28,8 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     public Hantera_Agenter(InfDB idb, inloggningValidering InloggadSom) {
         initComponents();
         this.InloggadSom = InloggadSom;
-        this.idb = idb;
-        VisaAllaAgenter();
+        this.idb = idb; 
+        VisaAllaAgenter(); // anropar en metod som ska visa alla Agenter
     }
 
     /**
@@ -298,15 +298,18 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     
     private void VisaAllaAgenter(){
         
-        txtAreaAgent.setText("");
+        txtAreaAgent.setText(""); // Nollställer txtArean.
         
         ArrayList<HashMap<String, String>> allaAgenter;
-        
+        // Det är en ArrayList av Hashmaps som kommer att hämtas från Databasen.
         
         try {
-            String fraga = "SELECT * FROM agent";
-            allaAgenter = idb.fetchRows(fraga);
+            String fraga = "SELECT * FROM agent"; // Vill ha med all info från alla agenter.
+            allaAgenter = idb.fetchRows(fraga); // idb.fetchrows - en redan befintlig metod i InfDBklassen, som returnerar ett värden med ArrayList av hashmaps.
                 
+            
+            
+            // Första raden i rutan txtAreaAgent ska visa fältnamnen.
             txtAreaAgent.append("Agent ID"+"\t");
             txtAreaAgent.append("Namn"+"\t");
             txtAreaAgent.append("Telefon"+"\t");
@@ -317,21 +320,22 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             
             
             
-            
+            // en For loop som strukturerar varje hasmap för sig, under respektive fält.
             for (HashMap<String, String> Agent : allaAgenter) {
                 txtAreaAgent.append(Agent.get("Agent_ID") + "\t");
                 txtAreaAgent.append(" " + Agent.get("Namn") + "\t");
                 txtAreaAgent.append(" " + Agent.get("Telefon") + "\t");
-                txtAreaAgent.append(" " + Agent.get("Anstallningsdatum") + "              "+ "\t");
+                txtAreaAgent.append(" " + Agent.get("Anstallningsdatum") + "              "+ "\t"); // Behövde skapa ett extra stort mellanrum här för att få värdena att komma under rätt fältnamn.
                 txtAreaAgent.append(" " + Agent.get("Administrator") + "\t");
                 txtAreaAgent.append(" " + Agent.get("Losenord") + "\t");
                 txtAreaAgent.append(" " + Agent.get("Omrade") + "\n");
                 
             }
         }
-        catch (InfException ettUndantag) {
+        catch (InfException ettUndantag) { 
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+            // Vi får ett felmeddelande som ska visa vart felet uppstod någonstans. Den hjälpte mig hitta när det var t.ex fel i SQL frågan.
             
         }
         catch (Exception ettUndantag) { //lägger även till nullpointer exception
@@ -345,11 +349,13 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     
     private void buttonRensaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRensaDataActionPerformed
         // TODO add your handling code here:
+        
+        // Denna 
         txtAgentID.setText("");
         txtAgentNamn.setText("");
         txtAgentTelefon.setText("");
         txtAgentDatum.setText("YYYY-MM-DD");
-        adminBox.isEnabled();
+        adminBox.setSelected(false);
         txtAgentLosenord.setText("");
         txtAgentOmrade.setText("");
         txtAgentID.requestFocus();
