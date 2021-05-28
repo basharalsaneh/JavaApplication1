@@ -139,10 +139,16 @@ public class BytaLosenordAdmin extends javax.swing.JFrame {
                 String resultat = idb.fetchSingle(fraga);
 
                 if(gammalLosenord.equals(resultat)){
+                    if(nyttLosenord.length() <=6){
                     String qSetPassword = "UPDATE agent SET losenord =" + "'" + nyttLosenord + "'" + "WHERE agent_id = " + "'" + vemArInloggad.getId() + "'";
                     idb.update(qSetPassword);
                     vemArInloggad.setNyttLosenord(nyttLosenord);
                      JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
+                     }
+                    else{ 
+                        passNytt.requestFocus(); 
+                        JOptionPane.showMessageDialog(this, "Tyvärr för långt lösenord, max 6 tecken");
+                    }
                 }
                 else{
                     passNuvarande.requestFocus();

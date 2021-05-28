@@ -54,6 +54,8 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Hantera utrustning");
 
+        txtUtID.setEditable(false);
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Sök på utrustning:");
 
@@ -66,6 +68,7 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
             }
         });
 
+        txtBenamning.setEditable(false);
         txtBenamning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBenamningActionPerformed(evt);
@@ -137,7 +140,7 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-       
+        
         try {
             // TODO add your handling code here:
             String enUtrustning = cbUtrustning.getSelectedItem().toString();
@@ -157,7 +160,8 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
             System.out.println(ex);
         }
            
-       
+        
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
   private void fyllCBMedUtrustning() {

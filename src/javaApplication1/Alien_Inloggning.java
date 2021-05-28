@@ -142,6 +142,7 @@ public class Alien_Inloggning extends javax.swing.JFrame {
     
     private void loggaInSomAlien(){
         if(Validering.personFinns(txtUser) && Validering.finnsLosenord(txtPassword)){
+      // Kollar upp om textBoxarna är tomma eller inte med hjälp av valideringsklassen.
         boolean godkandUser = false;
         boolean godkandLosenord = false;
           
@@ -153,7 +154,9 @@ public class Alien_Inloggning extends javax.swing.JFrame {
            String giltigUser = idb.fetchSingle(fraga1);
            String fraga2 = "SELECT Losenord FROM alien where Namn like '" + giltigUser + "';";
            String giltigLosenord = idb.fetchSingle(fraga2);
-    
+// Vi kör sql-frågor mot databasen över, och hämtar ett värde med hjälp av fetchSingle()-metoden.
+// Med koden nedan dubbelkollar vi så att rätt namn är inskrivet mot databasen, samt även det rätta lösenordet för det valda namnet.
+// Om så är fallet så ges de lokala booleanska variablerna godkandUser och godkandLosenord värdet true.
              if(user.equals(giltigUser)){
                  godkandUser = true;
                  if(password.equals(giltigLosenord)){
@@ -167,12 +170,16 @@ public class Alien_Inloggning extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(null, "Användare ej hittat.");
              }
              if(godkandUser && godkandLosenord){
-             String fraga3 = "SELECT Alien_ID from alien where Namn like '" + giltigUser+ "';";
+                 // Om true så körs följande nedan.
+                 JOptionPane.showMessageDialog(this, "Du kommer nu loggas in som " + giltigUser);
+                 String fraga3 = "SELECT Alien_ID from alien where Namn like '" + giltigUser+ "';";
                  String userID = idb.fetchSingle(fraga3);
                  int giltigtID = Integer.parseInt(userID);
+ // Med koden nedanför hänvisar vi till vår inloggningValiderings-klassen och fyller i vem som är inloggad med 
+ // hjälp av metoden inloggadSom(). Där fylls relevant information (namn, id, lösenord) för möjlighet att se 
+ // den inloggades uppgifter i inloggningValideringsklassen. 
                 vemArInloggad.inloggadSom(giltigUser, giltigtID, giltigLosenord);
-                JOptionPane.showMessageDialog(this, "User: " + giltigUser + ", lösenord: " + giltigLosenord + ", med id: " + giltigtID);
-                   this.dispose();
+                this.dispose();
                 new Alien(idb, vemArInloggad).setVisible(true);
              }
         
