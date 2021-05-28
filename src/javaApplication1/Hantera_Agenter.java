@@ -625,7 +625,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             
 
         } catch (InfException ex) {
-            Logger.getLogger(Registrering_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
