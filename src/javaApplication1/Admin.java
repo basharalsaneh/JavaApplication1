@@ -167,7 +167,7 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.dispose();
-        new Hantera_Aliens(idb, vemArInloggad).setVisible(true);
+        new Hantera_Aliens1(idb, vemArInloggad).setVisible(true);
         
     }//GEN-LAST:event_btnAliensActionPerformed
 

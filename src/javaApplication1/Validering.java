@@ -27,6 +27,15 @@ public class Validering {
         return resultat;
      }
      
+          public static boolean personFinns(JTextField enPerson, String meddelandetext) {
+        resultat = true;
+
+        if (enPerson.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingen användare inskrivet");
+            resultat = false;    
+        }
+        return resultat;
+     }
      public static boolean finnsLosenord(JPasswordField ettLosenord) {
         resultat = true;
 
@@ -58,7 +67,16 @@ public class Validering {
         }
         return result;
     }
-        
+    
+        public static boolean kontrollForComboBox(JComboBox text, String meddelandeText ) {
+        boolean result = true;
+        if (text.getSelectedItem().equals("")) {
+            result = false;
+            text.requestFocus();
+        }
+        return result;
+    }
+          
             
             
      public static boolean arAgent(){
