@@ -140,29 +140,36 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void taBortFranVapen(){
+    String sqlFraga = "Select * from utrustning where exist in vapen";
+    }
+    
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        
+        if(Validering.kontrollForComboBox(cbUtrustning)){
         try {
             // TODO add your handling code here:
             String enUtrustning = cbUtrustning.getSelectedItem().toString();
     
             String fraga = "delete from utrustning where benamning = '" + hamtaUtrustningsBenamning() + "';";
             String fraga2 = "delete from innehar_utrustning where utrustnings_id = '" + hamtaUtrustningsID() + "';";
+      //      String fraga3 = "delete from " + enUtrustning+ " where "+ hamtaUtrustningsID() + " IN (Select " + hamtaUtrustningsID()+ " from utrustning)";
             idb.delete(fraga2);
             idb.delete(fraga);
+          //  idb.delete(fraga3);
             
             JOptionPane.showMessageDialog(this, "Du har nu tagit bort utrustningen: " + enUtrustning );
+            
             txtUtID.setText("");
             txtBenamning.setText("");
-            
-           //  cbUtrustning.removeItem(enUtrustning); // Tanken var att ta bort borttagen utrustning från comboboxen. Gick dock inte.
-           
+            cbUtrustning.removeItem(enUtrustning); // Tar bort vald utrustning från comboboxen
+            cbUtrustning.setSelectedIndex(0); // Sätter fokus på översta (index 0) utrustning.
+ 
         } catch (InfException ex) {
             Logger.getLogger(Hantera_Utrustning.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
            
-        
+        }     
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
