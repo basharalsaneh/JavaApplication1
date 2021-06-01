@@ -171,12 +171,18 @@ public class Undersok_Omrade extends javax.swing.JFrame {
                     + "order by count(Ansvarig_Agent) DESC limit 3";
             soktaAgenter = idb.fetchRows(fraga);
 
+            // Första raden i rutan txtAreaVisaInfo ska visa fältnamnen.
+            txtAreaVisaInfo.append("Agent ID" + "\t");
+            txtAreaVisaInfo.append("Namn" + "\t");
+            txtAreaVisaInfo.append("Ansvarar för" + "\n");
+
             soktaAgenter.stream().map(Agent -> {
-                txtAreaVisaInfo.append("Agent ID: " + Agent.get("Agent_ID") + "\t");
                 return Agent;
             }).forEachOrdered(Agent -> {
-                txtAreaVisaInfo.append("Namn: " + Agent.get("Namn") + "\t");
-                txtAreaVisaInfo.append(" Ansvarar för:  " + Agent.get("Antal") + " st" + "\t");                
+
+                txtAreaVisaInfo.append(Agent.get("Agent_ID") + "\t");
+                txtAreaVisaInfo.append(" " + Agent.get("Namn") + "\t");
+                txtAreaVisaInfo.append(" " + Agent.get("Antal") + " st" + "\n");
             });
         } catch (InfException ettUndantag) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
