@@ -26,6 +26,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
      */
     public Agent_Inloggning(InfDB idb){
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
         vemArInloggad = new Validering();
         }

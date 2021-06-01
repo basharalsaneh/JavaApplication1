@@ -23,6 +23,7 @@ public class Admin extends javax.swing.JFrame {
      */
     public Admin(InfDB idb, Validering vemArInloggad) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
     }

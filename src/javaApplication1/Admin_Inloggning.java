@@ -19,6 +19,7 @@ public class Admin_Inloggning extends javax.swing.JFrame {
     // När man väl försöker logga in som Admin tar konstruktorn in den angivna kopplingen till databasen samt 
     // Skapar ett nytt "objekt" (den som är inloggad) som följer med så länge respektive Admin är inloggad.
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = new Validering();
     }

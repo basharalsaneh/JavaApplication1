@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package javaApplication1;
+import java.awt.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,6 +28,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
      */
     public Hantera_Agenter(InfDB idb, Validering InloggadSom) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.InloggadSom = InloggadSom;
         this.idb = idb; 
         VisaAllaAgenter(); // anropar en metod som ska visa alla Agenter

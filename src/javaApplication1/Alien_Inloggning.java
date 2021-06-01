@@ -17,6 +17,7 @@ public class Alien_Inloggning extends javax.swing.JFrame {
    
     public Alien_Inloggning(InfDB idb){
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = new Validering();
         

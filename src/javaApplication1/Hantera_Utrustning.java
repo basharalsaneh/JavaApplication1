@@ -25,6 +25,7 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
      */
     public Hantera_Utrustning(InfDB idb, Validering vemArInloggad) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
         fyllCBMedUtrustning();

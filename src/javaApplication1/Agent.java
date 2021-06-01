@@ -32,6 +32,7 @@ Validering vemArInloggad;
     
 public Agent(InfDB idb, Validering vemArInloggad) {
     initComponents();
+    this.setLocationRelativeTo(null);
     this.idb = idb;
     this.vemArInloggad = vemArInloggad;
     minaUtrustning();

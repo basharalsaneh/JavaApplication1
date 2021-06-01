@@ -25,6 +25,7 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
      */
     public Registrera_Utrustning(InfDB idb, Validering vemArInloggad) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
         jKaliber.setVisible(false);

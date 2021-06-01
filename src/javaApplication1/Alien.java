@@ -27,6 +27,7 @@ Validering vemArInloggad = null;
 
 public Alien(InfDB idb, Validering vemArInloggad) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
         jRub.setText("Välkommen " + vemArInloggad.getNamn() + "!");
