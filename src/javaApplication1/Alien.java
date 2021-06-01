@@ -23,10 +23,11 @@ public class Alien extends javax.swing.JFrame {
     
 
 InfDB idb;
-inloggningValidering vemArInloggad = null;
+Validering vemArInloggad = null;
 
-public Alien(InfDB idb, inloggningValidering vemArInloggad) {
+public Alien(InfDB idb, Validering vemArInloggad) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
         jRub.setText("Välkommen " + vemArInloggad.getNamn() + "!");
@@ -168,7 +169,6 @@ public Alien(InfDB idb, inloggningValidering vemArInloggad) {
 
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Du loggas nu ut som: " + vemArInloggad.getNamn());
         this.dispose();
         new Start(idb).setVisible(true);
     }//GEN-LAST:event_btnLoggaUtActionPerformed

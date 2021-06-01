@@ -13,14 +13,15 @@ import oru.inf.InfException;
 public class Admin_Inloggning extends javax.swing.JFrame {
 
     InfDB idb;
-    inloggningValidering vemArInloggad;
+    Validering vemArInloggad;
     
     public Admin_Inloggning(InfDB idb){ 
     // När man väl försöker logga in som Admin tar konstruktorn in den angivna kopplingen till databasen samt 
     // Skapar ett nytt "objekt" (den som är inloggad) som följer med så länge respektive Admin är inloggad.
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
-        this.vemArInloggad = new inloggningValidering();
+        this.vemArInloggad = new Validering();
     }
 
     @SuppressWarnings("unchecked")
@@ -32,11 +33,11 @@ public class Admin_Inloggning extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         buttonLogin = new javax.swing.JButton();
         txtUser = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblAdminNamn = new javax.swing.JLabel();
+        lblAdminLosenord = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
-        jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        lblAdmin = new javax.swing.JLabel();
+        btnTillbaka = new javax.swing.JButton();
 
         jLabel4.setText("jLabel4");
 
@@ -53,9 +54,9 @@ public class Admin_Inloggning extends javax.swing.JFrame {
 
         txtUser.setColumns(6);
 
-        jLabel2.setText("Agent ID");
+        lblAdminNamn.setText("Agent ID");
 
-        jLabel3.setText("Lösenord");
+        lblAdminLosenord.setText("Lösenord");
 
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -63,13 +64,13 @@ public class Admin_Inloggning extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
-        jLabel6.setText("MIB Admin");
+        lblAdmin.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
+        lblAdmin.setText("MIB Admin");
 
-        jButton1.setText("Gå tillbaka");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnTillbaka.setText("Gå tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnTillbakaActionPerformed(evt);
             }
         });
 
@@ -81,18 +82,18 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                 .addContainerGap(38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnTillbaka)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttonLogin))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(lblAdminNamn)
+                            .addComponent(lblAdminLosenord))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPassword)
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblAdmin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28))
@@ -106,19 +107,19 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(jLabel6)
+                        .addComponent(lblAdmin)
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(lblAdminNamn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
+                            .addComponent(lblAdminLosenord)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTillbaka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
@@ -141,20 +142,19 @@ public class Admin_Inloggning extends javax.swing.JFrame {
           
         String user = txtUser.getText();
         String password = txtPassword.getText();
-        System.out.println("Lösenordet inskrivet i rutan: " + password);
         try{
-        String fraga1 = "SELECT Namn FROM agent where Namn like '"+user+"';"; 
+        String fraga1 = "SELECT Agent_ID FROM agent where Agent_ID like '"+user+"';"; 
            String giltigUser = idb.fetchSingle(fraga1); 
            // Vid hämtning av fraga1 från databasuppkopplingen (idb) och med metoden: fetchSingle() så hämtar vi ett enstaka värde 
            //och ger agentens namn ett nytt stringvärde vars namn är giltigUser.
-           String fraga2 = "SELECT Losenord FROM agent where Namn like '" + giltigUser + "';";
+           String fraga2 = "SELECT Losenord FROM agent where Agent_ID like '" + giltigUser + "';";
            String giltigLosenord = idb.fetchSingle(fraga2);
-           String fraga3 = "SELECT Administrator FROM agent where Namn like '" + giltigUser + "';";
+           String fraga3 = "SELECT Administrator FROM agent where Agent_ID like '" + giltigUser + "';";
            String befogenhet = idb.fetchSingle(fraga3); 
            // Fortsättning med fetchSingle-metoder för att hämta Lösenord samt AdministratorStatus.
            String admin = "J";
            // If-satserna nedan kollar om det inskrivna användarnamnet, lösenordet samt om en administratörstatus finns för "vald" agent.
-           // Om de krav uppfylls ges en booleansk variabel för repsektive uppfyllt krav.
+           // Om de krav uppfylls ges en booleansk variabel för respektive uppfyllt krav.
              if(user.equals(giltigUser)){
                  godkandUser = true;
                  if(password.equals(giltigLosenord)){
@@ -171,14 +171,13 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                 }
             }
             else{
-                 JOptionPane.showMessageDialog(null, "Agent ej hittat.");
+                 JOptionPane.showMessageDialog(null, "Agent ej hittad.");
              }
-             if(godkandUser && godkandLosenord && godkandAdmin){
-                 JOptionPane.showMessageDialog(this, "Du kommer nu loggas in som " + giltigUser);
-             String fraga4 = "SELECT Agent_ID from agent where Namn like '" + giltigUser+ "';";
+             if(godkandUser && godkandLosenord && godkandAdmin){   
+             String fraga4 = "SELECT Agent_ID from agent where Agent_ID like '" + giltigUser+ "';";
                  String userID = idb.fetchSingle(fraga4);
                  int giltigtID = Integer.parseInt(userID);
- // Med koden nedanför hänvisar vi till vår inloggningValiderings-klassen och fyller i vem som är inloggad med 
+ // Med koden nedanför hänvisar vi till vår Valideringsklass och fyller i vem som är inloggad med 
  // hjälp av metoden inloggadSom(). Där fylls relevant information (namn, id, lösenord) för möjlighet att se 
  // den inloggades uppgifter i inloggningValideringsklassen.
                 vemArInloggad.inloggadSom(giltigUser, giltigtID, giltigLosenord);
@@ -196,11 +195,11 @@ public class Admin_Inloggning extends javax.swing.JFrame {
             
     }//GEN-LAST:event_buttonLoginActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         // TODO add your handling code here:
         this.dispose();
         new Start(idb).setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
@@ -213,14 +212,14 @@ public class Admin_Inloggning extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton buttonLogin;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblAdmin;
+    private javax.swing.JLabel lblAdminLosenord;
+    private javax.swing.JLabel lblAdminNamn;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables

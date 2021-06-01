@@ -38,7 +38,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblKaliber" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblInfo" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -47,7 +47,7 @@
                           <Component id="jTyp" min="-2" max="-2" attributes="0"/>
                           <Component id="txtBenamning" alignment="0" pref="168" max="32767" attributes="0"/>
                           <Component id="btnRegistrera" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jKaliber" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jInfo" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -74,8 +74,8 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblKaliber" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                  <Component id="jKaliber" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblInfo" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                  <Component id="jInfo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="25" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -113,6 +113,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtBenamning">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBenamningActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnRegistrera">
       <Properties>
@@ -147,11 +150,11 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblMessage">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblKaliber">
+    <Component class="javax.swing.JLabel" name="lblInfo">
     </Component>
-    <Component class="javax.swing.JTextField" name="jKaliber">
+    <Component class="javax.swing.JTextField" name="jInfo">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jKaliberActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jInfoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">

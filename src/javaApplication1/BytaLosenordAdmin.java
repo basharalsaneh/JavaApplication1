@@ -20,18 +20,17 @@ public class BytaLosenordAdmin extends javax.swing.JFrame {
     private static InfDB idb;
     String hamtatIDString;
     int hamtatID;
-    static inloggningValidering vemArInloggad;
+    static Validering vemArInloggad;
     /**
      * Creates new form BytaLosenord
      * @param idb
      * @param vemArInloggad
      */
-    public BytaLosenordAdmin(InfDB idb, inloggningValidering vemArInloggad) {
+    public BytaLosenordAdmin(InfDB idb, Validering vemArInloggad) {
         // Vid byte av lösenord för admins så har konstruktorn med sig databasuppkopplingen samt information om den som är inloggad.
         initComponents();
+        this.setLocationRelativeTo(null);
         BytaLosenordAdmin.idb = idb;
-        //this.hamtatID = Integer.parseInt(hamtatIDString);
-        JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " +vemArInloggad.getNamn());
         BytaLosenordAdmin.vemArInloggad = vemArInloggad;
     }
 
@@ -126,8 +125,8 @@ public class BytaLosenordAdmin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-            if(Validering.personFinns(passNuvarande) 
-                && Validering.personFinns(passNytt)
+            if(Validering.finnsLosenord(passNuvarande) 
+                && Validering.finnsLosenord(passNytt)
                 ){
   // Dubbelkollar så textfälten ej är tomma med koden ovanför som hänvisar till Valideringsklassen.
             try{
@@ -142,17 +141,13 @@ public class BytaLosenordAdmin extends javax.swing.JFrame {
 
                 if(gammalLosenord.equals(resultat)){ 
  // Om det gamla ifyllda lösenordet är lika med lösenordet som existerar i databasen så körs koden nedan.
-                    if(nyttLosenord.length() <=6){
+                    if(Validering.losenordMaxTecken(passNytt)){
                     String qSetPassword = "UPDATE agent SET losenord =" + "'" + nyttLosenord + "'" + "WHERE agent_id = " + "'" + vemArInloggad.getId() + "'";
                     idb.update(qSetPassword); // idb.update, uppdaterar gentemot databasen.
                     vemArInloggad.setNyttLosenord(nyttLosenord);
  // Anropar metoden setNyttLosenord() från inloggningValideringsklassen och ändrar personens lösenord via den klassen.
-                     JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
-                     }
-                    else{ 
-                        passNytt.requestFocus(); 
-                        JOptionPane.showMessageDialog(this, "Tyvärr för långt lösenord, max 6 tecken");
-                    }
+                     JOptionPane.showMessageDialog(this, "Lösenord har ändrats!");
+                     }      
                 }
                 else{
                     passNuvarande.requestFocus();

@@ -27,11 +27,12 @@ private String Telefon;
 private String losenord;
 private boolean administrator;
 private Date anstallningsdatum;
-inloggningValidering vemArInloggad;
+Validering vemArInloggad;
 
     
-public Agent(InfDB idb, inloggningValidering vemArInloggad) {
+public Agent(InfDB idb, Validering vemArInloggad) {
     initComponents();
+    this.setLocationRelativeTo(null);
     this.idb = idb;
     this.vemArInloggad = vemArInloggad;
     minaUtrustning();
@@ -186,7 +187,7 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
 
     private void btnBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLosenordActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Du transporteras nu till att byta lösenord.");
+
         this.dispose();
         new BytaLosenordAgent(idb, vemArInloggad).setVisible(true);
         
@@ -200,7 +201,6 @@ public Agent(InfDB idb, inloggningValidering vemArInloggad) {
 
     private void brnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnLoggaUtActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Du loggas nu ut som: " + vemArInloggad.getNamn());
         this.dispose();
         new Start(idb).setVisible(true);
     }//GEN-LAST:event_brnLoggaUtActionPerformed
