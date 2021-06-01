@@ -172,8 +172,7 @@ public class Alien_Inloggning extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(null, "Användare ej hittat.");
              }
              if(godkandUser && godkandLosenord){
-                 // Om true så körs följande nedan.
-                 JOptionPane.showMessageDialog(this, "Du kommer nu loggas in som " + giltigUser);
+                 // Om true så körs följande nedan.                 
                  String fraga3 = "SELECT Alien_ID from alien where Namn like '" + giltigUser+ "';";
                  String userID = idb.fetchSingle(fraga3);
                  int giltigtID = Integer.parseInt(userID);

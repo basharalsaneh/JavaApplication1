@@ -174,8 +174,7 @@ public class Admin_Inloggning extends javax.swing.JFrame {
             else{
                  JOptionPane.showMessageDialog(null, "Agent ej hittat.");
              }
-             if(godkandUser && godkandLosenord && godkandAdmin){
-                 JOptionPane.showMessageDialog(this, "Du kommer nu loggas in som " + giltigUser);
+             if(godkandUser && godkandLosenord && godkandAdmin){   
              String fraga4 = "SELECT Agent_ID from agent where Namn like '" + giltigUser+ "';";
                  String userID = idb.fetchSingle(fraga4);
                  int giltigtID = Integer.parseInt(userID);

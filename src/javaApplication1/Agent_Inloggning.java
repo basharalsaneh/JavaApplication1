@@ -155,8 +155,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
              }
 
              if(godkandUser && godkandLosenord){
-                  // Om true så körs följande nedan.
-                 JOptionPane.showMessageDialog(this, "Du kommer nu loggas in som " + giltigUser);
+                  // Om true så körs följande nedan.                 
              String fraga3 = "SELECT Agent_ID from agent where Namn like '" + giltigUser+ "';";
                  String userID = idb.fetchSingle(fraga3);
                  int giltigtID = Integer.parseInt(userID);
