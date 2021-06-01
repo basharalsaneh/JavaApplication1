@@ -75,16 +75,12 @@ public class Validering {
             resultat = false;
         }
         return resultat;
-<<<<<<< HEAD
      }
           
           
-     public static boolean finnsLosenord(JPasswordField ettLosenord) {
-=======
-    }
+
 
     public static boolean finnsLosenord(JPasswordField ettLosenord) {
->>>>>>> a6b201f576e8b2fee905b60525910a06cb3c644d
         resultat = true;
 
         if (ettLosenord.getPassword().length == 0) {
@@ -125,23 +121,18 @@ public class Validering {
         }
         return result;
     }
-<<<<<<< HEAD
     
-        public static boolean kontrollForComboBox(JComboBox text, Object messageText ) {
-=======
 
-    public static boolean kontrollForComboBox(JComboBox text, String meddelandeText) {
->>>>>>> a6b201f576e8b2fee905b60525910a06cb3c644d
+    public static boolean kontrollForComboBox(JComboBox text, String messageText) {
         boolean result = true;
         if (text.getSelectedItem().equals("Välja")) {
-            JOptionPane.showMessageDialog(null, (messageText));
+            JOptionPane.showMessageDialog(null, messageText);
             result = false;
             text.requestFocus();
            
         }
         return result;
     }
-<<<<<<< HEAD
         
            public static boolean losenMaxAntal(JTextField ruta){
       
@@ -217,7 +208,6 @@ public class Validering {
     }
             
             
-=======
 
     public void inloggadSom(String namnInloggad, int idInloggad, String angettLosenord) {
         namn = namnInloggad;
@@ -253,7 +243,6 @@ public class Validering {
         losenord = nyttLosenord;
     }
 
->>>>>>> a6b201f576e8b2fee905b60525910a06cb3c644d
 //     public static boolean arAgent(){
 //     resultat = true;
 //     return resultat;
