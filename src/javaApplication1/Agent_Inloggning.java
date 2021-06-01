@@ -134,9 +134,9 @@ public class Agent_Inloggning extends javax.swing.JFrame {
         String password = txtPassword.getText();
         
         try{
-        String fraga1 = "SELECT Namn FROM agent where Namn like '"+user+"';";
+        String fraga1 = "SELECT Agent_ID FROM agent where Agent_ID like '"+user+"';";
            String giltigUser = idb.fetchSingle(fraga1);
-           String fraga2 = "SELECT Losenord FROM agent where Namn like '" + giltigUser + "';";
+           String fraga2 = "SELECT Losenord FROM agent where Agent_ID like '" + giltigUser + "';";
            String giltigLosenord = idb.fetchSingle(fraga2);
 // Vi kör sql-frågor mot databasen och hämtar ett värde med hjälp av fetchSingle()-metoden.
 // Med koden nedan dubbelkollar vi så att rätt namn är inskrivet mot databasen, samt även det rätta lösenordet för det valda namnet.
@@ -151,12 +151,12 @@ public class Agent_Inloggning extends javax.swing.JFrame {
                 }
             }
             else{
-                 JOptionPane.showMessageDialog(null, "Agent ej hittat.");
+                 JOptionPane.showMessageDialog(null, "Agent ej hittad.");
              }
 
              if(godkandUser && godkandLosenord){
                   // Om true så körs följande nedan.                 
-             String fraga3 = "SELECT Agent_ID from agent where Namn like '" + giltigUser+ "';";
+             String fraga3 = "SELECT Agent_ID from agent where Agent_ID like '" + giltigUser+ "';";
                  String userID = idb.fetchSingle(fraga3);
                  int giltigtID = Integer.parseInt(userID);
        // Med koden nedanför hänvisar vi till vår inloggningValiderings-klassen och fyller i vem som är inloggad med 
