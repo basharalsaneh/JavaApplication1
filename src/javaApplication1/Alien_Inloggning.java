@@ -13,12 +13,12 @@ import oru.inf.InfException;
 public class Alien_Inloggning extends javax.swing.JFrame {
     
     InfDB idb;
-    inloggningValidering vemArInloggad;
+    Validering vemArInloggad;
    
     public Alien_Inloggning(InfDB idb){
         initComponents();
         this.idb = idb;
-        this.vemArInloggad = new inloggningValidering();
+        this.vemArInloggad = new Validering();
         
     }
 

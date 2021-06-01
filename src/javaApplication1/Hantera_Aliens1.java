@@ -12,9 +12,9 @@ import oru.inf.InfDB;
 public class Hantera_Aliens1 extends javax.swing.JFrame {
 
     private static InfDB idb;
-    static inloggningValidering vemArInloggad;
+    static Validering vemArInloggad;
 
-    public Hantera_Aliens1(InfDB idb, inloggningValidering vemArInloggad) {
+    public Hantera_Aliens1(InfDB idb, Validering vemArInloggad) {
         initComponents();
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;

@@ -19,7 +19,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
 
     
     InfDB idb;
-    inloggningValidering vemArInloggad;
+    Validering vemArInloggad;
     /**
      * Creates new form Agent_Inloggning
      * @param idb
@@ -27,7 +27,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
     public Agent_Inloggning(InfDB idb){
         initComponents();
         this.idb = idb;
-        vemArInloggad = new inloggningValidering();
+        vemArInloggad = new Validering();
         }
 
     /**

@@ -18,14 +18,14 @@ import java.util.HashMap;
  */
 public class Hantera_Agenter extends javax.swing.JFrame {
     
-    inloggningValidering InloggadSom;
+    Validering InloggadSom;
     InfDB idb;
     
 
     /**
      * Creates new form Registrering_Agenter
      */
-    public Hantera_Agenter(InfDB idb, inloggningValidering InloggadSom) {
+    public Hantera_Agenter(InfDB idb, Validering InloggadSom) {
         initComponents();
         this.InloggadSom = InloggadSom;
         this.idb = idb; 

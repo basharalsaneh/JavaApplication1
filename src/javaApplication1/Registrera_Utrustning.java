@@ -19,11 +19,11 @@ import oru.inf.InfException;
 public class Registrera_Utrustning extends javax.swing.JFrame {
 
     private static InfDB idb;
-    static inloggningValidering vemArInloggad;
+    static Validering vemArInloggad;
     /**
      * Creates new form Registrera_Utrustning
      */
-    public Registrera_Utrustning(InfDB idb, inloggningValidering vemArInloggad) {
+    public Registrera_Utrustning(InfDB idb, Validering vemArInloggad) {
         initComponents();
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;

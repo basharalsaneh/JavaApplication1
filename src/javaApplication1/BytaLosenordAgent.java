@@ -20,13 +20,13 @@ public class BytaLosenordAgent extends javax.swing.JFrame {
     private static InfDB idb;
     String hamtatIDString;
     int hamtatID;
-    static inloggningValidering vemArInloggad;
+    static Validering vemArInloggad;
     /**
      * Creates new form BytaLosenord
      * @param idb
      * @param vemArInloggad
      */
-    public BytaLosenordAgent(InfDB idb, inloggningValidering vemArInloggad) {
+    public BytaLosenordAgent(InfDB idb, Validering vemArInloggad) {
         // Vid byte av lösenord för admins så har konstruktorn med sig databasuppkopplingen samt information om den som är inloggad.
         initComponents();
         BytaLosenordAgent.idb = idb;
