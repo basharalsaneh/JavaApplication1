@@ -29,6 +29,7 @@ public class BytaLosenordAgent extends javax.swing.JFrame {
     public BytaLosenordAgent(InfDB idb, Validering vemArInloggad) {
         // Vid byte av lösenord för admins så har konstruktorn med sig databasuppkopplingen samt information om den som är inloggad.
         initComponents();
+        this.setLocationRelativeTo(null);
         BytaLosenordAgent.idb = idb;
         //this.hamtatID = Integer.parseInt(hamtatIDString);
         JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " +vemArInloggad.getNamn());

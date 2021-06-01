@@ -49,6 +49,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(500, 100));
 
         btnLogin.setText("Logga in");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {

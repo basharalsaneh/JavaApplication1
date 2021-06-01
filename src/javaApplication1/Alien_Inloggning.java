@@ -43,6 +43,7 @@ public class Alien_Inloggning extends javax.swing.JFrame {
         jLabel5.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(0, 0));
 
         buttonLogin.setText("Logga in");
         buttonLogin.addActionListener(new java.awt.event.ActionListener() {

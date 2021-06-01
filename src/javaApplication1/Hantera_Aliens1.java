@@ -16,6 +16,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
     public Hantera_Aliens1(InfDB idb, Validering vemArInloggad) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
         hamtaOmradesNamn();
