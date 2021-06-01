@@ -29,8 +29,6 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         BytaLosenordAlien.idb = idb;
-        //this.hamtatID = Integer.parseInt(hamtatIDString);
-        JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " +vemArInloggad.getNamn());
         BytaLosenordAlien.vemArInloggad = vemArInloggad;
     }
 
@@ -48,7 +46,7 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
         passNytt = new javax.swing.JPasswordField();
         passNuvarande = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnBytLosenord = new javax.swing.JButton();
         btnGaTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,10 +59,10 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
 
         jLabel4.setText("Nytt lösenord");
 
-        jButton1.setText("Spara");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBytLosenord.setText("Spara");
+        btnBytLosenord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBytLosenordActionPerformed(evt);
             }
         });
 
@@ -89,7 +87,7 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(btnGaTillbaka)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                            .addComponent(jButton1))
+                            .addComponent(btnBytLosenord))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel3)
@@ -115,7 +113,7 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnBytLosenord)
                     .addComponent(btnGaTillbaka))
                 .addGap(82, 82, 82))
         );
@@ -123,7 +121,7 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLosenordActionPerformed
         // TODO add your handling code here:
             if(Validering.finnsLosenord(passNuvarande) 
                 && Validering.finnsLosenord(passNytt)
@@ -138,19 +136,16 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
 
                 String fraga = "SELECT losenord FROM Alien WHERE alien_id =" + "'" + vemArInloggad.getId() + "'";
                 String resultat = idb.fetchSingle(fraga);
-
+ //!!!!!! Vi skulle också kunna hämta nuvarande lösenord från Valideringsklassen istället för att köra sql-frågan ovanför.!!!!!!!
                 if(gammalLosenord.equals(resultat)){
-                    if(nyttLosenord.length() <=6){ 
+                    if(Validering.losenordMaxTecken(passNytt)){ 
                     String qSetPassword = "UPDATE alien SET losenord =" + "'" + nyttLosenord + "'" + "WHERE alien_id = " + "'" + vemArInloggad.getId() + "'";
                     idb.update(qSetPassword);
                     vemArInloggad.setNyttLosenord(nyttLosenord);
  // Anropar metoden setNyttLosenord() från inloggningValideringsklassen och ändrar personens lösenord via den klassen.
-                     JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
-                }
-                    else{ 
-                        passNytt.requestFocus(); 
-                        JOptionPane.showMessageDialog(this, "Tyvärr för långt lösenord, max 6 tecken");
+                     JOptionPane.showMessageDialog(this, "Lösenord har ändrats!");
                     }
+
                 }
                 else{
                     passNuvarande.requestFocus();
@@ -165,7 +160,7 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
                 System.out.println("Random fel" + ex.getMessage());
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnBytLosenordActionPerformed
 
     private void btnGaTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGaTillbakaActionPerformed
         // TODO add your handling code here:
@@ -180,8 +175,8 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBytLosenord;
     private javax.swing.JButton btnGaTillbaka;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

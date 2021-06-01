@@ -80,13 +80,24 @@ public class Validering {
         resultat = true;
 
         if (ettLosenord.getPassword().length == 0) {
-            JOptionPane.showMessageDialog(null, "Inget lösenord inskrivet");
+            JOptionPane.showMessageDialog(null, "En lösenordsruta tom");
             resultat = false;
         }
-        System.out.println(resultat);
+
         return resultat;
     }
 
+        public static boolean losenordMaxTecken(JPasswordField ettLosenord) {
+        resultat = true;
+
+        if (ettLosenord.getPassword().length >6) {
+            JOptionPane.showMessageDialog(null, "Max 6 tecken tillåtet");
+            resultat = false;
+        }
+        
+        return resultat;
+    }
+    
     public static boolean txtKontroll(JTextField text) {
         boolean result = true;
         if (text.getText().isEmpty()) {
@@ -100,7 +111,7 @@ public class Validering {
     public static boolean kontrollForComboBox(JComboBox text) {
         boolean result = true;
         if (text.getSelectedItem().equals("Välja")) {
-            JOptionPane.showMessageDialog(null, "Välja en typ av utrustning!");
+            JOptionPane.showMessageDialog(null, "Välj en typ av utrustning!");
             result = false;
             text.requestFocus();
         }
@@ -112,6 +123,7 @@ public class Validering {
         if (text.getSelectedItem().equals("")) {
             result = false;
             text.requestFocus();
+           
         }
         return result;
     }

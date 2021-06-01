@@ -189,7 +189,7 @@ public Agent(InfDB idb, Validering vemArInloggad) {
 
     private void btnBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLosenordActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Du transporteras nu till att byta lösenord.");
+
         this.dispose();
         new BytaLosenordAgent(idb, vemArInloggad).setVisible(true);
         

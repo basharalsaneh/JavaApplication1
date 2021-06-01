@@ -31,8 +31,6 @@ public class BytaLosenordAgent extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         BytaLosenordAgent.idb = idb;
-        //this.hamtatID = Integer.parseInt(hamtatIDString);
-        JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " +vemArInloggad.getNamn());
         BytaLosenordAgent.vemArInloggad = vemArInloggad;
     }
 
@@ -127,8 +125,8 @@ public class BytaLosenordAgent extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-            if(Validering.personFinns(passNuvarande) 
-                && Validering.personFinns(passNytt)
+            if(Validering.finnsLosenord(passNuvarande) 
+                && Validering.finnsLosenord(passNytt)
                 ){
 // Dubbelkollar så textfälten ej är tomma med koden ovanför som hänvisar till Valideringsklassen.
             try{
@@ -142,15 +140,12 @@ public class BytaLosenordAgent extends javax.swing.JFrame {
                 String resultat = idb.fetchSingle(fraga);
 
                 if(gammalLosenord.equals(resultat)){
-                    if(nyttLosenord.length() <=6){
+                    if(Validering.losenordMaxTecken(passNytt)){
                     String qSetPassword = "UPDATE agent SET losenord =" + "'" + nyttLosenord + "'" + "WHERE agent_id = " + "'" + vemArInloggad.getId() + "'";
                     idb.update(qSetPassword);
                     vemArInloggad.setNyttLosenord(nyttLosenord);
 // Anropar metoden setNyttLosenord() från inloggningValideringsklassen och ändrar personens lösenord via den klassen.
-                     JOptionPane.showMessageDialog(this, "Lösenord har ändrat!");
-                    }else{ 
-                        passNytt.requestFocus(); 
-                        JOptionPane.showMessageDialog(this, "Tyvärr för långt lösenord, max 6 tecken");
+                     JOptionPane.showMessageDialog(this, "Lösenord har ändrats!");
                     }
                 }
                 else{
