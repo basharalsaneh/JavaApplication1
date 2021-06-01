@@ -27,6 +27,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
      */
     public Hantera_Agenter(InfDB idb, Validering InloggadSom) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.InloggadSom = InloggadSom;
         this.idb = idb; 
         VisaAllaAgenter(); // anropar en metod som ska visa alla Agenter

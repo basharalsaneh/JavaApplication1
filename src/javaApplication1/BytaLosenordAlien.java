@@ -27,6 +27,7 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
      */
     public BytaLosenordAlien(InfDB idb, Validering vemArInloggad) {
         initComponents();
+        this.setLocationRelativeTo(null);
         BytaLosenordAlien.idb = idb;
         //this.hamtatID = Integer.parseInt(hamtatIDString);
         JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " +vemArInloggad.getNamn());
