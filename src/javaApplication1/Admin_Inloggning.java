@@ -13,14 +13,14 @@ import oru.inf.InfException;
 public class Admin_Inloggning extends javax.swing.JFrame {
 
     InfDB idb;
-    inloggningValidering vemArInloggad;
+    Validering vemArInloggad;
     
     public Admin_Inloggning(InfDB idb){ 
     // När man väl försöker logga in som Admin tar konstruktorn in den angivna kopplingen till databasen samt 
     // Skapar ett nytt "objekt" (den som är inloggad) som följer med så länge respektive Admin är inloggad.
         initComponents();
         this.idb = idb;
-        this.vemArInloggad = new inloggningValidering();
+        this.vemArInloggad = new Validering();
     }
 
     @SuppressWarnings("unchecked")
