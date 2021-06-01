@@ -30,24 +30,21 @@ public class Validering {
         }
         return resultat;
     }
-    
-         public static boolean baraIntTecken(JTextField txtRuta) {
+
+    public static boolean baraIntTecken(JTextField txtRuta) {
         resultat = true;
-        
-        try{
-        String rutan = txtRuta.getText();
-        Integer.parseInt(rutan);
-        }
-        catch(NumberFormatException e)
-         {
-             JOptionPane.showMessageDialog(null, "Endast siffror möjligt");
+
+        try {
+            String rutan = txtRuta.getText();
+            Integer.parseInt(rutan);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Endast siffror möjligt");
             resultat = false;
         }
         return resultat;
     }
-    
-    
-     public static boolean max10Siffror(JTextField txtRuta) {
+
+    public static boolean max10Siffror(JTextField txtRuta) {
         resultat = true;
 
         if (txtRuta.getText().length() > 10) {
@@ -56,8 +53,8 @@ public class Validering {
         }
         return resultat;
     }
-     
-          public static boolean max20Tecken(JTextField txtRuta) {
+
+    public static boolean max20Tecken(JTextField txtRuta) {
         resultat = true;
 
         if (txtRuta.getText().length() > 20) {
@@ -75,10 +72,7 @@ public class Validering {
             resultat = false;
         }
         return resultat;
-     }
-          
-          
-
+    }
 
     public static boolean finnsLosenord(JPasswordField ettLosenord) {
         resultat = true;
@@ -91,17 +85,17 @@ public class Validering {
         return resultat;
     }
 
-        public static boolean losenordMaxTecken(JPasswordField ettLosenord) {
+    public static boolean losenordMaxTecken(JPasswordField ettLosenord) {
         resultat = true;
 
-        if (ettLosenord.getPassword().length >6) {
+        if (ettLosenord.getPassword().length > 6) {
             JOptionPane.showMessageDialog(null, "Max 6 tecken tillåtet");
             resultat = false;
         }
-        
+
         return resultat;
     }
-    
+
     public static boolean txtKontroll(JTextField text) {
         boolean result = true;
         if (text.getText().isEmpty()) {
@@ -121,7 +115,6 @@ public class Validering {
         }
         return result;
     }
-    
 
     public static boolean kontrollForComboBox(JComboBox text, String messageText) {
         boolean result = true;
@@ -129,39 +122,38 @@ public class Validering {
             JOptionPane.showMessageDialog(null, messageText);
             result = false;
             text.requestFocus();
-           
+
         }
         return result;
     }
-        
-           public static boolean losenMaxAntal(JTextField ruta){
-      
-        if(ruta.getText().length() > 6){
+
+    public static boolean losenordMaxAntal(JTextField ruta) {
+
+        if (ruta.getText().length() > 6) {
             JOptionPane.showMessageDialog(null, "Lösenordet får vara max 6 tecken långt!");
             ruta.requestFocus();
             return false;
-        }
-        else{
+        } else {
             return true;
         }
-    
+
     }
-           
-               public static boolean SiffrorKontroll(JTextField fieldToValidate, String messageText) {
+
+    public static boolean SiffrorKontroll(JTextField fieldToValidate, String messageText) {
         boolean result = false;
         if (fieldToValidate.getText().matches("[0-9]+")) {
 
             result = true;
 
         } else {
-             JOptionPane.showMessageDialog(null, (messageText));
+            JOptionPane.showMessageDialog(null, (messageText));
             fieldToValidate.requestFocus();
 
         }
         return result;
     }
-           
-       public static boolean TelefonKontroll(JTextField fieldToValidate) {
+
+    public static boolean TelefonKontroll(JTextField fieldToValidate) {
         boolean result = false;
         if (fieldToValidate.getText().matches("[+() [0-9]-]+") || fieldToValidate.getText().matches("")) {
 
@@ -173,13 +165,13 @@ public class Validering {
         }
         return result;
     }
-          
-       public static boolean DatumKontroll(JTextField fieldToValidate) {
+
+    public static boolean DatumKontroll(JTextField fieldToValidate) {
         boolean result = true;
         String Datum = fieldToValidate.getText();
 
         if (Datum.length() != 10) {
-            JOptionPane.showMessageDialog(null,"Datumet är felaktigt!");
+            JOptionPane.showMessageDialog(null, "Datumet är felaktigt!");
             result = false;
         } else {
             String år = Datum.substring(0, 4);
@@ -200,14 +192,12 @@ public class Validering {
                     && Integer.parseInt(dag) >= 1 && Integer.parseInt(dag) <= 31) {
             } else {
                 result = false;
-                 JOptionPane.showMessageDialog(null, "Datumet är felaktigt!");
+                JOptionPane.showMessageDialog(null, "Datumet är felaktigt!");
                 fieldToValidate.requestFocus();
             }
         }
         return result;
     }
-            
-            
 
     public void inloggadSom(String namnInloggad, int idInloggad, String angettLosenord) {
         namn = namnInloggad;

@@ -884,9 +884,9 @@ hamtaOmradeID();
 
         if (Validering.TelefonKontroll(txtAlienTelefon)
                 && Validering.personFinns(txtAlienNamn, "Ange namn!")
-                && Validering.losenMaxAntal(txtAlienLosenord)
+                && Validering.losenordMaxAntal(txtAlienLosenord)
                 && Validering.DatumKontroll(txtAlienRegDatum)
-                && Validering.losenMaxAntal(txtAlienLosenord)
+                && Validering.losenordMaxAntal(txtAlienLosenord)
                 && Validering.kontrollForComboBox(jOmrade, "Ange plats!")
                 && Validering.kontrollForComboBox(jRas, "Ange Ras!")
                 && Validering.kontrollForComboBox(jAgent, "Ange ansvarig agent!")){
