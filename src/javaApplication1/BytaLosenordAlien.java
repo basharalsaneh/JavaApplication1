@@ -19,14 +19,15 @@ public class BytaLosenordAlien extends javax.swing.JFrame {
     private static InfDB idb;
     String hamtatIDString;
     int hamtatID;
-    static inloggningValidering vemArInloggad;
+    static Validering vemArInloggad;
     /**
      * Creates new form BytaLosenord
      * @param idb
      * @param vemArInloggad
      */
-    public BytaLosenordAlien(InfDB idb, inloggningValidering vemArInloggad) {
+    public BytaLosenordAlien(InfDB idb, Validering vemArInloggad) {
         initComponents();
+        this.setLocationRelativeTo(null);
         BytaLosenordAlien.idb = idb;
         //this.hamtatID = Integer.parseInt(hamtatIDString);
         JOptionPane.showMessageDialog(this, "Du ska nu byta lösenord som: " +vemArInloggad.getNamn());

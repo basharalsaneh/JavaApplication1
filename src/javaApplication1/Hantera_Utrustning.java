@@ -18,13 +18,14 @@ import oru.inf.InfException;
  * @author marcu
  */
 public class Hantera_Utrustning extends javax.swing.JFrame {
-    static inloggningValidering vemArInloggad;
+    static Validering vemArInloggad;
     static InfDB idb;
     /**
      * Creates new form Hantera_Utrustning
      */
-    public Hantera_Utrustning(InfDB idb, inloggningValidering vemArInloggad) {
+    public Hantera_Utrustning(InfDB idb, Validering vemArInloggad) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
         fyllCBMedUtrustning();

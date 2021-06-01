@@ -23,10 +23,11 @@ public class Alien extends javax.swing.JFrame {
     
 
 InfDB idb;
-inloggningValidering vemArInloggad = null;
+Validering vemArInloggad = null;
 
-public Alien(InfDB idb, inloggningValidering vemArInloggad) {
+public Alien(InfDB idb, Validering vemArInloggad) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
         jRub.setText("Välkommen " + vemArInloggad.getNamn() + "!");

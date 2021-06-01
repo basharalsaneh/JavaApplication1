@@ -1,4 +1,3 @@
-
 package javaApplication1;
 
 import javax.swing.JComboBox;
@@ -12,32 +11,36 @@ import oru.inf.InfDB;
  *
  * @author Marcu
  */
-
 public class Validering {
     // Valideringsklass där vi kollar om eventuella textboxar, comboboxar, password-fält är tomma eller inte.
-    
+    //Innehåller även validering för inloggningssidorna.
+
     static boolean resultat = false;
-    
-     public static boolean personFinns(JTextField enPerson) {
+    private String namn = "";
+    private int id = 0;
+    private String losenord = "";
+
+    public static boolean personFinns(JTextField enPerson) {
         resultat = true;
 
         if (enPerson.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingen användare inskrivet");
-            resultat = false;    
+            resultat = false;
         }
         return resultat;
-     }
-     
-          public static boolean personFinns(JTextField enPerson, String meddelandetext) {
+    }
+
+    public static boolean personFinns(JTextField enPerson, String meddelandetext) {
         resultat = true;
 
         if (enPerson.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingen användare inskrivet");
-            resultat = false;    
+            resultat = false;
         }
         return resultat;
-     }
-     public static boolean finnsLosenord(JPasswordField ettLosenord) {
+    }
+
+    public static boolean finnsLosenord(JPasswordField ettLosenord) {
         resultat = true;
 
         if (ettLosenord.getPassword().length == 0) {
@@ -47,7 +50,7 @@ public class Validering {
         System.out.println(resultat);
         return resultat;
     }
-    
+
     public static boolean txtKontroll(JTextField text) {
         boolean result = true;
         if (text.getText().isEmpty()) {
@@ -57,9 +60,8 @@ public class Validering {
         }
         return result;
     }
-    
-    
-        public static boolean kontrollForComboBox(JComboBox text) {
+
+    public static boolean kontrollForComboBox(JComboBox text) {
         boolean result = true;
         if (text.getSelectedItem().equals("Välja")) {
             JOptionPane.showMessageDialog(null, "Välja en typ av utrustning!");
@@ -68,8 +70,8 @@ public class Validering {
         }
         return result;
     }
-    
-        public static boolean kontrollForComboBox(JComboBox text, String meddelandeText ) {
+
+    public static boolean kontrollForComboBox(JComboBox text, String meddelandeText) {
         boolean result = true;
         if (text.getSelectedItem().equals("")) {
             result = false;
@@ -77,9 +79,41 @@ public class Validering {
         }
         return result;
     }
-          
-            
-            
+
+    public void inloggadSom(String namnInloggad, int idInloggad, String angettLosenord) {
+        namn = namnInloggad;
+        id = idInloggad;
+        losenord = angettLosenord;
+    }
+
+    public void setNamn(String nyttNamn) {
+        this.namn = nyttNamn;
+    }
+
+    public String getNamn() {
+        return namn;
+    }
+
+    public String getNamn2() {
+        return this.namn;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int nyttId) {
+        id = nyttId;
+    }
+
+    public String getLosenord() {
+        return losenord;
+    }
+
+    public void setNyttLosenord(String nyttLosenord) {
+        losenord = nyttLosenord;
+    }
+
 //     public static boolean arAgent(){
 //     resultat = true;
 //     return resultat;
@@ -92,5 +126,4 @@ public class Validering {
 //     resultat = true;
 //     return resultat;
 //     }
-     }
-        
+}

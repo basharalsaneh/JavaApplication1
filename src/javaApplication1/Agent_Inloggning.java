@@ -19,15 +19,16 @@ public class Agent_Inloggning extends javax.swing.JFrame {
 
     
     InfDB idb;
-    inloggningValidering vemArInloggad;
+    Validering vemArInloggad;
     /**
      * Creates new form Agent_Inloggning
      * @param idb
      */
     public Agent_Inloggning(InfDB idb){
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
-        vemArInloggad = new inloggningValidering();
+        vemArInloggad = new Validering();
         }
 
     /**
@@ -48,6 +49,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(500, 100));
 
         btnLogin.setText("Logga in");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {

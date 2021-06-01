@@ -27,11 +27,12 @@ private String Telefon;
 private String losenord;
 private boolean administrator;
 private Date anstallningsdatum;
-inloggningValidering vemArInloggad;
+Validering vemArInloggad;
 
     
-public Agent(InfDB idb, inloggningValidering vemArInloggad) {
+public Agent(InfDB idb, Validering vemArInloggad) {
     initComponents();
+    this.setLocationRelativeTo(null);
     this.idb = idb;
     this.vemArInloggad = vemArInloggad;
     minaUtrustning();

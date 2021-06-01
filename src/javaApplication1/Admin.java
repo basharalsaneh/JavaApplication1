@@ -15,14 +15,15 @@ import oru.inf.InfDB;
  */
 public class Admin extends javax.swing.JFrame {
     InfDB idb;
-    inloggningValidering vemArInloggad;
+    Validering vemArInloggad;
     /**
      * Creates new form Admin
      * @param idb
      * @param vemArInloggad
      */
-    public Admin(InfDB idb, inloggningValidering vemArInloggad) {
+    public Admin(InfDB idb, Validering vemArInloggad) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
     }

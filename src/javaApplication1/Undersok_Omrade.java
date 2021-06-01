@@ -18,12 +18,12 @@ import oru.inf.InfException;
 public class Undersok_Omrade extends javax.swing.JFrame {
 
     InfDB idb;
-    inloggningValidering vemArInloggad = null;
+    Validering vemArInloggad = null;
 
     /**
      * Creates new form Undersok_Omrade
      */
-    public Undersok_Omrade(InfDB idb, inloggningValidering vemArInloggad) {
+    public Undersok_Omrade(InfDB idb, Validering vemArInloggad) {
         initComponents();
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
