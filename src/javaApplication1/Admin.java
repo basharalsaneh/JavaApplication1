@@ -167,7 +167,6 @@ public class Admin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Du loggas nu ut som: " + vemArInloggad.getNamn());
         this.dispose();
         new Start(idb).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed

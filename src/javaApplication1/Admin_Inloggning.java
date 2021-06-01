@@ -143,18 +143,18 @@ public class Admin_Inloggning extends javax.swing.JFrame {
         String user = txtUser.getText();
         String password = txtPassword.getText();
         try{
-        String fraga1 = "SELECT Namn FROM agent where Namn like '"+user+"';"; 
+        String fraga1 = "SELECT Agent_ID FROM agent where Agent_ID like '"+user+"';"; 
            String giltigUser = idb.fetchSingle(fraga1); 
            // Vid hämtning av fraga1 från databasuppkopplingen (idb) och med metoden: fetchSingle() så hämtar vi ett enstaka värde 
            //och ger agentens namn ett nytt stringvärde vars namn är giltigUser.
-           String fraga2 = "SELECT Losenord FROM agent where Namn like '" + giltigUser + "';";
+           String fraga2 = "SELECT Losenord FROM agent where Agent_ID like '" + giltigUser + "';";
            String giltigLosenord = idb.fetchSingle(fraga2);
-           String fraga3 = "SELECT Administrator FROM agent where Namn like '" + giltigUser + "';";
+           String fraga3 = "SELECT Administrator FROM agent where Agent_ID like '" + giltigUser + "';";
            String befogenhet = idb.fetchSingle(fraga3); 
            // Fortsättning med fetchSingle-metoder för att hämta Lösenord samt AdministratorStatus.
            String admin = "J";
            // If-satserna nedan kollar om det inskrivna användarnamnet, lösenordet samt om en administratörstatus finns för "vald" agent.
-           // Om de krav uppfylls ges en booleansk variabel för repsektive uppfyllt krav.
+           // Om de krav uppfylls ges en booleansk variabel för respektive uppfyllt krav.
              if(user.equals(giltigUser)){
                  godkandUser = true;
                  if(password.equals(giltigLosenord)){
@@ -174,10 +174,10 @@ public class Admin_Inloggning extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(null, "Agent ej hittad.");
              }
              if(godkandUser && godkandLosenord && godkandAdmin){   
-             String fraga4 = "SELECT Agent_ID from agent where Namn like '" + giltigUser+ "';";
+             String fraga4 = "SELECT Agent_ID from agent where Agent_ID like '" + giltigUser+ "';";
                  String userID = idb.fetchSingle(fraga4);
                  int giltigtID = Integer.parseInt(userID);
- // Med koden nedanför hänvisar vi till vår inloggningValiderings-klassen och fyller i vem som är inloggad med 
+ // Med koden nedanför hänvisar vi till vår Valideringsklass och fyller i vem som är inloggad med 
  // hjälp av metoden inloggadSom(). Där fylls relevant information (namn, id, lösenord) för möjlighet att se 
  // den inloggades uppgifter i inloggningValideringsklassen.
                 vemArInloggad.inloggadSom(giltigUser, giltigtID, giltigLosenord);

@@ -151,9 +151,9 @@ public class Alien_Inloggning extends javax.swing.JFrame {
         String user = txtUser.getText();
         String password = txtPassword.getText();
         try{
-        String fraga1 = "SELECT Namn FROM alien where Namn = '"+user+"';";
+        String fraga1 = "SELECT Alien_ID FROM alien where Alien_ID = '"+user+"';";
            String giltigUser = idb.fetchSingle(fraga1);
-           String fraga2 = "SELECT Losenord FROM alien where Namn = '" + giltigUser + "';";
+           String fraga2 = "SELECT Losenord FROM alien where Alien_ID = '" + giltigUser + "';";
            String giltigLosenord = idb.fetchSingle(fraga2);
 // Vi kör sql-frågor mot databasen över, och hämtar ett värde med hjälp av fetchSingle()-metoden.
 // Med koden nedan dubbelkollar vi så att rätt namn är inskrivet mot databasen, samt även det rätta lösenordet för det valda namnet.
@@ -172,7 +172,7 @@ public class Alien_Inloggning extends javax.swing.JFrame {
              }
              if(godkandUser && godkandLosenord){
                  // Om true så körs följande nedan.                 
-                 String fraga3 = "SELECT Alien_ID from alien where Namn like '" + giltigUser+ "';";
+                 String fraga3 = "SELECT Alien_ID, Namn from alien where Alien_ID like '" + giltigUser+ "';";
                  String userID = idb.fetchSingle(fraga3);
                  int giltigtID = Integer.parseInt(userID);
  // Med koden nedanför hänvisar vi till vår inloggningValiderings-klassen och fyller i vem som är inloggad med 

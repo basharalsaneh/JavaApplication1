@@ -169,7 +169,6 @@ public Alien(InfDB idb, Validering vemArInloggad) {
 
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Du loggas nu ut som: " + vemArInloggad.getNamn());
         this.dispose();
         new Start(idb).setVisible(true);
     }//GEN-LAST:event_btnLoggaUtActionPerformed
