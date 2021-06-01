@@ -60,10 +60,10 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaAgent = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
-        adminBox = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         buttonDelete = new javax.swing.JButton();
         laggTillAgent = new javax.swing.JToggleButton();
+        adminBox = new javax.swing.JComboBox<>();
         hämtaAgentInfoButton = new javax.swing.JButton();
         txtHämtaAgent = new javax.swing.JTextField();
         agentCombo = new javax.swing.JComboBox<>();
@@ -116,8 +116,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         jLabel1.setText("(max 6 tecken)");
 
-        adminBox.setText("Ja");
-
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         jLabel9.setText("(YYYY-MM-DD)");
 
@@ -134,6 +132,8 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 laggTillAgentActionPerformed(evt);
             }
         });
+
+        adminBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ja", "Nej" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -170,23 +170,23 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                                 .addComponent(buttonRensaData, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ändraAgentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(laggTillAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(74, 74, 74)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(adminBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(txtAgentID)
                                     .addComponent(txtAgentNamn)
                                     .addComponent(txtAgentOmrade)
                                     .addComponent(txtAgentLosenord, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtAgentDatum)
-                                    .addComponent(txtAgentTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(adminBox)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ändraAgentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(laggTillAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addComponent(txtAgentTelefon, javax.swing.GroupLayout.Alignment.TRAILING))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
@@ -220,7 +220,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(adminBox))
+                            .addComponent(adminBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtAgentLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,7 +297,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtHämtaAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hämtaAgentInfoButton)
@@ -372,7 +372,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         txtAgentNamn.setText("");
         txtAgentTelefon.setText("");
         txtAgentDatum.setText("YYYY-MM-DD");
-        adminBox.setSelected(false);
         txtAgentLosenord.setText("");
         txtAgentOmrade.setText("");
         txtAgentID.requestFocus();
@@ -389,6 +388,8 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         
         
         try {
+            
+            
             String StringID = txtAgentID.getText();// FÃ¥r ej vara null
             int id = Integer.parseInt(StringID);
             String namn = txtAgentNamn.getText(); // FÃ¥r ej vara null
@@ -397,10 +398,14 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             String losenord = txtAgentLosenord.getText();
             String plats = txtAgentOmrade.getText();
             int omrade = Integer.parseInt(plats);
-            String admin = "N";
-                if (adminBox.isEnabled()){
-            admin = "J";
-            } 
+            
+            String admin = "Ja";
+            String kollaAdmin = adminBox.getSelectedItem().toString();
+            if (kollaAdmin.equals(admin)){
+                admin = "J";
+            }
+            else admin = "N";
+            
             
             // SQL frågan är utformad så att den uppdaterar alla fälten hos Agenten. Om ett fält har samma värde som innan, så blir det ingen skillnad.
             // Och alla värden som är annorlunda kommer att bli uppdaterade.
@@ -417,7 +422,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             txtAgentNamn.setText("");
             txtAgentTelefon.setText("");
             txtAgentDatum.setText("YYYY-MM-DD");
-            adminBox.isEnabled();
             txtAgentLosenord.setText("");
             txtAgentOmrade.setText("");
             txtAgentID.requestFocus();
@@ -527,10 +531,10 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 // Den här koden ska kolla om Admin är ett "J" hos agenten. Isåfall ska adminBox vara(true), och selected. 
                 // Om agenten inte är Admin, alltså att Agent.get("Administrator") = "N", då ska Admin.box returnera false och inte vara selected.
                 if (Agent.get("Administrator").equals(admin)){
-                    adminBox.setSelected(true);
+                    adminBox.setSelectedItem("Ja");
                 }
                 else {
-                    adminBox.setSelected(false);
+                    adminBox.setSelectedItem("Nej");
                 }
                 
                 
@@ -591,12 +595,13 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             String plats = txtAgentOmrade.getText();
             int omrade = Integer.parseInt(plats);
             
-            String admin = "N";
+            String admin = "Ja";
+            String kollaAdmin = adminBox.getSelectedItem().toString();
+            if (kollaAdmin.equals(admin)){
+                admin = "J";
+            }
+            else admin = "N";   
             
-                if (adminBox.isEnabled()){
-            admin = "J";
-                }
-                // Om Adminboxen är intryckt så kommer String admin att bli ett "J". Detta för att det ska bara finnas två olika värden i kolumnen "Administrator". Antingen "J" eller "N".
             
             String nyAgent = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES ("+id+", \""+namn+"\", \""+telefon+"\", \""+datum+"\", \""+admin+"\", \""+losenord+"\","+omrade+");";
             
@@ -618,7 +623,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             txtAgentNamn.setText("");
             txtAgentTelefon.setText("");
             txtAgentDatum.setText("YYYY-MM-DD");
-            adminBox.setSelected(false);
             txtAgentLosenord.setText("");
             txtAgentOmrade.setText("");
             txtAgentID.requestFocus();
@@ -637,7 +641,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox adminBox;
+    private javax.swing.JComboBox<String> adminBox;
     private javax.swing.JComboBox<String> agentCombo;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonRensaData;
