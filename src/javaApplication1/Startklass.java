@@ -23,9 +23,6 @@ public class Startklass {
             Logger.getLogger(Startklass.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
-        
-        
-        
-        
+      
     }
 }

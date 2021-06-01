@@ -29,6 +29,42 @@ public class Validering {
         }
         return resultat;
     }
+    
+         public static boolean baraIntTecken(JTextField txtRuta) {
+        resultat = true;
+        
+        try{
+        String rutan = txtRuta.getText();
+        Integer.parseInt(rutan);
+        }
+        catch(NumberFormatException e)
+         {
+             JOptionPane.showMessageDialog(null, "Endast siffror möjligt");
+            resultat = false;
+        }
+        return resultat;
+    }
+    
+    
+     public static boolean max10Siffror(JTextField txtRuta) {
+        resultat = true;
+
+        if (txtRuta.getText().length() > 10) {
+            JOptionPane.showMessageDialog(null, "Max 10 siffror tillåtet");
+            resultat = false;
+        }
+        return resultat;
+    }
+     
+          public static boolean max20Tecken(JTextField txtRuta) {
+        resultat = true;
+
+        if (txtRuta.getText().length() > 20) {
+            JOptionPane.showMessageDialog(null, "Max 20 tecken tillåtet");
+            resultat = false;
+        }
+        return resultat;
+    }
 
     public static boolean personFinns(JTextField enPerson, String meddelandetext) {
         resultat = true;
@@ -54,7 +90,7 @@ public class Validering {
     public static boolean txtKontroll(JTextField text) {
         boolean result = true;
         if (text.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "utrustningsnamn är tomt");
+            JOptionPane.showMessageDialog(null, "En ruta är tom");
             result = false;
             text.requestFocus();
         }

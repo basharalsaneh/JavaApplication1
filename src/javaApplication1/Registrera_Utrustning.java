@@ -28,7 +28,7 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
-        jKaliber.setVisible(false);
+        jInfo.setVisible(false);
     }
     
        private String hamtaNyUtrustningID() {
@@ -71,7 +71,7 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
             idb.insert(fraga1);
             
             String fraga2 = "INSERT INTO vapen(utrustnings_id, kaliber) "
-                    + "VALUES ('" + nyID + "','" + jKaliber.getText() + "')";
+                    + "VALUES ('" + nyID + "','" + jInfo.getText() + "')";
             idb.insert(fraga2);
             
         } catch (InfException ex) {
@@ -90,7 +90,7 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
             idb.insert(fraga1);
             
             String fraga2 = "INSERT INTO teknik (utrustnings_id, kraftkalla) "
-                    + "VALUES ('" + nyID + "','" + jKaliber.getText() + "')";
+                    + "VALUES ('" + nyID + "','" + jInfo.getText() + "')";
             idb.insert(fraga2);
             
         } catch (InfException ex) {
@@ -109,7 +109,7 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
             idb.insert(fraga1);
             
             String fraga2 = "INSERT INTO kommunikation (utrustnings_id, overforingsteknik)"
-                    + " VALUES ('" + nyID + "','" + jKaliber.getText() + "')";
+                    + " VALUES ('" + nyID + "','" + jInfo.getText() + "')";
             idb.insert(fraga2);
             
         } catch (InfException ex) {
@@ -137,8 +137,8 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTyp = new javax.swing.JComboBox<>();
         lblMessage = new javax.swing.JLabel();
-        lblKaliber = new javax.swing.JLabel();
-        jKaliber = new javax.swing.JTextField();
+        lblInfo = new javax.swing.JLabel();
+        jInfo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -151,6 +151,12 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
         jLabel2.setText("Ny utrustning:");
 
         jLabel3.setText("Benämning:");
+
+        txtBenamning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBenamningActionPerformed(evt);
+            }
+        });
 
         btnRegistrera.setText("Registrera");
         btnRegistrera.addActionListener(new java.awt.event.ActionListener() {
@@ -168,9 +174,9 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
             }
         });
 
-        jKaliber.addActionListener(new java.awt.event.ActionListener() {
+        jInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jKaliberActionPerformed(evt);
+                jInfoActionPerformed(evt);
             }
         });
 
@@ -199,14 +205,14 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblKaliber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jButton1))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtBenamning, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                             .addComponent(btnRegistrera, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jKaliber))))
+                            .addComponent(jInfo))))
                 .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
@@ -226,8 +232,8 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
                     .addComponent(jTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblKaliber, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jKaliber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegistrera)
@@ -240,15 +246,16 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jKaliberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jKaliberActionPerformed
+    private void jInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInfoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jKaliberActionPerformed
+    }//GEN-LAST:event_jInfoActionPerformed
 
     private void btnRegistreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraActionPerformed
         // TODO add your handling code here:
            if (Validering.txtKontroll(txtBenamning)
+                && Validering.max20Tecken(txtBenamning)
                 && Validering.kontrollForComboBox(jTyp)
-                && Validering.txtKontroll(jKaliber)){
+                && Validering.txtKontroll(jInfo)){
             try {
                 Boolean UtrustningFinns = false;
                 Boolean LadeUtrustning = false;
@@ -266,13 +273,13 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
                 if (UtrustningFinns) {
                     JOptionPane.showMessageDialog(null,"Utrustningen finns redan i listan!");
                 } else {
-                    if (jTyp.getSelectedItem().equals("Vapen")) {
+                    if (jTyp.getSelectedItem().equals("Vapen") && Validering.baraIntTecken(jInfo)  && Validering.max10Siffror(jInfo) ) {
                         LaTillVapen();
                         LadeUtrustning = true;
-                    } else if (jTyp.getSelectedItem().equals("Kommunikation")) {
+                    } else if (jTyp.getSelectedItem().equals("Kommunikation") && Validering.max20Tecken(jInfo)) {
                         laTillKommunikation();
                         LadeUtrustning = true;
-                    }else if (jTyp.getSelectedItem().equals("Teknik")) {
+                    }else if (jTyp.getSelectedItem().equals("Teknik") && Validering.max20Tecken(jInfo)) {
                         laTillTeknik();
                         LadeUtrustning = true;
                     } 
@@ -282,8 +289,8 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Utrustningen har lagts till!");
                     txtBenamning.setText("");
                     jTyp.setSelectedIndex(0);
-                    jKaliber.setText("");
-                    lblKaliber.setText(" ");
+                    jInfo.setText("");
+                    lblInfo.setText(" ");
                 }
                 
             } catch (InfException ex) {
@@ -297,23 +304,23 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
     private void jTypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTypActionPerformed
         // TODO add your handling code here:
          if (jTyp.getSelectedItem().equals("Vapen")) {
-            jKaliber.setVisible(true);
-            lblKaliber.setText("Kaliber:");
+            jInfo.setVisible(true);
+            lblInfo.setText("Kaliber:");
         } 
          
          else if (jTyp.getSelectedItem().equals("Teknik")) {
-            jKaliber.setVisible(true);
-            lblKaliber.setText("Kraftkälla::");
+            jInfo.setVisible(true);
+            lblInfo.setText("Kraftkälla::");
         } 
          
          else if (jTyp.getSelectedItem().equals("Kommunikation")) {
-            jKaliber.setVisible(true);
-            lblKaliber.setText("Överföringsteknik:");
+            jInfo.setVisible(true);
+            lblInfo.setText("Överföringsteknik:");
         } 
          
          else {
-            jKaliber.setVisible(false);
-            lblKaliber.setText(" ");
+            jInfo.setVisible(false);
+            lblInfo.setText(" ");
         }
     }//GEN-LAST:event_jTypActionPerformed
 
@@ -323,6 +330,10 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
         new Agent(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void txtBenamningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBenamningActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBenamningActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -330,13 +341,13 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrera;
     private javax.swing.JButton jButton1;
-    private javax.swing.JTextField jKaliber;
+    private javax.swing.JTextField jInfo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JComboBox<String> jTyp;
-    private javax.swing.JLabel lblKaliber;
+    private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblMessage;
     private javax.swing.JTextField txtBenamning;
     // End of variables declaration//GEN-END:variables

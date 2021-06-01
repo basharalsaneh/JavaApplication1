@@ -132,7 +132,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
           
         String user = txtUser.getText();
         String password = txtPassword.getText();
-        System.out.println("Lösenordet inskrivet i rutan: " + password);
+        
         try{
         String fraga1 = "SELECT Namn FROM agent where Namn like '"+user+"';";
            String giltigUser = idb.fetchSingle(fraga1);
