@@ -20,7 +20,6 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
-        hamtaOmradesNamn();
         VisaAllaAliens();
         hamtaAgentssNamn();
         fyllValjaAlienID();
@@ -37,7 +36,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         txtAlienTelefon.setText(null);
         txtAlienLosenord.setText(null);
         txtAlienRegDatum.setText(null);
-        jOmrade.setSelectedIndex(0);
+        jPlats.setSelectedIndex(0);
         jAgent.setSelectedIndex(0);
         jRas.setSelectedIndex(0);
         jAlienID.setSelectedIndex(0);
@@ -58,9 +57,9 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
     }
     
-    private void updateraOmrade(String alienId) {
+    private void updateraPlats(String alienId) {
         try {
-            String fraga1 = "SElECT plats_id from plats WHERE benamning = '" + jOmrade.getSelectedItem() + "'";
+            String fraga1 = "SElECT plats_id from plats WHERE benamning = '" + jPlats.getSelectedItem() + "'";
             String OmradeID = idb.fetchSingle(fraga1);
 
             String fraga2 = "Update alien SET plats ='" + OmradeID + "' WHERE alien_id = '" + alienId + "'";
@@ -177,24 +176,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         return ras;
     }
 
-    private void hamtaOmradesNamn() {
-        String fraga = "SELECT benamning from omrade";
-
-        ArrayList<String> allaAliensID;
-
-        try {
-
-            allaAliensID = idb.fetchColumn(fraga);
-
-            for (String namn : allaAliensID) {
-                jOmrade.addItem(namn);
-            }
-
-        } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
-
-    }
+   
     
        private void hamtaAliensPlatser() {
 
@@ -205,6 +187,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             for (String element : listLocations) {
 
                 jAlienPlats.addItem(element);
+                jPlats.addItem(element);
 
             }
         } catch (InfException ex) {
@@ -251,7 +234,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
     private String hamtaOmradesID() {
         String OmradeID = "";
-        Object hamtaValdeOmrade = jOmrade.getSelectedItem();
+        Object hamtaValdeOmrade = jPlats.getSelectedItem();
         String Omrade = String.valueOf(hamtaValdeOmrade);
         String fraga = "SELECT omrades_id FROM omrade WHERE benamning = " + "'" + Omrade + "'";
 
@@ -345,7 +328,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
     private String hamtaOmradeID() {
         String platsID = "";
-        Object hamtaListaObjekt = jOmrade.getSelectedItem();
+        Object hamtaListaObjekt = jPlats.getSelectedItem();
         String omrade = String.valueOf(hamtaListaObjekt);
         
         String fraga = "SELECT omrades_id FROM omrade WHERE benamning = " + "'" + omrade + "'";
@@ -480,7 +463,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtAlienLosenord = new javax.swing.JTextField();
         txtAlienRegDatum = new javax.swing.JTextField();
-        jOmrade = new javax.swing.JComboBox<>();
+        jPlats = new javax.swing.JComboBox<>();
         jAgent = new javax.swing.JComboBox<>();
         jAlienID = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -578,10 +561,10 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             }
         });
 
-        jOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välja" }));
-        jOmrade.addActionListener(new java.awt.event.ActionListener() {
+        jPlats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välja" }));
+        jPlats.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jOmradeActionPerformed(evt);
+                jPlatsActionPerformed(evt);
             }
         });
 
@@ -653,7 +636,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                                             .addComponent(jAlienID, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(txtAlienNamn)
                                             .addComponent(txtAlienTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                                            .addComponent(jOmrade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jPlats, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jAgent, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(47, 47, 47)
@@ -697,9 +680,9 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtAlienTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                    .addComponent(jPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -940,7 +923,7 @@ hamtaOmradeID();
                 && Validering.losenordMaxAntal(txtAlienLosenord)
                 && Validering.DatumKontroll(txtAlienRegDatum)
                 && Validering.losenordMaxAntal(txtAlienLosenord)
-                && Validering.kontrollForComboBox(jOmrade, "Ange plats!")
+                && Validering.kontrollForComboBox(jPlats, "Ange plats!")
                 && Validering.kontrollForComboBox(jRas, "Ange Ras!")
                 && Validering.kontrollForComboBox(jAgent, "Ange ansvarig agent!")){
             
@@ -1009,7 +992,7 @@ hamtaOmradeID();
                         + "Ras: " + Ras + "\n"
                         + lblRaceSpecial.getText() + " " + hamtaRasSpecifikation() + "\n"
                         + "Telefon: " + telefon + "\n"
-                        + "Plats: " + jOmrade.getSelectedItem() + "\n"
+                        + "Plats: " + jPlats.getSelectedItem() + "\n"
                         + "Ansvarig agent: " + jAgent.getSelectedItem().toString());
 
                
@@ -1030,7 +1013,7 @@ hamtaOmradeID();
         if (Validering.kontrollForComboBox(jAlienID)) {
             if (txtAlienNamn.getText().isEmpty() && txtAlienTelefon.getText().isEmpty()
                     && txtAlienLosenord.getText().isEmpty()
-                    && jOmrade.getSelectedItem().equals("Välja")
+                    && jPlats.getSelectedItem().equals("Välja")
                     && jAgent.getSelectedItem().equals("Välja")){
                 JOptionPane.showMessageDialog(null, "Du glömde fylla alla rutor");
             } else {
@@ -1058,8 +1041,8 @@ hamtaOmradeID();
                         if (!txtAlienLosenord.getText().isEmpty()) {
                             UpdateraLosenord(alienId);
                         }
-                        if (!jOmrade.getSelectedItem().equals("Välja")) {
-                            updateraOmrade(alienId);
+                        if (!jPlats.getSelectedItem().equals("Välja")) {
+                            updateraPlats(alienId);
                         }
                         if (!jAgent.getSelectedItem().equals("Välja")) {
                             updateraAnsvarigAgent(alienId);
@@ -1080,7 +1063,7 @@ hamtaOmradeID();
                         + "Ras: " + Ras + "\n"
                         + lblRaceSpecial.getText() + " " + hamtaRasSpecifikation() + "\n"
                         + "Telefon: " + telefon + "\n"
-                        + "Plats: " + jOmrade.getSelectedItem() + "\n"
+                        + "Plats: " + jPlats.getSelectedItem() + "\n"
                         + "Ansvarig agent: " + jAgent.getSelectedItem().toString());
 
                
@@ -1170,9 +1153,9 @@ hamtaOmradeID();
         // TODO add your handling code here:
     }//GEN-LAST:event_jAgentActionPerformed
 
-    private void jOmradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOmradeActionPerformed
+    private void jPlatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlatsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jOmradeActionPerformed
+    }//GEN-LAST:event_jPlatsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -1370,9 +1353,9 @@ hamtaOmradeID();
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<String> jListaRas;
-    private javax.swing.JComboBox<String> jOmrade;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JComboBox<String> jPlats;
     private javax.swing.JComboBox<String> jRas;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
