@@ -157,7 +157,7 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
 
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if (Validering.kontrollForComboBox(cbUtrustning)) {
+        if (Validering.kontrollForComboBox(cbUtrustning) && Validering.kontrollForComboBox(cbUtrustning)) {
             try {
                 // TODO add your handling code here:
                 String enUtrustning = cbUtrustning.getSelectedItem().toString();
@@ -173,8 +173,8 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
                     idb.delete(fragaKomm);
                 }
                 if (vapenValt()) {
-                    String fragaVapen1 = "delete from vapen where utrustnings_id = '" + utrustningsID + "';";
-                    idb.delete(fragaVapen1);
+                    String fragaVapen = "delete from vapen where utrustnings_id = '" + utrustningsID + "';";
+                    idb.delete(fragaVapen);
                 }
                 if (teknikValt()) {
                     String fragaTek = "delete from teknik where utrustnings_id = '" + utrustningsID + "';";
@@ -187,6 +187,7 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
                 txtUtID.setText("");
                 txtBenamning.setText("");
                 cbUtrustning.removeItem(enUtrustning); // Tar bort vald utrustning från comboboxen
+                
                 cbUtrustning.setSelectedIndex(0); // Sätter fokus på översta (index 0) utrustning.
 
             } catch (InfException ex) {
