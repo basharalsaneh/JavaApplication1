@@ -30,9 +30,9 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="txtHämtaAgent" min="-2" pref="123" max="-2" attributes="0"/>
+              <Component id="txtHamtaAgent" min="-2" pref="123" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              <Component id="hämtaAgentInfoButton" min="-2" max="-2" attributes="0"/>
+              <Component id="hamtaAgentInfo" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               <Component id="visaAllaAgenter" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -48,8 +48,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace pref="29" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtHämtaAgent" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="hämtaAgentInfoButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtHamtaAgent" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="hamtaAgentInfo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="agentCombo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="visaAllaAgenter" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="goBackButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -339,18 +339,22 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="h&#xe4;mtaAgentInfoButton">
+    <Component class="javax.swing.JButton" name="hamtaAgentInfo">
       <Properties>
         <Property name="text" type="java.lang.String" value="H&#xe4;mta Agent Info"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="h&#xe4;mtaAgentInfoButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hamtaAgentInfoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtH&#xe4;mtaAgent">
+    <Component class="javax.swing.JTextField" name="txtHamtaAgent">
       <Properties>
         <Property name="text" type="java.lang.String" value="Skriv in Agent_ID"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtHamtaAgentMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtHamtaAgentActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="agentCombo">
       <Properties>
