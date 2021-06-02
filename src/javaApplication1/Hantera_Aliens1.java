@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import oru.inf.InfException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import static javaApplication1.AgentHanteraAliens.hamtaRas;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 
