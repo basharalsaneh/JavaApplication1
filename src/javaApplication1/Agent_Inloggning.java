@@ -178,7 +178,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        
         loggaInSomAgent();
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -192,7 +192,7 @@ public class Agent_Inloggning extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             
-         // Vid tryck på enter så körs metoden, loggaInSomAgen().
+         // Vid tryck på enter så körs metoden, loggaInSomAgent().
             
             loggaInSomAgent();
             
