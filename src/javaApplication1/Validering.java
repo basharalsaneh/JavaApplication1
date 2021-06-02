@@ -108,7 +108,7 @@ public class Validering {
 
     public static boolean kontrollForComboBox(JComboBox text) {
         boolean result = true;
-        if (text.getSelectedItem().equals("Välja")) {
+        if (text.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Välj en typ av utrustning!");
             result = false;
             text.requestFocus();

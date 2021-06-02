@@ -18,8 +18,10 @@ import oru.inf.InfException;
  * @author marcu
  */
 public class Hantera_Utrustning extends javax.swing.JFrame {
+
     static Validering vemArInloggad;
     static InfDB idb;
+
     /**
      * Creates new form Hantera_Utrustning
      */
@@ -48,6 +50,7 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
         txtBenamning = new javax.swing.JTextField();
         lblBenamning = new javax.swing.JLabel();
         cbUtrustning = new javax.swing.JComboBox<>();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +87,13 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
             }
         });
 
+        btnTillbaka.setText("Gå tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,8 +117,11 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
                                     .addComponent(txtUtID, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnTillbaka)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblSOK, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -133,47 +146,59 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
                     .addComponent(lblBenamning)
                     .addComponent(txtBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTillbaka))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void taBortFranVapen(){
-    String sqlFraga = "Select * from utrustning where exist in vapen";
-    }
-    
+
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if(Validering.kontrollForComboBox(cbUtrustning)){
-        try {
-            // TODO add your handling code here:
-            String enUtrustning = cbUtrustning.getSelectedItem().toString();
-    
-            String fraga = "delete from utrustning where benamning = '" + hamtaUtrustningsBenamning() + "';";
-            String fraga2 = "delete from innehar_utrustning where utrustnings_id = '" + hamtaUtrustningsID() + "';";
-      //      String fraga3 = "delete from " + enUtrustning+ " where "+ hamtaUtrustningsID() + " IN (Select " + hamtaUtrustningsID()+ " from utrustning)";
-            idb.delete(fraga2);
-            idb.delete(fraga);
-          //  idb.delete(fraga3);
-            
-            JOptionPane.showMessageDialog(this, "Du har nu tagit bort utrustningen: " + enUtrustning );
-            
-            txtUtID.setText("");
-            txtBenamning.setText("");
-            cbUtrustning.removeItem(enUtrustning); // Tar bort vald utrustning från comboboxen
-            cbUtrustning.setSelectedIndex(0); // Sätter fokus på översta (index 0) utrustning.
- 
-        } catch (InfException ex) {
-            Logger.getLogger(Hantera_Utrustning.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex);
+        if (Validering.kontrollForComboBox(cbUtrustning)) {
+            try {
+                // TODO add your handling code here:
+                String enUtrustning = cbUtrustning.getSelectedItem().toString();
+                String utrustningsID = txtUtID.getText();
+
+                String fraga = "delete from utrustning where benamning = '" + hamtaUtrustningsBenamning() + "';";
+                String fraga2 = "delete from innehar_utrustning where utrustnings_id = '" + hamtaUtrustningsID() + "';";
+                idb.delete(fraga2);       
+                idb.delete(fraga);
+             
+                if (kommunikationValt()) {
+                    String fragaKomm = "delete from kommunikation where utrustnings_id = '" + utrustningsID + "';";
+                    idb.delete(fragaKomm);
+                }
+                if (vapenValt()) {
+                    String fragaVapen1 = "delete from vapen where utrustnings_id = '" + utrustningsID + "';";
+                    idb.delete(fragaVapen1);
+                }
+                if (teknikValt()) {
+                    String fragaTek = "delete from teknik where utrustnings_id = '" + utrustningsID + "';";
+                    idb.delete(fragaTek);
+                }
+  
+                JOptionPane.showMessageDialog(this, "Du har nu tagit bort utrustningen: " + enUtrustning
+                        + " med id: " + txtUtID.getText());
+
+                txtUtID.setText("");
+                txtBenamning.setText("");
+                cbUtrustning.removeItem(enUtrustning); // Tar bort vald utrustning från comboboxen
+                cbUtrustning.setSelectedIndex(0); // Sätter fokus på översta (index 0) utrustning.
+
+            } catch (InfException ex) {
+                Logger.getLogger(Hantera_Utrustning.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex + " något fel tydligen...");
+            }
+
         }
-           
-        }     
-        
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-  private void fyllCBMedUtrustning() {
+    private void fyllCBMedUtrustning() {
         String fraga = "SELECT benamning from utrustning";
 
         ArrayList<String> utrustningLista;
@@ -196,36 +221,80 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
 
     }
 
-  private String hamtaUtrustningsID() throws InfException{
-        
-        
-            String enUtrustning = cbUtrustning.getSelectedItem().toString();
-            String fraga = "Select utrustnings_id from utrustning where benamning = '" + enUtrustning + "';";
-            String hamtaID = idb.fetchSingle(fraga);
-            
-            return hamtaID;
-  }
-  
-  private String hamtaUtrustningsBenamning() throws InfException{
-            String enUtrustning = cbUtrustning.getSelectedItem().toString();
-            String fraga = "Select benamning from utrustning where benamning = '" + enUtrustning + "';";
-            String hamtaBenamning = idb.fetchSingle(fraga);
-            
-            return hamtaBenamning; 
-  }
+    private boolean vapenValt() throws InfException {
+
+        boolean lyckad = false;
+        String nyID = txtUtID.getText();
+
+        String fraga2 = "select utrustnings_ID from vapen where Utrustnings_ID = " + nyID + ";";
+        String hamtatID = idb.fetchSingle(fraga2);
+
+        if (nyID.equals(hamtatID)) {
+
+            lyckad = true;
+        }
+        return lyckad;
+    }
+
+    private boolean kommunikationValt() throws InfException {
+
+        boolean lyckad = false;
+        String nyID = txtUtID.getText();
+
+        String fraga2 = "select utrustnings_ID from kommunikation where Utrustnings_ID = " + nyID + ";";
+        String hamtatID = idb.fetchSingle(fraga2);
+
+        if (nyID.equals(hamtatID)) {
+
+            lyckad = true;
+        }
+
+        return lyckad;
+    }
+
+    private boolean teknikValt() throws InfException {
+
+        boolean lyckad = false;
+        String nyID = txtUtID.getText();
+
+        String fraga2 = "select utrustnings_ID from teknik where Utrustnings_ID = " + nyID + ";";
+        String hamtatID = idb.fetchSingle(fraga2);
+
+        if (nyID.equals(hamtatID)) {
+
+            lyckad = true;
+        }
+        return lyckad;
+    }
+
+    private String hamtaUtrustningsID() throws InfException {
+
+        String enUtrustning = cbUtrustning.getSelectedItem().toString();
+        String fraga = "Select utrustnings_id from utrustning where benamning = '" + enUtrustning + "';";
+        String hamtaID = idb.fetchSingle(fraga);
+
+        return hamtaID;
+    }
+
+    private String hamtaUtrustningsBenamning() throws InfException {
+        String enUtrustning = cbUtrustning.getSelectedItem().toString();
+        String fraga = "Select benamning from utrustning where benamning = '" + enUtrustning + "';";
+        String hamtaBenamning = idb.fetchSingle(fraga);
+
+        return hamtaBenamning;
+    }
     private void cbUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUtrustningActionPerformed
-    
+
         try {
             // TODO add your handling code here:
-            
-            
+
             txtUtID.setText(hamtaUtrustningsID());
             txtBenamning.setText(hamtaUtrustningsBenamning());
         } catch (InfException ex) {
             Logger.getLogger(Hantera_Utrustning.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       
+
+
     }//GEN-LAST:event_cbUtrustningActionPerformed
 
     private void txtBenamningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBenamningActionPerformed
@@ -233,12 +302,19 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtBenamningActionPerformed
 
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Admin(idb, vemArInloggad).setVisible(true);
+    }//GEN-LAST:event_btnTillbakaActionPerformed
+
     /**
      * @param args the command line arguments
      */
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cbUtrustning;
     private javax.swing.JLabel lblBenamning;
     private javax.swing.JLabel lblHanteraUtrustning;
