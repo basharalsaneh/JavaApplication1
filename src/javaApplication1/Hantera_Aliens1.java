@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import oru.inf.InfException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import static javaApplication1.AgentHanteraAliens.hamtaRas;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 
@@ -24,7 +25,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         VisaAllaAliens();
         hamtaAgentssNamn();
         fyllValjaAlienID();
-        listaRas();
+        //listaRas();
         txtRaceSpecial.setVisible(false);
         lblRaceSpecial.setVisible(false);
         hamtaAliensPlatser();
@@ -141,6 +142,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
         for (String element : Raslista) {
             jRas.addItem(element);
+            //jListaRas.addItem(element);
         }
 
     }
@@ -512,6 +514,8 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jAlienPlats = new javax.swing.JComboBox<>();
+        jLabel19 = new javax.swing.JLabel();
+        jListaRas = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -607,7 +611,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
         jLabel2.setText("Alien ID:");
 
-        jRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välja" }));
+        jRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välja", "Boglodite", "Worm", "Squid", "Okänd" }));
         jRas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRasActionPerformed(evt);
@@ -792,6 +796,15 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             }
         });
 
+        jLabel19.setText("Välja en ras:");
+
+        jListaRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välja", "Boglodite", "Worm", "Squid", "Okänd" }));
+        jListaRas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jListaRasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -849,9 +862,15 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jAlienPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jAlienPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel19)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jListaRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -889,9 +908,13 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jAlienPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jAlienPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19)
+                            .addComponent(jListaRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1263,7 +1286,9 @@ hamtaOmradeID();
 
         try {
             String valdBenamning = jAlienPlats.getSelectedItem().toString();
-                String fraga = "SELECT * from Alien where Plats =(Select Plats_ID from Plats where Benamning = '" + valdBenamning + "') Order by Alien_ID";
+                String fraga = "SELECT * from Alien where Plats ="
+                        + "(Select Plats_ID from Plats where Benamning = '" + valdBenamning + "') "
+                        + "Order by Alien_ID";
             
                 
                 ArrayList<HashMap<String, String>> alienInfo = idb.fetchRows(fraga);
@@ -1284,6 +1309,33 @@ hamtaOmradeID();
             System.out.println("Internt felmeddelande" + e.getMessage());
         }
     }//GEN-LAST:event_jAlienPlatsActionPerformed
+
+    private void jListaRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListaRasActionPerformed
+        // TODO add your handling code here:
+           txtListaAliens.setText("");
+
+       
+        try {
+            String qAlienId = "SELECT alien_id FROM alien order by alien_id";
+            ArrayList<String> listAlienId = idb.fetchColumn(qAlienId);
+
+            txtListaAliens.append(" ID\t Namn\n "
+                + "----\t-------\n");
+
+            for(String alienID : listAlienId){
+                String ras = hamtaRas(alienID);
+                String qAlienName = "SELECT namn FROM alien WHERE alien_id = '" + alienID + "'";
+                String alienNamn = idb.fetchSingle(qAlienName);
+
+                if(jListaRas.getSelectedItem().equals(ras)){
+                    txtListaAliens.append(" " + alienID + "\t" + alienNamn + "\n");
+                }
+            }
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());       
+        }
+    }//GEN-LAST:event_jListaRasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1309,6 +1361,7 @@ hamtaOmradeID();
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1317,6 +1370,7 @@ hamtaOmradeID();
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JComboBox<String> jListaRas;
     private javax.swing.JComboBox<String> jOmrade;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
