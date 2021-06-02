@@ -23,15 +23,83 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         VisaAllaAliens();
         hamtaAgentssNamn();
         fyllValjaAlienID();
-        //listaRas();
+        listaRas();
         txtRaceSpecial.setVisible(false);
         lblRaceSpecial.setVisible(false);
         hamtaAliensPlatser();
     }
-    
-    
-    
-    private void rensaAllaFält(){
+
+    private void setBoglodite(String alienId) {
+
+        String nuvarandeRas = hamtaRas(alienId);
+        try {
+            lblRaceSpecial.setText("Ange antal boogies: ");
+            if (txtRaceSpecial.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Ange ras specialitet!");
+//  
+            } else {
+                if (nuvarandeRas != "<Oidentifierad>") {
+                    String qDelete = "DELETE FROM " + nuvarandeRas + " WHERE alien_id = '" + alienId + "'";
+                    idb.delete(qDelete);
+                }
+                if (Validering.SiffrorKontroll(txtRaceSpecial, "Antal boogies måste anges i siffror")) {
+                    String qBoglodite = "INSERT INTO Boglodite VALUES (" + alienId + "," + txtRaceSpecial.getText() + ")";
+                    idb.insert(qBoglodite);
+                }
+            }
+
+        } catch (InfException ex) {
+            System.out.println("Databasfel" + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Random fel" + ex.getMessage());
+        }
+    }
+
+    private void setSquid(String alienId) {
+        String nuvarandeRas = hamtaRas(alienId);
+        try {
+
+            lblRaceSpecial.setText("Ange antal armar:");
+            if (txtRaceSpecial.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Ange ras specialitet!");
+
+            } else {
+                if (nuvarandeRas != "<Oidentifierad>") {
+                    String qDelete = "DELETE FROM " + nuvarandeRas + " WHERE alien_id = '" + alienId + "'";
+                    idb.delete(qDelete);
+                }
+                if (Validering.SiffrorKontroll(txtRaceSpecial, "Antal armar måste anges i siffror")) {
+                    String qSquid = "INSERT INTO Squid VALUES (" + alienId + "," + txtRaceSpecial.getText() + ")";
+                    idb.insert(qSquid);
+                }
+            }
+
+        } catch (InfException ex) {
+            System.out.println("Databasfel" + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Random fel" + ex.getMessage());
+        }
+    }
+
+    private void setWorm(String alienId) {
+        String nuvarandeRas = hamtaRas(alienId);
+        try {
+
+            if (nuvarandeRas != "<Oidentifierad>") {
+                String qDelete = "DELETE FROM " + nuvarandeRas + " WHERE alien_id = '" + alienId + "'";
+                idb.delete(qDelete);
+            }
+            String qWorm = "INSERT INTO Worm VALUES (" + alienId + ")";
+            idb.insert(qWorm);
+
+        } catch (InfException ex) {
+            System.out.println("Databasfel" + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Random fel" + ex.getMessage());
+        }
+    }
+
+    private void rensaAllaFält() {
         txtAlienNamn.setText(null);
         txtAlienTelefon.setText(null);
         txtAlienLosenord.setText(null);
@@ -41,22 +109,20 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         jRas.setSelectedIndex(0);
         jAlienID.setSelectedIndex(0);
     }
-    
 
-            private void updateraAnsvarigAgent(String alienId) {
+    private void updateraAnsvarigAgent(String alienId) {
         try {
-            
 
             String qAgent = "Update alien SET ansvarig_agent  ='" + jAgent.getSelectedItem() + "' WHERE alien_id = '" + alienId + "'";
             idb.update(qAgent);
             JOptionPane.showMessageDialog(null, "Din Ansvarig agent har ändrats!");
 
         } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
 
     }
-    
+
     private void updateraPlats(String alienId) {
         try {
             String fraga1 = "SElECT plats_id from plats WHERE benamning = '" + jPlats.getSelectedItem() + "'";
@@ -67,50 +133,49 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ditt ömråde har ändrats!");
 
         } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
 
     }
-    
-      private void UpdateraLosenord(String alienId) {
-        try {
-            
-                String fraga = "UPDATE alien SET losenord = '" + txtAlienLosenord.getText() + "' WHERE alien_id = '" + alienId + "'";
-                idb.update(fraga);
-                JOptionPane.showMessageDialog(null, "Ditt lösenord har ändrats!");
-            
-        } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
-    }
-      
-        private void updateraTelefon(String alienId) {
-        try {
-             
-                String fraga = "UPDATE alien SET telefon = '" + txtAlienTelefon.getText() + "' WHERE alien_id = '" + alienId + "'";
-                idb.update(fraga);
-                JOptionPane.showMessageDialog(null, "Ditt telefonnummer har ändrats!");
 
-                
-        } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
-    }
-        
-        private void UppdateraAliensNamn(String alienId) {
-
+    private void UpdateraLosenord(String alienId) {
         try {
-           
-                String qName = "UPDATE alien SET namn = '" + txtAlienNamn.getText() + "' WHERE alien_id = '" + alienId + "'";
-                idb.update(qName);
-                JOptionPane.showMessageDialog(null, "Aliensnamn har ändrats!");
+
+            String fraga = "UPDATE alien SET losenord = '" + txtAlienLosenord.getText() + "' WHERE alien_id = '" + alienId + "'";
+            idb.update(fraga);
+            JOptionPane.showMessageDialog(null, "Ditt lösenord har ändrats!");
 
         } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
     }
 
-        private void fyllValjaAlienID() {
+    private void updateraTelefon(String alienId) {
+        try {
+
+            String fraga = "UPDATE alien SET telefon = '" + txtAlienTelefon.getText() + "' WHERE alien_id = '" + alienId + "'";
+            idb.update(fraga);
+            JOptionPane.showMessageDialog(null, "Ditt telefonnummer har ändrats!");
+
+        } catch (InfException ex) {
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
+    }
+
+    private void UppdateraAliensNamn(String alienId) {
+
+        try {
+
+            String qName = "UPDATE alien SET namn = '" + txtAlienNamn.getText() + "' WHERE alien_id = '" + alienId + "'";
+            idb.update(qName);
+            JOptionPane.showMessageDialog(null, "Aliensnamn har ändrats!");
+
+        } catch (InfException ex) {
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
+    }
+
+    private void fyllValjaAlienID() {
         String fraga = "SELECT alien_id from alien order by alien_id";
 
         ArrayList<String> allaAliensID;
@@ -124,19 +189,17 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             }
 
         } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
 
     }
-        
+
     private void listaRas() {
 
         ArrayList<String> Raslista = new ArrayList<String>();
-        Raslista.add("Okänd");
         Raslista.add("Boglodite");
         Raslista.add("Worm");
         Raslista.add("Squid");
-      
 
         for (String element : Raslista) {
             jRas.addItem(element);
@@ -144,7 +207,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         }
 
     }
-        
+
     public static String hamtaRas(String alienId) {
 
         String ras = "";
@@ -165,20 +228,14 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             } else if (Boglodite != null) {
                 ras = "Boglodite";
             }
-            else if(ras.equals("")){
-                ras = "Okänd";
-            }
-
 
         } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
         return ras;
     }
 
-   
-    
-       private void hamtaAliensPlatser() {
+    private void hamtaAliensPlatser() {
 
         try {
             String query = "SELECT benamning FROM plats";
@@ -211,8 +268,8 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             }
 
         } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
 
     }
 
@@ -227,27 +284,12 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             areaId = getAreaId;
 
         } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
         return areaId;
     }
 
-    private String hamtaOmradesID() {
-        String OmradeID = "";
-        Object hamtaValdeOmrade = jPlats.getSelectedItem();
-        String Omrade = String.valueOf(hamtaValdeOmrade);
-        String fraga = "SELECT omrades_id FROM omrade WHERE benamning = " + "'" + Omrade + "'";
 
-        try {
-            String hamtaOmradeID = idb.fetchSingle(fraga);
-            OmradeID = hamtaOmradeID;
-
-        } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
-        return OmradeID;
-    }
-    
     private String hamtaRasSpecifikation() {
         String raceSpecial = txtRaceSpecial.getText();
 
@@ -265,9 +307,9 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
             jTextArea1.append("ID \t Namn \t Telefon\t Reg.datum\t Ans_Agent\t Losenord\t Plats\n "
                     + "--\t-----\t----------\t----------\t----------\t--------\t-----\n");
-            
+
             for (HashMap<String, String> Alien : allaAliens) {
-        
+
                 jTextArea1.append(Alien.get("Alien_ID") + "\t");
                 jTextArea1.append(" " + Alien.get("Namn") + "\t");
                 jTextArea1.append(" " + Alien.get("Telefon") + "\t");
@@ -275,30 +317,14 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                 jTextArea1.append(" " + Alien.get("Ansvarig_Agent") + "\t");
                 jTextArea1.append(" " + Alien.get("Losenord") + "\t");
                 jTextArea1.append(" " + Alien.get("Plats") + "\n");
-                
 
             }
         } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
 
     }
 
-    private int kollaVardet() {
-        int hitta = 0;
-        try {
-            String qAlienId = "SELECT alien_id FROM alien WHERE alien_id = '" + txtAlien.getText() + "'";
-            ArrayList<String> alienID = idb.fetchColumn(qAlienId);
-
-            for (String element : alienID) {
-                hitta++;
-            }
-        } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
-        return hitta;
-
-    }
 
     private String hamtaNyAliensID() {
         int sistaID = 0;
@@ -321,8 +347,8 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             nyID = String.valueOf(newIdInt);
 
         } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
         return nyID;
     }
 
@@ -330,18 +356,17 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         String platsID = "";
         Object hamtaListaObjekt = jPlats.getSelectedItem();
         String omrade = String.valueOf(hamtaListaObjekt);
-        
+
         String fraga = "SELECT omrades_id FROM omrade WHERE benamning = " + "'" + omrade + "'";
         try {
             String omradeID = idb.fetchSingle(fraga);
             platsID = omradeID;
 
         } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
         return platsID;
     }
-
 
     private String hamtaAlienID() {
         String alienId = "";
@@ -384,8 +409,8 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             idb.delete(fraga2);
 
         } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
     }
 
     private void TaBortWorm() {
@@ -397,34 +422,10 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             idb.delete(fraga2);
 
         } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
-    }
-    
-        private void laggOkand(String alienId) {
-        String Ras = hamtaRas(alienId);
-        try {
-            if (Ras != "<Oidentifierad>") {
-                String qDelete = "DELETE FROM " + Ras + " WHERE alien_id = '" + alienId + "'";
-                idb.delete(qDelete);
-            }
-        } catch (InfException ex) {
-            System.out.println("Databasfel" + ex.getMessage());
-        } 
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
     }
 
-        
-            private void taBortOkand() {
-        String alienId = hamtaAlienID();
-        try {
-            String qAlien = "DELETE FROM alien WHERE alien_id = '" + alienId + "'";
-            idb.delete(qAlien);
-
-        } catch (InfException ex) {
-            System.out.println("Databasfel" + ex.getMessage());
-        } 
-    }
-    
     private int kontrolleraNamnochID() {
         int loops = 0;
         try {
@@ -593,7 +594,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
         jLabel2.setText("Alien ID:");
 
-        jRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välja", "Boglodite", "Worm", "Squid", "Okänd" }));
+        jRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välja" }));
         jRas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRasActionPerformed(evt);
@@ -780,7 +781,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
         jLabel19.setText("Välja en ras:");
 
-        jListaRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välja", "Boglodite", "Worm", "Squid", "Okänd" }));
+        jListaRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välja", "Boglodite", "Worm", "Squid" }));
         jListaRas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jListaRasActionPerformed(evt);
@@ -913,10 +914,10 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
 
     private void buttonListaAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaAllActionPerformed
-jTextArea1.setText("");
-hamtaOmradeID();
+        jTextArea1.setText("");
+        hamtaOmradeID();
 
-                String RasSpecifaktion = lblRaceSpecial.getText();
+        String RasSpecifaktion = lblRaceSpecial.getText();
 
         if (Validering.TelefonKontroll(txtAlienTelefon)
                 && Validering.personFinns(txtAlienNamn, "Ange namn!")
@@ -925,9 +926,9 @@ hamtaOmradeID();
                 && Validering.losenordMaxAntal(txtAlienLosenord)
                 && Validering.kontrollForComboBox(jPlats, "Ange plats!")
                 && Validering.kontrollForComboBox(jRas, "Ange Ras!")
-                && Validering.kontrollForComboBox(jAgent, "Ange ansvarig agent!")){
-            
-             if (txtRaceSpecial.isShowing() == true) {
+                && Validering.kontrollForComboBox(jAgent, "Ange ansvarig agent!")) {
+
+            if (txtRaceSpecial.isShowing() == true) {
                 if (!Validering.personFinns(txtRaceSpecial, "Ange " + RasSpecifaktion.substring(0, RasSpecifaktion.length() - 1))
                         || !Validering.SiffrorKontroll(txtRaceSpecial, RasSpecifaktion.substring(0, RasSpecifaktion.length() - 1) + " måste vara en siffra")) {
 
@@ -935,8 +936,7 @@ hamtaOmradeID();
                 }
             }
 
-           // HashMap<String, String> nyregistreradAlien;
-
+            // HashMap<String, String> nyregistreradAlien;
             try {
                 String alienId = hamtaNyAliensID();
 
@@ -944,7 +944,7 @@ hamtaOmradeID();
                 String telefon = txtAlienTelefon.getText();
                 String datum = txtAlienRegDatum.getText();    // FÃ¥r ej vara null
                 String losenord = txtAlienLosenord.getText();
-                
+
                 Object ValjaRas = jRas.getSelectedItem();
                 String Ras = ValjaRas.toString();
                 String nyAlien = "INSERT INTO alien (alien_id, namn, telefon, registreringsdatum, Ansvarig_Agent,losenord, plats)\n"
@@ -969,7 +969,7 @@ hamtaOmradeID();
                         + alienId + ")";
 
                 idb.insert(nyAlien);
-                
+
                 switch (Ras) {
                     case "Squid":
                         idb.insert(alienSquid);
@@ -981,10 +981,9 @@ hamtaOmradeID();
                         idb.insert(alienWorm);
                         break;
                 }
-            
 
                 JOptionPane.showMessageDialog(this, "Alien registrerad");
-                AlienInfo.setText("Alien har registrerat\n" 
+                AlienInfo.setText("Alien har registrerat\n"
                         + "--------------------------------\n"
                         + "ID: " + alienId + "\n"
                         + "Namn: " + namn + "\n"
@@ -995,7 +994,6 @@ hamtaOmradeID();
                         + "Plats: " + jPlats.getSelectedItem() + "\n"
                         + "Ansvarig agent: " + jAgent.getSelectedItem().toString());
 
-               
                 VisaAllaAliens();
 
             } catch (InfException ex) {
@@ -1009,17 +1007,16 @@ hamtaOmradeID();
         int hitta = 0;
         jTextArea1.setText("");
 
-
         if (Validering.kontrollForComboBox(jAlienID)) {
             if (txtAlienNamn.getText().isEmpty() && txtAlienTelefon.getText().isEmpty()
                     && txtAlienLosenord.getText().isEmpty()
                     && jPlats.getSelectedItem().equals("Välja")
-                    && jAgent.getSelectedItem().equals("Välja")){
+                    && jAgent.getSelectedItem().equals("Välja")) {
                 JOptionPane.showMessageDialog(null, "Du glömde fylla alla rutor");
             } else {
                 //Lägg till metodanrop som hämtar id och gör kollen för "flera med samma namn" istället. 
                 try {
-                    String qAlienId = "SELECT alien_id FROM alien WHERE alien_id = '" + jAlienID.getSelectedItem() + "' OR namn = '" + txtAlien.getText()+ "'";
+                    String qAlienId = "SELECT alien_id FROM alien WHERE alien_id = '" + jAlienID.getSelectedItem() + "' OR namn = '" + txtAlien.getText() + "'";
                     ArrayList<String> AllaAlienID = idb.fetchColumn(qAlienId);
                     String alienId = idb.fetchSingle(qAlienId);
 
@@ -1047,39 +1044,55 @@ hamtaOmradeID();
                         if (!jAgent.getSelectedItem().equals("Välja")) {
                             updateraAnsvarigAgent(alienId);
                         }
-                String namn = txtAlienNamn.getText(); // FÃ¥r ej vara null
-                String telefon = txtAlienTelefon.getText();
-                String datum = txtAlienRegDatum.getText();    // FÃ¥r ej vara null
-                String losenord = txtAlienLosenord.getText();
-                
-                Object ValjaRas = jRas.getSelectedItem();
-                String Ras = ValjaRas.toString();
-                       
-                        AlienInfo.setText("Aliens uppgifter har ändrats!\n" 
-                        + "-------------------------------------\n"
-                        + "ID: " + alienId + "\n"
-                        + "Namn: " + namn + "\n"
-                        + "Lösenord: " + losenord + "\n"
-                        + "Ras: " + Ras + "\n"
-                        + lblRaceSpecial.getText() + " " + hamtaRasSpecifikation() + "\n"
-                        + "Telefon: " + telefon + "\n"
-                        + "Plats: " + jPlats.getSelectedItem() + "\n"
-                        + "Ansvarig agent: " + jAgent.getSelectedItem().toString());
+                        if (!jRas.getSelectedItem().equals("Välja")) {
 
-               
-                VisaAllaAliens();
+                            String nuvarandeRas = hamtaRas(alienId);
+
+                            if (nuvarandeRas.equals(jRas.getSelectedItem())) {
+                                JOptionPane.showMessageDialog(null, "Alien är redan registrerad som den här rasen.");
+                            } else {
+
+                                if (jRas.getSelectedItem().equals("Boglodite")) {
+                                    setBoglodite(alienId);
+                                } else if (jRas.getSelectedItem().equals("Squid")) {
+                                    setSquid(alienId);
+                                } else if (jRas.getSelectedItem().equals("Worm")) {
+                                    setWorm(alienId);
+                                }
+                            }
+                        }
+                        String namn = txtAlienNamn.getText(); // FÃ¥r ej vara null
+                        String telefon = txtAlienTelefon.getText();
+                        String datum = txtAlienRegDatum.getText();    // FÃ¥r ej vara null
+                        String losenord = txtAlienLosenord.getText();
+
+                        Object ValjaRas = jRas.getSelectedItem();
+                        String Ras = ValjaRas.toString();
+
+                        AlienInfo.setText("Aliens uppgifter har ändrats!\n"
+                                + "-------------------------------------\n"
+                                + "ID: " + alienId + "\n"
+                                + "Namn: " + namn + "\n"
+                                + "Lösenord: " + losenord + "\n"
+                                + "Ras: " + Ras + "\n"
+                                + lblRaceSpecial.getText() + " " + hamtaRasSpecifikation() + "\n"
+                                + "Telefon: " + telefon + "\n"
+                                + "Plats: " + jPlats.getSelectedItem() + "\n"
+                                + "Ansvarig agent: " + jAgent.getSelectedItem().toString());
+
+                        VisaAllaAliens();
                     }
 
                 } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
+                    System.out.println("fel i systemet" + ex.getMessage());
+                }
 
             }
         }
     }//GEN-LAST:event_buttonEditActionPerformed
 
     private void buttonRensaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRensaDataActionPerformed
-    rensaAllaFält();
+        rensaAllaFält();
     }//GEN-LAST:event_buttonRensaDataActionPerformed
 
     private void buttonTaBortUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTaBortUtrustningActionPerformed
@@ -1091,11 +1104,9 @@ hamtaOmradeID();
                 JOptionPane.showMessageDialog(null, "Det är många aliens som har samma namn, försök med aliens ID!");
                 VisaAllaAliens();
 
-                
             } else if (hamtaAlienID().equals("")) {
-                 JOptionPane.showMessageDialog(null, "Du skrev fel namn eller ID");
-                 VisaAllaAliens();
-
+                JOptionPane.showMessageDialog(null, "Du skrev fel namn eller ID");
+                VisaAllaAliens();
 
             } else {
                 String ras = hamtaRas(hamtaAlienID());
@@ -1105,22 +1116,20 @@ hamtaOmradeID();
                     TaBortWorm();
                 } else if (ras.equals("Boglodite")) {
                     TaBortBoglodite();
-                } else if (ras.equals("Okänd")) {
-                    taBortOkand();
                 }
 
                 JOptionPane.showMessageDialog(null, "Alien har tagits bort från listan!");
                 VisaAllaAliens();
-            } 
-        } 
+            }
+        }
 
     }//GEN-LAST:event_buttonTaBortUtrustningActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-   txtListaAliens.setText("");
+        txtListaAliens.setText("");
 
         ArrayList<HashMap<String, String>> soktaDatum;
-        if (Validering.txtKontroll(txtDatum1) 
+        if (Validering.txtKontroll(txtDatum1)
                 && Validering.txtKontroll(txtDatum2)
                 && Validering.DatumKontroll(txtDatum1)
                 && Validering.DatumKontroll(txtDatum2)) {
@@ -1133,7 +1142,7 @@ hamtaOmradeID();
                 soktaDatum = idb.fetchRows(fraga);
 
                 txtListaAliens.append("ID \t Namn \t Registreringsdatum \n"
-                    + "--\t-----\t------------\n");
+                        + "--\t-----\t------------\n");
 
                 for (HashMap<String, String> alien : soktaDatum) {
                     txtListaAliens.append(alien.get("Alien_ID") + "\t");
@@ -1159,21 +1168,21 @@ hamtaOmradeID();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    AlienInfo.setText("");
-    jTextArea1.setText("");
+        AlienInfo.setText("");
+        jTextArea1.setText("");
 
-   if (Validering.personFinns(jAlienID1, "Du glömde ange alien id")) {
+        if (Validering.personFinns(jAlienID1, "Du glömde ange alien id")) {
             try {
-                String fraga1 = "SELECT alien_id FROM alien WHERE alien_ID = '" + jAlienID1.getText() + "' OR namn = '" + jAlienID1.getText()+ "'";
+                String fraga1 = "SELECT alien_id FROM alien WHERE alien_ID = '" + jAlienID1.getText() + "' OR namn = '" + jAlienID1.getText() + "'";
                 String alienId = idb.fetchSingle(fraga1);
-                
+
                 if (alienId == null) {
                     JOptionPane.showMessageDialog(null, "Alien id finns inte!");
-                                    VisaAllaAliens();
+                    VisaAllaAliens();
 
                 } else {
-                    AlienInfo.setText("Aliens uppgifter!\n" 
-                        + "--------------------------\n");
+                    AlienInfo.setText("Aliens uppgifter!\n"
+                            + "--------------------------\n");
                     AlienInfo.append("Alien ID: " + alienId + "\n");
 
                     String fraga2 = "SELECT namn, telefon, registreringsdatum FROM alien WHERE alien_id = '" + alienId + "'";
@@ -1183,26 +1192,26 @@ hamtaOmradeID();
                     AlienInfo.append("Regestreringsdatum: " + alienInfo.get("registreringsdatum") + "\n");
 
                     String fraga3 = "SELECT benamning FROM plats "
-                                       + "JOIN alien ON plats.plats_id = alien.plats "
-                                       + "WHERE alien_id = '" + alienId + "'";
+                            + "JOIN alien ON plats.plats_id = alien.plats "
+                            + "WHERE alien_id = '" + alienId + "'";
                     String alienPlats = idb.fetchSingle(fraga3);
-                    
+
                     String fraga4 = "SELECT omrade.benamning FROM omrade "
-                                        + "JOIN plats ON omrade.omrades_id = plats.finns_i "
-                                        + "WHERE plats.benamning = '" + alienPlats + "'";
+                            + "JOIN plats ON omrade.omrades_id = plats.finns_i "
+                            + "WHERE plats.benamning = '" + alienPlats + "'";
                     String alienOmrade = idb.fetchSingle(fraga4);
-                    
+
                     AlienInfo.append("Finns i: " + alienPlats + " (" + alienOmrade + ")" + "\n");
 
                     String fraga5 = "SELECT agent.namn FROM agent "
-                                          + "JOIN alien ON agent.agent_id = alien.ansvarig_agent "
-                                          + "WHERE alien_id = '" + alienId + "'";
+                            + "JOIN alien ON agent.agent_id = alien.ansvarig_agent "
+                            + "WHERE alien_id = '" + alienId + "'";
                     String fraga6 = idb.fetchSingle(fraga5);
                     AlienInfo.append("Ansvarig Agent är: " + fraga6 + "\n");
-                VisaAllaAliens();
+                    VisaAllaAliens();
 
                 }
-                    
+
             } catch (InfException ex) {
                 System.out.println("fel i systemet" + ex.getMessage());
             }
@@ -1211,20 +1220,34 @@ hamtaOmradeID();
 
     private void jAlienIDPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jAlienIDPopupMenuWillBecomeInvisible
         // TODO add your handling code here:
-    
-    try{
-                    String fraga2 = "SELECT namn, telefon, registreringsdatum, losenord FROM alien WHERE alien_id = '" + jAlienID.getSelectedItem() + "'";
-                    HashMap<String, String> alienInfo = idb.fetchRow(fraga2);
-                    txtAlienNamn.setText(alienInfo.get("namn"));
-                    txtAlienTelefon.setText(alienInfo.get("telefon"));
-                    txtAlienRegDatum.setText(alienInfo.get("registreringsdatum"));  
-                    txtAlienLosenord.setText(alienInfo.get("losenord"));
 
-    } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
-            }
-    
-    
+        try {
+            String fraga2 = "SELECT namn, telefon, registreringsdatum, losenord FROM alien WHERE alien_id = '" + jAlienID.getSelectedItem() + "'";
+            HashMap<String, String> alienInfo = idb.fetchRow(fraga2);
+            txtAlienNamn.setText(alienInfo.get("namn"));
+            txtAlienTelefon.setText(alienInfo.get("telefon"));
+            txtAlienRegDatum.setText(alienInfo.get("registreringsdatum"));
+            txtAlienLosenord.setText(alienInfo.get("losenord"));
+
+            String fraga3 = "SELECT benamning FROM plats "
+                    + "JOIN alien ON plats.plats_id = alien.plats "
+                    + "WHERE alien_id = '" + jAlienID.getSelectedItem() + "'";
+            String alienPlats = idb.fetchSingle(fraga3);
+            jPlats.setSelectedItem(alienPlats);
+
+            String fraga5 = "SELECT agent.namn FROM agent "
+                    + "JOIN alien ON agent.agent_id = alien.ansvarig_agent "
+                    + "WHERE alien_id = '" + jAlienID.getSelectedItem() + "'";
+            String AnsvarigAgent = idb.fetchSingle(fraga5);
+            jAgent.setSelectedItem(AnsvarigAgent);
+
+           
+          
+        } catch (InfException ex) {
+            System.out.println("fel i systemet" + ex.getMessage());
+        }
+
+
     }//GEN-LAST:event_jAlienIDPopupMenuWillBecomeInvisible
 
     private void jAlienIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAlienIDActionPerformed
@@ -1233,11 +1256,10 @@ hamtaOmradeID();
 
     private void jRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRasActionPerformed
         // TODO add your handling code here:
-    if (jRas.getSelectedItem().equals("Squid") || jRas.getSelectedItem().equals("Boglodite")) {
+        if (jRas.getSelectedItem().equals("Squid") || jRas.getSelectedItem().equals("Boglodite")) {
             txtRaceSpecial.setVisible(true);
             lblRaceSpecial.setVisible(true);
 
-            
             if (jRas.getSelectedItem().equals("Boglodite")) {
                 lblRaceSpecial.setText("Antal boogies:");
             }
@@ -1253,7 +1275,7 @@ hamtaOmradeID();
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-                 this.dispose();
+        this.dispose();
         new Agent(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -1265,27 +1287,24 @@ hamtaOmradeID();
         // TODO add your handling code here:
         txtListaAliens.setText("");
 
-
         try {
             String valdBenamning = jAlienPlats.getSelectedItem().toString();
-                String fraga = "SELECT * from Alien where Plats ="
-                        + "(Select Plats_ID from Plats where Benamning = '" + valdBenamning + "') "
-                        + "Order by Alien_ID";
-            
-                
-                ArrayList<HashMap<String, String>> alienInfo = idb.fetchRows(fraga);
+            String fraga = "SELECT * from Alien where Plats ="
+                    + "(Select Plats_ID from Plats where Benamning = '" + valdBenamning + "') "
+                    + "Order by Alien_ID";
 
-                    txtListaAliens.append("ID \t Namn \t Telefon\t Reg.datum\t Plats\n"
+            ArrayList<HashMap<String, String>> alienInfo = idb.fetchRows(fraga);
+
+            txtListaAliens.append("ID \t Namn \t Telefon\t Reg.datum\t Plats\n"
                     + "--\t-----\t---------\t----------\t--------\n");
 
-
-                for (HashMap<String, String> alien : alienInfo) {
+            for (HashMap<String, String> alien : alienInfo) {
                 txtListaAliens.append(" " + alien.get("Alien_ID") + "\t");
                 txtListaAliens.append(alien.get("Namn") + "\t");
                 txtListaAliens.append(" " + alien.get("Telefon") + "\t");
                 txtListaAliens.append(" " + alien.get("Registreringsdatum") + "\t");
                 txtListaAliens.append(" " + alien.get("Plats") + "\n");
-                }
+            }
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("Internt felmeddelande" + e.getMessage());
@@ -1294,28 +1313,27 @@ hamtaOmradeID();
 
     private void jListaRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListaRasActionPerformed
         // TODO add your handling code here:
-           txtListaAliens.setText("");
+        txtListaAliens.setText("");
 
-       
         try {
             String qAlienId = "SELECT alien_id FROM alien order by alien_id";
             ArrayList<String> listAlienId = idb.fetchColumn(qAlienId);
 
             txtListaAliens.append(" ID\t Namn\n "
-                + "----\t-------\n");
+                    + "----\t-------\n");
 
-            for(String alienID : listAlienId){
+            for (String alienID : listAlienId) {
                 String ras = hamtaRas(alienID);
                 String qAlienName = "SELECT namn FROM alien WHERE alien_id = '" + alienID + "'";
                 String alienNamn = idb.fetchSingle(qAlienName);
 
-                if(jListaRas.getSelectedItem().equals(ras)){
+                if (jListaRas.getSelectedItem().equals(ras)) {
                     txtListaAliens.append(" " + alienID + "\t" + alienNamn + "\n");
                 }
             }
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
-            System.out.println("Internt felmeddelande" + ex.getMessage());       
+            System.out.println("Internt felmeddelande" + ex.getMessage());
         }
     }//GEN-LAST:event_jListaRasActionPerformed
 

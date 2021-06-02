@@ -478,12 +478,8 @@
         <Component class="javax.swing.JComboBox" name="jRas">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
+              <StringArray count="1">
                 <StringItem index="0" value="V&#xe4;lja"/>
-                <StringItem index="1" value="Boglodite"/>
-                <StringItem index="2" value="Worm"/>
-                <StringItem index="3" value="Squid"/>
-                <StringItem index="4" value="Ok&#xe4;nd"/>
               </StringArray>
             </Property>
           </Properties>
@@ -671,12 +667,11 @@
     <Component class="javax.swing.JComboBox" name="jListaRas">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="4">
             <StringItem index="0" value="V&#xe4;lja"/>
             <StringItem index="1" value="Boglodite"/>
             <StringItem index="2" value="Worm"/>
             <StringItem index="3" value="Squid"/>
-            <StringItem index="4" value="Ok&#xe4;nd"/>
           </StringArray>
         </Property>
       </Properties>
