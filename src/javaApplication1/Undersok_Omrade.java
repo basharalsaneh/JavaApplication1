@@ -172,18 +172,15 @@ public class Undersok_Omrade extends javax.swing.JFrame {
             soktaAgenter = idb.fetchRows(fraga);
 
             // Första raden i rutan txtAreaVisaInfo ska visa fältnamnen.
-            txtAreaVisaInfo.append("Agent ID" + "\t");
-            txtAreaVisaInfo.append("Namn" + "\t");
-            txtAreaVisaInfo.append("Ansvarar för" + "\n");
+                 txtAreaVisaInfo.append("ID \t Namn \t Ansvar för\n"
+                                      + "---\t-------\t-----------\n");
 
-            soktaAgenter.stream().map(Agent -> {
-                return Agent;
-            }).forEachOrdered(Agent -> {
+                for (HashMap<String, String> alien : soktaAgenter) {
+                txtAreaVisaInfo.append(" " + alien.get("Agent_ID") + "\t");
+                txtAreaVisaInfo.append(alien.get("Namn") + "\t");
+                txtAreaVisaInfo.append(" " + alien.get("Antal") + " st" + "\n");
 
-                txtAreaVisaInfo.append(Agent.get("Agent_ID") + "\t");
-                txtAreaVisaInfo.append(" " + Agent.get("Namn") + "\t");
-                txtAreaVisaInfo.append(" " + Agent.get("Antal") + " st" + "\n");
-            });
+        }
         } catch (InfException ettUndantag) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
