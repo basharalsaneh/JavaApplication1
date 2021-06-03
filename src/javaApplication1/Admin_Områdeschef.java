@@ -179,10 +179,9 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
 
     private void platsComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_platsComboActionPerformed
         // TODO add your handling code here:
-        txtAreaOmrade.setText("");
-        txtAreaOmrade.append("AGENT_ID" + "\t");
-        txtAreaOmrade.append("NAMN" + "\t");
-        txtAreaOmrade.append("TELEFON" + "\n");
+        txtAreaOmrade.setText("");     
+        txtAreaOmrade.append("AGENT_ID\t Namn \t TELEFON \n"
+                           + "--------\t-------\t------------\n");
         
         ArrayList<HashMap<String, String>> allaOmradeschefer;
         
