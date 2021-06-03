@@ -29,20 +29,37 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         hamtaAliensPlatser();
     }
 
-    private void setBoglodite(String alienId) {
+    
+            private int visaKontroll() {
+        int hitta = 0;
+        try {
+            String fraga = "SELECT alien_id FROM alien WHERE namn = '" + jAlienID1.getText() + "' OR alien_id = '" + jAlienID1.getText() + "'";
+            ArrayList<String> alienIdList = idb.fetchColumn(fraga);
+
+            for (String element : alienIdList) {
+                hitta++;
+            }
+        } catch (InfException ex) {
+            System.out.println("fel i databas" + ex.getMessage());
+        } 
+        return hitta;
+
+    }
+            
+    private void hanteraBoglodite(String alienId) {
 
         String valdeRas = hamtaRas(alienId);
         try {
             lblRaceSpecial.setText("Ange antal boogies: ");
             if (txtRaceSpecial.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Du glömde ange antal boogies!");
-//  
+ 
             } else {
-                if (valdeRas != "<Oidentifierad>") {
+                if (valdeRas != "Välja") {
                     String fraga1 = "DELETE FROM " + valdeRas + " WHERE alien_id = '" + alienId + "'";
                     idb.delete(fraga1);
                 }
-                if (Validering.SiffrorKontroll(txtRaceSpecial, "Antal boogies måste anges i siffror")) {
+                if (Validering.SiffrorKontroll(txtRaceSpecial, "Antal boogies måste anges i siffror!")) {
                     String fraga2 = "INSERT INTO Boglodite VALUES (" + alienId + "," + txtRaceSpecial.getText() + ")";
                     idb.insert(fraga2);
                 }
@@ -53,7 +70,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         } 
     }
 
-    private void setSquid(String alienId) {
+    private void hanteraSquid(String alienId) {
         String valdeRas = hamtaRas(alienId);
         try {
 
@@ -62,11 +79,11 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Du glömde ange antal armar!");
 
             } else {
-                if (valdeRas != "<Oidentifierad>") {
+                if (valdeRas != "Välja") {
                     String fraga1 = "DELETE FROM " + valdeRas + " WHERE alien_id = '" + alienId + "'";
                     idb.delete(fraga1);
                 }
-                if (Validering.SiffrorKontroll(txtRaceSpecial, "Antal armar måste anges i siffror")) {
+                if (Validering.SiffrorKontroll(txtRaceSpecial, "Antal armar måste anges i siffror!")) {
                     String fraga2 = "INSERT INTO Squid VALUES (" + alienId + "," + txtRaceSpecial.getText() + ")";
                     idb.insert(fraga2);
                 }
@@ -77,11 +94,11 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         } 
     }
 
-    private void setWorm(String alienId) {
+    private void hanteraWorm(String alienId) {
         String valdeRas = hamtaRas(alienId);
         try {
 
-            if (valdeRas != "<Oidentifierad>") {
+            if (valdeRas != "Välja") {
                 String fraga1 = "DELETE FROM " + valdeRas + " WHERE alien_id = '" + alienId + "'";
                 idb.delete(fraga1);
             }
@@ -106,8 +123,10 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
     private void updateraAnsvarigAgent(String alienId) {
         try {
-
-            String qAgent = "Update alien SET ansvarig_agent  ='" + jAgent.getSelectedItem() + "' WHERE alien_id = '" + alienId + "'";
+            String fraga1 = "SElECT agent_id from agent WHERE namn = '" + jAgent.getSelectedItem() + "'";
+            String agent = idb.fetchSingle(fraga1);
+            
+            String qAgent = "Update alien SET ansvarig_agent  ='" + agent + "' WHERE alien_id = '" + alienId + "'";
             idb.update(qAgent);
             JOptionPane.showMessageDialog(null, "Din Ansvarig agent har ändrats!");
 
@@ -191,6 +210,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
     private void listaRas() {
 
         ArrayList<String> Raslista = new ArrayList<String>();
+        Raslista.add("Välja");
         Raslista.add("Boglodite");
         Raslista.add("Worm");
         Raslista.add("Squid");
@@ -363,8 +383,8 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
     private String hamtaAlienID() {
         String alienId = "";
         try {
-            String qAlienId = "SELECT alien_id FROM alien WHERE namn = '" + txtAlien.getText() + "' OR alien_id = '" + txtAlien.getText() + "'";
-            String resultAlienId = idb.fetchSingle(qAlienId);
+            String fraga = "SELECT alien_id FROM alien WHERE namn = '" + txtAlien.getText() + "' OR alien_id = '" + txtAlien.getText() + "'";
+            String resultAlienId = idb.fetchSingle(fraga);
             if (resultAlienId != null) {
                 alienId = resultAlienId;
             }
@@ -419,20 +439,18 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
     }
 
     private int kontrolleraNamnochID() {
-        int loops = 0;
+        int hitta = 0;
         try {
-            String qAlienId = "SELECT alien_id FROM alien WHERE namn = '" + txtAlien.getText() + "' OR alien_id = '" + txtAlien.getText() + "'";
-            ArrayList<String> alienIdList = idb.fetchColumn(qAlienId);
+            String fraga = "SELECT alien_id FROM alien WHERE namn = '" + txtAlien.getText() + "' OR alien_id = '" + txtAlien.getText() + "'";
+            ArrayList<String> alienIdList = idb.fetchColumn(fraga);
 
             for (String element : alienIdList) {
-                loops++;
+                hitta++;
             }
         } catch (InfException ex) {
             System.out.println("fel i databas" + ex.getMessage());
-        } catch (Exception ex) {
-            System.out.println("Random fel" + ex.getMessage());
-        }
-        return loops;
+        } 
+        return hitta;
 
     }
 
@@ -586,7 +604,6 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
         jLabel2.setText("Alien ID:");
 
-        jRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välja" }));
         jRas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRasActionPerformed(evt);
@@ -928,13 +945,12 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                 }
             }
 
-            // HashMap<String, String> nyregistreradAlien;
             try {
                 String alienId = hamtaNyAliensID();
 
-                String namn = txtAlienNamn.getText(); // FÃ¥r ej vara null
+                String namn = txtAlienNamn.getText(); 
                 String telefon = txtAlienTelefon.getText();
-                String datum = txtAlienRegDatum.getText();    // FÃ¥r ej vara null
+                String datum = txtAlienRegDatum.getText();    
                 String losenord = txtAlienLosenord.getText();
 
                 Object ValjaRas = jRas.getSelectedItem();
@@ -1006,11 +1022,10 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                     && jAgent.getSelectedItem().equals("Välja")) {
                 JOptionPane.showMessageDialog(null, "Du glömde fylla alla rutor");
             } else {
-                //Lägg till metodanrop som hämtar id och gör kollen för "flera med samma namn" istället. 
                 try {
-                    String qAlienId = "SELECT alien_id FROM alien WHERE alien_id = '" + jAlienID.getSelectedItem() + "' OR namn = '" + txtAlien.getText() + "'";
-                    ArrayList<String> AllaAlienID = idb.fetchColumn(qAlienId);
-                    String alienId = idb.fetchSingle(qAlienId);
+                    String fraga = "SELECT alien_id FROM alien WHERE alien_id = '" + jAlienID.getSelectedItem() + "' OR namn = '" + txtAlien.getText() + "'";
+                    ArrayList<String> AllaAlienID = idb.fetchColumn(fraga);
+                    String alienId = idb.fetchSingle(fraga);
 
                     for (String element : AllaAlienID) {
                         hitta++;
@@ -1045,17 +1060,17 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                             } else {
 
                                 if (jRas.getSelectedItem().equals("Boglodite")) {
-                                    setBoglodite(alienId);
+                                    hanteraBoglodite(alienId);
                                 } else if (jRas.getSelectedItem().equals("Squid")) {
-                                    setSquid(alienId);
+                                    hanteraSquid(alienId);
                                 } else if (jRas.getSelectedItem().equals("Worm")) {
-                                    setWorm(alienId);
+                                    hanteraWorm(alienId);
                                 }
                             }
                         }
-                        String namn = txtAlienNamn.getText(); // FÃ¥r ej vara null
+                        String namn = txtAlienNamn.getText(); 
                         String telefon = txtAlienTelefon.getText();
-                        String datum = txtAlienRegDatum.getText();    // FÃ¥r ej vara null
+                        String datum = txtAlienRegDatum.getText();  
                         String losenord = txtAlienLosenord.getText();
 
                         Object ValjaRas = jRas.getSelectedItem();
@@ -1167,10 +1182,18 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             try {
                 String fraga1 = "SELECT alien_id FROM alien WHERE alien_ID = '" + jAlienID1.getText() + "' OR namn = '" + jAlienID1.getText() + "'";
                 String alienId = idb.fetchSingle(fraga1);
-
-                if (alienId == null) {
+                
+                if (visaKontroll() > 1) {
+                JOptionPane.showMessageDialog(null, "Det är många aliens som har samma namn, försök med aliens ID!");
+                VisaAllaAliens();
+                }
+                
+                else if (alienId == null) {
                     JOptionPane.showMessageDialog(null, "Alien id finns inte!");
                     VisaAllaAliens();
+                    
+                    
+
 
                 } else {
                     AlienInfo.setText("Aliens uppgifter!\n"
@@ -1308,8 +1331,8 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         txtListaAliens.setText("");
 
         try {
-            String qAlienId = "SELECT alien_id FROM alien order by alien_id";
-            ArrayList<String> listAlienId = idb.fetchColumn(qAlienId);
+            String fraga = "SELECT alien_id FROM alien order by alien_id";
+            ArrayList<String> listAlienId = idb.fetchColumn(fraga);
 
             txtListaAliens.append(" ID\t Namn\n "
                     + "----\t-------\n");
