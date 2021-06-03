@@ -190,7 +190,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
     private void fyllValjaAlienID() {
         String fraga = "SELECT alien_id from alien order by alien_id";
         ArrayList<String> allaAliensID;
-        
+
         try {
 
             allaAliensID = idb.fetchColumn(fraga);
@@ -987,7 +987,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                         + "Namn: " + namn + "\n"
                         + "Lösenord: " + losenord + "\n"
                         + "Ras: " + Ras + "\n"
-                        + lblRaceSpecial.getText()+ " " + hamtaRasSpecifikation() + "\n"
+                        + lblRaceSpecial.getText() + " " + hamtaRasSpecifikation() + "\n"
                         + "Telefon: " + telefon + "\n"
                         + "Plats: " + jPlats.getSelectedItem() + "\n"
                         + "Ansvarig agent: " + jAgent.getSelectedItem().toString());
@@ -1243,6 +1243,48 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                     + "WHERE alien_id = '" + jAlienID.getSelectedItem() + "'";
             String AnsvarigAgent = idb.fetchSingle(fraga5);
             jAgent.setSelectedItem(AnsvarigAgent);
+
+            try {
+                String SquidFraga = "SELECT alien_id FROM squid WHERE alien_id = '" + jAlienID.getSelectedItem() + "'";
+                String Squid = idb.fetchSingle(SquidFraga);
+
+                String BogloditeFraga = "SELECT alien_id FROM boglodite WHERE alien_id = '" + jAlienID.getSelectedItem() + "'";
+                String Boglodite = idb.fetchSingle(BogloditeFraga);
+
+                String WormFraga = "SELECT alien_id FROM worm WHERE alien_id = '" + jAlienID.getSelectedItem() + "'";
+                String Worm = idb.fetchSingle(WormFraga);
+
+                if (jAlienID.getSelectedItem().equals(Worm)) {
+                    jRas.setSelectedIndex(2);
+
+                } else if (jAlienID.getSelectedItem().equals(Squid)) {
+                    jRas.setSelectedIndex(3);
+
+                } else if (jAlienID.getSelectedItem().equals(Boglodite)) {
+                    jRas.setSelectedIndex(1);
+                }
+                
+                
+            String fraga9 = "select Antal_Boogies from Boglodite WHERE alien_id = '" + jAlienID.getSelectedItem() + "'";
+            String Boogies = idb.fetchSingle(fraga9);
+
+            String fraga11 = "select Antal_Armar from Squid WHERE alien_id = '" + jAlienID.getSelectedItem() + "'";
+            String Armar = idb.fetchSingle(fraga11);
+
+            if (jAlienID.getSelectedItem().equals(Squid)) {
+            txtRaceSpecial.setText(Armar);
+
+                } else if (jAlienID.getSelectedItem().equals(Boglodite)) {
+            txtRaceSpecial.setText(Boogies);
+                }
+            
+            
+            } catch (InfException ex) {
+                System.out.println("fel i databas" + ex.getMessage());
+            }
+            
+
+            
 
         } catch (InfException ex) {
             System.out.println("fel i databas" + ex.getMessage());
