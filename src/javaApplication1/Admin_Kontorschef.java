@@ -100,7 +100,6 @@ public class Admin_Kontorschef extends javax.swing.JFrame {
         gaTillbaka = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         nyKontorschefAgentID = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,6 +111,12 @@ public class Admin_Kontorschef extends javax.swing.JFrame {
         valjKontor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valjKontorActionPerformed(evt);
+            }
+        });
+
+        agentCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agentComboActionPerformed(evt);
             }
         });
 
@@ -133,8 +138,6 @@ public class Admin_Kontorschef extends javax.swing.JFrame {
 
         jLabel2.setText("Välj ny kontorschef");
 
-        jLabel3.setText("ID");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,8 +148,7 @@ public class Admin_Kontorschef extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(17, 17, 17)
                                 .addComponent(nyKontorschefAgentID))
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE))
@@ -186,10 +188,8 @@ public class Admin_Kontorschef extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(agentCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nyKontorschefAgentID))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(nyKontorschefAgentID)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(andraKontorschefKnapp)
                 .addGap(41, 41, 41))
@@ -276,6 +276,10 @@ public class Admin_Kontorschef extends javax.swing.JFrame {
         
     }//GEN-LAST:event_andraKontorschefKnappActionPerformed
 
+    private void agentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agentComboActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -284,7 +288,6 @@ public class Admin_Kontorschef extends javax.swing.JFrame {
     private javax.swing.JToggleButton gaTillbaka;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nyKontorschefAgentID;
     private javax.swing.JTextArea txtAreaKontor;

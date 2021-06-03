@@ -38,7 +38,7 @@
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="96" max="32767" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -99,7 +99,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Vilka agenter ansvarar f&#xf6;r flest aliens inom omr&#xe5;de:"/>
+        <Property name="text" type="java.lang.String" value="Topp 3 agenter som ansvarar f&#xf6;r flest aliens inom omr&#xe5;de:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtOmradesChef1">

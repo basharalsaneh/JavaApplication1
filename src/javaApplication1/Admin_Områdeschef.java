@@ -6,6 +6,7 @@
 package javaApplication1;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -31,18 +32,29 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
     
     private void fyllCombobox(){
         
-        String fraga = "SELECT Benamning from OMRADE";
+        platsCombo.removeAllItems();
+        valjChef.removeAllItems();
+        
+        String platsFraga = "SELECT Benamning from OMRADE";
+        String agentFraga = "SELECT Agent_ID, namn FROM Agent";
         
         ArrayList<String> allaOmradenamn;
-        
+        ArrayList<HashMap<String, String>> allaAgentnamn;
         
         try {
             
-            allaOmradenamn = idb.fetchColumn(fraga);
+            allaOmradenamn = idb.fetchColumn(platsFraga);
+            allaAgentnamn = idb.fetchRows(agentFraga);
 
             for (String namn : allaOmradenamn) {
                 platsCombo.addItem(namn);
             }  
+            
+            for (HashMap<String, String> agent : allaAgentnamn){
+                String agenter = "ID: " + agent.get("Agent_ID") + ", " + agent.get("namn");
+                valjChef.addItem(agenter);
+            }
+            
             
             
         } catch (InfException ettUndantag) {
@@ -70,18 +82,19 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtAreaOmrade = new javax.swing.JTextArea();
         platsCombo = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        valjChef = new javax.swing.JComboBox<>();
+        andraOmradeschefKnapp = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtAreaOmrade.setColumns(20);
+        txtAreaOmrade.setRows(5);
+        jScrollPane1.setViewportView(txtAreaOmrade);
 
         platsCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,9 +102,12 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jToggleButton1.setText("Ändra");
+        andraOmradeschefKnapp.setText("Ändra områdeschef");
+        andraOmradeschefKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                andraOmradeschefKnappActionPerformed(evt);
+            }
+        });
 
         jToggleButton2.setText("Gå tillbaka");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -100,47 +116,62 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Välj Område");
+
+        jLabel2.setText("Välj ny områdeschef");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(platsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(135, 135, 135))
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToggleButton2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(valjChef, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))))
+                        .addContainerGap()
+                        .addComponent(platsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(andraOmradeschefKnapp)
+                            .addComponent(jToggleButton2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(25, 25, 25)
+                .addComponent(jToggleButton2)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(platsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jToggleButton1)))
-                .addGap(18, 18, 18)
-                .addComponent(jToggleButton2)
-                .addContainerGap(62, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(valjChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(andraOmradeschefKnapp)
+                .addGap(44, 44, 44))
         );
 
         pack();
@@ -148,6 +179,39 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
 
     private void platsComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_platsComboActionPerformed
         // TODO add your handling code here:
+        txtAreaOmrade.setText("");
+        txtAreaOmrade.append("AGENT_ID" + "\t");
+        txtAreaOmrade.append("NAMN" + "\t");
+        txtAreaOmrade.append("TELEFON" + "\n");
+        
+        ArrayList<HashMap<String, String>> allaOmradeschefer;
+        
+        
+        try{
+            
+            String valdOmrade = platsCombo.getSelectedItem().toString();
+       
+            String fraga = SELECT a.Agent_ID, namn, telefon FROM (agent a JOIN omradeschef ON a.Agent_ID = omradeschef.Agent_ID)
+           JOIN omrade on Omrades_ID = omradeschef.Omrade WHERE Omrade.Benamning = '" + valdOmrade + "';
+//"SELECT Agent_ID, namn, telefon FROM agent WHERE Agent_ID = (Select Agent_ID from Omradeschef where Omrade = '" + valdOmrade + "')";
+            allaOmradeschefer = idb.fetchRows(fraga);
+            
+            for (HashMap<String, String> agent : allaOmradeschefer){
+                txtAreaOmrade.append(agent.get("Agent_ID") + "\t");
+                txtAreaOmrade.append(agent.get("namn") + "\t");
+                txtAreaOmrade.append(agent.get("telefon") + "\n");
+            }
+            
+            
+            
+        } catch (InfException ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        } 
+        catch (Exception ettUndantag) { //lägger även till nullpointer exception
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        }
     }//GEN-LAST:event_platsComboActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
@@ -156,18 +220,41 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
         new Admin_HanteraAgenterMeny(idb).setVisible(true);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
+    private void andraOmradeschefKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_andraOmradeschefKnappActionPerformed
+        // TODO add your handling code here:
+        txtAreaOmrade.setText("");
+        String valtOmrade = platsCombo.getSelectedItem().toString();
+        String chef = valjChef.getSelectedItem().toString();
+        
+        String baraID = chef.replaceAll("\\D+","");
+       
+        int nyOmradesChefID = Integer.parseInt(baraID);
+        
+        String uppdateraChef = "update kontorschef set agent_id = " + nyOmradesChefID + " where kontorsbeteckning = '" + valtOmrade + "'";
+        
+        try{
+            idb.update(uppdateraChef);
+            JOptionPane.showMessageDialog(null, "Områdets chef är nu uppdaterad!");
+            
+            
+        }catch (InfException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage()); 
+        }
+    }//GEN-LAST:event_andraOmradeschefKnappActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JToggleButton andraOmradeschefKnapp;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JComboBox<String> platsCombo;
+    private javax.swing.JTextArea txtAreaOmrade;
+    private javax.swing.JComboBox<String> valjChef;
     // End of variables declaration//GEN-END:variables
 }

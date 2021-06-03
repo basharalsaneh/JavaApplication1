@@ -56,7 +56,7 @@ public class Undersok_Omrade extends javax.swing.JFrame {
 
         jLabel2.setText("Områdeschefen är:");
 
-        jLabel3.setText("Vilka agenter ansvarar för flest aliens inom område:");
+        jLabel3.setText("Topp 3 agenter som ansvarar för flest aliens inom område:");
 
         txtOmradesChef1.setEditable(false);
         txtOmradesChef1.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +98,7 @@ public class Undersok_Omrade extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(84, 84, 84)
                                 .addComponent(jLabel1)))
-                        .addContainerGap(96, Short.MAX_VALUE))
+                        .addContainerGap(62, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()

@@ -918,7 +918,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         jTextArea1.setText("");
         hamtaplatsID();
 
-        String RasSpecifaktion = lblRaceSpecial.getText();
+        String RasSpecifikation = lblRaceSpecial.getText();
 
         if (Validering.TelefonKontroll(txtAlienTelefon)
                 && Validering.personFinns(txtAlienNamn, "Ange namn!")
@@ -930,7 +930,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                 && Validering.kontrollForComboBox(jAgent, "Ange ansvarig agent!")) {
 
             if (txtRaceSpecial.isShowing() == true) {
-                if (!Validering.SiffrorKontroll(txtRaceSpecial, RasSpecifaktion.substring(0, RasSpecifaktion.length() - 1) + " måste vara en siffra")) {
+                if (!Validering.SiffrorKontroll(txtRaceSpecial, RasSpecifikation.substring(0, RasSpecifikation.length() - 1) + " måste vara en siffra")) {
 
                     return;
                 }

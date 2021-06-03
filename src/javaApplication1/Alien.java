@@ -30,7 +30,7 @@ public Alien(InfDB idb, Validering vemArInloggad) {
         this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
-        jRub.setText("Välkommen På alien med ID " + vemArInloggad.getNamn() + "!");
+        jRub.setText("Välkommen alien med ID " + vemArInloggad.getNamn() + "!");
     }
 
 
