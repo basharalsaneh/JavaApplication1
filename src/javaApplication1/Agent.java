@@ -208,7 +208,7 @@ public Agent(InfDB idb, Validering vemArInloggad) {
     private void btnAliensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAliensActionPerformed
         // TODO add your handling code here:
              this.dispose();
-        new Hantera_Aliens1(idb, vemArInloggad).setVisible(true);
+        new AgentHanteraAlien(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_btnAliensActionPerformed
 
     private void btnOmradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOmradeActionPerformed

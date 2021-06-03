@@ -1,17 +1,18 @@
 package javaApplication1;
 
+
 import oru.inf.InfException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 
-public class Hantera_Aliens1 extends javax.swing.JFrame {
+public class AgentHanteraAlien extends javax.swing.JFrame {
 
     private static InfDB idb;
     static Validering vemArInloggad;
 
-    public Hantera_Aliens1(InfDB idb, Validering vemArInloggad) {
+    public AgentHanteraAlien(InfDB idb, Validering vemArInloggad) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idb = idb;
@@ -372,79 +373,9 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         return platsID;
     }
 
-    private String hamtaAlienID() {
-        String alienId = "";
-        try {
-            String fraga = "SELECT alien_id FROM alien WHERE namn = '" + txtAlien.getText() + "' OR alien_id = '" + txtAlien.getText() + "'";
-            String resultAlienId = idb.fetchSingle(fraga);
-            if (resultAlienId != null) {
-                alienId = resultAlienId;
-            }
 
-        } catch (InfException ex) {
-            System.out.println("fel i databas" + ex.getMessage());
-        } catch (Exception ex) {
-            System.out.println("Random fel" + ex.getMessage());
-        }
-        return alienId;
-    }
 
-    private void TaBortBoglodite() {
-        String alienID = hamtaAlienID();
-        try {
-            String fraga1 = "DELETE FROM alien WHERE alien_id = '" + alienID + "'";
-            idb.delete(fraga1);
-            String fraga2 = "DELETE FROM boglodite WHERE alien_id = '" + alienID + "'";
-            idb.delete(fraga2);
-
-        } catch (InfException ex) {
-            System.out.println("Internt felmeddelande" + ex.getMessage());
-        } catch (Exception ex) {
-            System.out.println("fel i databas" + ex.getMessage());
-        }
-    }
-
-    private void TaBortSquid() {
-        String alienID = hamtaAlienID();
-        try {
-            String fraga1 = "DELETE FROM alien WHERE alien_id = '" + alienID + "'";
-            idb.delete(fraga1);
-            String fraga2 = "DELETE FROM squid WHERE alien_id = '" + alienID + "'";
-            idb.delete(fraga2);
-
-        } catch (InfException ex) {
-            System.out.println("fel i databas" + ex.getMessage());
-        }
-    }
-
-    private void TaBortWorm() {
-        String alienId = hamtaAlienID();
-        try {
-            String fraga1 = "DELETE FROM alien WHERE alien_id = '" + alienId + "'";
-            idb.delete(fraga1);
-            String fraga2 = "DELETE FROM worm WHERE alien_id = '" + alienId + "'";
-            idb.delete(fraga2);
-
-        } catch (InfException ex) {
-            System.out.println("fel i databas" + ex.getMessage());
-        }
-    }
-
-    private int kontrolleraNamnochID() {
-        int hitta = 0;
-        try {
-            String fraga = "SELECT alien_id FROM alien WHERE namn = '" + txtAlien.getText() + "' OR alien_id = '" + txtAlien.getText() + "'";
-            ArrayList<String> alienIdList = idb.fetchColumn(fraga);
-
-            for (String element : alienIdList) {
-                hitta++;
-            }
-        } catch (InfException ex) {
-            System.out.println("fel i databas" + ex.getMessage());
-        }
-        return hitta;
-
-    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -478,9 +409,6 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txtAlien = new javax.swing.JTextField();
-        buttonTaBortUtrustning = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         txtDatum1 = new javax.swing.JTextField();
@@ -721,15 +649,6 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
         jLabel7.setText("Lista aliens på plats:");
 
-        jLabel8.setText("Ta bort alien med ID/Namn:");
-
-        buttonTaBortUtrustning.setText("Ta bort");
-        buttonTaBortUtrustning.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTaBortUtrustningActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Lista aliens");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -807,14 +726,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jScrollPane5)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtAlien, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(buttonTaBortUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
@@ -865,15 +777,9 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel8)
-                                    .addComponent(txtAlien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(buttonTaBortUtrustning)))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(41, 41, 41)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1010,7 +916,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Du glömde fylla alla rutor");
             } else {
                 try {
-                    String fraga = "SELECT alien_id FROM alien WHERE alien_id = '" + jAlienID.getSelectedItem() + "' OR namn = '" + txtAlien.getText() + "'";
+                    String fraga = "SELECT alien_id FROM alien WHERE alien_id = '" + jAlienID.getSelectedItem() + "' OR namn = '" + txtAlienNamn.getText() + "'";
                     ArrayList<String> AllaAlienID = idb.fetchColumn(fraga);
                     String alienId = idb.fetchSingle(fraga);
 
@@ -1090,36 +996,6 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
     private void buttonRensaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRensaDataActionPerformed
         rensaAllaFält();
     }//GEN-LAST:event_buttonRensaDataActionPerformed
-
-    private void buttonTaBortUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTaBortUtrustningActionPerformed
-        // TODO add your handling code here:
-        jTextArea1.setText("");
-
-        if (Validering.personFinns(txtAlien, "Du glömde ange aliennamn eller ID")) {
-            if (kontrolleraNamnochID() > 1) {
-                JOptionPane.showMessageDialog(null, "Det är många aliens som har samma namn, försök med aliens ID!");
-                VisaAllaAliens();
-
-            } else if (hamtaAlienID().equals("")) {
-                JOptionPane.showMessageDialog(null, "Du skrev fel namn eller ID");
-                VisaAllaAliens();
-
-            } else {
-                String ras = hamtaRas(hamtaAlienID());
-                if (ras.equals("Squid")) {
-                    TaBortSquid();
-                } else if (ras.equals("Worm")) {
-                    TaBortWorm();
-                } else if (ras.equals("Boglodite")) {
-                    TaBortBoglodite();
-                }
-
-                JOptionPane.showMessageDialog(null, "Alien har tagits bort från listan!");
-                VisaAllaAliens();
-            }
-        }
-
-    }//GEN-LAST:event_buttonTaBortUtrustningActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         txtListaAliens.setText("");
@@ -1310,7 +1186,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new Admin(idb, vemArInloggad).setVisible(true);
+        new Agent(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtAlienLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlienLosenordActionPerformed
@@ -1377,7 +1253,6 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
     private javax.swing.JButton buttonEdit;
     private javax.swing.JButton buttonListaAll;
     private javax.swing.JButton buttonRensaData;
-    private javax.swing.JButton buttonTaBortUtrustning;
     private javax.swing.JComboBox<String> jAgent;
     private javax.swing.JComboBox<String> jAlienID;
     private javax.swing.JTextField jAlienID1;
@@ -1402,7 +1277,6 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<String> jListaRas;
     private javax.swing.JPanel jPanel1;
@@ -1415,7 +1289,6 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblRaceSpecial;
-    private javax.swing.JTextField txtAlien;
     private javax.swing.JTextField txtAlienLosenord;
     private javax.swing.JTextField txtAlienNamn;
     private javax.swing.JTextField txtAlienRegDatum;
