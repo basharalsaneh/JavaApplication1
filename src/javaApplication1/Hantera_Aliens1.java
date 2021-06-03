@@ -189,9 +189,8 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
     private void fyllValjaAlienID() {
         String fraga = "SELECT alien_id from alien order by alien_id";
-
         ArrayList<String> allaAliensID;
-
+        
         try {
 
             allaAliensID = idb.fetchColumn(fraga);
@@ -994,6 +993,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                         + "Ansvarig agent: " + jAgent.getSelectedItem().toString());
 
                 VisaAllaAliens();
+                fyllValjaAlienID();
 
             } catch (InfException ex) {
                 System.out.println("fel i databas" + ex.getMessage());
@@ -1080,6 +1080,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                                 + "Ansvarig agent: " + jAgent.getSelectedItem().toString());
 
                         VisaAllaAliens();
+                        fyllValjaAlienID();
                     }
 
                 } catch (InfException ex) {
