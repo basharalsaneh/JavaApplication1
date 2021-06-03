@@ -31,72 +31,66 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
     private void setBoglodite(String alienId) {
 
-        String nuvarandeRas = hamtaRas(alienId);
+        String valdeRas = hamtaRas(alienId);
         try {
             lblRaceSpecial.setText("Ange antal boogies: ");
             if (txtRaceSpecial.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Ange ras specialitet!");
+                JOptionPane.showMessageDialog(null, "Du glömde ange antal boogies!");
 //  
             } else {
-                if (nuvarandeRas != "<Oidentifierad>") {
-                    String qDelete = "DELETE FROM " + nuvarandeRas + " WHERE alien_id = '" + alienId + "'";
-                    idb.delete(qDelete);
+                if (valdeRas != "<Oidentifierad>") {
+                    String fraga1 = "DELETE FROM " + valdeRas + " WHERE alien_id = '" + alienId + "'";
+                    idb.delete(fraga1);
                 }
                 if (Validering.SiffrorKontroll(txtRaceSpecial, "Antal boogies måste anges i siffror")) {
-                    String qBoglodite = "INSERT INTO Boglodite VALUES (" + alienId + "," + txtRaceSpecial.getText() + ")";
-                    idb.insert(qBoglodite);
+                    String fraga2 = "INSERT INTO Boglodite VALUES (" + alienId + "," + txtRaceSpecial.getText() + ")";
+                    idb.insert(fraga2);
                 }
             }
 
         } catch (InfException ex) {
-            System.out.println("Databasfel" + ex.getMessage());
-        } catch (Exception ex) {
-            System.out.println("Random fel" + ex.getMessage());
-        }
+            System.out.println("fel i databas" + ex.getMessage());
+        } 
     }
 
     private void setSquid(String alienId) {
-        String nuvarandeRas = hamtaRas(alienId);
+        String valdeRas = hamtaRas(alienId);
         try {
 
-            lblRaceSpecial.setText("Ange antal armar:");
+            lblRaceSpecial.setText("Ange antal armar: "); 
             if (txtRaceSpecial.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Ange ras specialitet!");
+                JOptionPane.showMessageDialog(null, "Du glömde ange antal armar!");
 
             } else {
-                if (nuvarandeRas != "<Oidentifierad>") {
-                    String qDelete = "DELETE FROM " + nuvarandeRas + " WHERE alien_id = '" + alienId + "'";
-                    idb.delete(qDelete);
+                if (valdeRas != "<Oidentifierad>") {
+                    String fraga1 = "DELETE FROM " + valdeRas + " WHERE alien_id = '" + alienId + "'";
+                    idb.delete(fraga1);
                 }
                 if (Validering.SiffrorKontroll(txtRaceSpecial, "Antal armar måste anges i siffror")) {
-                    String qSquid = "INSERT INTO Squid VALUES (" + alienId + "," + txtRaceSpecial.getText() + ")";
-                    idb.insert(qSquid);
+                    String fraga2 = "INSERT INTO Squid VALUES (" + alienId + "," + txtRaceSpecial.getText() + ")";
+                    idb.insert(fraga2);
                 }
             }
 
         } catch (InfException ex) {
-            System.out.println("Databasfel" + ex.getMessage());
-        } catch (Exception ex) {
-            System.out.println("Random fel" + ex.getMessage());
-        }
+            System.out.println("fel i databas" + ex.getMessage());
+        } 
     }
 
     private void setWorm(String alienId) {
-        String nuvarandeRas = hamtaRas(alienId);
+        String valdeRas = hamtaRas(alienId);
         try {
 
-            if (nuvarandeRas != "<Oidentifierad>") {
-                String qDelete = "DELETE FROM " + nuvarandeRas + " WHERE alien_id = '" + alienId + "'";
-                idb.delete(qDelete);
+            if (valdeRas != "<Oidentifierad>") {
+                String fraga1 = "DELETE FROM " + valdeRas + " WHERE alien_id = '" + alienId + "'";
+                idb.delete(fraga1);
             }
-            String qWorm = "INSERT INTO Worm VALUES (" + alienId + ")";
-            idb.insert(qWorm);
+            String fraga2 = "INSERT INTO Worm VALUES (" + alienId + ")";
+            idb.insert(fraga2);
 
         } catch (InfException ex) {
-            System.out.println("Databasfel" + ex.getMessage());
-        } catch (Exception ex) {
-            System.out.println("Random fel" + ex.getMessage());
-        }
+            System.out.println("fel i databas" + ex.getMessage());
+        } 
     }
 
     private void rensaAllaFält() {
@@ -118,7 +112,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Din Ansvarig agent har ändrats!");
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
 
     }
@@ -133,7 +127,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ditt ömråde har ändrats!");
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
 
     }
@@ -146,7 +140,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ditt lösenord har ändrats!");
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
     }
 
@@ -158,7 +152,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ditt telefonnummer har ändrats!");
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
     }
 
@@ -171,7 +165,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Aliensnamn har ändrats!");
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
     }
 
@@ -189,7 +183,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             }
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
 
     }
@@ -230,7 +224,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             }
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
         return ras;
     }
@@ -248,7 +242,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
             }
         } catch (InfException ex) {
-            System.out.println("Databasfel" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         } 
     }
 
@@ -266,7 +260,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             }
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
 
     }
@@ -282,7 +276,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             areaId = getAreaId;
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
         return areaId;
     }
@@ -318,7 +312,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
             }
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
 
     }
@@ -345,23 +339,23 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             nyID = String.valueOf(newIdInt);
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
         return nyID;
     }
 
-    private String hamtaOmradeID() {
+    private String hamtaplatsID() {
         String platsID = "";
         Object hamtaListaObjekt = jPlats.getSelectedItem();
-        String omrade = String.valueOf(hamtaListaObjekt);
+        String plats = String.valueOf(hamtaListaObjekt);
 
-        String fraga = "SELECT omrades_id FROM omrade WHERE benamning = " + "'" + omrade + "'";
+        String fraga = "SELECT plats_id FROM plats WHERE benamning = " + "'" + plats + "'";
         try {
             String omradeID = idb.fetchSingle(fraga);
             platsID = omradeID;
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
         return platsID;
     }
@@ -376,7 +370,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             }
 
         } catch (InfException ex) {
-            System.out.println("Databasfel" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         } catch (Exception ex) {
             System.out.println("Random fel" + ex.getMessage());
         }
@@ -394,7 +388,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
         } catch (InfException ex) {
             System.out.println("Internt felmeddelande" + ex.getMessage());
         } catch (Exception ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
     }
 
@@ -407,7 +401,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             idb.delete(fraga2);
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
     }
 
@@ -420,7 +414,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             idb.delete(fraga2);
 
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
     }
 
@@ -434,7 +428,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                 loops++;
             }
         } catch (InfException ex) {
-            System.out.println("Databasfel" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         } catch (Exception ex) {
             System.out.println("Random fel" + ex.getMessage());
         }
@@ -913,7 +907,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
 
     private void buttonListaAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListaAllActionPerformed
         jTextArea1.setText("");
-        hamtaOmradeID();
+        hamtaplatsID();
 
         String RasSpecifaktion = lblRaceSpecial.getText();
 
@@ -952,7 +946,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                         + "'" + datum + "'" + ", "
                         + "'" + hamtaAgentsID() + "'" + ", "
                         + "'" + losenord + "'" + ", "
-                        + "'" + hamtaOmradeID() + "'" + ")";
+                        + "'" + hamtaplatsID() + "'" + ")";
 
                 String alienSquid = "INSERT INTO squid (alien_id, antal_armar)\n"
                         + "VALUES ("
@@ -995,7 +989,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                 VisaAllaAliens();
 
             } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
+                System.out.println("fel i databas" + ex.getMessage());
             }
         }
 
@@ -1082,7 +1076,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                     }
 
                 } catch (InfException ex) {
-                    System.out.println("fel i systemet" + ex.getMessage());
+                    System.out.println("fel i databas" + ex.getMessage());
                 }
 
             }
@@ -1211,7 +1205,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                 }
 
             } catch (InfException ex) {
-                System.out.println("fel i systemet" + ex.getMessage());
+                System.out.println("fel i databas" + ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -1242,7 +1236,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
            
           
         } catch (InfException ex) {
-            System.out.println("fel i systemet" + ex.getMessage());
+            System.out.println("fel i databas" + ex.getMessage());
         }
 
 
@@ -1304,7 +1298,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                 txtListaAliens.append(" " + alien.get("Plats") + "\n");
             }
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Databasfel!");
+            JOptionPane.showMessageDialog(null, "fel i databas!");
             System.out.println("Internt felmeddelande" + e.getMessage());
         }
     }//GEN-LAST:event_jAlienPlatsActionPerformed
@@ -1330,7 +1324,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
                 }
             }
         } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Databasfel!");
+            JOptionPane.showMessageDialog(null, "fel i databas!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
     }//GEN-LAST:event_jListaRasActionPerformed
