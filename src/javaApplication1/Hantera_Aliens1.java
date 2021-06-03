@@ -249,9 +249,7 @@ public class Hantera_Aliens1 extends javax.swing.JFrame {
             }
         } catch (InfException ex) {
             System.out.println("Databasfel" + ex.getMessage());
-        } catch (Exception ex) {
-            System.out.println("Random fel" + ex.getMessage());
-        }
+        } 
     }
 
     private void hamtaAgentssNamn() {
