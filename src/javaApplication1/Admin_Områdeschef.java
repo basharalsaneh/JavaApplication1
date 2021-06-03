@@ -191,8 +191,7 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
             
             String valdOmrade = platsCombo.getSelectedItem().toString();
        
-            String fraga = SELECT a.Agent_ID, namn, telefon FROM (agent a JOIN omradeschef ON a.Agent_ID = omradeschef.Agent_ID)
-           JOIN omrade on Omrades_ID = omradeschef.Omrade WHERE Omrade.Benamning = '" + valdOmrade + "';
+            String fraga = "SELECT a.Agent_ID, namn, telefon FROM (agent a JOIN omradeschef ON a.Agent_ID = omradeschef.Agent_ID) JOIN omrade on Omrades_ID = omradeschef.Omrade WHERE Omrade.Benamning = '" + valdOmrade + "'";
 //"SELECT Agent_ID, namn, telefon FROM agent WHERE Agent_ID = (Select Agent_ID from Omradeschef where Omrade = '" + valdOmrade + "')";
             allaOmradeschefer = idb.fetchRows(fraga);
             
