@@ -260,6 +260,7 @@ public class Admin_Kontorschef extends javax.swing.JFrame {
             idb.update(uppdateraChef);
             JOptionPane.showMessageDialog(null, "Kontorets chef är nu uppdaterad!");
             
+        valjKontor.setSelectedIndex(0);
             
         }catch (InfException e) {
             JOptionPane.showMessageDialog(null, e.getMessage()); 
