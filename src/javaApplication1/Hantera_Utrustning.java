@@ -31,6 +31,7 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
         fyllCBMedUtrustning();
+        FyllCBMedAgenter();
     }
 
     /**
@@ -51,6 +52,9 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
         lblBenamning = new javax.swing.JLabel();
         cbUtrustning = new javax.swing.JComboBox<>();
         btnTillbaka = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        agentCombobox = new javax.swing.JComboBox<>();
+        registreraUtrustningPaAgent = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,39 +98,57 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Agent:");
+
+        registreraUtrustningPaAgent.setText("Registrera på Agent");
+        registreraUtrustningPaAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registreraUtrustningPaAgentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(107, 107, 107)
-                            .addComponent(lblHanteraUtrustning))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(116, 116, 116)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblBenamning)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblUtrustningID)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtUtID, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(lblHanteraUtrustning)
+                        .addGap(71, 71, 71))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnTillbaka)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblSOK, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(121, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblBenamning)
+                                        .addComponent(btnTillbaka))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(38, 38, 38)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtUtID, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(registreraUtrustningPaAgent)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(26, 26, 26)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(lblUtrustningID))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(agentCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblSOK, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cbUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(64, 64, 64))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +159,11 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSOK, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(agentCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUtrustningID)
                     .addComponent(txtUtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -148,13 +174,50 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTillbaka))
-                .addContainerGap(74, Short.MAX_VALUE))
+                    .addComponent(btnTillbaka)
+                    .addComponent(registreraUtrustningPaAgent))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void FyllCBMedAgenter(){
+        
+        
+        agentCombobox.removeAllItems();
+        
+        String agentFraga = "SELECT Agent_ID, namn FROM Agent";
+        
+        ArrayList<HashMap<String, String>> allaAgentnamn;
+        
+        try{
+            
+        allaAgentnamn = idb.fetchRows(agentFraga);
 
+             
+            
+            for (HashMap<String, String> agent : allaAgentnamn){
+                String agenter = "ID: " + agent.get("Agent_ID") + ", " + agent.get("namn");
+                agentCombobox.addItem(agenter);
+            }
+            
+            
+        } catch (InfException ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        }
+        
+        catch (Exception ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        }    
+        
+        
+    
+        
+    }
+    
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         if (Validering.kontrollForComboBox(cbUtrustning) && Validering.kontrollForComboBox(cbUtrustning)) {
@@ -311,18 +374,53 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
         new Admin(idb, vemArInloggad).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    private void registreraUtrustningPaAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registreraUtrustningPaAgentActionPerformed
+        // TODO add your handling code here:
+        
+        String agent = agentCombobox.getSelectedItem().toString();
+        String baraID = agent.replaceAll("\\D+","");
+        int agentID = Integer.parseInt(baraID);
+        
+        String utrustningID = txtUtID.getText();
+        int UtrustningsID = Integer.parseInt(utrustningID);
+        
+        String UtrustningNamn = txtBenamning.getText();
+        
+        String fraga = "INSERT INTO Innehar_Utrustning (Agent_ID, Utrustnings_ID, Utkvitteringsdatum) VALUES ("+agentID+", "+UtrustningsID+", curdate())";
+        
+        try{
+            
+            idb.insert(fraga);
+            JOptionPane.showMessageDialog(null, "Utrustning " +UtrustningNamn+ " har nu registrerats på " + agent);
+            
+        }   catch (InfException ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        }
+        
+        catch (Exception ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        }
+        
+        
+    }//GEN-LAST:event_registreraUtrustningPaAgentActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> agentCombobox;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cbUtrustning;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblBenamning;
     private javax.swing.JLabel lblHanteraUtrustning;
     private javax.swing.JLabel lblSOK;
     private javax.swing.JLabel lblUtrustningID;
+    private javax.swing.JToggleButton registreraUtrustningPaAgent;
     private javax.swing.JTextField txtBenamning;
     private javax.swing.JTextField txtUtID;
     // End of variables declaration//GEN-END:variables
