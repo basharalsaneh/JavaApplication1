@@ -191,8 +191,8 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
                 cbUtrustning.setSelectedIndex(0); // Sätter fokus på översta (index 0) utrustning.
 
             } catch (InfException ex) {
-                Logger.getLogger(Hantera_Utrustning.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println(ex + " något fel tydligen...");
+                JOptionPane.showMessageDialog(this, "Din lista är tomt!");
             }
 
         }
@@ -200,6 +200,8 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void fyllCBMedUtrustning() {
+        cbUtrustning.removeAllItems();
+        cbUtrustning.addItem("-----");
         String fraga = "SELECT benamning from utrustning";
 
         ArrayList<String> utrustningLista;

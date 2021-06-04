@@ -238,7 +238,6 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
                     String qUpdate = "UPDATE Omradeschef SET AGENT_ID = '" + nyOmradesChefID + "'WHERE Agent_ID = '" + nuChef + "'";
                     idb.update(qUpdate);
                     JOptionPane.showMessageDialog(null, "Områdets chef är nu uppdaterad!");
-                    platsCombo.setSelectedItem(qUpdate);
                 }
 
             } catch (InfException ex) {
