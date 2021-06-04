@@ -361,7 +361,8 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             txtAreaAgent.append("Anställningsdatum"+ "\t");
             txtAreaAgent.append("Admin" + "\t");
             txtAreaAgent.append("Lösenord" + "\t");
-            txtAreaAgent.append("Område" + "\n");
+            txtAreaAgent.append("Område" + "\t");
+            txtAreaAgent.append("Ansvarig för Område"+ "\n");
             
             
             
@@ -376,7 +377,11 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 
                 String omradeFraga = "Select Benamning from Omrade where Omrades_ID ="+Agent.get("Omrade");
                 String omrade = idb.fetchSingle(omradeFraga);
-                txtAreaAgent.append(" " + omrade + "\n");
+                txtAreaAgent.append(" " + omrade + "\t");
+                
+                String ansvarigForOmrade = "Select Benamning from Omrade where Omrades_ID =(Select Omrade from omradeschef where Agent_ID = "+Agent.get("Agent_ID")+ ")";
+                String omradeAnsvar = idb.fetchSingle(ansvarigForOmrade);
+                txtAreaAgent.append(" " + omradeAnsvar + "\n");
                 
             }
         }
@@ -526,7 +531,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 
             }
             if (hittatOmradeschef == true){
-                JOptionPane.showMessageDialog(null, "Denna Agent är Områdescheff! vänligen ändra Områdeschef först!");
+                JOptionPane.showMessageDialog(null, "Denna Agent är Områdeschef! vänligen ändra Områdeschef först!");
                 
             }
             
