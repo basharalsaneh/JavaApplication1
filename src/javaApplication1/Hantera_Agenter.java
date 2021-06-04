@@ -606,7 +606,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             String losenord = txtAgentLosenord.getText();
             
             String plats = områdeCombobox.getSelectedItem().toString();
-            String omradeFraga = "Select Omrades_ID from Omrade where Benamning =" + plats;
+            String omradeFraga = "Select Omrades_ID from Omrade where Benamning ='"+plats+"'";
             String OmradeID = idb.fetchSingle(omradeFraga);
             int omrade = Integer.parseInt(OmradeID);
             
