@@ -5,7 +5,6 @@
  */
 package javaApplication1;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -239,13 +238,13 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
                     String qUpdate = "UPDATE Omradeschef SET AGENT_ID = '" + nyOmradesChefID + "'WHERE Agent_ID = '" + nuChef + "'";
                     idb.update(qUpdate);
                     JOptionPane.showMessageDialog(null, "Områdets chef är nu uppdaterad!");
-
-                }else {
-                    JOptionPane.showMessageDialog(null, "Agenten är redan chef för ett annat område");
+                    platsCombo.setSelectedItem(qUpdate);
                 }
 
             } catch (InfException ex) {
                 System.out.println("Databasfel" + ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Agenten är redan chef för ett annat område!");
+
             } 
         
     }//GEN-LAST:event_andraOmradeschefKnappActionPerformed
