@@ -428,7 +428,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             String losenord = txtAgentLosenord.getText();
             String plats = områdeCombobox.getSelectedItem().toString();
             
-            String omradeFraga = "Select Omrades_ID from Omrade where Benamning =" + plats;
+            String omradeFraga = "Select Omrades_ID from Omrade where Benamning = '"+plats+"'";
             String OmradeID = idb.fetchSingle(omradeFraga);
             int omrade = Integer.parseInt(OmradeID);
             
@@ -455,9 +455,15 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             rensaFalt();
             
 
-        } catch (InfException ex) {
-            Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+        }  catch (InfException ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
         }
+        
+        catch (Exception ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        } 
         
     }//GEN-LAST:event_ändraAgentButtonActionPerformed
 
@@ -468,8 +474,22 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         String StringID = labelAgent_ID.getText();// FÃ¥r ej vara null
         int id = Integer.parseInt(StringID); // Omvandlar String till INT. För Agent_ID är av typen INT.
         
+        Boolean hittatKontorschef = false;
+        Boolean hittatOmradeschef = false;
+        Boolean hittatAlienAnsvar = false;
+        
+        
+        ArrayList<String> allaKontorschefer;
+        ArrayList<String> allaOmradeschefer;
+        ArrayList<String> alienAnsvarig;
+        
+        String kollaKontorschef = "Select Agent_ID from Kontorschef";
+        String kollaOmradeschef = "Select Agent_ID from Omradeschef";
+        String kollaAnsvarigForAlien = "Select Ansvarig_Agent from Alien";
+        
         // SQL fråga som tar bort en Agent från Databasen där Agent_ID = det som man skrev in i txtHämtaAgent.
-        String fraga = "DELETE FROM agent WHERE Agent_ID ="+id;
+        String fragaTaBortAgent = "DELETE FROM Agent WHERE Agent_ID ="+ id;
+        
         
         
         // En dialogruta ska poppa ut så att man inte tar bort en agent av misstag. Den här dialogrutan ska uppdateras och förbättras. T.ex Ta med mer information om vilken agent som håller på att tas bort.
@@ -479,7 +499,51 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         if(svar==JOptionPane.YES_OPTION){
         try{
             
-            idb.delete(fraga);
+            
+            
+            allaKontorschefer = idb.fetchColumn(kollaKontorschef);
+            allaOmradeschefer = idb.fetchColumn(kollaOmradeschef);
+            alienAnsvarig = idb.fetchColumn(kollaAnsvarigForAlien);
+            
+            for(String agent : allaKontorschefer){
+                if (agent.equals(StringID)){
+                    hittatKontorschef = true;
+                    
+                }
+                
+            }
+            if (hittatKontorschef == true){
+                JOptionPane.showMessageDialog(null, "Denna Agent är kontorschef! vänligen ändra Kontorschef först!");
+                this.dispose();
+                new Admin_Kontorschef(idb).setVisible(true);
+            }
+            
+            
+            for(String agent : allaOmradeschefer){
+                if (agent.equals(StringID)){
+                    hittatOmradeschef = true;
+                    
+                }
+                
+            }
+            if (hittatOmradeschef == true){
+                JOptionPane.showMessageDialog(null, "Denna Agent är Områdescheff! vänligen ändra Områdeschef först!");
+                this.dispose();
+                new Admin_Områdeschef(idb).setVisible(true);
+            }
+            
+            for(String agent : alienAnsvarig){
+                if (agent.equals(StringID)){
+                    hittatAlienAnsvar = true;
+                    
+                }
+            }
+            if (hittatAlienAnsvar == true){
+            JOptionPane.showMessageDialog(null, "Denna Agent är ansvarig för en Alien! Vänligen byt ansvaret till en annan Agent!");
+            
+        }
+            
+            idb.delete(fragaTaBortAgent);
             JOptionPane.showMessageDialog(this, "Agent borttagen");
             
             FyllComboboxar();
@@ -487,8 +551,14 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             
             
             
-        } catch (InfException ex) {
-            Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InfException ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        }
+        
+        catch (Exception ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
         }
         
         }
@@ -566,10 +636,15 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             rensaFalt();
             
 
-        } catch (InfException ex) {
-            Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+        }  catch (InfException ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
         }
         
+        catch (Exception ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        } 
         
     }//GEN-LAST:event_laggTillAgentActionPerformed
 
