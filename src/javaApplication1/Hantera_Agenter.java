@@ -176,8 +176,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
         adminBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ja", "Nej" }));
 
-        områdeCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         labelAgent_ID.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -304,7 +302,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             }
         });
 
-        agentCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         agentCombobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agentComboboxActionPerformed(evt);
@@ -398,6 +395,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     
     private void rensaFalt(){
      // Denna kod tar bort all data som i textfältena. T.ex om man råkade skriva fel.
+        labelAgent_ID.setText("");
         txtAgentNamn.setText("");
         txtAgentTelefon.setText("");
         txtAgentDatum.setText("YYYY-MM-DD");
@@ -424,9 +422,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         
         try {
             
-            
-            String StringID = labelAgent_ID.getText();// FÃ¥r ej vara null
-            int id = Integer.parseInt(StringID);
             String namn = txtAgentNamn.getText(); // FÃ¥r ej vara null
             String telefon = txtAgentTelefon.getText();
             String datum = txtAgentDatum.getText();    // FÃ¥r ej vara null
@@ -445,7 +440,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             
             // SQL frågan är utformad så att den uppdaterar alla fälten hos Agenten. Om ett fält har samma värde som innan, så blir det ingen skillnad.
             // Och alla värden som är annorlunda kommer att bli uppdaterade.
-            String uppdateraAgent = "UPDATE agent SET Agent_ID = "+id+", Namn = \""+namn+"\", Telefon = \""+telefon+"\", Anstallningsdatum = \""+datum+"\", Administrator = \""+admin+"\", Losenord = \""+losenord+"\", Omrade = "+omrade+" WHERE Agent_ID = "+agentID+";";
+            String uppdateraAgent = "UPDATE agent SET Namn = \""+namn+"\", Telefon = \""+telefon+"\", Anstallningsdatum = \""+datum+"\", Administrator = \""+admin+"\", Losenord = \""+losenord+"\", Omrade = "+omrade+" WHERE Agent_ID = "+agentID+";";
 
             idb.update(uppdateraAgent);
             
@@ -453,7 +448,8 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(this, "Agent ändrad");
             txtAreaAgent.setText("");
-            VisaAllaAgenter();
+            agentCombobox.setSelectedIndex(1);
+            FyllComboboxar();
             rensaFalt();
             
 
@@ -484,7 +480,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             idb.delete(fraga);
             JOptionPane.showMessageDialog(this, "Agent borttagen");
             
-            VisaAllaAgenter();
+            FyllComboboxar();
             // Uppdaterar listan med alla Agenter
             
             
@@ -528,10 +524,10 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         
         try {
             
-            
-            String Agent = agentCombobox.getSelectedItem().toString();
-            String baraID = Agent.replaceAll("\\D+","");
-            int id = Integer.parseInt(baraID);
+            String fraga = "SELECT IFNULL(max(agent_ID),0) FROM agent";
+            String stringAgent = idb.fetchSingle(fraga);
+            int nyttId = Integer.parseInt(stringAgent) + 1;
+             
             String namn = txtAgentNamn.getText(); // FÃ¥r ej vara null
             String telefon = txtAgentTelefon.getText();
             String datum = txtAgentDatum.getText();    // FÃ¥r ej vara null
@@ -549,7 +545,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             else admin = "N";   
             
             
-            String nyAgent = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES ("+id+", \""+namn+"\", \""+telefon+"\", \""+datum+"\", \""+admin+"\", \""+losenord+"\","+omradeID+");";
+            String nyAgent = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES ("+nyttId+", \""+namn+"\", \""+telefon+"\", \""+datum+"\", \""+admin+"\", \""+losenord+"\","+omradeID+");";
             
 
             
@@ -559,12 +555,11 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             //txtAreaAgent.setText(nyregistreradAgent);
             
             
-            JOptionPane.showMessageDialog(this, "Agent registrerad");
+            JOptionPane.showMessageDialog(this, "Agent registrerad med ID: " + nyttId);
             
             txtAreaAgent.setText("");
-            VisaAllaAgenter();
-            // Den nyregistrerade Agenten kommer att dyka upp på listan av Alla agenter.
             
+            FyllComboboxar();
             rensaFalt();
             
 
