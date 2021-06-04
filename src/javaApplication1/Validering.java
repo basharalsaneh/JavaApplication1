@@ -205,7 +205,6 @@ public class Validering {
         losenord = angettLosenord;
     }
 
-
     public void setNamn(String nyttNamn) {
         this.namn = nyttNamn;
     }
@@ -233,7 +232,17 @@ public class Validering {
     public void setNyttLosenord(String nyttLosenord) {
         losenord = nyttLosenord;
     }
-    
 
-
+//     public static boolean arAgent(){
+//     resultat = true;
+//     return resultat;
+//     }
+//      public static boolean arAdmin(){
+//     resultat = true;
+//     return resultat;
+//     }
+//       public static boolean arAlien(){
+//     resultat = true;
+//     return resultat;
+//     }
 }

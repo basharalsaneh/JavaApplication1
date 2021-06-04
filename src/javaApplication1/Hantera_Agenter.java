@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package javaApplication1;
+import java.awt.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -30,7 +31,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.InloggadSom = InloggadSom;
         this.idb = idb; 
-        VisaAllaAgenter(); // anropar en metod som ska visa alla Agenter (se metoden nedan).
+        VisaAllaAgenter(); // anropar en metod som ska visa alla Agenter
     }
 
     /**
@@ -90,11 +91,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         jLabel8.setText("Omrade");
 
         txtAgentDatum.setText("YYYY-MM-DD");
-        txtAgentDatum.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtAgentDatumMousePressed(evt);
-            }
-        });
         txtAgentDatum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAgentDatumActionPerformed(evt);
@@ -140,11 +136,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         });
 
         adminBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ja", "Nej" }));
-        adminBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminBoxActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -166,11 +157,16 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel7)
                                         .addGap(29, 29, 29))
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(14, 14, 14))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3))
+                                        .addGap(29, 29, 29))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(buttonRensaData, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
@@ -260,9 +256,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         txtHamtaAgent.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtHamtaAgentMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtHamtaAgentMousePressed(evt);
             }
         });
         txtHamtaAgent.addActionListener(new java.awt.event.ActionListener() {
@@ -392,7 +385,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         txtAgentID.requestFocus();
     }
     
-    
     private void buttonRensaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRensaDataActionPerformed
         // TODO add your handling code here:
         
@@ -400,7 +392,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
     }//GEN-LAST:event_buttonRensaDataActionPerformed
 
-  
     private void ändraAgentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ändraAgentButtonActionPerformed
         // TODO add your handling code here:
         if(Validering.personFinns(txtHamtaAgent)){
@@ -433,9 +424,8 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             // SQL frågan är utformad så att den uppdaterar alla fälten hos Agenten. Om ett fält har samma värde som innan, så blir det ingen skillnad.
             // Och alla värden som är annorlunda kommer att bli uppdaterade.
             String uppdateraAgent = "UPDATE agent SET Agent_ID = "+id+", Namn = \""+namn+"\", Telefon = \""+telefon+"\", Anstallningsdatum = \""+datum+"\", Administrator = \""+admin+"\", Losenord = \""+losenord+"\", Omrade = "+omrade+" WHERE Agent_ID = "+agentID+";";
-            
+
             idb.update(uppdateraAgent);
-            
             
             
             
@@ -451,13 +441,10 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ändraAgentButtonActionPerformed
 
-   
-    
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // TODO add your handling code here:
-        if(Validering.personFinns(txtHamtaAgent)){
-            if(Validering.baraIntTecken(txtHamtaAgent)){
-         // hämtar Agent_ID som man skrev in i fältet txtHämtaAgent.
+        
+        // hämtar Agent_ID som man skrev in i fältet txtHämtaAgent.
         String agent = txtHamtaAgent.getText();
         int id = Integer.parseInt(agent); // Omvandlar String till INT. För Agent_ID är av typen INT.
         
@@ -489,21 +476,18 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             // Visar för användaren att agenten inte blev borttagen
             JOptionPane.showMessageDialog(this, "Agent ej borttagen");
         }
-                
-            } 
-        }
+        
+        
+        
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void txtAgentDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgentDatumActionPerformed
         // TODO add your handling code here:
-        txtAgentDatum.setText("");
     }//GEN-LAST:event_txtAgentDatumActionPerformed
 
     private void hamtaAgentInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hamtaAgentInfoActionPerformed
         // TODO add your handling code here:
-        
-        if(Validering.txtKontroll(txtHamtaAgent)){
-                if(Validering.max10Siffror(txtHamtaAgent)){
+        if(Validering.txtKontroll(txtHamtaAgent) && Validering.max10Siffror(txtHamtaAgent)){
         // För enkelhetens skull så kopierades en del kod från en annan metod. 
         
         // Ska kolla upp en Agent.
@@ -572,10 +556,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         }
         
         }
-       
-        
-        }
-        
     }//GEN-LAST:event_hamtaAgentInfoActionPerformed
 
     private void agentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentComboActionPerformed
@@ -607,9 +587,8 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
     private void laggTillAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laggTillAgentActionPerformed
         // TODO add your handling code here:
-        if(Validering.txtKontroll(txtAgentID) && Validering.txtKontroll(txtAgentLosenord)
-        && Validering.DatumKontroll(txtAgentDatum) && Validering.baraIntTecken(txtAgentOmrade))
-        {       
+        
+        
         try {
             String StringID = txtAgentID.getText();// FÃ¥r ej vara null
             int id = Integer.parseInt(StringID);
@@ -629,7 +608,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             
             
             String nyAgent = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES ("+id+", \""+namn+"\", \""+telefon+"\", \""+datum+"\", \""+admin+"\", \""+losenord+"\","+omrade+");";
-
+            
 
             
 
@@ -650,7 +629,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         } catch (InfException ex) {
             Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
+        
         
     }//GEN-LAST:event_laggTillAgentActionPerformed
 
@@ -662,22 +641,8 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
     private void txtHamtaAgentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtHamtaAgentMouseClicked
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_txtHamtaAgentMouseClicked
-
-    private void adminBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_adminBoxActionPerformed
-
-    private void txtHamtaAgentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtHamtaAgentMousePressed
-        // TODO add your handling code here:
         txtHamtaAgent.setText("");
-    }//GEN-LAST:event_txtHamtaAgentMousePressed
-
-    private void txtAgentDatumMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAgentDatumMousePressed
-        // TODO add your handling code here:
-        txtAgentDatum.setText("");
-    }//GEN-LAST:event_txtAgentDatumMousePressed
+    }//GEN-LAST:event_txtHamtaAgentMouseClicked
 
     /**
      * @param args the command line arguments

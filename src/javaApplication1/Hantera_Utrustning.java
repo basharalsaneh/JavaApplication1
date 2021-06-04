@@ -157,12 +157,9 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
 
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        
         if (Validering.kontrollForComboBox(cbUtrustning) && Validering.kontrollForComboBox(cbUtrustning)) {
-           
             try {
                 // TODO add your handling code here:
-               
                 String enUtrustning = cbUtrustning.getSelectedItem().toString();
                 String utrustningsID = txtUtID.getText();
 
@@ -199,8 +196,6 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
             }
 
         }
-       
-        
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -208,19 +203,15 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
         String fraga = "SELECT benamning from utrustning";
 
         ArrayList<String> utrustningLista;
-        
-       
+
         try {
 
             utrustningLista = idb.fetchColumn(fraga);
-               if(!utrustningLista.isEmpty()){ 
+
             for (String namn : utrustningLista) {
                 cbUtrustning.addItem(namn);
             }
-               }
-               else{
-               System.out.println("Tomt på utrustning.");
-               }
+
         } catch (InfException ettUndantag) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
@@ -228,7 +219,7 @@ public class Hantera_Utrustning extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
         }
-        
+
     }
 
     private boolean vapenValt() throws InfException {

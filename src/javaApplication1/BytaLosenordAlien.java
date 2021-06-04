@@ -5,7 +5,9 @@
  */
 package javaApplication1;
 
-
+import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -15,8 +17,8 @@ import oru.inf.InfException;
  */
 public class BytaLosenordAlien extends javax.swing.JFrame {
     private static InfDB idb;
-//    String hamtatIDString;
-//    int hamtatID;
+    String hamtatIDString;
+    int hamtatID;
     static Validering vemArInloggad;
     /**
      * Creates new form BytaLosenord

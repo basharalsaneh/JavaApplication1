@@ -17,7 +17,7 @@ public class AgentHanteraAlien extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
-        VisaAllaAliens();  
+        VisaAllaAliens();
         hamtaAgentssNamn();
         fyllValjaAlienID();
         listaRas();
@@ -26,7 +26,7 @@ public class AgentHanteraAlien extends javax.swing.JFrame {
         hamtaAliensPlatser();
     }
 
-    private int visaKontroll() { 
+    private int visaKontroll() {
         int hitta = 0;
         try {
             String fraga = "SELECT alien_id FROM alien WHERE namn = '" + jAlienID1.getText() + "' OR alien_id = '" + jAlienID1.getText() + "'";
