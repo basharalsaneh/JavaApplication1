@@ -514,8 +514,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             }
             if (hittatKontorschef == true){
                 JOptionPane.showMessageDialog(null, "Denna Agent är kontorschef! vänligen ändra Kontorschef först!");
-                this.dispose();
-                new Admin_Kontorschef(idb).setVisible(true);
+                
             }
             
             
@@ -528,8 +527,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             }
             if (hittatOmradeschef == true){
                 JOptionPane.showMessageDialog(null, "Denna Agent är Områdescheff! vänligen ändra Områdeschef först!");
-                this.dispose();
-                new Admin_Områdeschef(idb).setVisible(true);
+                
             }
             
             for(String agent : alienAnsvarig){
@@ -542,14 +540,16 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Denna Agent är ansvarig för en Alien! Vänligen byt ansvaret till en annan Agent!");
             
         }
+        
             
-            idb.delete(fragaTaBortAgent);
-            JOptionPane.showMessageDialog(this, "Agent borttagen");
+            if(hittatKontorschef == false && hittatOmradeschef == false && hittatAlienAnsvar == false){
+        idb.delete(fragaTaBortAgent);
+        JOptionPane.showMessageDialog(this, "Agent borttagen");
             
-            FyllComboboxar();
+        FyllComboboxar();
             // Uppdaterar listan med alla Agenter
             
-            
+        }    
             
         } catch (InfException ettUndantag) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
