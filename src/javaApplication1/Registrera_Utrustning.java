@@ -273,7 +273,7 @@ public class Registrera_Utrustning extends javax.swing.JFrame {
                 if (UtrustningFinns) {
                     JOptionPane.showMessageDialog(null,"Utrustningen finns redan i listan!");
                 } else {
-                    if (jTyp.getSelectedItem().equals("Vapen") && Validering.baraIntTecken(jInfo)  && Validering.max10Siffror(jInfo) ) {
+                    if (jTyp.getSelectedItem().equals("Vapen") && Validering.baraIntTecken(jInfo) && Validering.SiffrorKontroll(jInfo,"Ange ett positivt tal")  && Validering.max10Siffror(jInfo) ) {
                         LaTillVapen();
                         LadeUtrustning = true;
                     } else if (jTyp.getSelectedItem().equals("Kommunikation") && Validering.max20Tecken(jInfo)) {
