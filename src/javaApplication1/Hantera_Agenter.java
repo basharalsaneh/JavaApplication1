@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package javaApplication1;
+import java.awt.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,55 +30,9 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.InloggadSom = InloggadSom;
-        this.idb = idb;
-        FyllComboboxar();
+        this.idb = idb; 
         VisaAllaAgenter(); // anropar en metod som ska visa alla Agenter
     }
-    
-    
-    private void FyllComboboxar(){
-        
-        agentCombobox.removeAllItems();
-        områdeCombobox.removeAllItems();
-        
-        String omradeFraga = "SELECT Benamning FROM Omrade";
-        String agentFraga = "SELECT Agent_ID, namn FROM Agent";
-        
-        ArrayList<String> allaOmradesnamn;
-        ArrayList<HashMap<String, String>> allaAgentnamn;
-        
-        try{
-            
-        allaOmradesnamn = idb.fetchColumn(omradeFraga);
-        allaAgentnamn = idb.fetchRows(agentFraga);
-
-            for (String omrade : allaOmradesnamn){
-                områdeCombobox.addItem(omrade);
-            }  
-            
-            for (HashMap<String, String> agent : allaAgentnamn){
-                String agenter = "ID: " + agent.get("Agent_ID") + ", " + agent.get("namn");
-                agentCombobox.addItem(agenter);
-            }
-            
-            
-        } catch (InfException ettUndantag) {
-            JOptionPane.showMessageDialog(null, "Databasfel!");
-            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
-        }
-        
-        catch (Exception ettUndantag) {
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
-        }    
-        
-        
-    }
-    
-    
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,6 +44,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        txtAgentID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -100,6 +56,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         txtAgentTelefon = new javax.swing.JTextField();
         txtAgentDatum = new javax.swing.JTextField();
         txtAgentLosenord = new javax.swing.JTextField();
+        txtAgentOmrade = new javax.swing.JTextField();
         buttonRensaData = new javax.swing.JButton();
         ändraAgentButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -109,11 +66,11 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         buttonDelete = new javax.swing.JButton();
         laggTillAgent = new javax.swing.JToggleButton();
         adminBox = new javax.swing.JComboBox<>();
-        områdeCombobox = new javax.swing.JComboBox<>();
-        labelAgent_ID = new javax.swing.JLabel();
+        hamtaAgentInfo = new javax.swing.JButton();
+        txtHamtaAgent = new javax.swing.JTextField();
+        agentCombo = new javax.swing.JComboBox<>();
         visaAllaAgenter = new javax.swing.JToggleButton();
         goBackButton = new javax.swing.JToggleButton();
-        agentCombobox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,6 +89,13 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         jLabel7.setText("Losenord");
 
         jLabel8.setText("Omrade");
+
+        txtAgentDatum.setText("YYYY-MM-DD");
+        txtAgentDatum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAgentDatumActionPerformed(evt);
+            }
+        });
 
         buttonRensaData.setText("Rensa fälten");
         buttonRensaData.addActionListener(new java.awt.event.ActionListener() {
@@ -173,14 +137,15 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
         adminBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ja", "Nej" }));
 
-        labelAgent_ID.setText("0");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -215,20 +180,15 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(74, 74, 74)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(adminBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txtAgentID)
                                     .addComponent(txtAgentNamn)
+                                    .addComponent(txtAgentOmrade)
                                     .addComponent(txtAgentLosenord, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtAgentDatum)
-                                    .addComponent(txtAgentTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(labelAgent_ID)
-                                            .addComponent(adminBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(områdeCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtAgentTelefon, javax.swing.GroupLayout.Alignment.TRAILING))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
@@ -242,10 +202,10 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addComponent(labelAgent_ID))
+                            .addComponent(txtAgentID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -270,9 +230,9 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(områdeCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
+                            .addComponent(txtAgentOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buttonRensaData, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                             .addComponent(ändraAgentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -284,6 +244,32 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                         .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
+
+        hamtaAgentInfo.setText("Hämta Agent Info");
+        hamtaAgentInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hamtaAgentInfoActionPerformed(evt);
+            }
+        });
+
+        txtHamtaAgent.setText("Skriv in Agent_ID");
+        txtHamtaAgent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtHamtaAgentMouseClicked(evt);
+            }
+        });
+        txtHamtaAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHamtaAgentActionPerformed(evt);
+            }
+        });
+
+        agentCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        agentCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agentComboActionPerformed(evt);
+            }
+        });
 
         visaAllaAgenter.setText("Visa Alla Agenter");
         visaAllaAgenter.addActionListener(new java.awt.event.ActionListener() {
@@ -299,39 +285,37 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             }
         });
 
-        agentCombobox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agentComboboxActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(agentCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(visaAllaAgenter)
-                        .addGap(94, 94, 94)
-                        .addComponent(goBackButton)
-                        .addGap(15, 15, 15))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(txtHamtaAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(hamtaAgentInfo)
+                .addGap(56, 56, 56)
+                .addComponent(visaAllaAgenter)
+                .addGap(33, 33, 33)
+                .addComponent(agentCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(goBackButton)
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtHamtaAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hamtaAgentInfo)
+                    .addComponent(agentCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(visaAllaAgenter)
-                    .addComponent(goBackButton)
-                    .addComponent(agentCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(goBackButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78))
@@ -373,10 +357,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 txtAreaAgent.append(" " + Agent.get("Anstallningsdatum") + "              "+ "\t"); // Behövde skapa ett extra stort mellanrum här för att få värdena att komma under rätt fältnamn.
                 txtAreaAgent.append(" " + Agent.get("Administrator") + "\t");
                 txtAreaAgent.append(" " + Agent.get("Losenord") + "\t");
-                
-                String omradeFraga = "Select Benamning from Omrade where Omrades_ID ="+Agent.get("Omrade");
-                String omrade = idb.fetchSingle(omradeFraga);
-                txtAreaAgent.append(" " + omrade + "\n");
+                txtAreaAgent.append(" " + Agent.get("Omrade") + "\n");
                 
             }
         }
@@ -395,11 +376,13 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     
     private void rensaFalt(){
      // Denna kod tar bort all data som i textfältena. T.ex om man råkade skriva fel.
-        labelAgent_ID.setText("");
+        txtAgentID.setText("");
         txtAgentNamn.setText("");
         txtAgentTelefon.setText("");
-        txtAgentDatum.setText("");
+        txtAgentDatum.setText("YYYY-MM-DD");
         txtAgentLosenord.setText("");
+        txtAgentOmrade.setText("");
+        txtAgentID.requestFocus();
     }
     
     private void buttonRensaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRensaDataActionPerformed
@@ -411,26 +394,24 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
     private void ändraAgentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ändraAgentButtonActionPerformed
         // TODO add your handling code here:
-        
+        if(Validering.personFinns(txtHamtaAgent)){
         // En metod som ska uppdatera datan hos en agent med all data som finns skriven i textfälten. Agenten som ska uppdateras skrivs 
         
-        String Agent = agentCombobox.getSelectedItem().toString();
-        String baraID = Agent.replaceAll("\\D+","");
-        int agentID = Integer.parseInt(baraID);
-        
+        String agent = txtHamtaAgent.getText();
+        int agentID = Integer.parseInt(agent);
         
         
         try {
             
+            
+            String StringID = txtAgentID.getText();// FÃ¥r ej vara null
+            int id = Integer.parseInt(StringID);
             String namn = txtAgentNamn.getText(); // FÃ¥r ej vara null
             String telefon = txtAgentTelefon.getText();
             String datum = txtAgentDatum.getText();    // FÃ¥r ej vara null
             String losenord = txtAgentLosenord.getText();
-            String plats = områdeCombobox.getSelectedItem().toString();
-            
-            String omradeFraga = "Select Omrades_ID from Omrade where Benamning =" + plats;
-            String OmradeID = idb.fetchSingle(omradeFraga);
-            int omrade = Integer.parseInt(OmradeID);
+            String plats = txtAgentOmrade.getText();
+            int omrade = Integer.parseInt(plats);
             
             String admin = "Ja";
             String kollaAdmin = adminBox.getSelectedItem().toString();
@@ -442,7 +423,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             
             // SQL frågan är utformad så att den uppdaterar alla fälten hos Agenten. Om ett fält har samma värde som innan, så blir det ingen skillnad.
             // Och alla värden som är annorlunda kommer att bli uppdaterade.
-            String uppdateraAgent = "UPDATE agent SET Namn = \""+namn+"\", Telefon = \""+telefon+"\", Anstallningsdatum = \""+datum+"\", Administrator = \""+admin+"\", Losenord = \""+losenord+"\", Omrade = "+omrade+" WHERE Agent_ID = "+agentID+";";
+            String uppdateraAgent = "UPDATE agent SET Agent_ID = "+id+", Namn = \""+namn+"\", Telefon = \""+telefon+"\", Anstallningsdatum = \""+datum+"\", Administrator = \""+admin+"\", Losenord = \""+losenord+"\", Omrade = "+omrade+" WHERE Agent_ID = "+agentID+";";
 
             idb.update(uppdateraAgent);
             
@@ -450,23 +431,22 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(this, "Agent ändrad");
             txtAreaAgent.setText("");
-            agentCombobox.setSelectedIndex(-1);
-            FyllComboboxar();
+            VisaAllaAgenter();
             rensaFalt();
             
 
         } catch (InfException ex) {
             Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        }
     }//GEN-LAST:event_ändraAgentButtonActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // TODO add your handling code here:
         
         // hämtar Agent_ID som man skrev in i fältet txtHämtaAgent.
-        String StringID = labelAgent_ID.getText();// FÃ¥r ej vara null
-        int id = Integer.parseInt(StringID); // Omvandlar String till INT. För Agent_ID är av typen INT.
+        String agent = txtHamtaAgent.getText();
+        int id = Integer.parseInt(agent); // Omvandlar String till INT. För Agent_ID är av typen INT.
         
         // SQL fråga som tar bort en Agent från Databasen där Agent_ID = det som man skrev in i txtHämtaAgent.
         String fraga = "DELETE FROM agent WHERE Agent_ID ="+id;
@@ -482,7 +462,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             idb.delete(fraga);
             JOptionPane.showMessageDialog(this, "Agent borttagen");
             
-            FyllComboboxar();
+            VisaAllaAgenter();
             // Uppdaterar listan med alla Agenter
             
             
@@ -501,103 +481,24 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    private void visaAllaAgenterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visaAllaAgenterActionPerformed
+    private void txtAgentDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgentDatumActionPerformed
         // TODO add your handling code here:
-        
-        VisaAllaAgenter();
-        rensaFalt();
-        
-        // Anropar metoden VisaAllaAgenter som ja.. Visar alla agenter i txtArean! :D
-        
-    }//GEN-LAST:event_visaAllaAgenterActionPerformed
+    }//GEN-LAST:event_txtAgentDatumActionPerformed
 
-    private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
+    private void hamtaAgentInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hamtaAgentInfoActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-        new Admin(idb, InloggadSom).setVisible(true);
-        
-        // Så att man kan gå tillbaka till föregående ruta som Admin. 
-        
-    }//GEN-LAST:event_goBackButtonActionPerformed
-
-    private void laggTillAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laggTillAgentActionPerformed
-        // TODO add your handling code here:
-        
-        
-        try {
-            
-            String fraga = "SELECT IFNULL(max(agent_ID),0) FROM agent";
-            String stringAgent = idb.fetchSingle(fraga);
-            int nyttId = Integer.parseInt(stringAgent) + 1;
-             
-            String namn = txtAgentNamn.getText(); // FÃ¥r ej vara null
-            String telefon = txtAgentTelefon.getText();
-            String datum = txtAgentDatum.getText();    // FÃ¥r ej vara null
-            String losenord = txtAgentLosenord.getText();
-            
-            String plats = områdeCombobox.getSelectedItem().toString();
-            String omradeFraga = "Select Omrades_ID from Omrade where Benamning =" + plats;
-            String OmradeID = idb.fetchSingle(omradeFraga);
-            int omrade = Integer.parseInt(OmradeID);
-            
-            String admin = "Ja";
-            String kollaAdmin = adminBox.getSelectedItem().toString();
-            if (kollaAdmin.equals(admin)){
-                admin = "J";
-            }
-            else admin = "N";   
-            
-            
-            String nyAgent = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES ("+nyttId+", \""+namn+"\", \""+telefon+"\", \""+datum+"\", \""+admin+"\", \""+losenord+"\","+omrade+");";
-            
-
-            
-
-            idb.insert(nyAgent);
-            
-            //txtAreaAgent.setText(nyregistreradAgent);
-            
-            
-            JOptionPane.showMessageDialog(this, "Agent registrerad med ID: " + nyttId);
-            
-            txtAreaAgent.setText("");
-            
-            FyllComboboxar();
-            rensaFalt();
-            
-
-        } catch (InfException ex) {
-            Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-    }//GEN-LAST:event_laggTillAgentActionPerformed
-
-    private void agentComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentComboboxActionPerformed
-        // TODO add your handling code here:
-        
+        if(Validering.txtKontroll(txtHamtaAgent) && Validering.max10Siffror(txtHamtaAgent)){
+        // För enkelhetens skull så kopierades en del kod från en annan metod. 
         
         // Ska kolla upp en Agent.
         ArrayList<HashMap<String, String>> kollaAgent;
         
         // Agenten som ska kollas upp skriver man in i txtHämtaAgent.
-        
-        
-        
+        String agent = txtHamtaAgent.getText();
+        int id = Integer.parseInt(agent); // Omvandlar String till INT.
+        String admin = "J";
         
         try {
-            int i = -1;
-           
-            if(agentCombobox.getSelectedIndex() != i){
-                
-            String enAgent = agentCombobox.getSelectedItem().toString();
-            String baraID = enAgent.replaceAll("\\D+","");
-            int id = Integer.parseInt(baraID);
-        
-        
-            String admin = "J";
-            
-            
             String fraga = "SELECT * FROM agent where Agent_ID =" + id; // SQL fråga som ska hämta all information om Agenten.
             kollaAgent = idb.fetchRows(fraga);
             
@@ -620,14 +521,11 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 txtAreaAgent.append(" " + Agent.get("Anstallningsdatum") + "              "+ "\t");
                 txtAreaAgent.append(" " + Agent.get("Administrator") + "\t");
                 txtAreaAgent.append(" " + Agent.get("Losenord") + "\t");
-                
-                String omradeFraga = "Select Benamning from Omrade where Omrades_ID ="+Agent.get("Omrade");
-                String omrade = idb.fetchSingle(omradeFraga);
-                txtAreaAgent.append(" " + omrade + "\n");
+                txtAreaAgent.append(" " + Agent.get("Omrade") + "\n");
                 
                 
                 // Vill att all info som hämtas om agenten ska också komma in på respektive täxtfält bredvid txtArean.
-                labelAgent_ID.setText(Agent.get("Agent_ID"));
+                txtAgentID.setText(Agent.get("Agent_ID"));
                 txtAgentNamn.setText(Agent.get("Namn"));
                 txtAgentTelefon.setText(Agent.get("Telefon"));
                 txtAgentDatum.setText(Agent.get("Anstallningsdatum"));
@@ -643,13 +541,9 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 
                 
                 txtAgentLosenord.setText(Agent.get("Losenord"));
+                txtAgentOmrade.setText(Agent.get("Omrade"));
+                txtAgentID.requestFocus(); // Ger fokus på txtAgentID så att man inte behöver trycka på det fältet för att börja skriv igen.
                 
-                
-                String omradeFraga2 = "Select Benamning from Omrade where Omrades_ID = (Select Omrade from Agent where Agent_ID = " + id + ")";
-                String plats = idb.fetchSingle(omradeFraga2);
-                områdeCombobox.setSelectedItem(plats);
-                
-            }
                 
             }
             
@@ -657,20 +551,98 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             
             
             
+        }catch (InfException ex) {
+            Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        }
+    }//GEN-LAST:event_hamtaAgentInfoActionPerformed
+
+    private void agentComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentComboActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_agentComboActionPerformed
+
+    private void visaAllaAgenterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visaAllaAgenterActionPerformed
+        // TODO add your handling code here:
+        
+        VisaAllaAgenter();
+        txtHamtaAgent.setText("");
+        rensaFalt();
+        
+        // Anropar metoden VisaAllaAgenter som ja.. Visar alla agenter i txtArean! :D
+        
+    }//GEN-LAST:event_visaAllaAgenterActionPerformed
+
+    private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Admin(idb, InloggadSom).setVisible(true);
+        
+        // Så att man kan gå tillbaka till föregående ruta som Admin. 
+        
+    }//GEN-LAST:event_goBackButtonActionPerformed
+
+    private void laggTillAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laggTillAgentActionPerformed
+        // TODO add your handling code here:
+        
+        
+        try {
+            String StringID = txtAgentID.getText();// FÃ¥r ej vara null
+            int id = Integer.parseInt(StringID);
+            String namn = txtAgentNamn.getText(); // FÃ¥r ej vara null
+            String telefon = txtAgentTelefon.getText();
+            String datum = txtAgentDatum.getText();    // FÃ¥r ej vara null
+            String losenord = txtAgentLosenord.getText();
+            String plats = txtAgentOmrade.getText();
+            int omrade = Integer.parseInt(plats);
             
-        } catch (InfException ettUndantag) {
-            JOptionPane.showMessageDialog(null, "Databasfel!");
-            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+            String admin = "Ja";
+            String kollaAdmin = adminBox.getSelectedItem().toString();
+            if (kollaAdmin.equals(admin)){
+                admin = "J";
+            }
+            else admin = "N";   
+            
+            
+            String nyAgent = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES ("+id+", \""+namn+"\", \""+telefon+"\", \""+datum+"\", \""+admin+"\", \""+losenord+"\","+omrade+");";
+            
+
+            
+
+            idb.insert(nyAgent);
+            
+            //txtAreaAgent.setText(nyregistreradAgent);
+            
+            
+            JOptionPane.showMessageDialog(this, "Agent registrerad");
+            
+            txtAreaAgent.setText("");
+            VisaAllaAgenter();
+            // Den nyregistrerade Agenten kommer att dyka upp på listan av Alla agenter.
+            
+            rensaFalt();
+            
+
+        } catch (InfException ex) {
+            Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        catch (Exception ettUndantag) {
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
-        }
+        
+    }//GEN-LAST:event_laggTillAgentActionPerformed
+
+    private void txtHamtaAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHamtaAgentActionPerformed
+        // TODO add your handling code here:
         
         
-        
-    }//GEN-LAST:event_agentComboboxActionPerformed
+    }//GEN-LAST:event_txtHamtaAgentActionPerformed
+
+    private void txtHamtaAgentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtHamtaAgentMouseClicked
+        // TODO add your handling code here:
+        txtHamtaAgent.setText("");
+    }//GEN-LAST:event_txtHamtaAgentMouseClicked
 
     /**
      * @param args the command line arguments
@@ -679,10 +651,11 @@ public class Hantera_Agenter extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> adminBox;
-    private javax.swing.JComboBox<String> agentCombobox;
+    private javax.swing.JComboBox<String> agentCombo;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonRensaData;
     private javax.swing.JToggleButton goBackButton;
+    private javax.swing.JButton hamtaAgentInfo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -694,14 +667,15 @@ public class Hantera_Agenter extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelAgent_ID;
     private javax.swing.JToggleButton laggTillAgent;
-    private javax.swing.JComboBox<String> områdeCombobox;
     private javax.swing.JTextField txtAgentDatum;
+    private javax.swing.JTextField txtAgentID;
     private javax.swing.JTextField txtAgentLosenord;
     private javax.swing.JTextField txtAgentNamn;
+    private javax.swing.JTextField txtAgentOmrade;
     private javax.swing.JTextField txtAgentTelefon;
     private javax.swing.JTextArea txtAreaAgent;
+    private javax.swing.JTextField txtHamtaAgent;
     private javax.swing.JToggleButton visaAllaAgenter;
     private javax.swing.JButton ändraAgentButton;
     // End of variables declaration//GEN-END:variables
