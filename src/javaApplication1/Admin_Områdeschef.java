@@ -5,6 +5,7 @@
  */
 package javaApplication1;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -16,10 +17,9 @@ import oru.inf.InfException;
  * @author kristofffer
  */
 public class Admin_Områdeschef extends javax.swing.JFrame {
-    
-    
+
     private InfDB idb;
-    
+
     /**
      * Creates new form Admin_områdesOchKontorsChef
      */
@@ -29,48 +29,41 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
         this.idb = idb;
         fyllCombobox();
     }
-    
-    private void fyllCombobox(){
-        
+
+    private void fyllCombobox() {
+
         platsCombo.removeAllItems();
         valjChef.removeAllItems();
-        
+
         String platsFraga = "SELECT Benamning from OMRADE";
         String agentFraga = "SELECT Agent_ID, namn FROM Agent";
-        
+
         ArrayList<String> allaOmradenamn;
         ArrayList<HashMap<String, String>> allaAgentnamn;
-        
+
         try {
-            
+
             allaOmradenamn = idb.fetchColumn(platsFraga);
             allaAgentnamn = idb.fetchRows(agentFraga);
 
             for (String namn : allaOmradenamn) {
                 platsCombo.addItem(namn);
-            }  
-            
-            for (HashMap<String, String> agent : allaAgentnamn){
+            }
+
+            for (HashMap<String, String> agent : allaAgentnamn) {
                 String agenter = "ID: " + agent.get("Agent_ID") + ", " + agent.get("namn");
                 valjChef.addItem(agenter);
             }
-            
-            
-            
+
         } catch (InfException ettUndantag) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
-        }
-        
-        catch (Exception ettUndantag) {
+        } catch (Exception ettUndantag) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
-        }    
-        
-        
+        }
+
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -179,34 +172,30 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
 
     private void platsComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_platsComboActionPerformed
         // TODO add your handling code here:
-        txtAreaOmrade.setText("");     
+        txtAreaOmrade.setText("");
         txtAreaOmrade.append("AGENT_ID\t Namn \t TELEFON \n"
-                           + "--------\t-------\t------------\n");
-        
+                + "--------\t-------\t------------\n");
+
         ArrayList<HashMap<String, String>> allaOmradeschefer;
-        
-        
-        try{
-            
+
+        try {
+
             String valdOmrade = platsCombo.getSelectedItem().toString();
-       
+
             String fraga = "SELECT a.Agent_ID, namn, telefon FROM (agent a JOIN omradeschef ON a.Agent_ID = omradeschef.Agent_ID) JOIN omrade on Omrades_ID = omradeschef.Omrade WHERE Omrade.Benamning = '" + valdOmrade + "'";
 //"SELECT Agent_ID, namn, telefon FROM agent WHERE Agent_ID = (Select Agent_ID from Omradeschef where Omrade = '" + valdOmrade + "')";
             allaOmradeschefer = idb.fetchRows(fraga);
-            
-            for (HashMap<String, String> agent : allaOmradeschefer){
+
+            for (HashMap<String, String> agent : allaOmradeschefer) {
                 txtAreaOmrade.append(agent.get("Agent_ID") + "\t");
                 txtAreaOmrade.append(agent.get("namn") + "\t");
                 txtAreaOmrade.append(agent.get("telefon") + "\n");
             }
-            
-            
-            
+
         } catch (InfException ettUndantag) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
-        } 
-        catch (Exception ettUndantag) { //lägger även till nullpointer exception
+        } catch (Exception ettUndantag) { //lägger även till nullpointer exception
             JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
         }
@@ -221,29 +210,49 @@ public class Admin_Områdeschef extends javax.swing.JFrame {
     private void andraOmradeschefKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_andraOmradeschefKnappActionPerformed
         // TODO add your handling code here:
         txtAreaOmrade.setText("");
-        String valtOmrade = platsCombo.getSelectedItem().toString();
+        boolean nuvarandeChef = false;
+        //String valtOmrade = platsCombo.getSelectedItem().toString();
         String chef = valjChef.getSelectedItem().toString();
-        
-        String baraID = chef.replaceAll("\\D+","");
-       
+        String baraID = chef.replaceAll("\\D+", "");
         int nyOmradesChefID = Integer.parseInt(baraID);
-        
-        String uppdateraChef = "update kontorschef set agent_id = " + nyOmradesChefID + " where kontorsbeteckning = '" + valtOmrade + "'";
-        
-        try{
-            idb.update(uppdateraChef);
-            JOptionPane.showMessageDialog(null, "Områdets chef är nu uppdaterad!");
+
+        try {
+            String fraga = "SELECT a.agent_id FROM AGENT a "
+                    + "JOIN omradeschef oc ON a.agent_id = oc.agent_id "
+                    + "JOIN omrade o on oc.omrade = o.omrades_id "
+                    + "WHERE benamning =" + "'" + platsCombo.getSelectedItem() + "'";
+            String nuChef = idb.fetchSingle(fraga);
             
-            
-        }catch (InfException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage()); 
-        }
+            String allaChefer = "SELECT agent_id FROM AGENT JOIN omradeschef USING (agent_id)";
+            ArrayList<String> Chef = idb.fetchColumn(allaChefer);
+
+                for (String element : Chef) {
+                    if (element.equals(nyOmradesChefID)) {
+                        nuvarandeChef = true;
+                        System.out.println(element);
+                        break;
+                    }
+                }
+                
+                if (nuvarandeChef == false) {
+
+                    String qUpdate = "UPDATE Omradeschef SET AGENT_ID = '" + nyOmradesChefID + "'WHERE Agent_ID = '" + nuChef + "'";
+                    idb.update(qUpdate);
+                    JOptionPane.showMessageDialog(null, "Områdets chef är nu uppdaterad!");
+
+                }else {
+                    JOptionPane.showMessageDialog(null, "Agenten är redan chef för ett annat område");
+                }
+
+            } catch (InfException ex) {
+                System.out.println("Databasfel" + ex.getMessage());
+            } 
+        
     }//GEN-LAST:event_andraOmradeschefKnappActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton andraOmradeschefKnapp;
