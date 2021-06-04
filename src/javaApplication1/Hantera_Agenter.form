@@ -250,9 +250,6 @@
         <Component class="javax.swing.JTextField" name="txtAgentTelefon">
         </Component>
         <Component class="javax.swing.JTextField" name="txtAgentDatum">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="YYYY-MM-DD"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtAgentLosenord">
         </Component>

@@ -40,20 +40,19 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         agentCombobox.removeAllItems();
         områdeCombobox.removeAllItems();
         
-        String omradeFraga = "SELECT Omrades_ID, Benamning FROM Omrade";
+        String omradeFraga = "SELECT Benamning FROM Omrade";
         String agentFraga = "SELECT Agent_ID, namn FROM Agent";
         
-        ArrayList<HashMap<String, String>> allaOmradesnamn;
+        ArrayList<String> allaOmradesnamn;
         ArrayList<HashMap<String, String>> allaAgentnamn;
         
         try{
             
-        allaOmradesnamn = idb.fetchRows(omradeFraga);
+        allaOmradesnamn = idb.fetchColumn(omradeFraga);
         allaAgentnamn = idb.fetchRows(agentFraga);
 
-            for (HashMap<String, String> omrade : allaOmradesnamn){
-                String Omraden = "ID: " + omrade.get("Omrades_ID") + ", " + omrade.get("Benamning");
-                områdeCombobox.addItem(Omraden);
+            for (String omrade : allaOmradesnamn){
+                områdeCombobox.addItem(omrade);
             }  
             
             for (HashMap<String, String> agent : allaAgentnamn){
@@ -133,8 +132,6 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         jLabel7.setText("Losenord");
 
         jLabel8.setText("Omrade");
-
-        txtAgentDatum.setText("YYYY-MM-DD");
 
         buttonRensaData.setText("Rensa fälten");
         buttonRensaData.addActionListener(new java.awt.event.ActionListener() {
@@ -376,7 +373,10 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 txtAreaAgent.append(" " + Agent.get("Anstallningsdatum") + "              "+ "\t"); // Behövde skapa ett extra stort mellanrum här för att få värdena att komma under rätt fältnamn.
                 txtAreaAgent.append(" " + Agent.get("Administrator") + "\t");
                 txtAreaAgent.append(" " + Agent.get("Losenord") + "\t");
-                txtAreaAgent.append(" " + Agent.get("Omrade") + "\n");
+                
+                String omradeFraga = "Select Benamning from Omrade where Omrades_ID ="+Agent.get("Omrade");
+                String omrade = idb.fetchSingle(omradeFraga);
+                txtAreaAgent.append(" " + omrade + "\n");
                 
             }
         }
@@ -398,7 +398,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         labelAgent_ID.setText("");
         txtAgentNamn.setText("");
         txtAgentTelefon.setText("");
-        txtAgentDatum.setText("YYYY-MM-DD");
+        txtAgentDatum.setText("");
         txtAgentLosenord.setText("");
     }
     
@@ -427,7 +427,9 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             String datum = txtAgentDatum.getText();    // FÃ¥r ej vara null
             String losenord = txtAgentLosenord.getText();
             String plats = områdeCombobox.getSelectedItem().toString();
-            String OmradeID = plats.replaceAll("\\D+","");
+            
+            String omradeFraga = "Select Omrades_ID from Omrade where Benamning =" + plats;
+            String OmradeID = idb.fetchSingle(omradeFraga);
             int omrade = Integer.parseInt(OmradeID);
             
             String admin = "Ja";
@@ -448,7 +450,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(this, "Agent ändrad");
             txtAreaAgent.setText("");
-            agentCombobox.setSelectedIndex(1);
+            agentCombobox.setSelectedIndex(-1);
             FyllComboboxar();
             rensaFalt();
             
@@ -533,9 +535,10 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             String datum = txtAgentDatum.getText();    // FÃ¥r ej vara null
             String losenord = txtAgentLosenord.getText();
             
-            String omrade = områdeCombobox.getSelectedItem().toString();
-            String baraOmradeID = omrade.replaceAll("\\D+","");
-            int omradeID = Integer.parseInt(baraOmradeID);
+            String plats = områdeCombobox.getSelectedItem().toString();
+            String omradeFraga = "Select Omrades_ID from Omrade where Benamning =" + plats;
+            String OmradeID = idb.fetchSingle(omradeFraga);
+            int omrade = Integer.parseInt(OmradeID);
             
             String admin = "Ja";
             String kollaAdmin = adminBox.getSelectedItem().toString();
@@ -545,7 +548,7 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             else admin = "N";   
             
             
-            String nyAgent = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES ("+nyttId+", \""+namn+"\", \""+telefon+"\", \""+datum+"\", \""+admin+"\", \""+losenord+"\","+omradeID+");";
+            String nyAgent = "INSERT INTO agent (Agent_ID, Namn, Telefon, Anstallningsdatum, Administrator, Losenord, Omrade) VALUES ("+nyttId+", \""+namn+"\", \""+telefon+"\", \""+datum+"\", \""+admin+"\", \""+losenord+"\","+omrade+");";
             
 
             
@@ -580,14 +583,21 @@ public class Hantera_Agenter extends javax.swing.JFrame {
         // Agenten som ska kollas upp skriver man in i txtHämtaAgent.
         
         
-        String enAgent = agentCombobox.getSelectedItem().toString();
-        String baraID = enAgent.replaceAll("\\D+","");
-        int id = Integer.parseInt(baraID);
         
-        
-        String admin = "J";
         
         try {
+            int i = -1;
+           
+            if(agentCombobox.getSelectedIndex() != i){
+                
+            String enAgent = agentCombobox.getSelectedItem().toString();
+            String baraID = enAgent.replaceAll("\\D+","");
+            int id = Integer.parseInt(baraID);
+        
+        
+            String admin = "J";
+            
+            
             String fraga = "SELECT * FROM agent where Agent_ID =" + id; // SQL fråga som ska hämta all information om Agenten.
             kollaAgent = idb.fetchRows(fraga);
             
@@ -610,7 +620,10 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 txtAreaAgent.append(" " + Agent.get("Anstallningsdatum") + "              "+ "\t");
                 txtAreaAgent.append(" " + Agent.get("Administrator") + "\t");
                 txtAreaAgent.append(" " + Agent.get("Losenord") + "\t");
-                txtAreaAgent.append(" " + Agent.get("Omrade") + "\n");
+                
+                String omradeFraga = "Select Benamning from Omrade where Omrades_ID ="+Agent.get("Omrade");
+                String omrade = idb.fetchSingle(omradeFraga);
+                txtAreaAgent.append(" " + omrade + "\n");
                 
                 
                 // Vill att all info som hämtas om agenten ska också komma in på respektive täxtfält bredvid txtArean.
@@ -630,7 +643,13 @@ public class Hantera_Agenter extends javax.swing.JFrame {
                 
                 
                 txtAgentLosenord.setText(Agent.get("Losenord"));
-                områdeCombobox.setSelectedItem(Agent.get("Omrade"));
+                
+                
+                String omradeFraga2 = "Select Benamning from Omrade where Omrades_ID = (Select Omrade from Agent where Agent_ID = " + id + ")";
+                String plats = idb.fetchSingle(omradeFraga2);
+                områdeCombobox.setSelectedItem(plats);
+                
+            }
                 
             }
             
@@ -638,8 +657,15 @@ public class Hantera_Agenter extends javax.swing.JFrame {
             
             
             
-        }catch (InfException ex) {
-            Logger.getLogger(Hantera_Agenter.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (InfException ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        }
+        
+        catch (Exception ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
         }
         
         
