@@ -18,7 +18,7 @@ import oru.inf.InfException;
 public class Undersok_Omrade extends javax.swing.JFrame {
 
     InfDB idb;
-    Validering vemArInloggad = null;
+    Validering vemArInloggad;
 
     /**
      * Creates new form Undersok_Omrade
@@ -27,7 +27,7 @@ public class Undersok_Omrade extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.vemArInloggad = vemArInloggad;
-        fyllcbValjaOmradesNamn();
+        fyllcbValjaOmradesNamn(); // Vid start av framen fylls comboboxen med alla de existerande områden.
     }
 
     /**

@@ -5,10 +5,7 @@
  */
 package javaApplication1;
 
-import java.awt.Color;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static javaApplication1.BytaLosenordAlien.vemArInloggad;
+
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -18,8 +15,8 @@ import oru.inf.InfException;
  */
 public class BytaLosenordAdmin extends javax.swing.JFrame {
     private static InfDB idb;
-    String hamtatIDString;
-    int hamtatID;
+    String hamtatIDString; // ANvänds ej?
+    int hamtatID; // används ej??
     static Validering vemArInloggad;
     /**
      * Creates new form BytaLosenord
@@ -31,8 +28,8 @@ public class BytaLosenordAdmin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         BytaLosenordAdmin.idb = idb;
-        BytaLosenordAdmin.vemArInloggad = vemArInloggad;
-    }
+        BytaLosenordAdmin.vemArInloggad = vemArInloggad; // Den inloggades uppgifter följs med vid öppningen av framen.
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.

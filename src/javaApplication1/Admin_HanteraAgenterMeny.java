@@ -24,7 +24,7 @@ public class Admin_HanteraAgenterMeny extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idb = idb;
-        this.InloggadSom = InloggadSom;
+        this.InloggadSom = InloggadSom; // Behöver kollas på!
         
     }
 

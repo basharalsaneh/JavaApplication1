@@ -1,7 +1,4 @@
-
 package javaApplication1;
-
-
 
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -14,14 +11,14 @@ public class Admin_Inloggning extends javax.swing.JFrame {
 
     InfDB idb;
     Validering vemArInloggad;
-    
-    public Admin_Inloggning(InfDB idb){ 
-    // När man väl försöker logga in som Admin tar konstruktorn in den angivna kopplingen till databasen samt 
-    // Skapar ett nytt "objekt" (den som är inloggad) som följer med så länge respektive Admin är inloggad.
+
+    public Admin_Inloggning(InfDB idb) {
+        // När man väl försöker logga in som Admin tar konstruktorn in den angivna kopplingen till databasen samt 
+        // Skapar ett nytt "objekt" (den som är inloggad) som följer med så länge respektive Admin är inloggad.
         initComponents();
         this.setLocationRelativeTo(null);
         this.idb = idb;
-        this.vemArInloggad = new Validering();
+        this.vemArInloggad = new Validering(); // Vid körning av denna frame skapas ett nytt valideringsobjekt kopplad till klassen validering.
     }
 
     @SuppressWarnings("unchecked")
@@ -131,71 +128,67 @@ public class Admin_Inloggning extends javax.swing.JFrame {
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
 
-                loggaInSomAdmin();
+        loggaInSomAdmin();
     }
-        
-    
-    private void loggaInSomAdmin(){
-            if(Validering.personFinns(txtUser) && Validering.finnsLosenord(txtPassword)){ 
-// Hänvisar till Valideringsklassen och kollar om textrutorna är tomma eller inte.
-        boolean godkandUser = false;
-        boolean godkandLosenord = false;
-        boolean godkandAdmin = false;
-       
-          
-        String user = txtUser.getText();
-        String password = txtPassword.getText();
-        try{
-        String fraga1 = "SELECT Agent_ID FROM agent where Agent_ID like '"+user+"';"; 
-           String giltigUser = idb.fetchSingle(fraga1); 
-           // Vid hämtning av fraga1 från databasuppkopplingen (idb) och med metoden: fetchSingle() så hämtar vi ett enstaka värde 
-           //och ger agentens namn ett nytt stringvärde vars namn är giltigUser.
-           String fraga2 = "SELECT Losenord FROM agent where Agent_ID like '" + giltigUser + "';";
-           String giltigLosenord = idb.fetchSingle(fraga2);
-           String fraga3 = "SELECT Administrator FROM agent where Agent_ID like '" + giltigUser + "';";
-           String befogenhet = idb.fetchSingle(fraga3); 
-           // Fortsättning med fetchSingle-metoder för att hämta Lösenord samt AdministratorStatus.
-           String admin = "J";
-           // If-satserna nedan kollar om det inskrivna användarnamnet, lösenordet samt om en administratörstatus finns för "vald" agent.
-           // Om de krav uppfylls ges en booleansk variabel för respektive uppfyllt krav.
-             if(user.equals(giltigUser)){
-                 godkandUser = true;
-                 if(password.equals(giltigLosenord)){
-                  godkandLosenord = true;
-                  if(befogenhet.equals(admin)){
-                  godkandAdmin = true;
-                  }
-                  else{
-                  JOptionPane.showMessageDialog(null, "Du har ej befogenhet till denna att logga in.");
-                  }
+
+    private void loggaInSomAdmin() {
+        if (Validering.personFinns(txtUser) && Validering.finnsLosenord(txtPassword)) {
+// Hänvisar till Valideringsklassen och kollar om text/password-rutorna är tomma eller inte.
+            boolean godkandUser = false;
+            boolean godkandLosenord = false;
+            boolean godkandAdmin = false;
+            // Lokala variabler av typen boolean, där syftet är att kolla upp så att, 
+            // om det inskrivna i textrutorna matchar användarens befogenhet, lösenord, id så loggas man in.
+            String user = txtUser.getText();
+            String password = txtPassword.getText();
+            try {
+                String fraga1 = "SELECT Agent_ID FROM agent where Agent_ID like '" + user + "';";
+                String giltigUser = idb.fetchSingle(fraga1);
+                // Vid hämtning av fraga1 från databasuppkopplingen (idb) och med metoden: fetchSingle() så hämtar vi ett enstaka värde 
+                //och ger agentens namn ett nytt stringvärde vars namn är giltigUser.
+                String fraga2 = "SELECT Losenord FROM agent where Agent_ID like '" + giltigUser + "';";
+                String giltigLosenord = idb.fetchSingle(fraga2);
+                
+                String fraga3 = "SELECT Administrator FROM agent where Agent_ID like '" + giltigUser + "';";
+                String befogenhet = idb.fetchSingle(fraga3);
+                // Fortsättning med fetchSingle-metoder för att hämta Lösenord samt AdministratorStatus.
+                String admin = "J";
+                // If-satserna nedan kollar om det inskrivna användarnamnet, lösenordet samt om en administratörstatus finns för "vald" agent.
+                // Om de krav uppfylls ges en booleansk variabel för respektive uppfyllt krav.
+                if (user.equals(giltigUser)) {
+                    godkandUser = true;
+                    if (password.equals(giltigLosenord)) {
+                        godkandLosenord = true;
+                        if (befogenhet.equals(admin)) {
+                            godkandAdmin = true;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Du har ej befogenhet till denna att logga in.");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Lösenord är felaktigt för valt id");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Agent ej hittad.");
                 }
-                else {
-                JOptionPane.showMessageDialog(null, "Lösenord är felaktigt för valt id");
-                }
-            }
-            else{
-                 JOptionPane.showMessageDialog(null, "Agent ej hittad.");
-             }
-             if(godkandUser && godkandLosenord && godkandAdmin){   
-             String fraga4 = "SELECT Agent_ID from agent where Agent_ID like '" + giltigUser+ "';";
-                 String userID = idb.fetchSingle(fraga4);
-                 int giltigtID = Integer.parseInt(userID);
- // Med koden nedanför hänvisar vi till vår Valideringsklass och fyller i vem som är inloggad med 
- // hjälp av metoden inloggadSom(). Där fylls relevant information (namn, id, lösenord) för möjlighet att se 
- // den inloggades uppgifter i inloggningValideringsklassen.
-                vemArInloggad.inloggadSom(giltigUser, giltigtID, giltigLosenord);
-                this.dispose();
-                new Admin(idb, vemArInloggad).setVisible(true); 
+                if (godkandUser && godkandLosenord && godkandAdmin) {
+//  ta bort då vi redan har ID             String fraga4 = "SELECT Agent_ID from agent where Agent_ID like '" + giltigUser + "';";
+//  ta bort då vi redan har ID             String userID = idb.fetchSingle(fraga4);
+                    int giltigtID = Integer.parseInt(giltigUser);
+                    // Med koden nedanför hänvisar vi till vår Valideringsklass och fyller i vem som är inloggad med 
+                    // hjälp av metoden inloggadSom(). Där fylls relevant information (namn, id, lösenord) för möjlighet att se 
+                    // den inloggades uppgifter i inloggningValideringsklassen.
+                    vemArInloggad.inloggadSom(giltigUser, giltigtID, giltigLosenord);
+                    this.dispose();
+                    new Admin(idb, vemArInloggad).setVisible(true);
 // När alla krav är uppfyllda så startas Admin-sidan där databasuppkopplingen samt den inloggades uppgifter följs med.
-             }
-        
-            
-        } catch (InfException ex) {
-            Logger.getLogger(Admin_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, ex);
+                }
+
+            } catch (InfException ex) {
+                Logger.getLogger(Admin_Inloggning.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, ex);
+            }
         }
-        }
-            
+
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
@@ -206,13 +199,13 @@ public class Admin_Inloggning extends javax.swing.JFrame {
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 // Vid Enter-tryck så körs den privata metoden loggaInSomAdmin(), om kraven uppfylls.
 
-            loggaInSomAdmin();}
+            loggaInSomAdmin();
+        }
     }//GEN-LAST:event_txtPasswordKeyPressed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTillbaka;
